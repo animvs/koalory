@@ -54,7 +54,7 @@ project(":android") {
 
     dependencies {
         compile project(":core")
-        compile project(":animvs-engine:net:play-services:base-game-utils")
+        //compile project(":animvs-engine:net:play-services:base-game-utils")
 
         compile 'ch.acra:acra:+'
 
@@ -118,14 +118,6 @@ project(":animvs-engine:core:animvs-ui") {
     }
 }
 
-project(":animvs-engine:core:animvs-ui") {
-    apply plugin: "java"
-
-    dependencies {
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-    }
-}
-
 project(":animvs-engine:core:animvs-core") {
     apply plugin: "java"
 
@@ -159,7 +151,7 @@ project(":animvs-engine:core:animvs-utils") {
     }
 }
 
-project(":animvs-engine:net:play-services:base-game-utils") {
+/*project(":animvs-engine:net:play-services:base-game-utils") {
     apply plugin: "android-library"
 
     dependencies {
@@ -168,7 +160,7 @@ project(":animvs-engine:net:play-services:base-game-utils") {
 
         //compile files("/libs/google-play-services.jar")
     }
-}
+}*/
 
 tasks.eclipse.doLast {
     delete ".project"
