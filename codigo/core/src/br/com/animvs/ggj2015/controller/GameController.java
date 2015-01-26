@@ -129,9 +129,6 @@ public final class GameController implements Disposable {
 
     public void endMatch() {
         inGame = false;
-        colorRecovered = 0;
-
-        ui.showUIGameOver();
     }
 
     public void addColorRecovered(float toAdd) {
@@ -235,8 +232,10 @@ public final class GameController implements Disposable {
     }
 
     public void checkGameOver() {
-        if ((lives == 0) && (entities.getNumberPlayers() == 0))
+        if ((lives == 0) && (entities.getNumberPlayers() == 0)) {
+            getUiController().showUIGameOver();
             endMatch();
+        }
     }
 
     private Array<AnimvsFontInfo> createFontsInfo() {

@@ -38,6 +38,9 @@ public final class EntitiesController {
     }
 
     public void restart() {
+        for (int i = 0; i < Configurations.GAMEPLAY_MAX_PLAYERS; i++)
+            players.get(i).restart();
+
         for (int i = 0; i < items.size; i++)
             items.get(i).dispose();
 
@@ -102,11 +105,6 @@ public final class EntitiesController {
     }
 
     public void validateGameOver() {
-       /* if (players.size == 0) {
-            controller.endMatch();
-            controller.getUiController().showUIGameOver();
-        }*/
-
         if (controller.getColorRecovered() >= 1f) {
             controller.endMatch();
             controller.getUiController().showUIGameWin();

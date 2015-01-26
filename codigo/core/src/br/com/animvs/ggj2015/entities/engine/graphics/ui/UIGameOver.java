@@ -27,7 +27,6 @@ public class UIGameOver extends UIBase {
 
     @Override
     protected void eventBuild(int width, int height, float ratioX, float ratioY) {
-
         getWindow().setBackground("frame-blue");
 
         Label lblTitle = new Label(uiController.getGameController().getLanguage().getLang().getValor("main.ui.gameover.title"), getUiSkin(), "title-white");
