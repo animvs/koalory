@@ -47,7 +47,8 @@ public final class Player extends GGJ15Entity {
         return playerIndex;
     }
 
-    private static final float ANIMATION_VELOCITY_TOLLERANCE = 0.05f;
+    private static final float ANIMATION_Y_VELOCITY_TOLLERANCE = 1.3f;
+    private static final float ANIMATION_X_VELOCITY_TOLLERANCE = 0.3f;
 
     public boolean getJumping() {
         if (getBody() == null)
@@ -55,10 +56,10 @@ public final class Player extends GGJ15Entity {
 
         float vVelocity = getBody().getLinearVelocity().y;
 
-        if (vVelocity < 0f && vVelocity < -ANIMATION_VELOCITY_TOLLERANCE)
+        if (vVelocity < 0f && vVelocity < -ANIMATION_Y_VELOCITY_TOLLERANCE)
             return true;
 
-        if (vVelocity > 0f && vVelocity > ANIMATION_VELOCITY_TOLLERANCE)
+        if (vVelocity > 0f && vVelocity > ANIMATION_Y_VELOCITY_TOLLERANCE)
             return true;
 
         return false;
@@ -73,9 +74,9 @@ public final class Player extends GGJ15Entity {
         float hVelocity = getBody().getLinearVelocity().x;
 
         if (hVelocity < 0f)
-            return hVelocity < ANIMATION_VELOCITY_TOLLERANCE;
+            return hVelocity < ANIMATION_X_VELOCITY_TOLLERANCE;
         else
-            return hVelocity > ANIMATION_VELOCITY_TOLLERANCE;
+            return hVelocity > ANIMATION_X_VELOCITY_TOLLERANCE;
     }
 
     public Player(GameController controller, int playerIndex) {
@@ -164,18 +165,18 @@ public final class Player extends GGJ15Entity {
     }
 
     public void tryJump() {
-        if (getBody() == null){
-            //Gdx.app.log("DEBUG", "JUMP BLOCKED - Physical Body is NULL");
+        if (getBody() == null) {
+            Gdx.app.log("DEBUG", "JUMP BLOCKED - Physical Body is NULL");
             return;
         }
 
         if (getJumping()) {
-            //Gdx.app.log("DEBUG", "JUMP BLOCKED - Player is JUMPING already");
+            Gdx.app.log("DEBUG", "JUMP BLOCKED - Player is JUMPING already - vX: " + getBody().getLinearVelocity().x + " vY: " + getBody().getLinearVelocity().y);
             return;
         }
 
-        if(TimeUtils.timeSinceMillis(lastJumpTime) < 850L) {
-            //Gdx.app.log("DEBUG", "JUMP BLOCKED - Next jump is NOT READY yet");
+        if (TimeUtils.timeSinceMillis(lastJumpTime) < 850L) {
+            Gdx.app.log("DEBUG", "JUMP BLOCKED - Next jump is NOT READY yet");
             return;
         }
 
