@@ -107,11 +107,15 @@ public final class Player extends GGJ15Entity {
         getGraphic().setInterpolationDefault(0.25f);
     }
 
+    public void updateInputOnly() {
+        computeInput();
+    }
+
     @Override
     public void update() {
         super.update();
 
-        computeInput();
+        updateInputOnly();
         if (alive) {
             if (getBody() != null) {
                 //Gdx.app.log("DEBUG", "vX: " + getBody().getLinearVelocity().x + " vY: " + getBody().getLinearVelocity().y);
@@ -196,7 +200,7 @@ public final class Player extends GGJ15Entity {
         //setVisible(false);
     }
 
-    public void restart(){
+    public void restart() {
         setPosition(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
         disposeBody();
         alive = false;
@@ -227,7 +231,7 @@ public final class Player extends GGJ15Entity {
         Gdx.app.log("PLAYER", "Player " + playerIndex + " created.");
     }
 
-    private void computeInput() {
+    public void computeInput() {
         input.update();
 
         if (alive && getBody() != null) {

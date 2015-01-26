@@ -165,6 +165,7 @@ public final class GameController implements Disposable {
 
             resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
+            getUiController().showUIInitial();
         }
     }
 
@@ -182,7 +183,7 @@ public final class GameController implements Disposable {
         if (initialized) {
             if (inGame) {
                 physics.update(Gdx.graphics.getDeltaTime());
-                entities.update();
+                entities.update(false);
 
                 background.render();
 
@@ -202,7 +203,8 @@ public final class GameController implements Disposable {
                     stage.getCamera().position.set(cameraPositionCache.x, cameraPositionCache.y, stage.getCamera().position.z);
                     stage.getCamera().update();
                 }
-            }
+            } else
+                entities.update(true);
             ui.render();
         }
     }
@@ -232,7 +234,7 @@ public final class GameController implements Disposable {
     }
 
     public void checkGameOver() {
-        if ((lives == 0) && (entities.getNumberPlayers() == 0)) {
+        if ((lives == 0) && (entities.getPlayersAlive() == 0)) {
             getUiController().showUIGameOver();
             endMatch();
         }

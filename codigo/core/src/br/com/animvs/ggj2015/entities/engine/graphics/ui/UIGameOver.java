@@ -1,43 +1,35 @@
 package br.com.animvs.ggj2015.entities.engine.graphics.ui;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.badlogic.gdx.utils.ArrayMap;
 
-import br.com.animvs.ggj2015.controller.UIController;
-import br.com.animvs.ui.AnimvsUI2;
+import br.com.animvs.ggj2015.controller.GameController;
 
 /**
  * Created by ANSCHAU on 24/01/2015.
  */
 public class UIGameOver extends UIBase {
-
-    private UIController uiController;
-
-    public UIGameOver(UIController controller, AssetManager assetManager, String caminhoUISkin, ArrayMap<String, BitmapFont> fontes) {
-        super(controller, assetManager, caminhoUISkin, fontes);
-        this.uiController = controller;
+    public UIGameOver(GameController controller, String caminhoUISkin) {
+        super(controller, caminhoUISkin);
     }
 
     @Override
     protected void eventBuild(int width, int height, float ratioX, float ratioY) {
         getWindow().setBackground("frame-blue");
 
-        Label lblTitle = new Label(uiController.getGameController().getLanguage().getLang().getValor("main.ui.gameover.title"), getUiSkin(), "title-white");
+        Label lblTitle = new Label(getGameController().getLanguage().getLang().getValor("main.ui.gameover.title"), getUiSkin(), "title-white");
         lblTitle.setAlignment(Align.center);
-        Label lblMessage = new Label(uiController.getGameController().getLanguage().getLang().getValor("main.ui.gameover.message"), getUiSkin(), "title-white");
+        Label lblMessage = new Label(getGameController().getLanguage().getLang().getValor("main.ui.gameover.message"), getUiSkin(), "title-white");
         lblMessage.setAlignment(Align.center);
 
         Image imgRestart = new Image(getUiSkin(), "btn-restart");
         imgRestart.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                uiController.getGameController().startMatch();
+                getGameController().startMatch();
                 return true;
             }
         });
@@ -81,7 +73,7 @@ public class UIGameOver extends UIBase {
         goToUIInitial();
     }
 
-    private void goToUIInitial(){
-        uiController.showUIInitial();
+    private void goToUIInitial() {
+        getGameController().getUiController().showUIInitial();
     }
 }

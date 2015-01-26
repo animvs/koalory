@@ -2,13 +2,10 @@ package br.com.animvs.ggj2015.entities.engine.graphics.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.utils.ArrayMap;
 
 import br.com.animvs.ggj2015.Configurations;
-import br.com.animvs.ggj2015.controller.UIController;
+import br.com.animvs.ggj2015.controller.GameController;
 import br.com.animvs.ui.AnimvsUI2;
 
 /**
@@ -16,8 +13,16 @@ import br.com.animvs.ui.AnimvsUI2;
  */
 public abstract class UIBase extends AnimvsUI2 {
 
-    public UIBase(UIController controller, AssetManager assetManager, String caminhoUISkin, ArrayMap<String, BitmapFont> fontes) {
-        super(controller, assetManager, caminhoUISkin, fontes);
+    private GameController controller;
+
+    protected final GameController getGameController() {
+        return controller;
+    }
+
+    public UIBase(GameController controller, String caminhoUISkin) {
+        super(controller.getUiController(), controller.getLoad().getAssetManager(), caminhoUISkin, controller.getFonts().getFonts());
+
+        this.controller = controller;
     }
 
     @Override
@@ -32,8 +37,10 @@ public abstract class UIBase extends AnimvsUI2 {
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_0))
             eventActionButtonPressed();
 
-        for (int i = 0; i < Controllers.getControllers().size; i++) {
-            if (Controllers.getControllers().get(i).getButton(Configurations.CORE_GAMEPAD_BUTTON_ACTION))
+        int maxJoysticks = Controllers.getControllers().size > Configurations.GAMEPLAY_MAX_PLAYERS ? Configurations.GAMEPLAY_MAX_PLAYERS : Controllers.getControllers().size;
+
+        for (int i = 0; i < maxJoysticks; i++) {
+            if (controller.getEntities().getPlayer(i).getInput().getButtonActionJustPressed())
                 eventActionButtonPressed();
         }
     }

@@ -2,8 +2,6 @@ package br.com.animvs.ggj2015.entities.engine.graphics.ui;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -11,10 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
-import com.badlogic.gdx.utils.ArrayMap;
 
 import br.com.animvs.ggj2015.Configurations;
-import br.com.animvs.ggj2015.controller.UIController;
+import br.com.animvs.ggj2015.controller.GameController;
 
 /**
  * Created by ANSCHAU on 24/01/2015.
@@ -28,11 +25,8 @@ public class UIInGame extends UIBase {
 
     private Touchpad touchpad;
 
-    private UIController uiController;
-
-    public UIInGame(UIController controller, AssetManager assetManager, String caminhoUISkin, ArrayMap<String, BitmapFont> fontes) {
-        super(controller, assetManager, caminhoUISkin, fontes);
-        this.uiController = controller;
+    public UIInGame(GameController controller, String caminhoUISkin) {
+        super(controller, caminhoUISkin);
     }
 
     @Override
@@ -82,7 +76,7 @@ public class UIInGame extends UIBase {
 
     @Override
     protected void eventVisible() {
-        uiController.getGameController().getSound().playMusicInGame();
+        getGameController().getSound().playMusicInGame();
     }
 
     @Override
@@ -100,27 +94,27 @@ public class UIInGame extends UIBase {
         super.render();
         tbLifes.clear();
         updateColors();
-        for (int i = 0; i < uiController.getGameController().getLives(); i++) {
+        for (int i = 0; i < getGameController().getLives(); i++) {
             Image life = new Image(getUiSkin(), "life");
             tbLifes.add(life).width(59f * getController().getRatio().x).height(54f * getController().getRatio().y).pad(5f * getController().getRatio().y);
         }
 
         if (Configurations.SIMULATE_MOBILE_ON_DESKTOP || Gdx.app.getType() != Application.ApplicationType.Desktop)
             if (touchpad != null)
-                if (touchpad.getKnobPercentX() != uiController.getGameController().getEntities().getPlayer(0).getMovementXMobile())
-                    uiController.getGameController().getEntities().getPlayer(0).setMovementXMobile(touchpad.getKnobPercentX());
+                if (touchpad.getKnobPercentX() != getGameController().getEntities().getPlayer(0).getMovementXMobile())
+                    getGameController().getEntities().getPlayer(0).setMovementXMobile(touchpad.getKnobPercentX());
 
     }
 
     public void updateColors() {
-        imgRed.setText(uiController.getColorRecoveredCastCache() + "%");
+        imgRed.setText(getGameController().getUiController().getColorRecoveredCastCache() + "%");
     }
 
     private void computeAction() {
-        if (uiController.getGameController().getEntities().getPlayer(0).getAlive())
-            uiController.getGameController().getEntities().getPlayer(0).tryJump();
+        if (getGameController().getEntities().getPlayer(0).getAlive())
+            getGameController().getEntities().getPlayer(0).tryJump();
         else
-            uiController.getGameController().getEntities().getPlayer(0).getInput().setMobileTouchClicked(true);
+            getGameController().getEntities().getPlayer(0).getInput().setMobileTouchClicked(true);
     }
 
     @Override

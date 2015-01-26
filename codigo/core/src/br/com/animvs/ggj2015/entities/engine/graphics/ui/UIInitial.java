@@ -1,26 +1,20 @@
 package br.com.animvs.ggj2015.entities.engine.graphics.ui;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.ArrayMap;
 
-import br.com.animvs.ggj2015.controller.UIController;
+import br.com.animvs.ggj2015.controller.GameController;
 
 /**
  * Created by ANSCHAU on 23/01/2015.
  */
 public class UIInitial extends UIBase {
 
-    private UIController controller;
-
-    public UIInitial(UIController controller, AssetManager assetManager, String caminhoUISkin, ArrayMap<String, BitmapFont> fontes) {
-        super(controller, assetManager, caminhoUISkin, fontes);
-        this.controller = controller;
+    public UIInitial(GameController controller, String caminhoUISkin) {
+        super(controller, caminhoUISkin);
     }
 
     @Override
@@ -44,7 +38,7 @@ public class UIInitial extends UIBase {
         ImageButton btnCredits = new ImageButton(getUiSkin(), "btn-credit");
         btnCredits.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                controller.showUICredits();
+                getGameController().getUiController().showUICredits();
                 return true;
             }
         });
@@ -65,7 +59,7 @@ public class UIInitial extends UIBase {
 
     @Override
     protected void eventVisible() {
-        controller.getGameController().getSound().playMusicInGame();
+        getGameController().getSound().playMusicInGame();
     }
 
     @Override
@@ -79,6 +73,6 @@ public class UIInitial extends UIBase {
     }
 
     private void startGame() {
-        controller.getGameController().startMatch();
+        getGameController().startMatch();
     }
 }
