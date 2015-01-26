@@ -60,6 +60,6 @@ nb-configuration.xml
 build/
 .mp3
 cache/
-/source/android/libs/armeabi
-/source/android/libs/armeabi-v7a
-/source/android/libs/x86
+/codigo/android/libs/armeabi
+/codigo/android/libs/armeabi-v7a
+/codigo/android/libs/x86
