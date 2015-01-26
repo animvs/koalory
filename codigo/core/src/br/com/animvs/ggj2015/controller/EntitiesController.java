@@ -1,7 +1,6 @@
 package br.com.animvs.ggj2015.controller;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
@@ -62,10 +61,8 @@ public final class EntitiesController {
         return count;
     }
 
-    public void spawnItem(float x, float y) {
-        float colorToRecover = MathUtils.random(0.25f);
-
-        Item newItem = new Item(controller, colorToRecover);
+    public void spawnItemColorProgress(float x, float y, float colorProgressAmount) {
+        Item newItem = new Item(controller, colorProgressAmount);
 
         items.add(newItem);
         newItem.setPosition(x + Configurations.CORE_TILE_SIZE / 2f, y + Configurations.CORE_TILE_SIZE / 2f);
