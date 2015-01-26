@@ -10,18 +10,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import br.com.animvs.ggj2015.controller.UIController;
-import br.com.animvs.ui.AnimvsUI2;
 
 /**
  * Created by ANSCHAU on 23/01/2015.
  */
-public class UIInitial extends AnimvsUI2 {
+public class UIInitial extends UIBase {
 
     private UIController controller;
 
     public UIInitial(UIController controller, AssetManager assetManager, String caminhoUISkin, ArrayMap<String, BitmapFont> fontes) {
         super(controller, assetManager, caminhoUISkin, fontes);
         this.controller = controller;
+    }
+
+    @Override
+    public void eventActionButtonPressed() {
+        startGame();
     }
 
     @Override
@@ -32,7 +36,7 @@ public class UIInitial extends AnimvsUI2 {
         ImageButton btnPlay = new ImageButton(getUiSkin(), "btn-play");
         btnPlay.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                controller.getGameController().startMatch();
+                startGame();
                 return true;
             }
         });
@@ -74,4 +78,7 @@ public class UIInitial extends AnimvsUI2 {
 
     }
 
+    private void startGame() {
+        controller.getGameController().startMatch();
+    }
 }

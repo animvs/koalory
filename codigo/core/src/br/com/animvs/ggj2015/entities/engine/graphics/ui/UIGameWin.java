@@ -17,7 +17,7 @@ import br.com.animvs.ui.AnimvsUIController2;
 /**
  * Created by ANSCHAU on 24/01/2015.
  */
-public class UIGameWin extends AnimvsUI2 {
+public class UIGameWin extends UIBase {
 
     private UIController uiController;
 
@@ -46,7 +46,7 @@ public class UIGameWin extends AnimvsUI2 {
         Image imgHome = new Image(getUiSkin(), "btn-home");
         imgHome.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                uiController.showUIInitial();
+                goToHomeUI();
                 return true;
             }
         });
@@ -75,5 +75,14 @@ public class UIGameWin extends AnimvsUI2 {
     @Override
     protected void eventoBack() {
 
+    }
+
+    @Override
+    public void eventActionButtonPressed() {
+        goToHomeUI();
+    }
+
+    private void goToHomeUI(){
+        uiController.showUIInitial();
     }
 }

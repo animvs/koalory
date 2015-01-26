@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Scaling;
 
+import br.com.animvs.ggj2015.entities.engine.graphics.ui.UIBase;
 import br.com.animvs.ggj2015.entities.engine.graphics.ui.UICredits;
 import br.com.animvs.ggj2015.entities.engine.graphics.ui.UIGameOver;
 import br.com.animvs.ggj2015.entities.engine.graphics.ui.UIGameWin;
@@ -29,6 +30,12 @@ public class UIController extends AnimvsUIController2 {
     private Skin uiSkin;
 
     private int colorRecoveredCastCache;
+    private UIBase uiBaseCache;
+
+    @Override
+    public UIBase getUI() {
+        return uiBaseCache;
+    }
 
     public int getColorRecoveredCastCache() {
         return colorRecoveredCastCache;
@@ -57,6 +64,11 @@ public class UIController extends AnimvsUIController2 {
     @Override
     public void setUI(AnimvsUI2 uiCurrent) {
         super.setUI(uiCurrent);
+
+        if (!(uiCurrent instanceof UIBase))
+            throw new RuntimeException("Only UI's extending of 'UIBase' are allowed in this game");
+
+        uiBaseCache = (UIBase)uiCurrent;
 
         if (getUI() != null && controller.getStage() != null && controller.getStage().getViewport() != null)
             getUI().setBoundsByViewport(controller.getStage().getViewport());

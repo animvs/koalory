@@ -20,7 +20,7 @@ import br.com.animvs.ui.AnimvsUI2;
 /**
  * Created by ANSCHAU on 24/01/2015.
  */
-public class UIInGame extends AnimvsUI2 {
+public class UIInGame extends UIBase {
 
     private ImageTextButton imgRed;
     private ImageTextButton imgBlue;
@@ -122,5 +122,10 @@ public class UIInGame extends AnimvsUI2 {
             uiController.getGameController().getEntities().getPlayer(0).tryJump();
         else
             uiController.getGameController().getEntities().getPlayer(0).getInput().setMobileTouchClicked(true);
+    }
+
+    @Override
+    public void eventActionButtonPressed() {
+
     }
 }
