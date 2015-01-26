@@ -47,13 +47,13 @@ public final class Player extends GGJ15Entity {
         return playerIndex;
     }
 
-    public boolean getJumping() {
+    /*public boolean getJumping() {
         if (getBody() == null)
             return false;
 
-        return getBody().getLinearVelocity().y != 0f;
+        return (getBody().getLinearVelocity().y >= 0.1f && getBody().getLinearVelocity().y <= 0.1f);
         //return jumping;
-    }
+    }*/
 
     public Player(GameController controller, int playerIndex) {
         super(controller);
@@ -87,7 +87,15 @@ public final class Player extends GGJ15Entity {
     public void update() {
         super.update();
 
-        computeInput();
+        //DEBUG to show player Y velocity during jumps:
+        /*if (getBody() != null && getBody().getLinearVelocity().y != 0f)
+            Gdx.app.log("DEBUG", "Player velocity Y: " + getBody().getLinearVelocity().y);*/
+
+        /*if (getJumping()) {
+            Gdx.app.log("DEBUG", getJumping() ? "JUMPING" : "NOT JUMPING");
+        }*/
+
+                    computeInput();
         if (alive) {
             if (getBody() != null) {
                 computeDeath();
@@ -96,7 +104,8 @@ public final class Player extends GGJ15Entity {
                     getController().updateCameraDesiredPosition();
 
                 if (getBody() != null) {
-                    if (!getJumping()) {
+                    //if (!getJumping()) {
+                    if (getBody().getLinearVelocity().y == 0f) {
                         if (getBody().getLinearVelocity().x != 0f)
                             prepareAnimation("walk");
                         else {
@@ -140,10 +149,7 @@ public final class Player extends GGJ15Entity {
     }
 
     public void tryJump() {
-        if (getBody() == null || getJumping() /*|| TimeUtils.timeSinceMillis(lastJumpTime) < 500L*/)
-            return;
-
-        if (TimeUtils.timeSinceMillis(lastJumpTime) < 500L)
+        if (getBody() == null /*|| getJumping()*/ || TimeUtils.timeSinceMillis(lastJumpTime) < 850L)
             return;
 
         forceJump(false);
