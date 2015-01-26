@@ -23,7 +23,7 @@ public class SoundController {
         controller.getLoad().get(LoadController.SOUND_FX_DEATH_KOALA, Sound.class).play(1f, Random.random(0.75f, 1.25f), 0f);
     }
 
-    public void playDeathCharacter() {
+    public void playCharacterDeath() {
         controller.getLoad().get(LoadController.SOUND_FX_DEATH_CHARACTER, Sound.class).play(1f, Random.random(0.75f, 1.25f), 0f);
     }
 

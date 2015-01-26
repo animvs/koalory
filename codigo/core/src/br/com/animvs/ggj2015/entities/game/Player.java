@@ -186,6 +186,32 @@ public final class Player extends GGJ15Entity {
             getController().getSound().playJump();
     }
 
+    public void eventDeath() {
+        alive = false;
+        disposeBody();
+
+        setPosition(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
+        getController().getSound().playCharacterDeath();
+        getController().checkGameOver();
+        //setVisible(false);
+    }
+
+    public void restart(){
+        setPosition(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
+        disposeBody();
+        alive = false;
+
+        lastPositionCache = new Vector2();
+
+        lastJumpTime = 0L;
+        movementXMobile = 0f;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+    }
+
     @Override
     protected void eventAfterBodyCreated(Body body) {
         super.eventAfterBodyCreated(body);
@@ -215,24 +241,9 @@ public final class Player extends GGJ15Entity {
 
     }
 
-    public void eventDeath() {
-        alive = false;
-        disposeBody();
-
-        setPosition(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
-        getController().getSound().playDeathCharacter();
-        getController().checkGameOver();
-        //setVisible(false);
-    }
-
     private void computeDeath() {
         if (getY() <= 0f)
             eventDeath();
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
     }
 
     public void prepareAnimation(String newAnimationName) {
