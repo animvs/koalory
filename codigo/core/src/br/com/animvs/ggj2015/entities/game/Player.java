@@ -80,7 +80,6 @@ public final class Player extends GGJ15Entity {
 
         setGraphic(new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_CHARACTER, AnimacaoSkeletalData.class)));
         getGraphic().setSkin(blue ? "blue" : "green");
-        getGraphic().setAnimation("walk", true);
         getGraphic().setInterpolationDefault(0.25f);
     }
 
@@ -98,16 +97,14 @@ public final class Player extends GGJ15Entity {
 
                 if (getBody() != null) {
                     if (!getJumping()) {
-                        if (getBody().getLinearVelocity().x != 0f) {
-                            getGraphic().setAnimation("walk", true);
-                            getGraphic().setAnimationSpeedScale(Configurations.CORE_PLAYER_ANIM_SPEED_MULTIPLIER);
-                        } else{
-                            getGraphic().setAnimation("jump", false);
-                            getGraphic().setAnimationSpeedScale(Configurations.CORE_PLAYER_ANIM_SPEED_MULTIPLIER);
+                        if (getBody().getLinearVelocity().x != 0f)
+                            prepareAnimation("walk");
+                        else {
+                            prepareAnimation("walk");
+                            getGraphic().setAnimationSpeedScale(0f);
                         }
                     } else {
-                        getGraphic().setAnimation("jump", false);
-                        getGraphic().setAnimationSpeedScale(Configurations.CORE_PLAYER_ANIM_SPEED_MULTIPLIER);
+                        prepareAnimation("jump");
                     }
                 }
             }
@@ -137,9 +134,8 @@ public final class Player extends GGJ15Entity {
         lastJumpTime = TimeUtils.millis();
         /*jumping = true;*/
 
-        Gdx.app.log("JUMP", "Player " + playerIndex + " started a Jump");
+        //Gdx.app.log("JUMP", "Player " + playerIndex + " started a Jump");
 
-        getGraphic().setAnimation("jump", false);
         getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_JUMP_FORCE, true);
     }
 
@@ -190,7 +186,7 @@ public final class Player extends GGJ15Entity {
     public void eventDeath() {
         alive = false;
         disposeBody();
-        setBody(null);
+
         setPosition(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
         getController().getSound().playDeathCharacter();
         getController().checkGameOver();
@@ -205,6 +201,20 @@ public final class Player extends GGJ15Entity {
     @Override
     public void dispose() {
         super.dispose();
+    }
+
+    public void prepareAnimation(String newAnimationName) {
+        String currentAnimationName = getGraphic().getAnimationName();
+
+        if (currentAnimationName == null || !currentAnimationName.equals(newAnimationName)) {
+            if (newAnimationName.equals("jump")) {
+                if (currentAnimationName != null)
+                    getGraphic().setAnimation(newAnimationName, false);
+            } else
+                getGraphic().setAnimation(newAnimationName, true);
+        }
+
+        getGraphic().setAnimationSpeedScale(Configurations.CORE_PLAYER_ANIM_SPEED_MULTIPLIER);
     }
 
     /*public void endJump() {
