@@ -79,8 +79,13 @@ public class LevelController implements Disposable {
 
         for (int i = 0; i < objects.getCount(); i++) {
             if (objects.get(i).getName().equals("color")) {
+                Object powerProperty = objects.get(i).getProperties().get("power");
+
+                if (powerProperty == null)
+                    throw new RuntimeException("Item color does not have the property 'power'");
+
                 RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
-                controller.getEntities().spawnItem(rectangle.getRectangle().getX(), rectangle.getRectangle().getY());
+                controller.getEntities().spawnItemColorProgress(rectangle.getRectangle().getX(), rectangle.getRectangle().getY(), Float.parseFloat(powerProperty.toString()));
             } else if (objects.get(i).getName().equals("spawn")) {
                 RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
 
