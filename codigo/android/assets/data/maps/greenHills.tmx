@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="20" tilewidth="64" tileheight="64" nextobjectid="127">
+=======
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="20" tilewidth="64" tileheight="64" nextobjectid="123">
+>>>>>>> parent of 5643aaa... maps greenHills.tmx complete
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
@@ -15,7 +19,11 @@
  </layer>
  <layer name="ground" width="130" height="20">
   <data encoding="base64" compression="zlib">
+<<<<<<< HEAD
    eJztlksKwjAQhnsVXbmrbgou3LhTF+oB9AIKPlYKPq7uFFqIIc+ZxJF2PvgplDaZZP5MpigEQRBoDEBD7iAEVloPLLkDEdhQPSA+6Ce1B5aahH4wb556Hfg3H1TcAXSABWjm0IovtCDUWAU6O+4AkPxjfeoyc/8naLbI/+oaoPpAakJeStAYNEH867u7S+S4uge64gXKXts4gc6gC+hqeJ8aPeeUNbl6FpsHdC/kqGGufsrUS+Wso6E8QE/QC/Q2vKfgypEL3/kPyXOIsL1jVXz72ZTHmF6Ks4f1naUUsblygKXe/2kjqg9Msewt87Z1y6XYmqb7+dfEnCUKqcdNVQdsd8QRdEDGhoGzb4ndRwopxlVrU8oaYIrnDropc48i4sTg25eNQS1ry3chYM4ShRTj5sq76SzmuBtj15ZqXmz/3Hcf5NoDytpyji0+EB+ID8QHWH0AP7+jvg==
+=======
+   eJztlj0OwjAMhXsctsJSiYGFDRiAA8AFQOJnAomfq+NKVAqVkyZOTCp4n/SWqkmc+MVxUQAAAAAAAACAjGnuADypcgfwA8xIE4cW+ULzwowVxLPJHYCQuSGgj+YbsRaOq2uA6QPUBF1K0pA0EoztertL4bxtD/yKF2LO2saBdCSdSGfme2raOY/Zk6tnsXmg7QWNGubqp7heqg+99o10Jz1IT+Z7DK4cuei6/z559pG0d6yKTz9zeQzppXL2sF13KUVsrhxIqc9//FasD7hYtpZ1m7rlkrRO5+phQ+5SDKnnTVUHbG/EnrQTxibF3M83a0LoOcaQYl6zNqWsAVw8V9LFWHsQEKcELhcmK0YNS8t/0nX77gOtvHM1QeNtDN1bqnWl/fO/+0DrDGL2pjk3fAAfwAfwgVQvhOCehQ==
+>>>>>>> parent of 5643aaa... maps greenHills.tmx complete
   </data>
  </layer>
  <objectgroup name="collision">
@@ -29,6 +37,9 @@
   <object id="96" name="floor" x="2046.67" y="1274.67">
    <polyline points="0,0 0,-314.667 190.667,-316 192,-380 320,-378.667 320,-508 448,-508 448,-569.333 962.667,-570.667 962.667,-633.333 1025.33,-634.667 1024,-698.667 1086.67,-698.667 1086.67,-826.667 1280,-826.667 1280,-701.333 1344,-700 1345.33,-637.333 1406.67,-637.333 1406.67,-569.333 1473.33,-569.333 1473.33,-508 1600,-506.667 1601.33,-377.333 1664,-378.667 1665.33,-249.333 2114.67,-252 2116,1.33333 0,1.33333 1.33333,-13.3333"/>
   </object>
+  <object id="101" name="floor" x="5567.33" y="1278.67">
+   <polyline points="0,0 -0.666667,-319.333 64,-319.333 64,-382.667 128,-382 128.667,-510.667 256.667,-510 256.667,-382.667 320,-382 318.667,-252.667 511.333,-254 512.667,-0.666667 0,-0.666667"/>
+  </object>
   <object id="105" name="floor" x="7040" y="1278">
    <polyline points="0,0 0,-256 448,-256 449,-319 512,-319 512,-381 575,-381 575,-446 640,-446 641,-509 1279,-509 1279,0 0,-1"/>
   </object>
@@ -37,12 +48,15 @@
   <object id="116" name="floor" x="4223" y="832" width="641" height="37"/>
   <object id="118" name="bridge" x="6081" y="1007" width="318" height="20"/>
   <object id="121" name="bridge" x="6722" y="1006" width="188" height="17"/>
+<<<<<<< HEAD
   <object id="123" name="floor" x="5568" y="1278.67">
    <polyline points="0,0 -2,-446.667 126.667,-446.667 126.667,-510 255.333,-510.667 256,-381.333 319.333,-382 319.333,-254.667 511.333,-254.667 511.333,0 0.666667,0"/>
   </object>
   <object id="126" name="ramp" x="640" y="444">
    <polyline points="0,0 320,-317 385,-316 385,1 -3,2"/>
   </object>
+=======
+>>>>>>> parent of 5643aaa... maps greenHills.tmx complete
  </objectgroup>
  <objectgroup name="items">
   <object id="18" name="question" x="320" y="256" width="63" height="62"/>
@@ -94,7 +108,7 @@
   </object>
   <object id="81" name="spawn" x="8234.33" y="412.667" width="64" height="66.6667">
    <properties>
-    <property name="spawnInterval" value="4.8"/>
+    <property name="spawnInterval" value="2"/>
     <property name="speed" value="-1"/>
    </properties>
   </object>
@@ -130,7 +144,7 @@
   </object>
   <object id="90" name="color" x="8059" y="536" width="62" height="64">
    <properties>
-    <property name="power" value="0.16"/>
+    <property name="power" value="0.040"/>
    </properties>
   </object>
   <object id="91" name="color" x="3524" y="700" width="62" height="64">
@@ -151,12 +165,6 @@
   <object id="94" name="color" x="7231" y="955" width="62" height="64">
    <properties>
     <property name="power" value="0.15"/>
-   </properties>
-  </object>
-  <object id="125" name="spawn" x="4149.83" y="221.333" width="62.5" height="64.5">
-   <properties>
-    <property name="spawnInterval" value="9"/>
-    <property name="speed" value="0.7"/>
    </properties>
   </object>
  </objectgroup>
