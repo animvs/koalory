@@ -36,6 +36,27 @@ public class Item extends GGJ15Entity {
         setGraphic(graphic);
     }
 
+    @Override
+    public void setY(float y) {
+        super.setY(y);
+        if (getBody() != null)
+            getBody().setTransform(getBody().getPosition().x, controller.getPhysics().toBox(y), getBody().getAngle());
+
+        if (getGraphic() != null)
+            getGraphic().setPosicao(getX(), y /*- Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f*/);
+    }
+
+    @Override
+    public void setPosition(float x, float y) {
+        super.setPosition(x, y);
+
+        if (getBody() != null)
+            getBody().setTransform(controller.getPhysics().toBox(x), controller.getPhysics().toBox(y), getBody().getAngle());
+
+        if (getGraphic() != null)
+            getGraphic().setPosicao(x, y /*- Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f*/);
+    }
+
     public void collect() {
         controller.addColorRecovered(colorRecovered);
         controller.getEntities().validateGameOver();
