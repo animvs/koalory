@@ -47,13 +47,36 @@ public final class Player extends GGJ15Entity {
         return playerIndex;
     }
 
-    /*public boolean getJumping() {
+    private static final float ANIMATION_VELOCITY_TOLLERANCE = 0.05f;
+
+    public boolean getJumping() {
         if (getBody() == null)
             return false;
 
-        return (getBody().getLinearVelocity().y >= 0.1f && getBody().getLinearVelocity().y <= 0.1f);
-        //return jumping;
-    }*/
+        float vVelocity = getBody().getLinearVelocity().y;
+
+        if (vVelocity < 0f && vVelocity < -ANIMATION_VELOCITY_TOLLERANCE)
+            return true;
+
+        if (vVelocity > 0f && vVelocity > ANIMATION_VELOCITY_TOLLERANCE)
+            return true;
+
+        return false;
+
+        //return (getBody().getLinearVelocity().y >= 0.1f && getBody().getLinearVelocity().y <= 0.1f);
+    }
+
+    private boolean getMovingHorizontally() {
+        if (getBody() == null)
+            return false;
+
+        float hVelocity = getBody().getLinearVelocity().x;
+
+        if (hVelocity < 0f)
+            return hVelocity < ANIMATION_VELOCITY_TOLLERANCE;
+        else
+            return hVelocity > ANIMATION_VELOCITY_TOLLERANCE;
+    }
 
     public Player(GameController controller, int playerIndex) {
         super(controller);
@@ -87,26 +110,21 @@ public final class Player extends GGJ15Entity {
     public void update() {
         super.update();
 
-        //DEBUG to show player Y velocity during jumps:
-        /*if (getBody() != null && getBody().getLinearVelocity().y != 0f)
-            Gdx.app.log("DEBUG", "Player velocity Y: " + getBody().getLinearVelocity().y);*/
-
-        /*if (getJumping()) {
-            Gdx.app.log("DEBUG", getJumping() ? "JUMPING" : "NOT JUMPING");
-        }*/
-
-                    computeInput();
+        computeInput();
         if (alive) {
             if (getBody() != null) {
+                //Gdx.app.log("DEBUG", "vX: " + getBody().getLinearVelocity().x + " vY: " + getBody().getLinearVelocity().y);
+
                 computeDeath();
 
                 if (getX() != lastPositionCache.x || getY() != lastPositionCache.y)
                     getController().updateCameraDesiredPosition();
 
                 if (getBody() != null) {
-                    //if (!getJumping()) {
-                    if (getBody().getLinearVelocity().y == 0f) {
-                        if (getBody().getLinearVelocity().x != 0f)
+                    if (!getJumping()) {
+                        //if (getBody().getLinearVelocity().y == 0f) {
+                        //if (getBody().getLinearVelocity().x != 0f)
+                        if (getMovingHorizontally())
                             prepareAnimation("walk");
                         else {
                             prepareAnimation("walk");
@@ -137,9 +155,6 @@ public final class Player extends GGJ15Entity {
         if (resetForceY)
             getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0f);
 
-        if (resetForceY)
-            getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0f);
-
         lastJumpTime = TimeUtils.millis();
         /*jumping = true;*/
 
@@ -149,8 +164,20 @@ public final class Player extends GGJ15Entity {
     }
 
     public void tryJump() {
-        if (getBody() == null /*|| getJumping()*/ || TimeUtils.timeSinceMillis(lastJumpTime) < 850L)
+        if (getBody() == null){
+            //Gdx.app.log("DEBUG", "JUMP BLOCKED - Physical Body is NULL");
             return;
+        }
+
+        if (getJumping()) {
+            //Gdx.app.log("DEBUG", "JUMP BLOCKED - Player is JUMPING already");
+            return;
+        }
+
+        if(TimeUtils.timeSinceMillis(lastJumpTime) < 850L) {
+            //Gdx.app.log("DEBUG", "JUMP BLOCKED - Next jump is NOT READY yet");
+            return;
+        }
 
         forceJump(false);
 
@@ -178,8 +205,6 @@ public final class Player extends GGJ15Entity {
 
         if (alive && getBody() != null) {
             float movementX = input.getMovementX();
-            /*if (getJumping())
-                movementX *= 0.75f;*/
 
             if (Configurations.SIMULATE_MOBILE_ON_DESKTOP || Gdx.app.getType() != Application.ApplicationType.Desktop)
                 getBody().setLinearVelocity(movementXMobile, getBody().getLinearVelocity().y);
