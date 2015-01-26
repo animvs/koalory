@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 
 import br.com.animvs.engine2.physics.AnimvsBodyFactory;
 import br.com.animvs.engine2.physics.AnimvsPhysicsController;
+import br.com.animvs.ggj2015.Configurations;
 import br.com.animvs.ggj2015.entities.game.Foe;
 import br.com.animvs.ggj2015.entities.game.Item;
 import br.com.animvs.ggj2015.entities.game.Player;
@@ -193,6 +194,9 @@ public final class PhysicsController extends AnimvsPhysicsController {
                                     Gdx.app.log("KILL", "Player " + player.getPlayerIndex() + " has killed a Koala");
                                     foe.eventDeath(player);
                                 } else {
+                                    if (Configurations.DEBUG_PLAYER_IMMORTAL)
+                                        return;
+
                                     //Player has been damaged by the foe:
                                     Gdx.app.log("KILL", "Player " + player.getPlayerIndex() + " has been killed by a Koala");
                                     player.eventDeath();

@@ -3,7 +3,8 @@ package br.com.animvs.ggj2015;
 import com.badlogic.gdx.math.Vector2;
 
 public final class Configurations {
-    public static final boolean DEBUG_PHYSICS = false;
+    public static final boolean DEBUG_PLAYER_IMMORTAL = false;
+    public static final boolean DEBUG_PHYSICS = true;
     public static final boolean SIMULATE_MOBILE_ON_DESKTOP = false;
 
     public static final String VERSION_NAME = "0.0.1";

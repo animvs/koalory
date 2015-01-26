@@ -63,10 +63,10 @@ public final class Foe extends GGJ15Entity {
         disposeBody();
         getGraphic().setAnimation("dead", false);
 
-        if (killer != null) {
+        if (killer != null)
             killer.forceJump(true);
-        } else
-            Gdx.app.log("FOE", "Koala has committed suicide");
+        /*else
+            Gdx.app.log("FOE", "Koala has committed suicide");*/
 
         getController().getSound().playDeathKoala();
     }
