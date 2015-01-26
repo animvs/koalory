@@ -76,7 +76,7 @@ public final class EntitiesController {
 
     public void createEntityBody(GGJ15Entity entityOwner) {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(entityOwner, new Vector2(600f, 550f), 0f,
-                BodyDef.BodyType.DynamicBody, Configurations.GAMEPLAY_ENTITY_SIZE_X, Configurations.GAMEPLAY_ENTITY_SIZE_Y, 1f, 0.1f, false);
+                BodyDef.BodyType.DynamicBody, Configurations.GAMEPLAY_ENTITY_SIZE_X, Configurations.GAMEPLAY_ENTITY_SIZE_Y, 1f, 0f, false);
 
         controller.getPhysics().createRetangleBody(bodyParams);
     }

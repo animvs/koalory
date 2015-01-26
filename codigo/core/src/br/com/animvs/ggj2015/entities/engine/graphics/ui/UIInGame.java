@@ -15,7 +15,6 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import br.com.animvs.ggj2015.Configurations;
 import br.com.animvs.ggj2015.controller.UIController;
-import br.com.animvs.ui.AnimvsUI2;
 
 /**
  * Created by ANSCHAU on 24/01/2015.
@@ -54,7 +53,7 @@ public class UIInGame extends UIBase {
             Table tbCenter = new Table(getUiSkin());
             tbCenter.addListener(new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    action();
+                    computeAction();
                     return true;
                 }
             });
@@ -65,7 +64,7 @@ public class UIInGame extends UIBase {
             Table tbRodapeRight = new Table(getUiSkin());
             tbRodapeRight.addListener(new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    action();
+                    computeAction();
                     return true;
                 }
             });
@@ -76,9 +75,9 @@ public class UIInGame extends UIBase {
 
         } else
             getWindow().add().fill().expand();
-        //setDebug(true);
-        //getWindow().setDebug(true);
-        //tbRodapeRight.setDebug(true);
+
+        /*setDebug(true);
+        getWindow().setDebug(true);*/
     }
 
     @Override
@@ -117,7 +116,7 @@ public class UIInGame extends UIBase {
         imgRed.setText(uiController.getColorRecoveredCastCache() + "%");
     }
 
-    private void action() {
+    private void computeAction() {
         if (uiController.getGameController().getEntities().getPlayer(0).getAlive())
             uiController.getGameController().getEntities().getPlayer(0).tryJump();
         else
