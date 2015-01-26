@@ -7,11 +7,6 @@ public final class Configurations {
     public static final boolean DEBUG_PHYSICS = true;
     public static final boolean SIMULATE_MOBILE_ON_DESKTOP = false;
 
-    public static final String VERSION_NAME = "0.0.1";
-    public static final int VERSION_CODE = 1;
-
-    public static final float CORE_TILE_SIZE = 64f;
-
     public static final Vector2 RESOLUTION_REAL = new Vector2(1280f, 768f);
 
     public static final String LEVEL_LAYER_COLLISION = "collision";
@@ -22,6 +17,8 @@ public final class Configurations {
     public static final String CORE_LANGUAGE_PATH = "data/lang/";
     public static final float CORE_CAMERA_SPEED_MULTIPLIER = 1f;
     public static final float CORE_PLAYER_ANIM_SPEED_MULTIPLIER = 3f;
+    public static final float CORE_TILE_SIZE = 64f;
+    public static final int CORE_GAMEPAD_BUTTON_ACTION = 1;
 
     public static final String GRAPHICS_SHADER_COLOR_FRAG = "data/graphics/shaders/frag/color.frag";
     public static final String GRAPHICS_SHADER_DEFAULT_VERT = "data/graphics/shaders/vert/default.vert";
