@@ -49,7 +49,7 @@ public final class InputMapper {
         if (!playerOwner.getAlive()) {
             int playerIndex = playerOwner.getPlayerIndex();
             if (Controllers.getControllers().size - 1 >= playerIndex)
-                if (Controllers.getControllers().get(playerIndex).getButton(1)) {
+                if (Controllers.getControllers().get(playerIndex).getButton(Configurations.CORE_GAMEPAD_BUTTON_ACTION)) {
                     Gdx.app.log("PLAYER", "Player requesting spawn: " + playerOwner.getPlayerIndex() + " Lives after spawn: " + (controller.getLives() - 1));
                     if (controller.getLives() > 0)
                         playerOwner.spawn(MathUtils.randomBoolean());
@@ -121,7 +121,7 @@ public final class InputMapper {
         if (Controllers.getControllers().get(playerOwner.getPlayerIndex()).getAxis(1) > 0.15f)
             movementX += Configurations.GAMEPLAY_MOVEMENT_SPEED;
 
-        if (getController().getButton(1))
+        if (getController().getButton(Configurations.CORE_GAMEPAD_BUTTON_ACTION))
             playerOwner.tryJump();
     }
 
