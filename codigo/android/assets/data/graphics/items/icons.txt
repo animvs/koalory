@@ -1,0 +1,39 @@
+icons.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+block_brick
+  rotate: false
+  xy: 134, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+block_question
+  rotate: false
+  xy: 68, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+block_stone
+  rotate: false
+  xy: 2, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+object_coin
+  rotate: false
+  xy: 200, 2
+  size: 34, 50
+  orig: 40, 56
+  offset: 3, 2
+  index: -1
+object_spikes
+  rotate: false
+  xy: 2, 68
+  size: 64, 20
+  orig: 64, 20
+  offset: 0, 0
+  index: -1

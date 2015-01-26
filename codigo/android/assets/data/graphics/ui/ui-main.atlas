@@ -1,0 +1,139 @@
+
+ui-main.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+logo
+  rotate: false
+  xy: 0, 408
+  size: 415, 103
+  orig: 415, 103
+  offset: 0, 0
+  index: -1
+character
+  rotate: true
+  xy: 0, 183
+  size: 224, 407
+  orig: 224, 407
+  offset: 0, 0
+  index: -1
+btn-play
+  rotate: false
+  xy: 416, 270
+  size: 239, 241
+  orig: 239, 241
+  offset: 0, 0
+  index: -1
+cores
+  rotate: false
+  xy: 408, 55
+  size: 214, 214
+  orig: 214, 214
+  offset: 0, 0
+  index: -1
+koala
+  rotate: true
+  xy: 0, 33
+  size: 149, 212
+  orig: 149, 212
+  offset: 0, 0
+  index: -1
+btn-home
+  rotate: false
+  xy: 213, 85
+  size: 101, 97
+  orig: 101, 97
+  offset: 0, 0
+  index: -1
+btn-restart
+  rotate: false
+  xy: 315, 85
+  size: 85, 97
+  orig: 85, 97
+  offset: 0, 0
+  index: -1
+btn-back
+  rotate: false
+  xy: 213, 4
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+btn-credit
+  rotate: false
+  xy: 294, 4
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+life
+  rotate: false
+  xy: 375, 0
+  size: 59, 54
+  orig: 59, 54
+  offset: 0, 0
+  index: -1
+touchpad
+  rotate: false
+  xy: 435, 4
+  size: 50, 50
+  split: 24, 25, 24, 25
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+touchpad-knob
+  rotate: false
+  xy: 486, 10
+  size: 44, 44
+  split: 20, 23, 20, 23
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+frame-blue
+  rotate: false
+  xy: 623, 249
+  size: 20, 20
+  split: 5, 5, 5, 5
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+backgound-bar
+  rotate: false
+  xy: 644, 257
+  size: 12, 12
+  split: 5, 5, 5, 5
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+bar-blue
+  rotate: false
+  xy: 408, 402
+  size: 5, 5
+  split: 1, 1, 1, 1
+  orig: 5, 5
+  offset: 0, 0
+  index: -1
+bar-green
+  rotate: false
+  xy: 408, 396
+  size: 5, 5
+  split: 1, 1, 1, 1
+  orig: 5, 5
+  offset: 0, 0
+  index: -1
+bar-red
+  rotate: false
+  xy: 408, 390
+  size: 5, 5
+  split: 1, 1, 1, 1
+  orig: 5, 5
+  offset: 0, 0
+  index: -1
+frame-yellow
+  rotate: false
+  xy: 408, 384
+  size: 5, 5
+  split: 1, 1, 1, 1
+  orig: 5, 5
+  offset: 0, 0
+  index: -1

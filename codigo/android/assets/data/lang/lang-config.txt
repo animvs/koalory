@@ -1,0 +1,12 @@
+{
+languages: [
+	{
+		languageAbbreviation: en,
+		fontFilePath: playtime.ttf
+	},
+	{
+		languageAbbreviation: pt-br,
+		fontFilePath: playtime.ttf
+	}
+]
+}

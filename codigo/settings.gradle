@@ -1,0 +1,10 @@
+include 'desktop', 'android', 'ios', 'core',
+
+'animvs-engine:core:animvs-ui',
+'animvs-engine:core:animvs-core',
+'animvs-engine:core:animvs-physics',
+'animvs-engine:core:spine-libgdx',
+'animvs-engine:core:animvs-utils',
+
+':animvs-engine:net:play-services:google-play-services_lib',
+':animvs-engine:net:play-services:base-game-utils'

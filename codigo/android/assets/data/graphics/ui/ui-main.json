@@ -1,0 +1,49 @@
+{
+com.badlogic.gdx.graphics.Color: {
+	white: { a: 1, b: 1, g: 1, r: 1 },
+	red: { r: 1, g: 0, b: 0, a: 1 },
+	black: { a: 1, b: 0, g: 0, r: 0 },
+	gray: { a: 1, b: 0.6, g: 0.6, r: 0.6 },
+	gray-light: { a: 1, b: 0.75, g: 0.75, r: 0.75 },
+	green: { a: 1, b: 0.5, g: 1.0, r: 0.5 },
+	green-dark: { a: 1, b: 0, g: 0.45, r: 0 },
+	blue: { r: 0.5, g: 0.5, b: 1.0, a: 1 },
+	yellow:{ r: 1, g: 1, b: 0.4, a: 1 }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
+	notification-frame-content:{ name: btn-play, color: { r: 1, g: 0.97, b: 0.7, a: 0 } },
+},
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+	default: { font: default-font, fontColor: white },
+	title: { font: big-font, fontColor: black },
+	title-white: { font: big-font, fontColor: white },
+	title-red: { font: big-font, fontColor: red },
+	defaultBlack: { font: default-font, fontColor: black },
+	small: { font: small-font, fontColor: white },
+	smallBlack: { font: small-font, fontColor: black },
+
+    initial-version: { font: small-font, fontColor: gray-light },
+	store-price: { font: default-font, fontColor: white },
+},
+com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
+	default: { titleFont: default-font, titleFontColor: white}
+	frame-blue: { titleFont: default-font, titleFontColor: white, background: frame-blue}
+},
+com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+    btn-play: {down: btn-play, up: btn-play, checked: btn-play},
+    btn-credit: {down: btn-credit, up: btn-credit, checked: btn-credit}
+    btn-back: {down: btn-credit, up: btn-back, checked: btn-back}
+},
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+    default: {down: btn-play, up: btn-play, font: default-font, fontColor: white }
+},
+com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
+    cores: { down: cores, up: cores ,font: default-font, fontColor: black, disabled: cores},
+},
+com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
+    btn-menu: { down: btn-play, up: btn-play, font: default-font, fontColor: white },
+},
+com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle: {
+    default: {"background": "touchpad", "knob": "touchpad-knob"}
+}
+}

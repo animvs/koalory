@@ -1,0 +1,41 @@
+
+skeleton.png
+size: 128,64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+armCoala
+  rotate: false
+  xy: 102, 46
+  size: 23, 14
+  orig: 23, 14
+  offset: 0, 0
+  index: -1
+bodyCoala
+  rotate: true
+  xy: 56, 8
+  size: 52, 44
+  orig: 52, 44
+  offset: 0, 0
+  index: -1
+footCoala
+  rotate: false
+  xy: 102, 31
+  size: 23, 13
+  orig: 23, 13
+  offset: 0, 0
+  index: -1
+footCoalaRight
+  rotate: false
+  xy: 102, 16
+  size: 23, 13
+  orig: 23, 13
+  offset: 0, 0
+  index: -1
+headCoala
+  rotate: true
+  xy: 2, 2
+  size: 58, 52
+  orig: 58, 52
+  offset: 0, 0
+  index: -1

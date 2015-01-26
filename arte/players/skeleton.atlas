@@ -1,0 +1,76 @@
+
+skeleton.png
+size: 256,64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blue/ninjaArmLowerBlue
+  rotate: true
+  xy: 2, 2
+  size: 17, 28
+  orig: 17, 28
+  offset: 0, 0
+  index: -1
+blue/ninjaHeadBlue
+  rotate: false
+  xy: 2, 21
+  size: 46, 36
+  orig: 46, 36
+  offset: 0, 0
+  index: -1
+blue/ninjaTorsoUpperBlue
+  rotate: false
+  xy: 98, 24
+  size: 27, 33
+  orig: 27, 33
+  offset: 0, 0
+  index: -1
+ninjaArmLowerGreen
+  rotate: false
+  xy: 156, 29
+  size: 17, 28
+  orig: 17, 28
+  offset: 0, 0
+  index: -1
+ninjaArmUpper
+  rotate: false
+  xy: 175, 39
+  size: 19, 18
+  orig: 19, 18
+  offset: 0, 0
+  index: -1
+ninjaHeadGreen
+  rotate: false
+  xy: 50, 21
+  size: 46, 36
+  orig: 46, 36
+  offset: 0, 0
+  index: -1
+ninjaLegLower
+  rotate: true
+  xy: 32, 4
+  size: 15, 28
+  orig: 15, 28
+  offset: 0, 0
+  index: -1
+ninjaLegUpper
+  rotate: true
+  xy: 62, 6
+  size: 13, 18
+  orig: 13, 18
+  offset: 0, 0
+  index: -1
+ninjaTorsoLower
+  rotate: false
+  xy: 196, 45
+  size: 19, 12
+  orig: 19, 12
+  offset: 0, 0
+  index: -1
+ninjaTorsoUpperGreen
+  rotate: false
+  xy: 127, 24
+  size: 27, 33
+  orig: 27, 33
+  offset: 0, 0
+  index: -1

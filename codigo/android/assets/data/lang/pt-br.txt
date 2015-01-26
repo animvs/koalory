@@ -1,0 +1,86 @@
+{
+items: [
+	{
+	    name: main,
+		items: [
+			{
+				name: gameName,
+				value: "Shooting Gallery"
+			},
+            {
+                name: ui,
+                items: [
+                    {
+                        name: initial,
+                        items: [
+                            {
+                                name: credit,
+                                value: "Créditos:"
+                            },
+                            {
+                                name: andrei,
+                                value: "Andrei Daldegan"
+                            },
+                            {
+                                name: atrAndrei,
+                                value: "Game Design / Programação"
+                            },
+                            {
+                                name: anderson,
+                                value: "Anderson Anschau"
+                            },
+                            {
+                                name: atrAnderson,
+                                value: "Programador / Game Design"
+                            },
+                            {
+                                name: cleber,
+                                value: "Cleber Santos"
+                            },
+                            {
+                                name: atrCleber,
+                                value: "Gerência Projeto"
+                            },
+                            {
+                                name: jardel,
+                                value: "Jardel Siqueira"
+                            },
+                            {
+                                name: atrJardel,
+                                value: "Animação / Level Design"
+                            }
+
+                        ]
+                    },
+                    {
+                        name: gamewin,
+                        items: [
+                            {
+                                name: title,
+                                value: "Parabéns! Você venceu!"
+                            },
+                            {
+                                name: message,
+                                value: "Você conseguiu recuperar as cores do mundo."
+                            }
+                        ]
+                    },
+                    {
+                        name: gameover,
+                        items: [
+                            {
+                              name: title,
+                              value: "Fim de Jogo!"
+                            },
+                            {
+                              name: message,
+                              value: "Graças ao teu fracasso \n o mundo será eternamente cinza!"
+                            },
+                        ]
+                    }
+                ],
+            }
+		],
+	},
+]
+}

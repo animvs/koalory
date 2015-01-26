@@ -1,0 +1,202 @@
+{
+items: [
+	{
+	    name: main,
+		items: [
+			{
+				name: gameName,
+				value: "Shooting Gallery"
+			},
+            {
+                name: ui,
+                items: [
+                    {
+                        name: start,
+                        items: [
+                            {
+                                name: lives,
+                                value: Lives
+                            },
+                            {
+                                name: livesFill,
+                                value: "Lives Filled"
+                            },
+                            {
+                                name: play,
+                                value: Play
+                            },
+                            {
+                                name: adsFree,
+                                value: "Ads Free"
+                            },
+                            {
+                                name: store,
+                                value: Store
+                            },
+                            {
+                                name: upgrade,
+                                value: "Upgrade +"
+                            },
+                            {
+                                name: best,
+                                value: Best
+                            },
+                            {
+                              name: continue,
+                              value: Continue
+                            },
+                            {
+                                name: details,
+                                value: Details
+                            },
+                        ]
+                    },
+                    {
+                        name: gameover,
+                        items: [
+                            {
+                              name: title,
+                              value: "Match Completed!"
+                            },
+                        ]
+                    },
+                    {
+                        name: chests,
+                        items: [
+                            {
+                              name: unlock,
+                              value: "Unlock"
+                            },
+                        ]
+                    },
+                    {
+                        name: buyDialog,
+                        items: [
+                            {
+                               name: noCoins,
+                               value: "You don't have enough coins."
+                            },
+                            {
+                               name: noLives,
+                               value: "You don't have enough lives."
+                            },
+                            {
+                                name: noGems,
+                                value: "You don't have enough gems."
+                            },
+                            {
+                               name: question,
+                               value: "Do you wish to spend {0} GEMS ?"
+                            },
+                            {
+                               name: questionStore,
+                               value: "Do you wish to go to the store ?"
+                            },
+                            {
+                               name: x,
+                               value: x
+                            },
+                            {
+                               name: ok,
+                               value: OK
+                            },
+                            {
+                               name: cancel,
+                               value: Cancel
+                            }
+                        ]
+                    },
+                    {
+                        name: settings,
+                        items: [
+                            {
+                                name: checked,
+                                value: X
+                            },
+                            {
+                              name: language,
+                              value: Language
+                            },
+                            {
+                                name: english,
+                                value: English
+                            },
+                            {
+                                name: portuguese,
+                                value: Portuguese
+                            }
+                        ]
+                    },
+                    {
+                        name: upgrade,
+                        items: [
+                            {
+                                name: title,
+                                value: "Crossbow Upgraded!"
+                            },
+                            {
+                                name: description,
+                                value: "Now you can spend {0} arrows every match!"
+                            },
+                        ]
+                    },
+                    {
+                        name: gem-bought,
+                        items: [
+                            {
+                                name: description,
+                                value: "You just received {0} GEM'S!\n\nUse gem's to buy all sort of things and become an archery legend!"
+                            },
+                        ]
+                    },
+                ],
+            },
+            {
+                name: rewards,
+                items: [
+                    {
+                        name: gem-title,
+                        value: "PRECIOUS GEM'S"
+                    },
+                    {
+                        name: gem-text,
+                        value: "Use gem's to buy all sort of things and become an archery legend!"
+                    },
+                    {
+                        name: rune-title,
+                        value: "RUNE"
+                    },
+                    {
+                        name: rune-text,
+                        value: "Runes are passive items sorted before the match, they can be very useful providing all sorts of bonus!"
+                    },
+                    {
+                        name: livesMax-title,
+                        value: "LIVES INCREMENT"
+                    },
+                    {
+                        name: livesMax-text,
+                        value: "You just got an extra life! With that, you can play more often, and also expend more time in different game modes."
+                    },
+                    {
+                        name: chestaccess-title,
+                        value: "CHESTS"
+                    },
+                    {
+                        name: chestaccess-text,
+                        value: "Now you can open locked chests to collect rewards and rare items! Gather all the keys you can."
+                    },
+                    {
+                        name: button-title,
+                        value: "BUTTON"
+                    },
+                    {
+                        name: button-text,
+                        value: "Release one more row of challenges and rewards by hitting a button target during a match!"
+                    }
+                ]
+            }
+		],
+	},
+]
+}
