@@ -1,0 +1,3 @@
+[submodule "codigo/animvs-engine"]
+	path = codigo/animvs-engine
+	url = http://gitlab.animvs.com.br/animvs-main/animvs-engine.git
