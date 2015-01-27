@@ -31,7 +31,7 @@ items: [
                             },
                             {
                                 name: atrAnderson,
-                                value: "Programador / Game Design"
+                                value: "Game Design / Programação"
                             },
                             {
                                 name: cleber,

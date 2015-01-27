@@ -58,7 +58,7 @@ public abstract class GGJ15Entity extends Group implements Disposable, PhysicBod
             physicBody.setTransform(physicBody.getPosition().x, controller.getPhysics().toBox(y), physicBody.getAngle());
 
         if (graphic != null)
-            graphic.setPosicao(getX(), y - Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f);
+            graphic.setPosicao(getX(), y - (Configurations.GAMEPLAY_ENTITY_SIZE_Y * graphic.getEscala().y) / 2f);
     }
 
     @Override
@@ -69,7 +69,7 @@ public abstract class GGJ15Entity extends Group implements Disposable, PhysicBod
             physicBody.setTransform(controller.getPhysics().toBox(x), controller.getPhysics().toBox(y), physicBody.getAngle());
 
         if (graphic != null)
-            graphic.setPosicao(x, y - Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f);
+            graphic.setPosicao(x, y - (Configurations.GAMEPLAY_ENTITY_SIZE_Y * graphic.getEscala().y) / 2f);
     }
 
     @Override
@@ -134,10 +134,6 @@ public abstract class GGJ15Entity extends Group implements Disposable, PhysicBod
         this.controller = controller;
         controller.getStage().registerEntity(this);
     }
-
-    /*public boolean checkRemoval() {
-        return (getY() >= Configurations.RESOLUTION_REAL.y + Configurations.ENTITY_TARGETS_WIDTH);
-    }*/
 
     protected void eventAfterBodyCreated(Body body) {
         physicBody = body;

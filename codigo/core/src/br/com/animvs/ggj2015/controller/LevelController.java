@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Disposable;
 import br.com.animvs.ggj2015.Configurations;
 import br.com.animvs.ggj2015.controller.physics.MapBodyBuilder;
 import br.com.animvs.ggj2015.entities.engine.graphics.tiles.TileRenderer;
+import br.com.animvs.ggj2015.entities.game.Player;
 
 public class LevelController implements Disposable {
     private GameController controller;
@@ -20,11 +21,21 @@ public class LevelController implements Disposable {
 
     private OrthographicCamera cameraCache;
 
+    private Player cameraOwner;
+
     //Objects created from tiled:
     private ArrayMap<String, Body> bodiesCollision;
 
     public LevelController(GameController controller) {
         this.controller = controller;
+    }
+
+    public Player getCameraOwner() {
+        return cameraOwner;
+    }
+
+    public void setCameraOwner(Player cameraOwner) {
+        this.cameraOwner = cameraOwner;
     }
 
     public void loadMap(String mapPath) {

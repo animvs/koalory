@@ -10,7 +10,6 @@ import br.com.animvs.ggj2015.entities.engine.ia.IAStraight;
 import br.com.animvs.ggj2015.entities.game.Foe;
 import br.com.animvs.ggj2015.entities.game.GGJ15Entity;
 import br.com.animvs.ggj2015.entities.game.Item;
-import br.com.animvs.ggj2015.entities.game.Player;
 import br.com.animvs.ggj2015.entities.game.Spawner;
 
 /**
@@ -19,27 +18,27 @@ import br.com.animvs.ggj2015.entities.game.Spawner;
 public final class EntitiesController {
     private GameController controller;
 
-    private DelayedRemovalArray<Player> players;
+    //private DelayedRemovalArray<Player> players;
     private DelayedRemovalArray<Item> items;
     private DelayedRemovalArray<Foe> foes;
     private DelayedRemovalArray<Spawner> spawners;
 
     public EntitiesController(GameController controller) {
         this.controller = controller;
-        players = new DelayedRemovalArray<Player>();
+        //players = new DelayedRemovalArray<Player>();
         items = new DelayedRemovalArray<Item>();
         foes = new DelayedRemovalArray<Foe>();
         spawners = new DelayedRemovalArray<Spawner>();
     }
 
     public void initialize() {
-        for (int i = 0; i < Configurations.GAMEPLAY_MAX_PLAYERS; i++)
-            players.add(new Player(controller, i));
+        /*for (int i = 0; i < Configurations.GAMEPLAY_MAX_PLAYERS; i++)
+            players.add(new Player(controller, i));*/
     }
 
     public void restart() {
-        for (int i = 0; i < Configurations.GAMEPLAY_MAX_PLAYERS; i++)
-            players.get(i).restart();
+        /*for (int i = 0; i < Configurations.GAMEPLAY_MAX_PLAYERS; i++)
+            players.get(i).restart();*/
 
         for (int i = 0; i < items.size; i++)
             items.get(i).dispose();
@@ -52,17 +51,17 @@ public final class EntitiesController {
         spawners.clear();
     }
 
-    public Player getPlayer(int index) {
+    /*public Player getPlayer(int index) {
         return players.get(index);
-    }
+    }*/
 
-    public int getPlayersAlive() {
+    /*public int getPlayersAlive() {
         int count = 0;
         for (int i = 0; i < players.size; i++)
             if (players.get(i).getAlive())
                 count++;
         return count;
-    }
+    }*/
 
     public void spawnItemColorProgress(float x, float y, float colorProgressAmount) {
         Item newItem = new Item(controller, colorProgressAmount);
@@ -78,8 +77,12 @@ public final class EntitiesController {
     }
 
     public void createEntityBody(GGJ15Entity entityOwner) {
+        createEntityBody(entityOwner, 1f);
+    }
+
+    public void createEntityBody(GGJ15Entity entityOwner, float scale) {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(entityOwner, new Vector2(600f, 550f), 0f,
-                BodyDef.BodyType.DynamicBody, Configurations.GAMEPLAY_ENTITY_SIZE_X, Configurations.GAMEPLAY_ENTITY_SIZE_Y, 1f, 0f, false);
+                BodyDef.BodyType.DynamicBody, Configurations.GAMEPLAY_ENTITY_SIZE_X * scale, Configurations.GAMEPLAY_ENTITY_SIZE_Y * scale, 1f, 0f, false);
 
         controller.getPhysics().createRetangleBody(bodyParams);
     }
@@ -89,15 +92,15 @@ public final class EntitiesController {
         foes.add(newFoe);
     }
 
-    public void update(boolean onlyInput) {
-        if (onlyInput) {
+    public void update() {
+/*        if (onlyInput) {
             for (int i = 0; i < players.size; i++)
                 players.get(i).updateInputOnly();
             return;
         }
 
         for (int i = 0; i < players.size; i++)
-            players.get(i).update();
+            players.get(i).update();*/
 
         for (int i = 0; i < foes.size; i++)
             foes.get(i).update();
@@ -110,7 +113,7 @@ public final class EntitiesController {
         items.removeValue(item, true);
     }
 
-    public void validateGameOver() {
+    public void processGameWin() {
         if (controller.getColorRecovered() >= 1f) {
             controller.endMatch();
             controller.getUiController().showUIGameWin();

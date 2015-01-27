@@ -29,6 +29,10 @@ public abstract class UIBase extends AnimvsUI2 {
     public void render() {
         super.render();
 
+        if (controller.getInput().checkAnyInputHasActionPressed())
+            eventActionButtonPressed();
+
+        /*
         //Keyboard action button for player 1:
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
             eventActionButtonPressed();
@@ -40,9 +44,10 @@ public abstract class UIBase extends AnimvsUI2 {
         int maxJoysticks = Controllers.getControllers().size > Configurations.GAMEPLAY_MAX_PLAYERS ? Configurations.GAMEPLAY_MAX_PLAYERS : Controllers.getControllers().size;
 
         for (int i = 0; i < maxJoysticks; i++) {
-            if (controller.getEntities().getPlayer(i).getInput().getButtonActionJustPressed())
+
+            if (controller.getPlayers().getPlayer(i).getInput().getButtonActionJustPressed())
                 eventActionButtonPressed();
-        }
+        }*/
     }
 
     public abstract void eventActionButtonPressed();

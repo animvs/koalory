@@ -47,7 +47,7 @@ public class UIInGame extends UIBase {
             Table tbCenter = new Table(getUiSkin());
             tbCenter.addListener(new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    computeAction();
+                    /*computeAction();*/
                     return true;
                 }
             });
@@ -58,7 +58,7 @@ public class UIInGame extends UIBase {
             Table tbRodapeRight = new Table(getUiSkin());
             tbRodapeRight.addListener(new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    computeAction();
+                    /*computeAction();*/
                     return true;
                 }
             });
@@ -101,8 +101,8 @@ public class UIInGame extends UIBase {
 
         if (Configurations.SIMULATE_MOBILE_ON_DESKTOP || Gdx.app.getType() != Application.ApplicationType.Desktop)
             if (touchpad != null)
-                if (touchpad.getKnobPercentX() != getGameController().getEntities().getPlayer(0).getMovementXMobile())
-                    getGameController().getEntities().getPlayer(0).setMovementXMobile(touchpad.getKnobPercentX());
+                /*if (touchpad.getKnobPercentX() != getGameController().getEntities().getPlayer(0).getMovementXMobile())*/
+                    getGameController().getInput().setTouchKnobMovementX(touchpad.getKnobPercentX());
 
     }
 
@@ -110,12 +110,12 @@ public class UIInGame extends UIBase {
         imgRed.setText(getGameController().getUiController().getColorRecoveredCastCache() + "%");
     }
 
-    private void computeAction() {
-        if (getGameController().getEntities().getPlayer(0).getAlive())
+    /*private void computeAction() {
+        if (getGameController().getPlayers().getTotalPlayersInGame() > 0)
             getGameController().getEntities().getPlayer(0).tryJump();
         else
             getGameController().getEntities().getPlayer(0).getInput().setMobileTouchClicked(true);
-    }
+    }*/
 
     @Override
     public void eventActionButtonPressed() {

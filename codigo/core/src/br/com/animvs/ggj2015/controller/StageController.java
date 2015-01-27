@@ -15,6 +15,7 @@ import br.com.animvs.ggj2015.entities.game.GGJ15Entity;
 
 public final class StageController {
     private GameController controller;
+    private ParallaxCamera cameraCache;
 
     private Stage stage;
 
@@ -46,10 +47,14 @@ public final class StageController {
         return stage.getViewport();
     }
 
-    public StageController(GameController controller) {
+    public StageController(GameController controller, ParallaxCamera camera) {
         // stage = new Stage(new ScalingViewport(Scaling.fit,
         // Configurations.RESOLUTION_REAL.x, Configurations.RESOLUTION_REAL.y));
+        if (camera == null)
+            throw new RuntimeException("The parameter 'camera' must be != NULL");
+
         this.controller = controller;
+        this.cameraCache = camera;
     }
 
     public void bringToFront(GGJ15Entity entity) {
@@ -64,7 +69,7 @@ public final class StageController {
 
     public void initialize() {
         stage = new Stage(new FitViewport(Configurations.RESOLUTION_REAL.x, Configurations.RESOLUTION_REAL.y), new PolygonSpriteBatch());
-        stage.getViewport().setCamera(new ParallaxCamera(Configurations.RESOLUTION_REAL.x, Configurations.RESOLUTION_REAL.y));
+        stage.getViewport().setCamera(cameraCache);
 
         resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         //stage.getCamera().position.set(0f, stage.getCamera().position.y, 0f);
