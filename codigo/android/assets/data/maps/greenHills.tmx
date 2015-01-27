@@ -5,17 +5,17 @@
  </tileset>
  <layer name="background" width="130" height="20">
   <data encoding="base64" compression="zlib">
-   eJztzjENAAAIA7Bpxb8IjokgIa2CJgAAAAAAADXXAQAAAOCNBXDKAGM=
+   eJztxzEOgDAQBLH7MYQ6wNezUtor6LGlKaYKAAAAAAC2I51ppKt5/mGmOz3pbR4AAADgiwXTkAdx
   </data>
  </layer>
  <layer name="groundBack" width="130" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt00EKwjAQheGeyJ09gHbhtgvBlQvBlT1Avb0tTqELIeA8fKn8HwxJSxheQtI0AAAAAFB2iAKArbi6A8BqiPFhTfE2lJdUb2vvqY16xvdozLJYspxX/1pHkC/N91j9nrqpjuKe0OlX81uM8z2u4T0BwCd9eQnwlzpxv724H35v5w6AKpzcASaXRCn6OmT2rDqfbA61e6IUfR0ye1adTzaH2gtA7Tnh
+   eJzt1jEOwjAMBdAch4mNHgAYujIgscCA1IkeoGw9Oo1wpIilqWzXDv1PslKqynJDkzgEAAAAAACAeUeKaMzu1aCxLgDgz9ytCyj0sC5g4zTPiEvBMz2NL8U6SvXzj7i39nrint0NxZt+D8x8ElIt1+xeTT1K/I6l1tNI43mKE117mwsPfa51Dfle+6Qxfsce1pNnaf9JrP/HLdLeT9Bj+lXSI0qQPBOhXr9n4s6qkPDtqSQdhPPB+vbWBYALrXUBkxsjJPJ6wJkDzrtp5l6qY4REXg84c8B5N83cS30AnPM9dw==
   </data>
  </layer>
  <layer name="ground" width="130" height="20">
   <data encoding="base64" compression="zlib">
-   eJztljkOwjAQRXMcukATiYKGDiiAA8AFQGKpQGK5OhOJSMbyOmNjFP6TfhPF9tjzPZ6qAgAAAAAAAAAe09IBBNKUDqAHzEgThxblQgtCjRXI2ZQOgMlcEchPzjdizRzX1gDVB6gJealJQ9KIMdb3dtfMeXUP9MULkrO2cSAdSSfS2fA9NXrOJXty9Sw2D+heyFHDXP2UqZf6hV77RrqTHqSn4bsEV45c+O5/SJ5DxO0dm+rTz6Y8xvRSJXtY311KEZsrB1za8x+/JfWBKZatZd2ubrkUW9N0P3+bmLskIfW8qeqA7Y3Yk3bM2DiU7Ftiz1FCinnV2pSyBpjiuZIuytqDiDg5+M5lZVDH0vJfCJy7JCHFvLnybrqLOd7G2L2lWpfbP/+7D3KdgWRvOeeGD+AD+AA+4OoFxY6fYw==
+   eJztltEKwjAMRfdH6qMPfoD6oP//NU5wEEbN2iZdynoOXBgMsrS5yTJNAAAAAAAAADr3WTdFz7jUspC5wrg8hGBMvjNA+oCZ0JbTrPOsS6PYNXHXHjiKF1redRSWM2k7yz8P7OEFbZ/qfZdqgVYjja3+z6lzjnrZHSPz2Oolj9y0Gli4/mT1QUkuy9zSVDrT1n7em5JesuAd12sO9LIvROZReo8WPOLK2eQ5AzzPWUtUHjW9ZMEjbqu6p3qxxb+x9Gzyu++EFl7iOfW+dn8e3QcRsyLq7vEBPsAH+MCiD1zuk+w=
   </data>
  </layer>
  <objectgroup name="collision">
@@ -33,10 +33,10 @@
    <polyline points="0,0 0,-256 448,-256 449,-319 512,-319 512,-381 575,-381 575,-446 640,-446 641,-509 1279,-509 1279,0 0,-1"/>
   </object>
   <object id="108" name="floor" x="2110" y="640" width="128" height="38"/>
-  <object id="115" name="platform" x="6529" y="1007" width="61" height="16"/>
+  <object id="115" name="platform" x="6529" y="1025" width="61" height="16"/>
   <object id="116" name="floor" x="4223" y="832" width="641" height="37"/>
-  <object id="118" name="bridge" x="6081" y="1007" width="318" height="20"/>
-  <object id="121" name="bridge" x="6722" y="1006" width="188" height="17"/>
+  <object id="118" name="bridge" x="6081" y="1024" width="318" height="20"/>
+  <object id="121" name="bridge" x="6722" y="1025" width="188" height="17"/>
   <object id="123" name="floor" x="5568" y="1278.67">
    <polyline points="0,0 -2,-446.667 126.667,-446.667 126.667,-510 255.333,-510.667 256,-381.333 319.333,-382 319.333,-254.667 511.333,-254.667 511.333,0 0.666667,0"/>
   </object>
