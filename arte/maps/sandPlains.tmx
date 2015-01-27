@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="20" tilewidth="64" tileheight="64" nextobjectid="152">
+ <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
+  <image source="tileset.png" width="832" height="640"/>
+ </tileset>
+ <layer name="background" width="130" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt1bsNgDAMQMEMyC58aj6r4wFMgSIFlNxJr3CXuHEpAADwbI6WaI22ZGYMe3REZ3QlMwDAW9PXDxhMz/vu+W9/Y9cAkGt5I93j9uwcAOrcR/kJhQ==
+  </data>
+ </layer>
+ <layer name="groundBack" width="130" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt1rEKgCAUhWHfrTWChramNnsAXXv0EpwirSS9Sv8HYqngEUquUgAAAABwrw+Mb6f3OXMOtEEfbZUOAXHmaFY6BIBk3ONpJGqh4cGaUC0X485S8h6fCu6Vm5YO8IHF9+4sxj+nfEete/J/hZj7JVUYpQMAeIUa7X+6izEbmQMAAKjNDky6CeM=
+  </data>
+ </layer>
+ <layer name="ground" width="130" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztl8FuwzAIhnmRrblvu7e7b5N62vs/zdIDKqKAsU1sd+KTODhKAoE/YAMkSZIkSZIkSZIkoznv9r3b5+xAnGC8lm2zgiNoef2C+TFqsV0mxNLDpWAnWEMLWl6vsE6MlP+mA9TC7B5h6WBFLfTq4AXG5htrjT69ujgyNqnXannFmEZooWbu9+jgpoFXePwPt453lvDUvdQjjoiP59HSwRV8feFtt4+I4BzU6oDu1agGpJxvYVHeadWBpolfYgi9pu1NS/ssrw5Gz4iz4KvnvFCTb+4XoTNFs58GvzXW+q3SPdaaXuc6QC2U6uA5L3nqKflqnQt8TluzWtIDnSlSXtA0v9y3d68wWwerIuWacptR7/A4p6zcarWh/ZjOlFYd1JimFQ/S89I91np1SjrQiOjJWGv+Xx+hg95+QGMaoQM+M/l8jMKaNd5zRm/9PRbpN0IHPf3AO9+xX1p5iMSbe4nIWj+LDui3SfdYa/6u3jxEkjqo/1YrLmuNROUhkmfSwR8uUqH/
+  </data>
+ </layer>
+ <objectgroup name="collision">
+  <object id="127" name="sand" x="61.3333" y="451">
+   <polyline points="0,0 580,0 709.333,125.333 897.333,125.333 1026.67,253.333 1156,256 1218.67,316 1342.67,316 1348,830.667 66.6667,829.333 66.6667,66.6667 34.6667,60 13.3333,49.3333 1.33333,34.6667 -1.33333,0"/>
+  </object>
+  <object id="131" name="bridge" x="1726.67" y="767.667" width="192" height="21.3333"/>
+  <object id="132" name="bridge" x="1406.33" y="767.667" width="192" height="21.3333"/>
+  <object id="135" name="sand" x="1921.33" y="768" width="445.333" height="69.3333"/>
+  <object id="136" name="sand" x="2494.67" y="638.667" width="194.667" height="64"/>
+  <object id="137" name="sand" x="2749.33" y="446.667" width="194.667" height="62.6667"/>
+  <object id="138" name="sand" x="3134.33" y="508.667">
+   <polyline points="0,0 2.66667,-58.6667 132,-58.6667 510.667,321.333 574.667,321.333 576,384 576,385.333 68,388 68,8 2.66667,8 0,-9.33333"/>
+  </object>
+  <object id="139" name="sand" x="3198.67" y="1276">
+   <polyline points="0,0 1.33333,-121.333 -38.6667,-132 -61.3333,-158.667 -62.6667,-192 642.667,-189.333 705.333,-253.333 958.667,-253.333 960,-193.333 960,-190.667 896,-192 898.667,0 -1.33333,0"/>
+  </object>
+  <object id="140" name="sand" x="4157.33" y="830.667" width="708" height="65.3333"/>
+  <object id="141" name="sand" x="4928" y="640" width="192" height="66.6667"/>
+  <object id="142" name="sand" x="5246.67" y="446.667" width="194.667" height="66.6667"/>
+  <object id="143" name="sand" x="5566.67" y="380" width="194.667" height="66.6667"/>
+  <object id="144" name="sand" x="5566.67" y="765.333" width="194.667" height="66.6667"/>
+  <object id="145" name="sand" x="5504" y="1024" width="510.667" height="64"/>
+  <object id="146" name="sand" x="6142.67" y="894.667" width="194.667" height="38.6667"/>
+  <object id="147" name="sand" x="6397.33" y="701.333">
+   <polyline points="0,0 190.667,1.33333 322.667,-126.667 453.333,-126.667 512,-65.3333 580,-64 638.667,-2.66667 706.667,-1.33333 769.333,64 834.667,65.3333 894.667,128 964,128 1029.33,196 1153.33,194.667 1281.33,65.3333 1854.67,65.3333 1854.67,125.333 1796,128 1793.33,569.333 130.667,572 128,66.6667 36,66.6667 6.66667,45.3333 -1.33333,14.6667 -1.33333,-1.33333"/>
+  </object>
+  <object id="148" name="sand" x="5248.67" y="768">
+   <polyline points="0,0 64.6667,0 128,64 187.333,64.6667 191.333,70 190,92 180.667,109.333 161.333,120.667 144,126 125.333,128 64.6667,128.667 64,64 52,63.3333 31.3333,58.6667 10.6667,46.6667 0,31.3333 -0.666667,11.3333 -0.666667,1.33333"/>
+  </object>
+  <object id="150" name="sand" x="3904" y="702" width="127.333" height="39.3333"/>
+ </objectgroup>
+ <objectgroup name="items">
+  <object id="18" name="question" x="320" y="256" width="63" height="62"/>
+  <object id="22" name="spawn" x="1345.33" y="574.667" width="64" height="66.6667">
+   <properties>
+    <property name="spawnInterval" value="5"/>
+    <property name="speed" value="-1"/>
+   </properties>
+  </object>
+  <object id="38" name="spawn" x="3238.5" y="114" width="62.5" height="64.5">
+   <properties>
+    <property name="spawnInterval" value="9"/>
+    <property name="speed" value="0.8"/>
+   </properties>
+  </object>
+  <object id="47" name="spawn" x="7123" y="384.667" width="62" height="66">
+   <properties>
+    <property name="spawnInterval" value="5.5"/>
+    <property name="speed" value="-0.6"/>
+   </properties>
+  </object>
+  <object id="51" name="color" x="4514" y="606" width="62" height="64">
+   <properties>
+    <property name="power" value="0.10"/>
+   </properties>
+  </object>
+  <object id="52" name="color" x="7743.03" y="701.515" width="62" height="64">
+   <properties>
+    <property name="power" value="0.10"/>
+   </properties>
+  </object>
+  <object id="55" name="color" x="2814.37" y="380.515" width="62" height="64">
+   <properties>
+    <property name="power" value="0.10"/>
+   </properties>
+  </object>
+  <object id="56" name="color" x="4993.7" y="373.515" width="62" height="64">
+   <properties>
+    <property name="power" value="0.05"/>
+   </properties>
+  </object>
+  <object id="43" name="spike" x="5765.02" y="1003.45" width="64" height="16.6667"/>
+  <object id="80" name="spawn" x="3238.33" y="185.667" width="64" height="66.6667">
+   <properties>
+    <property name="spawnInterval" value="6"/>
+    <property name="speed" value="-0.8"/>
+   </properties>
+  </object>
+  <object id="81" name="spawn" x="8234.33" y="412.667" width="64" height="66.6667">
+   <properties>
+    <property name="spawnInterval" value="4.9"/>
+    <property name="speed" value="-0.7"/>
+   </properties>
+  </object>
+  <object id="82" name="color" x="1249.7" y="702.515" width="62" height="64">
+   <properties>
+    <property name="power" value="0.05"/>
+   </properties>
+  </object>
+  <object id="83" name="color" x="2095.7" y="529.848" width="62" height="64">
+   <properties>
+    <property name="power" value="0.05"/>
+   </properties>
+  </object>
+  <object id="85" name="color" x="1644" y="524" width="62" height="64">
+   <properties>
+    <property name="power" value="0.05"/>
+   </properties>
+  </object>
+  <object id="87" name="color" x="2560" y="573.333" width="62" height="64">
+   <properties>
+    <property name="power" value="0.015"/>
+   </properties>
+  </object>
+  <object id="88" name="color" x="3135.67" y="1019.33" width="62" height="64">
+   <properties>
+    <property name="power" value="0.015"/>
+   </properties>
+  </object>
+  <object id="89" name="color" x="3647" y="600" width="62" height="64">
+   <properties>
+    <property name="power" value="0.05"/>
+   </properties>
+  </object>
+  <object id="90" name="color" x="8059" y="536" width="62" height="64">
+   <properties>
+    <property name="power" value="0.16"/>
+   </properties>
+  </object>
+  <object id="91" name="color" x="4093.33" y="957.333" width="62" height="64">
+   <properties>
+    <property name="power" value="0.10"/>
+   </properties>
+  </object>
+  <object id="92" name="color" x="5630" y="606.667" width="62" height="64">
+   <properties>
+    <property name="power" value="0.015"/>
+   </properties>
+  </object>
+  <object id="93" name="color" x="6745.67" y="356" width="62" height="64">
+   <properties>
+    <property name="power" value="0.020"/>
+   </properties>
+  </object>
+  <object id="94" name="color" x="7303" y="555" width="62" height="64">
+   <properties>
+    <property name="power" value="0.15"/>
+   </properties>
+  </object>
+  <object id="125" name="spawn" x="4149.83" y="221.333" width="62.5" height="64.5">
+   <properties>
+    <property name="spawnInterval" value="9"/>
+    <property name="speed" value="0.7"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
