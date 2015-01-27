@@ -113,6 +113,5 @@ public final class PlayersController extends BaseController {
 
     @Override
     public void initialize() {
-
     }
 }
