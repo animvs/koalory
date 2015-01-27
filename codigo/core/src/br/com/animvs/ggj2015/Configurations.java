@@ -25,6 +25,8 @@ public final class Configurations {
 
     public static final Vector2 GAMEPLAY_PLAYER_START = new Vector2(175f, 850f);
 
+    public static final float GAMEPLAY_ZOOM_MAX = 1.6f;
+
     public static final float GAMEPLAY_ENTITY_SIZE_X = 50f;
     public static final float GAMEPLAY_ENTITY_SIZE_Y = 100f;
 

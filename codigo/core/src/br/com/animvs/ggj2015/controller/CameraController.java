@@ -1,7 +1,8 @@
 package br.com.animvs.ggj2015.controller;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 
 import br.com.animvs.ggj2015.Configurations;
@@ -15,11 +16,12 @@ public final class CameraController extends BaseController {
     private ParallaxCamera camera;
     private Player cameraOwner;
 
-    private Vector2 cameraDesiredPosition;
-    private Vector2 cameraPositionCache;
+    private float desiredZoom;
+    private Vector2 desiredPosition;
+    private Vector2 positionCache;
 
-    public OrthographicCamera getCamera() {
-        return camera;
+    public float getZoom() {
+        return camera.zoom;
     }
 
     public void setCameraOwner(Player cameraOwner) {
@@ -33,8 +35,12 @@ public final class CameraController extends BaseController {
     public CameraController(GameController controller, ParallaxCamera camera) {
         super(controller);
         this.camera = camera;
-        cameraDesiredPosition = new Vector2();
-        cameraPositionCache = new Vector2();
+        desiredPosition = new Vector2();
+        positionCache = new Vector2();
+    }
+
+    public Matrix4 calculateParallaxMatrix(float parallaxX, float parallaxY) {
+        return camera.calculateParallaxMatrix(parallaxX, parallaxY);
     }
 
     @Override
@@ -45,23 +51,38 @@ public final class CameraController extends BaseController {
         if (cameraOwner == null)
             return;
 
-        TMP_updateCameraDesiredPosition();
+        updateDesired();
 
-        if (cameraDesiredPosition.x != camera.position.x || cameraDesiredPosition.y != camera.position.y) {
-            cameraPositionCache.set(camera.position.x, getController().getStage().getCamera().position.y);
+        boolean needUpdate = false;
 
-            cameraPositionCache.lerp(cameraDesiredPosition, Gdx.graphics.getDeltaTime() * Configurations.CORE_CAMERA_SPEED_MULTIPLIER);
-            camera.position.set(cameraPositionCache.x, cameraPositionCache.y, camera.position.z);
-            camera.update();
+        //Update camera position:
+        if (desiredPosition.x != camera.position.x || desiredPosition.y != camera.position.y) {
+            positionCache.set(camera.position.x, getController().getStage().getCamera().position.y);
+
+            positionCache.lerp(desiredPosition, Gdx.graphics.getDeltaTime() * Configurations.CORE_CAMERA_SPEED_MULTIPLIER);
+            camera.position.set(positionCache.x, positionCache.y, camera.position.z);
+            needUpdate = true;
         }
+
+        //Update camera zoom:
+        if (desiredZoom != camera.zoom) {
+            needUpdate = true;
+            camera.zoom = MathUtils.lerp(camera.zoom, desiredZoom, Gdx.graphics.getDeltaTime() * Configurations.CORE_CAMERA_SPEED_MULTIPLIER);
+        }
+
+        if (needUpdate)
+            camera.update();
     }
 
-    private void TMP_updateCameraDesiredPosition() {
-        if (getController().getPlayers().getTotalPlayersInGame() == 0)
+    private void updateDesired() {
+        if (getController().getPlayers().getTotalPlayersInGame() == 0) {
+            desiredZoom = 1f;
             return;
+        }
 
         if (getController().getPlayers().getTotalPlayersInGame() == 1) {
-            cameraDesiredPosition.set(getController().getPlayers().getPlayer(0).getX(), getController().getPlayers().getPlayer(0).getY());
+            desiredZoom = 1f;
+            desiredPosition.set(getController().getPlayers().getPlayer(0).getX(), getController().getPlayers().getPlayer(0).getY());
             return;
         }
 
@@ -105,10 +126,26 @@ public final class CameraController extends BaseController {
         float averageX = playerLeft.getX() + (playerRight.getX() - playerLeft.getX()) / 2f;
         float averageY = playerLeft.getY() + (playerRight.getY() - playerLeft.getY()) / 2f;
 
-        cameraDesiredPosition.set(averageX, averageY);
+        desiredPosition.set(averageX, averageY);
 
-        /*stage.getCamera().position.x = entities.getPlayer(0).getX();
-        stage.getCamera().position.y = entities.getPlayer(0).getY();
-        stage.getCamera().update();*/
+        updateDesiredZoom(playerLeft, playerRight, playerTop, playerBottom);
+    }
+
+    private void updateDesiredZoom(Player playerLeft, Player playerRight, Player playerTop, Player playerBottom) {
+        float coverageX = playerRight.getX() - playerLeft.getX();
+        float coverageY = playerTop.getX() - playerBottom.getX();
+
+        float zoomNeededX = 1f;
+        float zoomNeededY = 1f;
+
+        zoomNeededX = coverageX / Configurations.RESOLUTION_REAL.x * 1.5f;
+        zoomNeededY = coverageY / Configurations.RESOLUTION_REAL.y * 1.5f;
+
+        if (zoomNeededX > zoomNeededY)
+            desiredZoom = zoomNeededX;
+        else
+            desiredZoom = zoomNeededY;
+
+        desiredZoom = MathUtils.clamp(desiredZoom, 1f, Configurations.GAMEPLAY_ZOOM_MAX);
     }
 }
