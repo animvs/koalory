@@ -135,10 +135,6 @@ public abstract class GGJ15Entity extends Group implements Disposable, PhysicBod
         controller.getStage().registerEntity(this);
     }
 
-    /*public boolean checkRemoval() {
-        return (getY() >= Configurations.RESOLUTION_REAL.y + Configurations.ENTITY_TARGETS_WIDTH);
-    }*/
-
     protected void eventAfterBodyCreated(Body body) {
         physicBody = body;
         physicBody.setUserData(this);

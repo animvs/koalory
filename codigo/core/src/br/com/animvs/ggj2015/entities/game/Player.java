@@ -2,6 +2,8 @@ package br.com.animvs.ggj2015.entities.game;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -10,6 +12,7 @@ import br.com.animvs.engine2.graficos.loaders.AnimacaoSkeletalData;
 import br.com.animvs.ggj2015.Configurations;
 import br.com.animvs.ggj2015.controller.GameController;
 import br.com.animvs.ggj2015.controller.LoadController;
+import br.com.animvs.ggj2015.controller.PlayersController;
 import br.com.animvs.ggj2015.entities.engine.input.InputProcessor;
 
 /**
@@ -199,6 +202,7 @@ public final class Player extends GGJ15Entity {
     public void dispose() {
         super.dispose();
 
+        getInput().setPlayer(null);
         getController().getPlayers().unregisterPlayer(this);
     }
 
@@ -207,7 +211,26 @@ public final class Player extends GGJ15Entity {
         super.eventAfterBodyCreated(body);
 
         body.setFixedRotation(true);
-        setPosition(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
+
+        Vector2 spawnLocation = new Vector2();
+        PlayersController playersController = getController().getPlayers();
+
+        if (playersController.getTotalPlayersInGame() > 1) {
+            Player playerReference;
+            while (true){
+                playerReference = playersController.getPlayer(MathUtils.random(playersController.getTotalPlayersInGame() - 1));
+
+                if (playerReference != this)
+                    break;
+            }
+
+            spawnLocation.set(playerReference.getX(), playerReference.getY() + Configurations.GAMEPLAY_ENTITY_SIZE_Y * 1.25f);
+        } else
+            spawnLocation.set(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
+
+        setPosition(spawnLocation.x, spawnLocation.y);
+
+        //setPosition(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
         //setPosition(600f, 550f + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f);
         //getController().getStage().bringToFront(this);
 

@@ -11,6 +11,7 @@ import br.com.animvs.engine2.internationalization.AnimvsLanguageController;
 import br.com.animvs.engine2.utils.AnimvsIntCrypto;
 import br.com.animvs.ggj2015.Configurations;
 import br.com.animvs.ggj2015.entities.engine.graphics.GGJ15ShaderLoad;
+import br.com.animvs.ggj2015.entities.engine.graphics.ParallaxCamera;
 import br.com.animvs.ggj2015.entities.engine.graphics.shaders.ShaderColor;
 
 /**
@@ -162,12 +163,15 @@ public final class GameController implements Disposable {
             this.ui = new UIController(this, LoadController.UI_JSON_PATH, Configurations.RESOLUTION_REAL);
             this.physics = new PhysicsController(this, Configurations.DEBUG_PHYSICS, 250f, 0.004f, new Vector2(0f, -10f));
             //this.physics = new PhysicsController(this, Configurations.DEBUG_PHYSICS, 100f, 0.001f, new Vector2());
-            this.stage = new StageController(this);
+
+            ParallaxCamera newCamera = new ParallaxCamera(Configurations.RESOLUTION_REAL.x, Configurations.RESOLUTION_REAL.y);
+            this.camera = new CameraController(this, newCamera);
+            this.stage = new StageController(this, newCamera);
+
             this.entities = new EntitiesController(this);
             this.shaderColor = new ShaderColor(this);
             this.background = new BackgroundController(this);
             this.players = new PlayersController(this);
-            this.camera = new CameraController(this);
             this.input = new InputController(this);
 
             level = new LevelController(this);
