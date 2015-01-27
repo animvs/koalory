@@ -189,16 +189,16 @@ public final class PhysicsController extends AnimvsPhysicsController {
                             Foe foe = isFoe(contact.getFixtureA(), contact.getFixtureB());
                             if (foe != null && foe.getAlive()) {
                                 if (player.getY() > foe.getY()) {
-                                //if (contact.getWorldManifold().getNormal().y == 1f || contact.getWorldManifold().getNormal().y == -1f) {
+                                    //if (contact.getWorldManifold().getNormal().y == 1f || contact.getWorldManifold().getNormal().y == -1f) {
                                     //Player has killed the foe by jumping it's head:
-                                    Gdx.app.log("KILL", "Player " + player.getPlayerIndex() + " has killed a Koala");
+                                    Gdx.app.log("KILL", "Player " + controller.getPlayers().getPlayerIndex(player) + " has killed a Koala");
                                     foe.eventDeath(player);
                                 } else {
                                     if (Configurations.DEBUG_PLAYER_IMMORTAL)
                                         return;
 
                                     //Player has been damaged by the foe:
-                                    Gdx.app.log("KILL", "Player " + player.getPlayerIndex() + " has been killed by a Koala");
+                                    Gdx.app.log("KILL", "Player " + controller.getPlayers().getPlayerIndex(player) + " has been killed by a Koala");
                                     player.eventDeath();
                                 }
                                 return;

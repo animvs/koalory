@@ -30,9 +30,12 @@ public final class Foe extends GGJ15Entity {
         this.ia = ia;
         this.spawnPosition = spawnPosition;
 
-        getController().getEntities().createEntityBody(this);
+        float scale = 0.7f;
+
+        getController().getEntities().createEntityBody(this, scale);
 
         AnimacaoSkeletal graphic = new AnimacaoSkeletal(controller.getLoad().get(LoadController.SKELETON_KOALA, AnimacaoSkeletalData.class));
+        graphic.setEscala(scale, scale);
         setGraphic(graphic);
         graphic.setAnimation("walk", true);
 

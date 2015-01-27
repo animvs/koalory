@@ -1,7 +1,6 @@
 package br.com.animvs.ggj2015.controller;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
@@ -33,9 +32,9 @@ public final class GameController implements Disposable {
     private AnimvsFontController fonts;
     private AnimvsLanguageController language;
     private BackgroundController background;
-
-    private Vector2 cameraDesiredPosition;
-    private Vector2 cameraPositionCache;
+    private PlayersController players;
+    private CameraController camera;
+    private InputController input;
 
     private ShaderColor shaderColor;
 
@@ -43,6 +42,10 @@ public final class GameController implements Disposable {
     private int lives;
 
     private SoundController sound;
+
+    public boolean getInGame() {
+        return inGame;
+    }
 
     public SoundController getSound() {
         return sound;
@@ -76,6 +79,10 @@ public final class GameController implements Disposable {
         return entities;
     }
 
+    public PlayersController getPlayers() {
+        return players;
+    }
+
     public int getLives() {
         return lives;
     }
@@ -96,11 +103,17 @@ public final class GameController implements Disposable {
         return language;
     }
 
+    public InputController getInput() {
+        return input;
+    }
+
+    public CameraController getCamera() {
+        return camera;
+    }
+
     public GameController() {
         crypto = new AnimvsIntCrypto(Configurations.H_C);
         load = new LoadController(this);
-        cameraDesiredPosition = new Vector2();
-        cameraPositionCache = new Vector2();
     }
 
     public void load() {
@@ -114,15 +127,15 @@ public final class GameController implements Disposable {
         colorRecovered = 0f;
 
         entities.restart();
+        players.restart();
 
         level.loadMap(LoadController.LEVEL_GREEN_RIVER);
         getUiController().showUIInGame();
 
         ui.castValueColors();
 
-        if (lives > 0)
-            if (entities.getPlayer(0) != null)
-                entities.getPlayer(0).spawn(MathUtils.randomBoolean());
+        /*if (entities.getPlayer(0) != null)
+            entities.getPlayer(0).spawn(MathUtils.randomBoolean());*/
 
         //entities.createSpawner(new Vector2(750f, 650f), 3f, -0.5f);
     }
@@ -153,12 +166,18 @@ public final class GameController implements Disposable {
             this.entities = new EntitiesController(this);
             this.shaderColor = new ShaderColor(this);
             this.background = new BackgroundController(this);
+            this.players = new PlayersController(this);
+            this.camera = new CameraController(this);
+            this.input = new InputController(this);
 
             level = new LevelController(this);
 
             physics.initialize();
             stage.initialize();
             entities.initialize();
+            players.initialize();
+            camera.initialize();
+            input.initialize();
 
             this.colorRecovered = 0f; //starts with 0% of recovered colors
             this.lives = Configurations.GAMEPLAY_LIVES_AT_START; // starts with 5 lives
@@ -181,9 +200,12 @@ public final class GameController implements Disposable {
         load.update();
 
         if (initialized) {
+            input.update();
+
             if (inGame) {
+                players.update();
                 physics.update(Gdx.graphics.getDeltaTime());
-                entities.update(false);
+                entities.update();
 
                 background.render();
 
@@ -195,26 +217,11 @@ public final class GameController implements Disposable {
                     physics.renderDebug(stage.getCamera().combined);
 
                 checkGameOver();
+                camera.update();
+            }
 
-                if (cameraDesiredPosition.x != stage.getCamera().position.x || cameraDesiredPosition.y != stage.getCamera().position.y) {
-                    cameraPositionCache.set(stage.getCamera().position.x, stage.getCamera().position.y);
-
-                    cameraPositionCache.lerp(cameraDesiredPosition, Gdx.graphics.getDeltaTime() * Configurations.CORE_CAMERA_SPEED_MULTIPLIER);
-                    stage.getCamera().position.set(cameraPositionCache.x, cameraPositionCache.y, stage.getCamera().position.z);
-                    stage.getCamera().update();
-                }
-            } else
-                entities.update(true);
             ui.render();
         }
-    }
-
-    public void updateCameraDesiredPosition() {
-        cameraDesiredPosition.set(entities.getPlayer(0).getX(), entities.getPlayer(0).getY());
-
-        /*stage.getCamera().position.x = entities.getPlayer(0).getX();
-        stage.getCamera().position.y = entities.getPlayer(0).getY();
-        stage.getCamera().update();*/
     }
 
     @Override
@@ -234,7 +241,7 @@ public final class GameController implements Disposable {
     }
 
     public void checkGameOver() {
-        if ((lives == 0) && (entities.getPlayersAlive() == 0)) {
+        if ((lives == 0) && (players.getTotalPlayersInGame() == 0)) {
             getUiController().showUIGameOver();
             endMatch();
         }
