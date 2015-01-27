@@ -1,6 +1,7 @@
 package br.com.animvs.ggj2015.controller;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
@@ -11,6 +12,8 @@ import br.com.animvs.ggj2015.entities.game.Foe;
 import br.com.animvs.ggj2015.entities.game.GGJ15Entity;
 import br.com.animvs.ggj2015.entities.game.Item;
 import br.com.animvs.ggj2015.entities.game.Spawner;
+import br.com.animvs.ggj2015.entities.game.platforms.Platform;
+import br.com.animvs.ggj2015.entities.game.platforms.StaticPlatform;
 
 /**
  * Created by DALDEGAN on 24/01/2015.
@@ -20,6 +23,7 @@ public final class EntitiesController extends BaseController {
     private DelayedRemovalArray<Item> items;
     private DelayedRemovalArray<Foe> foes;
     private DelayedRemovalArray<Spawner> spawners;
+    private DelayedRemovalArray<Platform> platforms;
 
     public EntitiesController(GameController controller) {
         super(controller);
@@ -27,6 +31,7 @@ public final class EntitiesController extends BaseController {
         items = new DelayedRemovalArray<Item>();
         foes = new DelayedRemovalArray<Foe>();
         spawners = new DelayedRemovalArray<Spawner>();
+        platforms = new DelayedRemovalArray<Platform>();
     }
 
     @Override
@@ -43,9 +48,13 @@ public final class EntitiesController extends BaseController {
         for (int i = 0; i < foes.size; i++)
             foes.get(i).dispose();
 
+        for (int i = 0; i < platforms.size; i++)
+            platforms.get(i).dispose();
+
         items.clear();
         foes.clear();
         spawners.clear();
+        platforms.clear();
     }
 
     public void spawnItemColorProgress(float x, float y, float colorProgressAmount) {
@@ -60,6 +69,10 @@ public final class EntitiesController extends BaseController {
         spawners.add(new Spawner(getController(), position, spawnInterval, foeSpeed));
     }
 
+    public void createPlatform(PolylineMapObject line) {
+        platforms.add(new StaticPlatform(getController(), line));
+    }
+
     public void createEntityBody(GGJ15Entity entityOwner) {
         createEntityBody(entityOwner, 1f);
     }
@@ -67,6 +80,13 @@ public final class EntitiesController extends BaseController {
     public void createEntityBody(GGJ15Entity entityOwner, float scale) {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(entityOwner, new Vector2(600f, 550f), 0f,
                 BodyDef.BodyType.DynamicBody, Configurations.GAMEPLAY_ENTITY_SIZE_X * scale, Configurations.GAMEPLAY_ENTITY_SIZE_Y * scale, 1f, 0f, false);
+
+        getController().getPhysics().createRetangleBody(bodyParams);
+    }
+
+    public void createPlatformBody(Platform platform, int size) {
+        PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(platform, new Vector2(), 0f,
+                BodyDef.BodyType.KinematicBody, Configurations.CORE_TILE_SIZE * size, 50f, 1f, 0f, false);
 
         getController().getPhysics().createRetangleBody(bodyParams);
     }

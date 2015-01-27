@@ -11,6 +11,7 @@ public final class Configurations {
 
     public static final String LEVEL_LAYER_COLLISION = "collision";
     public static final String LEVEL_LAYER_ITEMS = "items";
+    public static final String LEVEL_LAYER_PLATFORMS = "platform";
 
     public static final int H_C = 924763985;
 

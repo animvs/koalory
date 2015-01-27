@@ -1,3 +1,4 @@
+/*
 package br.com.animvs.ggj2015.controller.physics;
 
 import com.badlogic.gdx.maps.Map;
@@ -54,10 +55,14 @@ public class MapBodyBuilder {
 
 			BodyDef bd = new BodyDef();
 
-			/*if (object.getName() != null && object.getName().equals("cart"))*/
+			*/
+/*if (object.getName() != null && object.getName().equals("cart"))*//*
+
 				bd.type = BodyType.KinematicBody;
-			/*else
-				bd.type = BodyType.StaticBody;*/
+			*/
+/*else
+				bd.type = BodyType.StaticBody;*//*
+
 
 			Body body = world.createBody(bd);
 			body.createFixture(shape, 1);
@@ -115,3 +120,4 @@ public class MapBodyBuilder {
 		return chain;
 	}
 }
+*/

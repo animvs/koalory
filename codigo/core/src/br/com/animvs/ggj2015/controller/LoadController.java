@@ -22,7 +22,7 @@ public final class LoadController extends AnimvsLoadController {
     public static final String UI_JSON_PATH = "data/graphics/ui/ui-main.json";
     public static final String UI_SKIN_PATH = "data/graphics/ui/ui-main.atlas";
 
-    public static final String LEVEL_GREEN_RIVER = "data/maps/greenHills.tmx";
+    public static final String LEVEL_MAIN = "data/maps/levelSelect.tmx";
 
     public static final String ATLAS_CHARACTER = "data/graphics/mobiles/character/skeleton.atlas";
     public static final String ATLAS_KOALA = "data/graphics/mobiles/koala/skeleton.atlas";
@@ -50,7 +50,7 @@ public final class LoadController extends AnimvsLoadController {
         Array<AnimvsLoadParameter> loadParameters = new Array<AnimvsLoadParameter>();
 
         loadParameters.add(new AnimvsLoadParameter(UI_SKIN_PATH, TextureAtlas.class));
-        loadParameters.add(new AnimvsLoadParameter(LEVEL_GREEN_RIVER, TiledMap.class));
+        loadParameters.add(new AnimvsLoadParameter(LEVEL_MAIN, TiledMap.class));
 
         //Background:
         loadParameters.add(new AnimvsLoadParameter(TEXTURE_BACKGROUND, Texture.class));

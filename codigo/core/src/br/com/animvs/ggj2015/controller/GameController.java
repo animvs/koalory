@@ -131,7 +131,7 @@ public final class GameController implements Disposable {
         players.restart();
         stage.restart();
 
-        level.loadMap(LoadController.LEVEL_GREEN_RIVER);
+        level.loadMap(LoadController.LEVEL_MAIN);
         getUiController().showUIInGame();
 
         ui.castValueColors();

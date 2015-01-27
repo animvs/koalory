@@ -2,6 +2,7 @@ package br.com.animvs.ggj2015.controller;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
@@ -9,8 +10,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Disposable;
 
+import br.com.animvs.engine2.physics.MapBodyBuilder;
 import br.com.animvs.ggj2015.Configurations;
-import br.com.animvs.ggj2015.controller.physics.MapBodyBuilder;
 import br.com.animvs.ggj2015.entities.engine.graphics.tiles.TileRenderer;
 import br.com.animvs.ggj2015.entities.game.Player;
 
@@ -83,6 +84,15 @@ public class LevelController implements Disposable {
 
         for (int i = 0; i < bodiesCollision.size; i++)
             controller.getPhysics().destroyBody(bodiesCollision.getValueAt(i));
+    }
+
+    private void createPlatforms() {
+        MapObjects objects = map.getLayers().get(Configurations.LEVEL_LAYER_PLATFORMS).getObjects();
+        for (int i = 0; i < objects.getCount(); i++) {
+            PolylineMapObject line = ((PolylineMapObject) objects.get(i));
+
+            controller.getEntities().createPlatform(line);
+        }
     }
 
     private void createItemsAndSpawners() {
