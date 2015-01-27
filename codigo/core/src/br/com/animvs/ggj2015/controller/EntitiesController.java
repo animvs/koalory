@@ -56,7 +56,7 @@ public final class EntitiesController {
         return players.get(index);
     }
 
-    public int getNumberPlayers() {
+    public int getPlayersAlive() {
         int count = 0;
         for (int i = 0; i < players.size; i++)
             if (players.get(i).getAlive())
@@ -89,7 +89,13 @@ public final class EntitiesController {
         foes.add(newFoe);
     }
 
-    public void update() {
+    public void update(boolean onlyInput) {
+        if (onlyInput) {
+            for (int i = 0; i < players.size; i++)
+                players.get(i).updateInputOnly();
+            return;
+        }
+
         for (int i = 0; i < players.size; i++)
             players.get(i).update();
 

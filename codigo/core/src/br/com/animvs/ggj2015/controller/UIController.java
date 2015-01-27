@@ -57,8 +57,6 @@ public class UIController extends AnimvsUIController2 {
                 LoadController.UI_SKIN_PATH,
                 controller.getFonts().getFonts(),
                 LoadController.UI_JSON_PATH);
-
-        showUIInitial();
     }
 
     @Override
@@ -68,7 +66,7 @@ public class UIController extends AnimvsUIController2 {
         if (!(uiCurrent instanceof UIBase))
             throw new RuntimeException("Only UI's extending of 'UIBase' are allowed in this game");
 
-        uiBaseCache = (UIBase)uiCurrent;
+        uiBaseCache = (UIBase) uiCurrent;
 
         if (getUI() != null && controller.getStage() != null && controller.getStage().getViewport() != null)
             getUI().setBoundsByViewport(controller.getStage().getViewport());
@@ -121,31 +119,31 @@ public class UIController extends AnimvsUIController2 {
     }
 
     public void showUIInitial() {
-        UIInitial uiInitial = new UIInitial(this, controller.getLoad().getAssetManager(), LoadController.UI_SKIN_PATH, controller.getFonts().getFonts());
+        UIInitial uiInitial = new UIInitial(getGameController(), LoadController.UI_SKIN_PATH);
         uiInitial.create();
         setUI(uiInitial);
     }
 
     public void showUIInGame() {
-        UIInGame inGame = new UIInGame(this, controller.getLoad().getAssetManager(), LoadController.UI_SKIN_PATH, controller.getFonts().getFonts());
+        UIInGame inGame = new UIInGame(getGameController(), LoadController.UI_SKIN_PATH);
         inGame.create();
         setUI(inGame);
     }
 
     public void showUIGameOver() {
-        UIGameOver uiGameOver = new UIGameOver(this, controller.getLoad().getAssetManager(), LoadController.UI_SKIN_PATH, controller.getFonts().getFonts());
+        UIGameOver uiGameOver = new UIGameOver(getGameController(), LoadController.UI_SKIN_PATH);
         uiGameOver.create();
         setUI(uiGameOver);
     }
 
     public void showUIGameWin() {
-        UIGameWin uiGameWin = new UIGameWin(this, controller.getLoad().getAssetManager(), LoadController.UI_SKIN_PATH, controller.getFonts().getFonts());
+        UIGameWin uiGameWin = new UIGameWin(getGameController(), LoadController.UI_SKIN_PATH);
         uiGameWin.create();
         setUI(uiGameWin);
     }
 
     public void showUICredits() {
-        UICredits uiCredits = new UICredits(this, controller.getLoad().getAssetManager(), LoadController.UI_SKIN_PATH, controller.getFonts().getFonts());
+        UICredits uiCredits = new UICredits(controller, LoadController.UI_SKIN_PATH);
         uiCredits.create();
         setUI(uiCredits);
     }

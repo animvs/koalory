@@ -21,6 +21,13 @@ public final class InputMapper {
 
     private boolean mobileTouchClicked;
 
+    private boolean buttonActionPressedLastFrame;
+    private boolean buttonActionPressedNow;
+
+    public boolean getButtonActionJustPressed() {
+        return buttonActionPressedNow && !buttonActionPressedLastFrame;
+    }
+
     public void setMobileTouchClicked(boolean mobileTouchClicked) {
         this.mobileTouchClicked = mobileTouchClicked;
     }
@@ -35,22 +42,11 @@ public final class InputMapper {
     }
 
     public void update() {
-        updateInput();
-    }
-
-    private Controller getController() {
-        if (Controllers.getControllers().size - 1 < playerOwner.getPlayerIndex())
-            return null;
-
-        return Controllers.getControllers().get(playerOwner.getPlayerIndex());
-    }
-
-    private void updateInput() {
         if (!playerOwner.getAlive()) {
             int playerIndex = playerOwner.getPlayerIndex();
             if (Controllers.getControllers().size - 1 >= playerIndex)
-                if (Controllers.getControllers().get(playerIndex).getButton(Configurations.CORE_GAMEPAD_BUTTON_ACTION)) {
-                    Gdx.app.log("PLAYER", "Player requesting spawn: " + playerOwner.getPlayerIndex() + " Lives after spawn: " + (controller.getLives() - 1));
+                if (getButtonActionJustPressed()) {
+                    Gdx.app.log("PLAYER", "Player requesting spawn: " + playerIndex + " Lives after spawn: " + (controller.getLives() - 1));
                     if (controller.getLives() > 0)
                         playerOwner.spawn(MathUtils.randomBoolean());
                 }
@@ -72,6 +68,13 @@ public final class InputMapper {
         }
         computeJoystick();
         computeTouch();
+    }
+
+    private Controller getJoystick() {
+        if (Controllers.getControllers().size - 1 < playerOwner.getPlayerIndex())
+            return null;
+
+        return Controllers.getControllers().get(playerOwner.getPlayerIndex());
     }
 
     private void computePlayer1Keyboard() {
@@ -109,10 +112,13 @@ public final class InputMapper {
     }
 
     private void computeJoystick() {
-        if (playerOwner.getBody() == null)
+        if (getJoystick() == null)
             return;
 
-        if (getController() == null)
+        buttonActionPressedLastFrame = buttonActionPressedNow;
+        buttonActionPressedNow = getJoystick().getButton(Configurations.CORE_GAMEPAD_BUTTON_ACTION);
+
+        if (playerOwner.getBody() == null)
             return;
 
         if (Controllers.getControllers().get(playerOwner.getPlayerIndex()).getAxis(1) < -0.15f)
@@ -121,7 +127,7 @@ public final class InputMapper {
         if (Controllers.getControllers().get(playerOwner.getPlayerIndex()).getAxis(1) > 0.15f)
             movementX += Configurations.GAMEPLAY_MOVEMENT_SPEED;
 
-        if (getController().getButton(Configurations.CORE_GAMEPAD_BUTTON_ACTION))
+        if (getButtonActionJustPressed())
             playerOwner.tryJump();
     }
 
