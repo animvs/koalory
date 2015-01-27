@@ -58,7 +58,7 @@ public class Item extends GGJ15Entity {
     }
 
     public void collect() {
-        controller.addColorRecovered(colorRecovered);
+        controller.addColorRecovered(1f);
         controller.getEntities().processGameWin();
         controller.getUiController().castValueColors();
     }

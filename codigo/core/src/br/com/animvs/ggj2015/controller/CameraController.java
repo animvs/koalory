@@ -39,8 +39,8 @@ public final class CameraController extends BaseController {
         positionCache = new Vector2();
     }
 
-    public Matrix4 calculateParallaxMatrix(float parallaxX, float parallaxY) {
-        return camera.calculateParallaxMatrix(parallaxX, parallaxY);
+    public Matrix4 calculateParallaxMatrix() {
+        return camera.calculateParallaxMatrix(1f, 1f);
     }
 
     @Override

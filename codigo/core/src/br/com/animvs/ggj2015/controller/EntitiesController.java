@@ -15,25 +15,22 @@ import br.com.animvs.ggj2015.entities.game.Spawner;
 /**
  * Created by DALDEGAN on 24/01/2015.
  */
-public final class EntitiesController {
-    private GameController controller;
-
+public final class EntitiesController extends BaseController {
     //private DelayedRemovalArray<Player> players;
     private DelayedRemovalArray<Item> items;
     private DelayedRemovalArray<Foe> foes;
     private DelayedRemovalArray<Spawner> spawners;
 
     public EntitiesController(GameController controller) {
-        this.controller = controller;
+        super(controller);
         //players = new DelayedRemovalArray<Player>();
         items = new DelayedRemovalArray<Item>();
         foes = new DelayedRemovalArray<Foe>();
         spawners = new DelayedRemovalArray<Spawner>();
     }
 
+    @Override
     public void initialize() {
-        /*for (int i = 0; i < Configurations.GAMEPLAY_MAX_PLAYERS; i++)
-            players.add(new Player(controller, i));*/
     }
 
     public void restart() {
@@ -51,20 +48,8 @@ public final class EntitiesController {
         spawners.clear();
     }
 
-    /*public Player getPlayer(int index) {
-        return players.get(index);
-    }*/
-
-    /*public int getPlayersAlive() {
-        int count = 0;
-        for (int i = 0; i < players.size; i++)
-            if (players.get(i).getAlive())
-                count++;
-        return count;
-    }*/
-
     public void spawnItemColorProgress(float x, float y, float colorProgressAmount) {
-        Item newItem = new Item(controller, colorProgressAmount);
+        Item newItem = new Item(getController(), colorProgressAmount);
 
         items.add(newItem);
         newItem.setPosition(x + Configurations.CORE_TILE_SIZE / 2f, y + Configurations.CORE_TILE_SIZE / 2f);
@@ -72,8 +57,7 @@ public final class EntitiesController {
     }
 
     public void createSpawner(Vector2 position, float spawnInterval, float foeSpeed) {
-        Spawner newSpawner = new Spawner(controller, position, spawnInterval, foeSpeed);
-        spawners.add(newSpawner);
+        spawners.add(new Spawner(getController(), position, spawnInterval, foeSpeed));
     }
 
     public void createEntityBody(GGJ15Entity entityOwner) {
@@ -84,24 +68,15 @@ public final class EntitiesController {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(entityOwner, new Vector2(600f, 550f), 0f,
                 BodyDef.BodyType.DynamicBody, Configurations.GAMEPLAY_ENTITY_SIZE_X * scale, Configurations.GAMEPLAY_ENTITY_SIZE_Y * scale, 1f, 0f, false);
 
-        controller.getPhysics().createRetangleBody(bodyParams);
+        getController().getPhysics().createRetangleBody(bodyParams);
     }
 
     public void spawnFoe(float x, float y, float speed) {
-        Foe newFoe = new Foe(controller, new IAStraight(controller, speed), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
+        Foe newFoe = new Foe(getController(), new IAStraight(getController(), speed), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
         foes.add(newFoe);
     }
 
     public void update() {
-/*        if (onlyInput) {
-            for (int i = 0; i < players.size; i++)
-                players.get(i).updateInputOnly();
-            return;
-        }
-
-        for (int i = 0; i < players.size; i++)
-            players.get(i).update();*/
-
         for (int i = 0; i < foes.size; i++)
             foes.get(i).update();
 
@@ -114,9 +89,9 @@ public final class EntitiesController {
     }
 
     public void processGameWin() {
-        if (controller.getColorRecovered() >= 1f) {
-            controller.endMatch();
-            controller.getUiController().showUIGameWin();
+        if (getController().getColorRecovered() >= 1f) {
+            getController().endMatch();
+            getController().getUiController().showUIGameWin();
         }
     }
 }

@@ -22,7 +22,7 @@ public final class BackgroundController extends BaseController {
     }
 
     public final void render() {
-        batch.setProjectionMatrix(getController().getCamera().calculateParallaxMatrix(1f, 1f));
+        batch.setProjectionMatrix(getController().getCamera().calculateParallaxMatrix());
 
         float width = Configurations.RESOLUTION_REAL.x * getController().getCamera().getZoom();
         float height = Configurations.RESOLUTION_REAL.y * getController().getCamera().getZoom();

@@ -33,10 +33,10 @@ public final class JoystickMapper extends InputProcessor {
 
         //TODO: Is there a way to know how many axis the joystick owns ?
         for (int i = 0; i < 5; i++) {
-            if (joystick.getAxis(1) < -0.15f)
+            if (joystick.getAxis(i) < -0.15f)
                 movementX -= Configurations.GAMEPLAY_MOVEMENT_SPEED;
 
-            if (joystick.getAxis(1) > 0.15f)
+            if (joystick.getAxis(i) > 0.15f)
                 movementX += Configurations.GAMEPLAY_MOVEMENT_SPEED;
         }
 
@@ -51,6 +51,6 @@ public final class JoystickMapper extends InputProcessor {
 
     @Override
     public boolean getActionPressed() {
-        return buttonActionPressedNow;
+        return buttonActionPressedNow && !buttonActionPressedLastFrame;
     }
 }

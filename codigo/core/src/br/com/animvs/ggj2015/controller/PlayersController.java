@@ -3,6 +3,7 @@ package br.com.animvs.ggj2015.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.DelayedRemovalArray;
 
 import br.com.animvs.ggj2015.entities.engine.input.InputProcessor;
 import br.com.animvs.ggj2015.entities.game.Player;
@@ -11,7 +12,7 @@ import br.com.animvs.ggj2015.entities.game.Player;
  * Created by DALDEGAN on 26/01/2015.
  */
 public final class PlayersController extends BaseController {
-    private Array<Player> playersInGame;
+    private DelayedRemovalArray<Player> playersInGame;
 
     public Player getPlayer(int index) {
         return playersInGame.get(index);
@@ -54,7 +55,7 @@ public final class PlayersController extends BaseController {
 
     public PlayersController(GameController controller) {
         super(controller);
-        playersInGame = new Array<Player>();
+        playersInGame = new DelayedRemovalArray<Player>();
     }
 
     public void unregisterPlayer(Player player) {
@@ -102,8 +103,10 @@ public final class PlayersController extends BaseController {
     }
 
     public void restart() {
+        playersInGame.begin();
         for (int i = 0; i < playersInGame.size; i++)
             playersInGame.get(i).dispose();
+        playersInGame.end();
 
         playersInGame.clear();
     }

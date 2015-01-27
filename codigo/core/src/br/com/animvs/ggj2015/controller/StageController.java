@@ -75,4 +75,8 @@ public final class StageController {
         //stage.getCamera().position.set(0f, stage.getCamera().position.y, 0f);
         //stage.getCamera().update();
     }
+
+    public void restart() {
+        stage.clear();
+    }
 }

@@ -35,17 +35,15 @@ public final class InputController extends BaseController {
     public void initialize() {
         //TODO: Configurable input mappers:
         inputMappers.add(new KeyboardMapper(Input.Keys.A, Input.Keys.D, Input.Keys.SPACE));
+        inputMappers.add(new KeyboardMapper(Input.Keys.LEFT, Input.Keys.RIGHT, Input.Keys.ENTER));
 
         for (int i = 0; i < Controllers.getControllers().size; i++)
             inputMappers.add(new JoystickMapper(Controllers.getControllers().get(i), Configurations.CORE_GAMEPAD_BUTTON_ACTION));
     }
 
     public void update() {
-        for (int i = 0; i < inputMappers.size; i++) {
+        for (int i = 0; i < inputMappers.size; i++)
             inputMappers.get(i).update();
-
-
-        }
     }
 
     public boolean checkAnyInputHasActionPressed() {

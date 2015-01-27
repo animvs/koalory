@@ -118,8 +118,6 @@ public abstract class GGJ15Entity extends Group implements Disposable, PhysicBod
             polygonSpriteBatchCache = (PolygonSpriteBatch) batch;
 
         if (graphic != null) {
-            /*graphic.setPosicao(getX(), getY());*/
-
             graphic.flipX(!facingRight);
 
             batch.end();
