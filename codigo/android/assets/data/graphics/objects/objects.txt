@@ -2,54 +2,61 @@ objects.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-star
-  rotate: false
-  xy: 74, 74
-  size: 52, 46
-  orig: 70, 70
-  offset: 0, 5
-  index: -1
-boxItem_disabled
-  rotate: false
-  xy: 146, 2
-  size: 70, 70
-  orig: 70, 70
-  offset: 0, 0
-  index: -1
 springboardUp
   rotate: false
-  xy: 2, 74
+  xy: 146, 2
   size: 70, 50
   orig: 70, 70
   offset: 0, 0
   index: -1
-particleBrick1b
+coinGold
   rotate: false
-  xy: 358, 59
-  size: 21, 21
-  orig: 21, 21
-  offset: 0, 0
+  xy: 218, 2
+  size: 36, 36
+  orig: 70, 70
+  offset: 17, 16
   index: -1
-springboardDown
+spikes
   rotate: false
-  xy: 128, 74
+  xy: 146, 54
   size: 70, 36
   orig: 70, 70
   offset: 0, 0
   index: -1
+keyGreen
+  rotate: false
+  xy: 188, 164
+  size: 60, 36
+  orig: 70, 70
+  offset: 5, 20
+  index: -1
+star
+  rotate: false
+  xy: 126, 168
+  size: 52, 46
+  orig: 70, 70
+  offset: 0, 5
+  index: -1
+colorWhite
+  rotate: false
+  xy: 74, 168
+  size: 50, 55
+  orig: 50, 55
+  offset: 0, 0
+  index: -1
 weight
   rotate: false
-  xy: 290, 2
+  xy: 74, 96
   size: 66, 70
   orig: 70, 70
   offset: 2, 0
   index: -1
-boxItem
+keyBlue
   rotate: false
-  xy: 218, 2
-  size: 70, 70
+  xy: 188, 202
+  size: 60, 36
   orig: 70, 70
-  offset: 0, 0
+  offset: 5, 20
   index: -1
 clock
   rotate: false
@@ -58,38 +65,73 @@ clock
   orig: 70, 70
   offset: 0, 0
   index: -1
-coinGold
+particleBrick1b
   rotate: false
-  xy: 272, 74
-  size: 36, 36
-  orig: 70, 70
-  offset: 17, 16
-  index: -1
-colorWhite
-  rotate: false
-  xy: 358, 2
-  size: 50, 55
-  orig: 50, 55
+  xy: 218, 66
+  size: 21, 21
+  orig: 21, 21
   offset: 0, 0
   index: -1
 brickWall
+  rotate: false
+  xy: 2, 74
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+bridge
+  rotate: false
+  xy: 74, 74
+  size: 70, 20
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+fireball
+  rotate: false
+  xy: 218, 40
+  size: 22, 24
+  orig: 70, 70
+  offset: 23, 23
+  index: -1
+particleBrick1a
+  rotate: false
+  xy: 218, 89
+  size: 19, 14
+  orig: 19, 14
+  offset: 0, 0
+  index: -1
+weightChained
+  rotate: false
+  xy: 146, 92
+  size: 66, 70
+  orig: 70, 70
+  offset: 2, 0
+  index: -1
+boxItem_disabled
+  rotate: false
+  xy: 2, 146
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+keyRed
+  rotate: false
+  xy: 126, 216
+  size: 60, 36
+  orig: 70, 70
+  offset: 5, 20
+  index: -1
+boxItem
   rotate: false
   xy: 74, 2
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
-spikes
+springboardDown
   rotate: false
-  xy: 200, 74
+  xy: 2, 218
   size: 70, 36
   orig: 70, 70
-  offset: 0, 0
-  index: -1
-particleBrick1a
-  rotate: false
-  xy: 381, 59
-  size: 19, 14
-  orig: 19, 14
   offset: 0, 0
   index: -1
