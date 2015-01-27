@@ -8,7 +8,7 @@
    eJzt1bsNgDAMQMEMyC58aj6r4wFMgSIFlNxJr3CXuHEpAADwbI6WaI22ZGYMe3REZ3QlMwDAW9PXDxhMz/vu+W9/Y9cAkGt5I93j9uwcAOrcR/kJhQ==
   </data>
  </layer>
- <layer name="groundBack" width="130" height="20" visible="0">
+ <layer name="groundBack" width="130" height="20">
   <data encoding="base64" compression="zlib">
    eJzt1rEKgCAUhWHfrTWChramNnsAXXv0EpwirSS9Sv8HYqngEUquUgAAAABwrw+Mb6f3OXMOtEEfbZUOAXHmaFY6BIBk3ONpJGqh4cGaUC0X485S8h6fCu6Vm5YO8IHF9+4sxj+nfEete/J/hZj7JVUYpQMAeIUa7X+6izEbmQMAAKjNDky6CeM=
   </data>
