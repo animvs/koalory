@@ -62,6 +62,7 @@
    <properties>
     <property name="fall" value="true"/>
     <property name="loop" value="false"/>
+    <property name="movimentInterval" value="2"/>
     <property name="respawnInterval" value="5"/>
     <property name="size" value="3"/>
    </properties>
