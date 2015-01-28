@@ -1,10 +1,18 @@
 package br.com.animvs.ggj2015.entities.game.platforms;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.utils.ArrayMap;
 
+import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
+import br.com.animvs.engine2.graficos.loaders.AnimacaoSkeletalData;
+import br.com.animvs.ggj2015.Configurations;
 import br.com.animvs.ggj2015.controller.GameController;
+import br.com.animvs.ggj2015.controller.LoadController;
 import br.com.animvs.ggj2015.entities.game.GGJ15Entity;
 
 /**
@@ -18,6 +26,16 @@ public abstract class Platform extends GGJ15Entity {
     private int size;
     private boolean fall;
     private float respawnInterval;
+    private float movementInterval;
+
+    private Vector2 positionCache;
+    private Vector2[] path;
+    private int pathIndex;
+    private float timeCounter;
+
+    private boolean increasingIndex;
+
+    private ArrayMap<AnimacaoSkeletal, Vector2> graphics;
 
     protected final boolean getFall() {
         return fall;
@@ -30,11 +48,47 @@ public abstract class Platform extends GGJ15Entity {
     public Platform(GameController controller, PolylineMapObject line) {
         super(controller);
 
+        increasingIndex = true;
+        positionCache = new Vector2();
+
+        preparePath(line);
         parseParameters(line);
 
         initialPosition = new Vector2(line.getPolyline().getX(), line.getPolyline().getY());
 
         getController().getEntities().createPlatformBody(this, size);
+
+        float platformWidth = Configurations.CORE_TILE_SIZE * size;
+
+        //Since platforms are composed by many pottentially blocks, it's rendering is done through cached offset graphics according to it's size:
+        graphics = new ArrayMap<AnimacaoSkeletal, Vector2>();
+        for (int i = 0; i < size; i++) {
+            AnimacaoSkeletal graphic = new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_PLATFORM, AnimacaoSkeletalData.class));
+            Vector2 graphicOffset = new Vector2(-((platformWidth / 2f) - (Configurations.CORE_TILE_SIZE / 2f)) + (i * Configurations.CORE_TILE_SIZE), 0f);
+
+            graphics.put(graphic, graphicOffset);
+        }
+    }
+
+    @Override
+    public void setY(float y) {
+        super.setY(y);
+        if (getBody() != null)
+            getBody().setTransform(getBody().getPosition().x, getController().getPhysics().toBox(y), getBody().getAngle());
+
+        if (getGraphic() != null)
+            getGraphic().setPosicao(getX(), y /*- Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f*/);
+    }
+
+    @Override
+    public void setPosition(float x, float y) {
+        super.setPosition(x, y);
+
+        if (getBody() != null)
+            getBody().setTransform(getController().getPhysics().toBox(x), getController().getPhysics().toBox(y), getBody().getAngle());
+
+        if (getGraphic() != null)
+            getGraphic().setPosicao(x, y /*- Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f*/);
     }
 
     @Override
@@ -49,13 +103,70 @@ public abstract class Platform extends GGJ15Entity {
 
     @Override
     public void update() {
+        //float distanceFromNextNode = positionCache.dst2(path[pathIndex]);
+
+        timeCounter += Gdx.graphics.getDeltaTime();
+
+        //positionCache.interpolate(path[pathIndex], timeCounter / movementInterval , Interpolation.exp5);
+        //positionCache.set(getX(), getY());
+
+        if (timeCounter >= movementInterval) {
+            timeCounter = 0f;
+
+            if (increasingIndex) {
+                pathIndex++;
+                if (pathIndex == path.length - 1) {
+                    pathIndex = path.length - 1;
+                    increasingIndex = false;
+                }
+            } else {
+                pathIndex--;
+                if (pathIndex == 0) {
+                    pathIndex = 0;
+                    increasingIndex = true;
+                }
+            }
+        }
+
+        positionCache.set(path[pathIndex].x, path[pathIndex].y);
+
+        float delta = (timeCounter / movementInterval);
+
+        //fade, sine
+        if (increasingIndex)
+            positionCache.interpolate(path[pathIndex + 1], delta, Interpolation.sine);
+        else
+            positionCache.interpolate(path[pathIndex - 1], delta, Interpolation.sine);
+
+        setPosition(positionCache.x, positionCache.y);
+        Gdx.app.log("ASD", "" + delta + " - X: " + getX() + " Y: " + getY());
+
+        for (int i = 0; i < graphics.size; i++)
+            graphics.getKeyAt(i).setPosicao(getX() - graphics.getValueAt(i).x, getY() - graphics.getValueAt(i).y);
+
         super.update();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+
+        batch.end();
+        for (int i = 0; i < graphics.size; i++)
+            graphics.getKeyAt(i).render(batch, Gdx.graphics.getDeltaTime());
+        batch.begin();
     }
 
     protected void parseParameters(PolylineMapObject line) {
         size = parsePropertyInteger("size", line);
         fall = parsePropertyBoolean("fall", line);
         respawnInterval = parsePropertyFloat("respawnInterval", line);
+        movementInterval = parsePropertyFloat("movementInterval", line);
     }
 
     protected final boolean parsePropertyBoolean(String name, PolylineMapObject line) {
@@ -110,10 +221,16 @@ public abstract class Platform extends GGJ15Entity {
             throw new RuntimeException("Property '" + name + "' cannot be empty");
     }
 
-    @Override
-    public void dispose() {
-        super.dispose();
+    private void preparePath(PolylineMapObject line) {
+        float[] vertices = line.getPolyline().getTransformedVertices();
+        Vector2[] worldVertices = new Vector2[vertices.length / 2];
 
+        for (int i = 0; i < vertices.length / 2; ++i) {
+            worldVertices[i] = new Vector2();
+            worldVertices[i].x = vertices[i * 2] /*/ Configurations.CORE_TILE_SIZE*/;
+            worldVertices[i].y = vertices[i * 2 + 1] /*/ Configurations.CORE_TILE_SIZE*/;
+        }
 
+        path = worldVertices;
     }
 }

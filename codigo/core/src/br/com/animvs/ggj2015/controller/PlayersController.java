@@ -82,7 +82,7 @@ public final class PlayersController extends BaseController {
                 if (input.getPlayerOwner() == null) {
                     if (getController().getLives() > 0) {
                         Player joiningPlayer = getController().getPlayers().spawnPlayer(getController().getInput().getInputMappers().get(i));
-                        Gdx.app.log("PLAYER", "Player " + joiningPlayer + "has been spawned");
+                        Gdx.app.log("PLAYER", "Player " + getController().getPlayers().getTotalPlayersInGame() + " has been spawned");
                     } else
                         Gdx.app.log("PLAYER","Player spawn blocked: No lives left");
                 } else

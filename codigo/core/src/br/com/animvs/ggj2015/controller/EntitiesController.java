@@ -86,7 +86,7 @@ public final class EntitiesController extends BaseController {
 
     public void createPlatformBody(Platform platform, int size) {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(platform, new Vector2(), 0f,
-                BodyDef.BodyType.KinematicBody, Configurations.CORE_TILE_SIZE * size, 50f, 1f, 0f, false);
+                BodyDef.BodyType.KinematicBody, Configurations.CORE_TILE_SIZE * size, Configurations.CORE_PLATFORM_SIZE_Y, 1f, 0f, false);
 
         getController().getPhysics().createRetangleBody(bodyParams);
     }
@@ -102,6 +102,9 @@ public final class EntitiesController extends BaseController {
 
         for (int i = 0; i < spawners.size; i++)
             spawners.get(i).update();
+
+        for (int i = 0; i < platforms.size; i++)
+            platforms.get(i).update();
     }
 
     public void removeItem(Item item) {

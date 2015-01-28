@@ -33,7 +33,8 @@ public final class LoadController extends AnimvsLoadController {
 
     public static final String TEXTURE_BACKGROUND = "data/graphics/background/background.png";
 
-    public static final String SKELETON_COLOR_PICKUP = "data/graphics/objects/color.skel";
+    public static final String SKELETON_COLOR = "data/graphics/objects/color.skel";
+    public static final String SKELETON_PLATFORM = "data/graphics/objects/platform.skel";
 
     public static final String SOUND_FX_JUMP = "data/sounds/jump.wav";
     public static final String MUSIC_IN_GAME = "data/sounds/cenario.mp3";
@@ -58,7 +59,8 @@ public final class LoadController extends AnimvsLoadController {
         // Skeletal Animations:
         loadParameters.add(new AnimvsLoadParameter(SKELETON_CHARACTER, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_CHARACTER)));
         loadParameters.add(new AnimvsLoadParameter(SKELETON_KOALA, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_KOALA)));
-        loadParameters.add(new AnimvsLoadParameter(SKELETON_COLOR_PICKUP, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_OBJECTS)));
+        loadParameters.add(new AnimvsLoadParameter(SKELETON_COLOR, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_OBJECTS)));
+        loadParameters.add(new AnimvsLoadParameter(SKELETON_PLATFORM, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_OBJECTS)));
 
         //Load Sons
         loadParameters.add(new AnimvsLoadParameter(SOUND_FX_JUMP, Sound.class));
