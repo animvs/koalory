@@ -51,10 +51,10 @@
  <objectgroup name="platform">
   <object id="140" name="path" x="632" y="274.667">
    <properties>
-    <property name="fall" value=""/>
-    <property name="loop" value=""/>
-    <property name="respawnInterval" value=""/>
-    <property name="size" value=""/>
+    <property name="fall" value="false"/>
+    <property name="loop" value="true"/>
+    <property name="respawnInterval" value="0"/>
+    <property name="size" value="1"/>
    </properties>
    <polyline points="0,0 326.667,2.66667"/>
   </object>
