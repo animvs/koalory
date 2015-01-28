@@ -31,7 +31,7 @@ public class Item extends GGJ15Entity {
         bodyParams.bodyHolder = this;
         controller.getPhysics().createRetangleBody(bodyParams);
 
-        AnimacaoSkeletal graphic = new AnimacaoSkeletal(controller.getLoad().get(LoadController.SKELETON_COLOR_PICKUP, AnimacaoSkeletalData.class));
+        AnimacaoSkeletal graphic = new AnimacaoSkeletal(controller.getLoad().get(LoadController.SKELETON_COLOR, AnimacaoSkeletalData.class));
         graphic.getColor().set(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1f);
         setGraphic(graphic);
     }

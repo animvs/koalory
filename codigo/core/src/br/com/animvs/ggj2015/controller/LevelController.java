@@ -1,6 +1,8 @@
 package br.com.animvs.ggj2015.controller;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -59,6 +61,7 @@ public class LevelController implements Disposable {
         }
 
         createItemsAndSpawners();
+        createPlatforms();
     }
 
     public void render() {
@@ -87,7 +90,14 @@ public class LevelController implements Disposable {
     }
 
     private void createPlatforms() {
-        MapObjects objects = map.getLayers().get(Configurations.LEVEL_LAYER_PLATFORMS).getObjects();
+        MapLayer layerPlatforms = map.getLayers().get(Configurations.LEVEL_LAYER_PLATFORMS);
+
+        if (layerPlatforms == null){
+            Gdx.app.log("LEVEL", "WARNING - Platform layer not found when loading level");
+            return;
+        }
+
+        MapObjects objects = layerPlatforms.getObjects();
         for (int i = 0; i < objects.getCount(); i++) {
             PolylineMapObject line = ((PolylineMapObject) objects.get(i));
 
