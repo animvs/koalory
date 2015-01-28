@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="83" height="20" tilewidth="64" tileheight="64" nextobjectid="146">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="83" height="20" tilewidth="64" tileheight="64" nextobjectid="147">
+ <properties>
+  <property name="background" value=""/>
+ </properties>
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
@@ -47,14 +50,20 @@
     <property name="receiverId" value=""/>
    </properties>
   </object>
+  <object id="146" name="sender" x="4668" y="269.333" width="61.3333" height="177.333">
+   <properties>
+    <property name="map" value=""/>
+    <property name="receiverId" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="platform">
   <object id="140" name="path" x="632" y="274.667">
    <properties>
-    <property name="fall" value="false"/>
-    <property name="loop" value="true"/>
-    <property name="respawnInterval" value="0"/>
-    <property name="size" value="1"/>
+    <property name="fall" value=""/>
+    <property name="loop" value=""/>
+    <property name="respawnInterval" value=""/>
+    <property name="size" value=""/>
    </properties>
    <polyline points="0,0 326.667,2.66667"/>
   </object>
