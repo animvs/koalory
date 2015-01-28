@@ -27,7 +27,7 @@ public final class Configurations {
     public static final String GRAPHICS_SHADER_COLOR_FRAG = "data/graphics/shaders/frag/color.frag";
     public static final String GRAPHICS_SHADER_DEFAULT_VERT = "data/graphics/shaders/vert/default.vert";
 
-    public static final Vector2 GAMEPLAY_PLAYER_START = new Vector2(175f, 1350f);
+    public static final Vector2 GAMEPLAY_PLAYER_START = new Vector2(175f, 1734f);
 
     public static final float GAMEPLAY_ZOOM_MAX = 1.6f;
 
