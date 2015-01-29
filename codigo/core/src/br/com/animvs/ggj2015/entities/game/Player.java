@@ -2,10 +2,14 @@ package br.com.animvs.ggj2015.entities.game;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.WorldManifold;
+import com.badlogic.gdx.utils.Array;
 
 import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
 import br.com.animvs.engine2.graficos.loaders.AnimacaoSkeletalData;
@@ -14,6 +18,7 @@ import br.com.animvs.ggj2015.controller.GameController;
 import br.com.animvs.ggj2015.controller.LoadController;
 import br.com.animvs.ggj2015.controller.PlayersController;
 import br.com.animvs.ggj2015.entities.engine.input.InputProcessor;
+import br.com.animvs.ggj2015.entities.game.platforms.Platform;
 
 /**
  * Created by DALDEGAN on 24/01/2015.
@@ -27,7 +32,14 @@ public final class Player extends GGJ15Entity {
 
     /*private boolean jumping;*/
     private long lastJumpTime;
+    private Fixture physicFixture;
     /*private float movementXMobile;*/
+
+    private Vector2 positionCache;
+
+    private Platform groundedPlatform;
+    private Vector2 groundedPlatformLastPosition;
+    private boolean grounded;
 
     public InputProcessor getInput() {
         return input;
@@ -57,6 +69,10 @@ public final class Player extends GGJ15Entity {
     private static final float ANIMATION_X_VELOCITY_TOLERANCE = 0.3f;
 
     public boolean getJumping() {
+        return !grounded;
+    }
+
+    /*public boolean getJumping() {
         if (getBody() == null)
             return false;
 
@@ -71,7 +87,7 @@ public final class Player extends GGJ15Entity {
         return false;
 
         //return (getBody().getLinearVelocity().y >= 0.1f && getBody().getLinearVelocity().y <= 0.1f);
-    }
+    }*/
 
     private boolean getMovingHorizontally() {
         if (getBody() == null)
@@ -91,6 +107,8 @@ public final class Player extends GGJ15Entity {
         if (inputMapper == null)
             throw new RuntimeException("The parameter 'inputMapper' must be != NULL");
 
+        positionCache = new Vector2();
+        groundedPlatformLastPosition = new Vector2();
         input = inputMapper;
         setPosition(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
 
@@ -113,7 +131,9 @@ public final class Player extends GGJ15Entity {
         super.update();
 
         updateInputOnly();
-        /*if (alive) {*/
+
+        getBody().setAwake(true);
+
         if (getBody() != null) {
             //Gdx.app.log("DEBUG", "vX: " + getBody().getLinearVelocity().x + " vY: " + getBody().getLinearVelocity().y);
 
@@ -121,6 +141,25 @@ public final class Player extends GGJ15Entity {
 
                 /*if (getX() != lastPositionCache.x || getY() != lastPositionCache.y)
                     getController().updateCameraDesiredPosition();*/
+
+            computePlayerGrounded();
+
+            if (!grounded) {
+                // disable friction while jumping
+
+                physicFixture.setFriction(0f);
+                physicFixture.setFriction(0f);
+
+                //Gdx.app.log("DEBUG", "JUMP BLOCKED - Player is JUMPING already - vX: " + getBody().getLinearVelocity().x + " vY: " + getBody().getLinearVelocity().y);
+                return;
+            } else {
+                /*if (groundedPlatform != null *//*&& groundedPlatform.dist == 0*//*) {
+                    getBody().applyLinearImpulse(0, -0.01f, getX(), getY(), true);
+                }*/
+
+                physicFixture.setFriction(0.2f);
+                physicFixture.setFriction(0.2f);
+            }
 
             if (getBody() != null) {
                 if (!getJumping()) {
@@ -148,11 +187,12 @@ public final class Player extends GGJ15Entity {
         if (resetForceY)
             getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0f);
 
-        lastJumpTime = TimeUtils.millis();
-        /*jumping = true;*/
+        /*lastJumpTime = TimeUtils.millis();
+        jumping = true;*/
 
         //Gdx.app.log("JUMP", "Player " + playerIndex + " started a Jump");
 
+        setPosition(getX(), getY() + 10f);
         getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_JUMP_FORCE, true);
     }
 
@@ -162,17 +202,22 @@ public final class Player extends GGJ15Entity {
             return;
         }
 
-        if (getJumping()) {
-            Gdx.app.log("DEBUG", "JUMP BLOCKED - Player is JUMPING already - vX: " + getBody().getLinearVelocity().x + " vY: " + getBody().getLinearVelocity().y);
+        if (!grounded) {
+            Gdx.app.log("DEBUG", "JUMP BLOCKED - Player is not grounded");
             return;
         }
 
-        if (TimeUtils.timeSinceMillis(lastJumpTime) < 850L) {
+        /*if (TimeUtils.timeSinceMillis(lastJumpTime) < 850L) {
             Gdx.app.log("DEBUG", "JUMP BLOCKED - Next jump is NOT READY yet");
             return;
-        }
+        }*/
 
-        forceJump(false);
+        if (!grounded)
+            forceJump(false);
+        else
+            forceJump(true);
+
+        grounded = false;
 
         if (getController().getSound() != null)
             getController().getSound().playJump();
@@ -217,7 +262,7 @@ public final class Player extends GGJ15Entity {
 
         if (playersController.getTotalPlayersInGame() > 1) {
             Player playerReference;
-            while (true){
+            while (true) {
                 playerReference = playersController.getPlayer(MathUtils.random(playersController.getTotalPlayersInGame() - 1));
 
                 if (playerReference != this)
@@ -227,6 +272,8 @@ public final class Player extends GGJ15Entity {
             spawnLocation.set(playerReference.getX(), playerReference.getY() + Configurations.GAMEPLAY_ENTITY_SIZE_Y * 1.25f);
         } else
             spawnLocation.set(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
+
+        physicFixture = body.getFixtureList().get(0);
 
         setPosition(spawnLocation.x, spawnLocation.y);
 
@@ -238,6 +285,27 @@ public final class Player extends GGJ15Entity {
             body.getFixtureList().get(i).setFriction(0.01f);*/
 
         /*Gdx.app.log("PLAYER", "Player " + playerIndex + " created.");*/
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+
+        if (grounded && groundedPlatform != null) {
+            /*float difX = (groundedPlatform.getX() - groundedPlatformLastPosition.x);
+            float difY = (groundedPlatform.getY() - groundedPlatformLastPosition.y);*/
+            //Gdx.app.log("LAST P"," X: " + difX + " Y: " + difY);
+
+            //if (input.getMovementX() == 0f) {
+            physicFixture.setFriction(0f);
+            getBody().applyForceToCenter(groundedPlatform.getBody().getLinearVelocity().x * 1.2f, -1f, true);
+            //}
+
+            //setPosition(getX() + difX, getY() + difY);
+
+
+            groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
+        }
     }
 
     public void computeInput() {
@@ -271,6 +339,43 @@ public final class Player extends GGJ15Entity {
         }
 
         getGraphic().setAnimationSpeedScale(Configurations.CORE_PLAYER_ANIM_SPEED_MULTIPLIER);
+    }
+
+    private void computePlayerGrounded() {
+        //groundedPlatform = null;
+        Array<Contact> contactList = getController().getPhysics().getWorld().getContactList();
+        for (int i = 0; i < contactList.size; i++) {
+            Contact contact = contactList.get(i);
+            if (contact.isTouching() && (contact.getFixtureA() == physicFixture || contact.getFixtureB() == physicFixture)) {
+
+                positionCache.set(getX(), getY());
+
+                WorldManifold manifold = contact.getWorldManifold();
+                boolean below = true;
+                for (int j = 0; j < manifold.getNumberOfContactPoints(); j++)
+                    below &= (getController().getPhysics().toWorld(manifold.getPoints()[j].y) < positionCache.y - Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f);
+
+                groundedPlatform = null;
+
+                if (below) {
+                    if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
+                        groundedPlatform = (Platform) contact.getFixtureA().getBody().getUserData();
+
+                    if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
+                        groundedPlatform = (Platform) contact.getFixtureB().getBody().getUserData();
+
+                    if (groundedPlatform != null)
+                        groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
+
+                    grounded = true;
+                    return;
+                }
+
+                grounded = false;
+                return;
+            }
+        }
+        grounded = false;
     }
 
     /*public void endJump() {

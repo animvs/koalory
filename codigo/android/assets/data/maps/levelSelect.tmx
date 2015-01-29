@@ -58,15 +58,15 @@
   </object>
  </objectgroup>
  <objectgroup name="platform">
-  <object id="140" name="path" x="632" y="274.667">
+  <object id="140" name="path" x="587" y="395.667">
    <properties>
     <property name="fall" value="true"/>
     <property name="loop" value="false"/>
-    <property name="movementInterval" value="2"/>
     <property name="respawnInterval" value="5"/>
     <property name="size" value="2"/>
+    <property name="speed" value="1"/>
    </properties>
-   <polyline points="0,0 139,-103 201,2 292,-105 446,-105"/>
+   <polyline points="0,0 451,-1"/>
   </object>
  </objectgroup>
 </map>
