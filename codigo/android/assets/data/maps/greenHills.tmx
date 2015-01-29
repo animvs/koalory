@@ -157,4 +157,6 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="platform"/>
+ <objectgroup name="teleport"/>
 </map>

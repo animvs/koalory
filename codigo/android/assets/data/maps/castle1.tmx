@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="23" tilewidth="64" tileheight="64" nextobjectid="143">
+ <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
+  <image source="tileset.png" width="832" height="640"/>
+ </tileset>
+ <layer name="background" width="130" height="23">
+  <data encoding="base64" compression="zlib">
+   eJzt0sEJwDAMBEEX5f5rCynAIJGzk8DMW+g+OwYAAOwxw7erm/RO5bbzp7qR+lndO0UHvQ0d6CD5s7p3ig56GzrQQfJnde+LdKCD25MO3qCDPXSgAwAAAADg3y4X8w5t
+  </data>
+ </layer>
+ <layer name="groundBack" width="130" height="23">
+  <data encoding="base64" compression="zlib">
+   eJzt1c0NwjAMBtBOxAIs0AU4df89uFcqsSGGCL93aiRL+ftSbxsAAOTdBuNuMvuP1M48z8q7uQ/G3WT2H6mdeZ6VdxPJwVE4/2rkoH6ukUzeqmq75mAfjLvpmoPZIm9vpT5zXsu7OTguvqtysNIZ/iP/g888fr2AhFdrzfTFSO3MPtu9ZwMAAAAA3/EE0yQN5w==
+  </data>
+ </layer>
+ <layer name="ground" width="130" height="23">
+  <data encoding="base64" compression="zlib">
+   eJztllEOgjAQRNdv9Rh6APVfvIF/XsD7n0GaaILQltkySCOzyXx0XXYm4YVqZnaRVi+rIIO0vKyCDNLysgoySMvLKsggLS8b+Q2pDXk2NcP2QWY9e1AP1k7Ez8MBy5M1Kw54fuKAMysO/J6sWXHA8xMHnNm1cXBt1bS6tboDCvO7hJB8JTPiwO9X8j3wfh9SO3M8eDg4WZ6x7bu3n9gPveOEvEitkYMcDygHgYHzSN5cZk8/9A4WZ0EcjBfqkbs7UucYA3Ny8GEhlrUx/L5M3aENcZ/HryYOcr6pM/q/lskB6lla7H0eT3Ew3hcHw2fm8BAH3z6/LHGA98XB8JmHQ1M46O9Ad8YypLKhfa9nqdj7mO+oW+H8dGgKB/0d6M5YhlQ2tO/1LBV7H/MddUsciAMryCgOxIE4+C8OXnDKolA=
+  </data>
+ </layer>
+ <objectgroup name="collision">
+  <object id="127" name="floor" x="128.25" y="643.75" width="1215.25" height="24.5"/>
+  <object id="131" name="floor" x="1343.45" y="665.73">
+   <polyline points="0,0 0.363636,42.1818 128.364,42.5455 128.727,106.545 256.182,105.818 256.364,169.818 576.364,169.818 576,617.091"/>
+  </object>
+  <object id="132" name="floor" x="2049" y="836" width="125" height="446"/>
+  <object id="133" name="floor" x="3010" y="708" width="187" height="61"/>
+  <object id="134" name="floor" x="3392" y="706" width="191" height="64"/>
+  <object id="135" name="floor" x="3776" y="706" width="192" height="63"/>
+  <object id="136" name="floor" x="4160" y="1280">
+   <polyline points="0,0 2,-571 63,-571 190,-444 511,-442 510,2"/>
+  </object>
+  <object id="140" name="floor" x="2305" y="1281">
+   <polyline points="0,0 0,-445 127,-445 256,-573 510,-573 510,0"/>
+  </object>
+  <object id="142" name="floor" x="4672.42" y="833.833" width="3644.08" height="16.5833"/>
+ </objectgroup>
+ <objectgroup name="items">
+  <object id="51" name="color" x="2988.67" y="206" width="62" height="64">
+   <properties>
+    <property name="power" value="0.10"/>
+   </properties>
+  </object>
+  <object id="52" name="color" x="3375.52" y="207.576" width="62" height="64">
+   <properties>
+    <property name="power" value="0.10"/>
+   </properties>
+  </object>
+  <object id="55" name="color" x="2183.7" y="240.515" width="62" height="64">
+   <properties>
+    <property name="power" value="0.10"/>
+   </properties>
+  </object>
+  <object id="56" name="color" x="1217.7" y="176.182" width="62" height="64">
+   <properties>
+    <property name="power" value="0.05"/>
+   </properties>
+  </object>
+  <object id="82" name="color" x="653.367" y="574.177" width="62" height="64">
+   <properties>
+    <property name="power" value="0.99"/>
+   </properties>
+  </object>
+  <object id="83" name="color" x="1123.7" y="173.848" width="62" height="64">
+   <properties>
+    <property name="power" value="0.05"/>
+   </properties>
+  </object>
+  <object id="85" name="color" x="1321.33" y="178.667" width="62" height="64">
+   <properties>
+    <property name="power" value="0.05"/>
+   </properties>
+  </object>
+  <object id="87" name="color" x="1424" y="180" width="62" height="64">
+   <properties>
+    <property name="power" value="0.015"/>
+   </properties>
+  </object>
+  <object id="88" name="color" x="2313" y="240.667" width="62" height="64">
+   <properties>
+    <property name="power" value="0.015"/>
+   </properties>
+  </object>
+  <object id="89" name="color" x="2579.12" y="208.848" width="62" height="64">
+   <properties>
+    <property name="power" value="0.05"/>
+   </properties>
+  </object>
+  <object id="90" name="color" x="3483.85" y="215.394" width="62" height="64">
+   <properties>
+    <property name="power" value="0.16"/>
+   </properties>
+  </object>
+  <object id="91" name="color" x="2793.33" y="208" width="62" height="64">
+   <properties>
+    <property name="power" value="0.10"/>
+   </properties>
+  </object>
+  <object id="93" name="color" x="3120.94" y="207.758" width="62" height="64">
+   <properties>
+    <property name="power" value="0.020"/>
+   </properties>
+  </object>
+  <object id="94" name="color" x="3252.21" y="212.576" width="62" height="64">
+   <properties>
+    <property name="power" value="0.15"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="platform"/>
+ <objectgroup name="teleport"/>
+</map>

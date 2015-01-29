@@ -18,7 +18,7 @@
  </layer>
  <layer name="ground" width="130" height="26">
   <data encoding="base64" compression="zlib">
-   eJztmFluxDAIhj1SW0361v1Yk/ufpkEKKqUYcGI78ZRf4mE8Dl74vOCUQqFQ6Hx6WOxxtSdHeSgEAj6Ai1kovydm3hf7OroTg+uWKbspv88giP202sdin+T36EzQsfUeD+4dlo7kgcf+NWPAxIgsvCR5bDCetwP7pak3D8CAFvteLFzT77WK9kzqaOfubPxPdSF2drXkga9/r1quI409S6VzNRIHrSStf69y9WvcjyXfrWLVmwNpn5tYndx+qO2PlH88+2B9zqvRssTqSmeAp320FuszpfE5gDhCjOb0E1OM2SVjmrauU67SMfL60vct19DoHFB/3H9w4H+D2MtBSU5YiwNsk/qU/Etz+584wLsIfYOgRs+tPRxIdx4tr6nBwZW0yftqcZAro7oXDjz5KNVWDrR2ciwccS5I9TXV4ADuKlP6++6tqSYH/O5bwoG1b1BxBiR/nAW8Q0u+c3kPLZfmFOcbzwieExy5H5R8D6rBAbJnxV+Lm/f9wMp/tXfDLXNsifrj/iW+rbZbcEBjw/cJKc/kv2kuRPMhXi7NQ20OsL+cgVyOa7VVSxYHXr739NGzH1h+pfq5vuX89uDAU7+krVoKDoID6lPyHxwEB1pfPf6Cg+AgOAgOgoPgYGsfg4PgAL+xyoID+dtaCg72cfANOs9CFQ==
+   eJztmFluxDAIhj1SW0361v1Yk/ufpkEKKqUYcGI78ZRf4mE8Dl74vOCUQqFQ6Hx6WOxxtSdHeSgEAj6Ai1kovydm3hf7OroTg+uWKbspv88giP202sdin+T36EzQsfUeD+4dlo7kgcf+NWPAxIgsvCR5bDCetwP7pak3D8CAFvteLFzT77WK9kzqaOfubPxPdSF2drXkga9/r1quI409S6VzNRIHrSStf69y9WvcjyXfrWLVmwNpn5tYndx+qO2PlH88+2B9zqvRssTqSmeAp/0ptVufKeN7JA4gjhCjOf3EFGN2yZimreuUq3SMvL70fcs1NDoH1B/3Hxz43yD2clCSE9biANukPiX/0tz+Jw7wLkLfIKjRc2sPB9KdR8tranBwJW3yvloc5Mqo7oUDTz5KtZUDrZ0cC0ecC1J9TTU4gLvKlP6+e2uqyQG/+5ZwYO0bVJwByR9nAe/Qku9c3kPLpTnF+cYzgucER+4HJd+DanCA7Fnx1+LmfT+w8l/t3XDLHFui/rh/iW+r7RYc0NjwfULKM/lvmgvRfIiXS/NQmwPsL2dAy3O1tmrJ4sDL954+evYDy69UP9e3nN8eHHjql7RVS8FBcEB9Sv6Dg+BA66vHX3AQHAQHwUFwEBxs7WNwEBzgN1ZZcCB/W0vBwT4OvgFiUkIe
   </data>
  </layer>
  <objectgroup name="collision">
@@ -195,4 +195,6 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="platform"/>
+ <objectgroup name="teleport"/>
 </map>
