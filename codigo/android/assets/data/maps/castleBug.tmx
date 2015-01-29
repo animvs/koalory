@@ -3,6 +3,11 @@
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
+ <layer name="fillteste" width="130" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6HzUv8eJ2MfSFg1VVVVVVVVVVVVVVVVVVXVhwcoGhVT
+  </data>
+ </layer>
  <layer name="background" width="130" height="30">
   <data encoding="base64" compression="zlib">
    eJzt0kEKgDAMAME+yv+/TTx4FFJMTbAzkFtpiu4YAACwxpF89ulM9p7I2Zl7ojuy7ozu+4oO5nboQAeZd0b3fUUHczt0oIPMO6P7OtKBDi5vOqiggzV0oAMAAAAA4D8O8zi7qP7Ou08X1d/B9Oiw+h2mvoFb9XtMfQOjwZtMnxZ2V/1PquYEVuGjuQ==
