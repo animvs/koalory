@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="83" height="20" tilewidth="64" tileheight="64" nextobjectid="152">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="83" height="20" tilewidth="64" tileheight="64" nextobjectid="156">
  <properties>
   <property name="background" value=""/>
  </properties>
@@ -30,44 +30,24 @@
     <property name="power" value="0.99"/>
    </properties>
   </object>
-  <object id="151" name="spawn" x="1115.5" y="346.5" width="63" height="61">
+  <object id="152" name="sender" x="3198.84" y="253.333" width="64" height="65.3333">
    <properties>
-    <property name="ia" value="jumper"/>
-    <property name="interval" value="1"/>
-    <property name="spawnInterval" value="2"/>
-    <property name="speed" value="-2"/>
-    <property name="speedY" value="5"/>
+    <property name="map" value="sandPlains"/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup name="teleport">
-  <object id="130" name="sender" x="3198.67" y="253.333" width="64" height="65.3333">
+  <object id="153" name="sender" x="2240.17" y="254.668" width="64" height="65.3333">
    <properties>
-    <property name="map" value=""/>
-    <property name="receiverId" value=""/>
+    <property name="map" value="frostPlateau"/>
    </properties>
   </object>
-  <object id="131" name="sender" x="2240" y="254.667" width="64" height="65.3333">
+  <object id="154" name="sender" x="1344.5" y="255.668" width="64" height="65.3333">
    <properties>
-    <property name="map" value=""/>
-    <property name="receiverId" value=""/>
-   </properties>
-  </object>
-  <object id="132" name="sender" x="1344.33" y="254.667" width="64" height="65.3333">
-   <properties>
-    <property name="map" value=""/>
-    <property name="receiverId" value=""/>
-   </properties>
-  </object>
-  <object id="146" name="sender" x="4668" y="269.333" width="61.3333" height="177.333">
-   <properties>
-    <property name="map" value=""/>
-    <property name="receiverId" value=""/>
+    <property name="map" value="greenHills"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="platform">
-  <object id="140" name="path" x="643" y="14.667">
+  <object id="140" name="path" x="646" y="107.667">
    <properties>
     <property name="fall" value="true"/>
     <property name="loop" value="false"/>
