@@ -33,10 +33,10 @@
   <object id="151" name="spawn" x="1115.5" y="346.5" width="63" height="61">
    <properties>
     <property name="ia" value="jumper"/>
-    <property name="interval" value="0.5"/>
+    <property name="interval" value="1"/>
     <property name="spawnInterval" value="2"/>
-    <property name="speed" value="-0.85"/>
-    <property name="speedY" value="0"/>
+    <property name="speed" value="-2"/>
+    <property name="speedY" value="5"/>
    </properties>
   </object>
  </objectgroup>
@@ -67,7 +67,7 @@
   </object>
  </objectgroup>
  <objectgroup name="platform">
-  <object id="140" name="path" x="632" y="274.667">
+  <object id="140" name="path" x="643" y="14.667">
    <properties>
     <property name="fall" value="true"/>
     <property name="loop" value="false"/>

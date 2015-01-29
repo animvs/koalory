@@ -87,7 +87,7 @@ public class Foe extends GGJ15Entity {
         body.setFixedRotation(true);
         getGraphic().setAnimation("walk", true);
 
-        body.getFixtureList().get(0).setFriction(0.1f);
+        body.getFixtureList().get(0).setFriction(0.5f);
         //Gdx.app.log("FOE", "Koala spawned at X: " + getX() + " Y: " + getY());
     }
 }

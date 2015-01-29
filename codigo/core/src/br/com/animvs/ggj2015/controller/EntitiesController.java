@@ -66,7 +66,7 @@ public final class EntitiesController extends BaseController {
         Gdx.app.log("ITEM", "Color pickup Spawned: X: " + x + " Y: " + y);
     }
 
-    public void createSpawner(Vector2 position, float spawnInterval, String ia, float foeSpeedX, float foeSpeedY, float interval) {
+    public void createSpawner(Vector2 position, float spawnInterval, String ia, float foeSpeedX, Float foeSpeedY, Float interval) {
         spawners.add(new Spawner(getController(), position, spawnInterval, ia, foeSpeedX, foeSpeedY, interval));
     }
 

@@ -136,7 +136,8 @@ public class LevelController implements Disposable {
                 if (objects.get(i).getProperties().get("interval") != null)
                     interval = Float.parseFloat(objects.get(i).getProperties().get("interval").toString());
 
-                controller.getEntities().createSpawner(new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y), spawnInterval, ia, speedX, speedY, interval);
+                Vector2 position = new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y);
+                controller.getEntities().createSpawner(position, spawnInterval, ia, speedX, speedY, interval);
             }
         }
     }
