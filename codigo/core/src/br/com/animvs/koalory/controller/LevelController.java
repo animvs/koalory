@@ -42,11 +42,6 @@ public class LevelController implements Disposable {
     }
 
     public void loadMap(String mapPath) {
-        if (map != null) {
-            map.dispose();
-            renderer.dispose();
-        }
-
         map = controller.getLoad().get(mapPath, TiledMap.class);
 
         renderer = new TileRenderer(map, controller);
@@ -86,10 +81,13 @@ public class LevelController implements Disposable {
 
     @Override
     public void dispose() {
-        renderer.dispose();
+        if (renderer != null)
+            renderer.dispose();
 
-        for (int i = 0; i < bodiesCollision.size; i++)
-            controller.getPhysics().destroyBody(bodiesCollision.getValueAt(i));
+        if (bodiesCollision != null) {
+            for (int i = 0; i < bodiesCollision.size; i++)
+                controller.getPhysics().destroyBody(bodiesCollision.getValueAt(i));
+        }
     }
 
     private void createPlatforms() {
@@ -141,7 +139,7 @@ public class LevelController implements Disposable {
 
                 Vector2 position = new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y);
                 controller.getEntities().createSpawner(position, spawnInterval, ia, speedX, speedY, interval);
-            } else if (objects.get(i).getName().equals("sender")){
+            } else if (objects.get(i).getName().equals("sender")) {
                 if (objects.get(i).getProperties().get("map") == null)
                     throw new RuntimeException("Item RECEIVER does not have the property 'map'");
 

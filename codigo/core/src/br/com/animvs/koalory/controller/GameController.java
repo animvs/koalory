@@ -128,18 +128,10 @@ public final class GameController implements Disposable {
         inGame = true;
         colorRecovered = 0f;
 
-        entities.restart();
-        players.restart();
-        stage.restart();
-
         if (map == null)
             nextMap = "levelSelect";
         else
             nextMap = map;
-
-        getUiController().showUIInGame();
-
-        ui.castValueColors();
 
         /*if (entities.getPlayer(0) != null)
             entities.getPlayer(0).spawn(MathUtils.randomBoolean());*/
@@ -158,7 +150,6 @@ public final class GameController implements Disposable {
     public void initialize() {
         if (!initialized) {
             initialized = true;
-
 
             this.sound = new SoundController(this);
 
@@ -211,6 +202,7 @@ public final class GameController implements Disposable {
 
         if (initialized) {
             if (nextMap != null) {
+                clean();
                 level.loadMap(Configurations.CORE_LEVEL_DIR + nextMap + ".tmx");
                 nextMap = null;
 
@@ -278,5 +270,17 @@ public final class GameController implements Disposable {
 
     private static void TMP_tests() {
         //Reservado para inicialização de testes:
+    }
+
+    private void clean(){
+        entities.restart();
+        players.restart();
+        stage.restart();
+
+        getUiController().showUIInGame();
+        ui.castValueColors();
+
+        if (level != null)
+            level.dispose();
     }
 }
