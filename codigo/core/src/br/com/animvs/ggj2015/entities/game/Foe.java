@@ -14,7 +14,7 @@ import br.com.animvs.ggj2015.entities.engine.ia.IABase;
 /**
  * Created by DALDEGAN on 24/01/2015.
  */
-public final class Foe extends GGJ15Entity {
+public class Foe extends GGJ15Entity {
     private IABase ia;
     private Vector2 spawnPosition;
 
@@ -87,6 +87,7 @@ public final class Foe extends GGJ15Entity {
         body.setFixedRotation(true);
         getGraphic().setAnimation("walk", true);
 
+        body.getFixtureList().get(0).setFriction(0.1f);
         //Gdx.app.log("FOE", "Koala spawned at X: " + getX() + " Y: " + getY());
     }
 }

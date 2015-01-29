@@ -41,6 +41,8 @@ public final class Player extends GGJ15Entity {
     private Vector2 groundedPlatformLastPosition;
     private boolean grounded;
 
+    private boolean mustJump;
+
     public InputProcessor getInput() {
         return input;
     }
@@ -135,6 +137,14 @@ public final class Player extends GGJ15Entity {
         getBody().setAwake(true);
 
         if (getBody() != null) {
+
+            if (mustJump) {
+                mustJump = false;
+
+                setPosition(getX(), getY() + 10f);
+                getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_JUMP_FORCE, true);
+            }
+
             //Gdx.app.log("DEBUG", "vX: " + getBody().getLinearVelocity().x + " vY: " + getBody().getLinearVelocity().y);
 
             computeDeath();
@@ -192,8 +202,7 @@ public final class Player extends GGJ15Entity {
 
         //Gdx.app.log("JUMP", "Player " + playerIndex + " started a Jump");
 
-        setPosition(getX(), getY() + 10f);
-        getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_JUMP_FORCE, true);
+        mustJump = true;
     }
 
     public void tryJump() {

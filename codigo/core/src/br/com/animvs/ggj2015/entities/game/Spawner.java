@@ -14,15 +14,21 @@ public final class Spawner {
     private float spawnInterval;
 
     private float spawnTimer;
-    private float foeSpeed;
+    private final String ia;
+    private float foeSpeedX;
 
     private Vector2 position;
+    private Float foeSpeedY;
+    private Float interval;
 
-    public Spawner(GameController controller, Vector2 position, float spawnInterval, float foeSpeed) {
+    public Spawner(GameController controller, Vector2 position, float spawnInterval, String ia, float foeSpeedX, Float foeSpeedY, Float interval) {
         this.controller = controller;
         this.spawnInterval = spawnInterval;
-        this.foeSpeed = foeSpeed;
+        this.ia = ia;
+        this.foeSpeedX = foeSpeedX;
         this.position = position;
+        this.foeSpeedY = foeSpeedY;
+        this.interval = interval;
     }
 
     public final void update() {
@@ -30,7 +36,7 @@ public final class Spawner {
 
         if (spawnTimer >= spawnInterval) {
             spawnTimer = 0f;
-            controller.getEntities().spawnFoe(position.x, position.y, foeSpeed);
+            controller.getEntities().spawnFoe(position.x, position.y, foeSpeedX, foeSpeedY, ia, interval);
         }
     }
 }

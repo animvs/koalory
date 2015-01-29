@@ -92,7 +92,7 @@ public class LevelController implements Disposable {
     private void createPlatforms() {
         MapLayer layerPlatforms = map.getLayers().get(Configurations.LEVEL_LAYER_PLATFORMS);
 
-        if (layerPlatforms == null){
+        if (layerPlatforms == null) {
             Gdx.app.log("LEVEL", "WARNING - Platform layer not found when loading level");
             return;
         }
@@ -121,9 +121,22 @@ public class LevelController implements Disposable {
                 RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
 
                 float spawnInterval = Float.parseFloat(objects.get(i).getProperties().get("spawnInterval").toString());
-                float speed = Float.parseFloat(objects.get(i).getProperties().get("speed").toString());
+                float speedX = Float.parseFloat(objects.get(i).getProperties().get("speed").toString());
 
-                controller.getEntities().createSpawner(new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y), spawnInterval, speed);
+                Float speedY = null;
+                String ia = null;
+                Float interval = null;
+
+                if (objects.get(i).getProperties().get("speedY") != null)
+                    speedY = Float.parseFloat(objects.get(i).getProperties().get("speedY").toString());
+
+                if (objects.get(i).getProperties().get("ia") != null)
+                    ia = objects.get(i).getProperties().get("ia").toString();
+
+                if (objects.get(i).getProperties().get("interval") != null)
+                    interval = Float.parseFloat(objects.get(i).getProperties().get("interval").toString());
+
+                controller.getEntities().createSpawner(new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y), spawnInterval, ia, speedX, speedY, interval);
             }
         }
     }

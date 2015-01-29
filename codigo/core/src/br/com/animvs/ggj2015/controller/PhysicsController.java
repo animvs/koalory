@@ -55,7 +55,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
     private DelayedRemovalArray<TargetPhysicsParameters> targetToCreate;
 
     public PhysicsController(GameController controller, boolean debug, float boxToWorld, float worldToBox, Vector2 gravity) {
-        super(debug, boxToWorld, worldToBox, gravity);
+        super(debug, boxToWorld, worldToBox, gravity, 20,30, 12, 5);
 
         this.controller = controller;
 
@@ -188,7 +188,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
                             //Colliding with enemy:
                             Foe foe = isFoe(contact.getFixtureA(), contact.getFixtureB());
                             if (foe != null && foe.getAlive()) {
-                                if (player.getY() > foe.getY()) {
+                                if (player.getY() - 32f > foe.getY()) {
                                     //if (contact.getWorldManifold().getNormal().y == 1f || contact.getWorldManifold().getNormal().y == -1f) {
                                     //Player has killed the foe by jumping it's head:
                                     Gdx.app.log("KILL", "Player " + controller.getPlayers().getPlayerIndex(player) + " has killed a Koala");
