@@ -3,7 +3,6 @@ package br.com.animvs.ggj2015.entities.game.platforms;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -26,7 +25,7 @@ public abstract class Platform extends GGJ15Entity {
     private int size;
     private boolean fall;
     private float respawnInterval;
-    private float movementInterval;
+    private float speed;
 
     private Vector2 positionCache;
     private Vector2[] path;
@@ -97,6 +96,9 @@ public abstract class Platform extends GGJ15Entity {
 
         setPosition(initialPosition.x, initialPosition.y);
 
+        for (int i = 0; i < body.getFixtureList().size; i++)
+            body.getFixtureList().get(i).setUserData(Configurations.CORE_PLATFORM_USER_DATA);
+
         //free unused resource:
         initialPosition = null;
     }
@@ -107,16 +109,35 @@ public abstract class Platform extends GGJ15Entity {
 
         timeCounter += Gdx.graphics.getDeltaTime();
 
-        //positionCache.interpolate(path[pathIndex], timeCounter / movementInterval , Interpolation.exp5);
+        //positionCache.interpolate(path[pathIndex], timeCounter / speed , Interpolation.exp5);
         //positionCache.set(getX(), getY());
 
-        if (timeCounter >= movementInterval) {
+        Vector2 desiredPosition;
+
+        if (increasingIndex) {
+            desiredPosition = path[pathIndex + 1];
+        } else {
+            desiredPosition = path[pathIndex - 1];
+        }
+
+        positionCache.sub(desiredPosition);
+        positionCache.nor().scl(-1f);
+
+        getBody().setLinearVelocity(positionCache.x * speed, positionCache.y * speed);
+
+        for (int i = 0; i < graphics.size; i++)
+            graphics.getKeyAt(i).setPosicao(getX() - graphics.getValueAt(i).x, getY() - graphics.getValueAt(i).y);
+
+        //if (timeCounter >= speed) {
+        positionCache.set(getX(), getY());
+        if (positionCache.dst2(desiredPosition) <= Configurations.CORE_PLATFORM_PATH_DISTANCE_TOLERANCE) {
             timeCounter = 0f;
 
             if (increasingIndex) {
                 pathIndex++;
                 if (pathIndex == path.length - 1) {
                     pathIndex = path.length - 1;
+
                     increasingIndex = false;
                 }
             } else {
@@ -127,22 +148,6 @@ public abstract class Platform extends GGJ15Entity {
                 }
             }
         }
-
-        positionCache.set(path[pathIndex].x, path[pathIndex].y);
-
-        float delta = (timeCounter / movementInterval);
-
-        //fade, sine
-        if (increasingIndex)
-            positionCache.interpolate(path[pathIndex + 1], delta, Interpolation.sine);
-        else
-            positionCache.interpolate(path[pathIndex - 1], delta, Interpolation.sine);
-
-        setPosition(positionCache.x, positionCache.y);
-        Gdx.app.log("ASD", "" + delta + " - X: " + getX() + " Y: " + getY());
-
-        for (int i = 0; i < graphics.size; i++)
-            graphics.getKeyAt(i).setPosicao(getX() - graphics.getValueAt(i).x, getY() - graphics.getValueAt(i).y);
 
         super.update();
     }
@@ -166,7 +171,7 @@ public abstract class Platform extends GGJ15Entity {
         size = parsePropertyInteger("size", line);
         fall = parsePropertyBoolean("fall", line);
         respawnInterval = parsePropertyFloat("respawnInterval", line);
-        movementInterval = parsePropertyFloat("movementInterval", line);
+        speed = parsePropertyFloat("speed", line);
     }
 
     protected final boolean parsePropertyBoolean(String name, PolylineMapObject line) {
