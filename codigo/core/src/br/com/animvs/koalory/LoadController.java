@@ -1,4 +1,4 @@
-package br.com.animvs.ggj2015.controller;
+package br.com.animvs.koalory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Array;
 import br.com.animvs.engine2.graficos.loaders.AnimacaoSkeletalData;
 import br.com.animvs.engine2.graficos.loaders.AnimacaoSkeletalDataLoader;
 import br.com.animvs.engine2.utils.AnimvsLoadController;
+import br.com.animvs.koalory.controller.GameController;
 
 /**
  * Created by DALDEGAN on 23/01/2015.

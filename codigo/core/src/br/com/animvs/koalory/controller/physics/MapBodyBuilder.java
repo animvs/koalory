@@ -1,5 +1,5 @@
 /*
-package br.com.animvs.ggj2015.controller.physics;
+package br.com.animvs.koalory.controller.physics;
 
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapObject;

@@ -10,7 +10,7 @@ import br.com.animvs.engine2.graphics.font.AnimvsFontInfo;
 import br.com.animvs.engine2.internationalization.AnimvsLanguageController;
 import br.com.animvs.engine2.utils.AnimvsIntCrypto;
 import br.com.animvs.koalory.Configurations;
-import br.com.animvs.koalory.entities.engine.graphics.GGJ15ShaderLoad;
+import br.com.animvs.koalory.entities.engine.graphics.KoaloryShaderLoad;
 import br.com.animvs.koalory.entities.engine.graphics.ParallaxCamera;
 import br.com.animvs.koalory.entities.engine.graphics.shaders.ShaderColor;
 
@@ -119,7 +119,7 @@ public final class GameController implements Disposable {
     }
 
     public void load() {
-        load.setShader(new GGJ15ShaderLoad());
+        load.setShader(new KoaloryShaderLoad());
         load.load();
     }
 
@@ -163,7 +163,7 @@ public final class GameController implements Disposable {
             this.sound = new SoundController(this);
 
             this.language = new AnimvsLanguageController("pt-br", Configurations.CORE_LANGUAGE_PATH);
-            this.fonts = new AnimvsFontController(language, "br.com.animvs.ggj2015.fontscache", Configurations.CORE_LANGUAGE_PATH, createFontsInfo(), "0123456789%", (int) Configurations.RESOLUTION_REAL.x);
+            this.fonts = new AnimvsFontController(language, "br.com.animvs.koalory.fontscache", Configurations.CORE_LANGUAGE_PATH, createFontsInfo(), "0123456789%", (int) Configurations.RESOLUTION_REAL.x);
             this.fonts.loadFonts();
 
             this.ui = new UIController(this, LoadController.UI_JSON_PATH, Configurations.RESOLUTION_REAL);

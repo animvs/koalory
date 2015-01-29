@@ -5,7 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 
 import br.com.animvs.engine2.graficos.shaders.ShaderLoad;
 
-public final class GGJ15ShaderLoad extends ShaderLoad {
+public final class KoaloryShaderLoad extends ShaderLoad {
 
     @Override
     protected FileHandle getFragmentShaderFile() {
