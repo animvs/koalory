@@ -45,10 +45,13 @@
     <property name="map" value="greenHills1-1"/>
    </properties>
   </object>
-  <object id="156" name="spawn" x="843" y="280" width="51" height="49">
+  <object id="156" name="spawn" x="1006" y="399" width="51" height="49">
    <properties>
-    <property name="spawnInterval" value="5"/>
-    <property name="speed" value="-1"/>
+    <property name="ia" value="jumper"/>
+    <property name="interval" value="0.8"/>
+    <property name="spawnInterval" value="9999"/>
+    <property name="speed" value="-2"/>
+    <property name="speedY" value="6"/>
    </properties>
   </object>
  </objectgroup>
