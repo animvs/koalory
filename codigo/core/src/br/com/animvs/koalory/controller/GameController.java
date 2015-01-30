@@ -269,11 +269,14 @@ public final class GameController implements Disposable {
         entities.restart();
         players.restart();
         stage.restart();
+        physics.restart();
 
         getUI().showUIInGame();
         ui.castValueColors();
 
         if (level != null)
             level.dispose();
+
+        Gdx.app.log("PHYSICS","Bodies remaining after clean: " + physics.getWorld().getBodyCount());
     }
 }

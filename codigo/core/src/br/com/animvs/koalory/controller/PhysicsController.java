@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 
 import br.com.animvs.engine2.physics.AnimvsBodyFactory;
@@ -23,6 +24,15 @@ import br.com.animvs.koalory.entities.physics.PhysicBodyHolder;
  * Created by DALDEGAN on 23/01/2015.
  */
 public final class PhysicsController extends AnimvsPhysicsController {
+
+    public void restart() {
+        Array<Body> bodies = new Array<Body>();
+        getWorld().getBodies(bodies);
+
+        for (int i = 0; i < bodies.size; i++) {
+            destroyBody(bodies.get(i));
+        }
+    }
 
     public static class TargetPhysicsParameters {
         public PhysicBodyHolder bodyHolder;

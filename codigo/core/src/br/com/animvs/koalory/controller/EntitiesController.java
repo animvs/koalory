@@ -45,14 +45,20 @@ public final class EntitiesController extends BaseController {
         /*for (int i = 0; i < Configurations.GAMEPLAY_MAX_PLAYERS; i++)
             players.get(i).restart();*/
 
+        items.begin();
         for (int i = 0; i < items.size; i++)
             items.get(i).dispose();
+        items.end();
 
+        foes.begin();
         for (int i = 0; i < foes.size; i++)
             foes.get(i).dispose();
+        foes.end();
 
+        platforms.begin();
         for (int i = 0; i < platforms.size; i++)
             platforms.get(i).dispose();
+        platforms.end();
 
         items.clear();
         foes.clear();

@@ -55,4 +55,9 @@ public final class Sender extends Item {
     public void collect() {
         getController().startMatch(mapName);
     }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+    }
 }
