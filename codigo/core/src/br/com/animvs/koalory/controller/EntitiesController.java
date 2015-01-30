@@ -131,10 +131,17 @@ public final class EntitiesController extends BaseController {
         items.removeValue(item, true);
     }
 
-    public void processGameWin() {
+    public void processMatchEnd() {
         if (getController().getColorRecovered() >= 1f) {
             getController().endMatch();
-            getController().getUiController().showUIGameWin();
+
+            if (getController().getLevel().getMapName().equals("castle1"))
+                getController().getUI().showUIGameWin();
+            else
+                getController().startMatch(null);
+        } else if ((getController().getLives() == 0) && (getController().getPlayers().getTotalPlayersInGame() == 0)) {
+            getController().endMatch();
+            getController().getUI().showUIGameOver();
         }
     }
 }

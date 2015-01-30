@@ -15,16 +15,14 @@ import com.badlogic.gdx.utils.Disposable;
 import br.com.animvs.engine2.physics.MapBodyBuilder;
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.entities.engine.graphics.tiles.TileRenderer;
-import br.com.animvs.koalory.entities.game.Player;
 
 public class LevelController implements Disposable {
     private GameController controller;
     private TiledMap map;
+    private String mapName;
     private TileRenderer renderer;
 
     private OrthographicCamera cameraCache;
-
-    private Player cameraOwner;
 
     //Objects created from tiled:
     private ArrayMap<String, Body> bodiesCollision;
@@ -33,27 +31,21 @@ public class LevelController implements Disposable {
         this.controller = controller;
     }
 
-    public Player getCameraOwner() {
-        return cameraOwner;
+    public String getMapName() {
+        return mapName;
     }
 
-    public void setCameraOwner(Player cameraOwner) {
-        this.cameraOwner = cameraOwner;
-    }
+    public void loadMap(String map) {
+        mapName = map;
+        this.map = controller.getLoad().get(map + ".tmx", TiledMap.class);
 
-    public void loadMap(String mapPath) {
-        map = controller.getLoad().get(mapPath, TiledMap.class);
-
-        renderer = new TileRenderer(map, controller);
+        renderer = new TileRenderer(this.map, controller);
         renderer.setOverCache(1f);
 
-        bodiesCollision = MapBodyBuilder.buildShapes(map, controller.getPhysics().getBoxToWorld(), controller.getPhysics().getWorld(), Configurations.LEVEL_LAYER_COLLISION);
+        bodiesCollision = MapBodyBuilder.buildShapes(this.map, controller.getPhysics().getBoxToWorld(), controller.getPhysics().getWorld(), Configurations.LEVEL_LAYER_COLLISION);
 
-        for (int i = 0; i < bodiesCollision.size; i++) {
-            /*for (int j = 0; j < bodiesCollision.getValueAt(i).getFixtureList().size; j++)
-                bodiesCollision.getValueAt(i).getFixtureList().get(j).setUserData("collision");*/
+        for (int i = 0; i < bodiesCollision.size; i++)
             bodiesCollision.getValueAt(i).setUserData("collision");
-        }
 
         createItemsAndSpawners();
         createPlatforms();

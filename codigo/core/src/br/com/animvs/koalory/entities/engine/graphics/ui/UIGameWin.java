@@ -75,6 +75,6 @@ public class UIGameWin extends UIBase {
     }
 
     private void goToHomeUI() {
-        getGameController().getUiController().showUIInitial();
+        getGameController().getUI().showUIInitial();
     }
 }

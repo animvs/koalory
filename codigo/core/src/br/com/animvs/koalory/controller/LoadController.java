@@ -30,10 +30,12 @@ public final class LoadController extends AnimvsLoadController {
 
     public static final String ATLAS_CHARACTER = "data/graphics/mobiles/character/skeleton.atlas";
     public static final String ATLAS_KOALA = "data/graphics/mobiles/koala/skeleton.atlas";
+    public static final String ATLAS_SHADOW = "data/graphics/mobiles/shadow/skeleton.atlas";
     public static final String ATLAS_OBJECTS = "data/graphics/objects/objects.txt";
 
     public static final String SKELETON_CHARACTER = "data/graphics/mobiles/character/skeleton.skel";
     public static final String SKELETON_KOALA = "data/graphics/mobiles/koala/skeleton.skel";
+    public static final String SKELETON_SHADOW = "data/graphics/mobiles/shadow/skeleton.skel";
 
     public static final String TEXTURE_BACKGROUND = "data/graphics/background/background.png";
 
@@ -69,6 +71,7 @@ public final class LoadController extends AnimvsLoadController {
         // Skeletal Animations:
         loadParameters.add(new AnimvsLoadParameter(SKELETON_CHARACTER, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_CHARACTER)));
         loadParameters.add(new AnimvsLoadParameter(SKELETON_KOALA, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_KOALA)));
+        loadParameters.add(new AnimvsLoadParameter(SKELETON_SHADOW, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_SHADOW)));
         loadParameters.add(new AnimvsLoadParameter(SKELETON_COLOR, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_OBJECTS)));
         loadParameters.add(new AnimvsLoadParameter(SKELETON_PLATFORM, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_OBJECTS)));
 

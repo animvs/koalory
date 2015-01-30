@@ -24,16 +24,10 @@ import br.com.animvs.koalory.entities.game.platforms.Platform;
  * Created by DALDEGAN on 24/01/2015.
  */
 public final class Player extends Entity {
-    //private int playerIndex;
     private InputProcessor input;
 
-    //private boolean alive;
-    /*private Vector2 lastPositionCache;*/
-
-    /*private boolean jumping;*/
-    private long lastJumpTime;
+    //private long lastJumpTime;
     private Fixture physicFixture;
-    /*private float movementXMobile;*/
 
     private Vector2 positionCache;
 
@@ -47,49 +41,12 @@ public final class Player extends Entity {
         return input;
     }
 
-    /*public float getMovementXMobile() {
-        return movementXMobile;
-    }
-
-    public void setMovementXMobile(float movementXMobile) {
-        this.movementXMobile = movementXMobile;
-    }*/
-
-    /*public InputProcessor getInput() {
-        return input;
-    }*/
-
-    /*public boolean getAlive() {
-        return alive;
-    }*/
-
-    /*public int getPlayerIndex() {
-        return playerIndex;
-    }*/
-
-    private static final float ANIMATION_Y_VELOCITY_TOLERANCE = 1.3f;
+    //private static final float ANIMATION_Y_VELOCITY_TOLERANCE = 1.3f;
     private static final float ANIMATION_X_VELOCITY_TOLERANCE = 0.3f;
 
     public boolean getJumping() {
         return !grounded;
     }
-
-    /*public boolean getJumping() {
-        if (getBody() == null)
-            return false;
-
-        float vVelocity = getBody().getLinearVelocity().y;
-
-        if (vVelocity < 0f && vVelocity < -ANIMATION_Y_VELOCITY_TOLERANCE)
-            return true;
-
-        if (vVelocity > 0f && vVelocity > ANIMATION_Y_VELOCITY_TOLERANCE)
-            return true;
-
-        return false;
-
-        //return (getBody().getLinearVelocity().y >= 0.1f && getBody().getLinearVelocity().y <= 0.1f);
-    }*/
 
     private boolean getMovingHorizontally() {
         if (getBody() == null)
@@ -141,16 +98,13 @@ public final class Player extends Entity {
             if (mustJump) {
                 mustJump = false;
 
+                prepareAnimation("jump");
+
                 setPosition(getX(), getY() + 10f);
                 getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_JUMP_FORCE, true);
             }
 
-            //Gdx.app.log("DEBUG", "vX: " + getBody().getLinearVelocity().x + " vY: " + getBody().getLinearVelocity().y);
-
             computeDeath();
-
-                /*if (getX() != lastPositionCache.x || getY() != lastPositionCache.y)
-                    getController().updateCameraDesiredPosition();*/
 
             computePlayerGrounded();
 
@@ -160,15 +114,10 @@ public final class Player extends Entity {
                 physicFixture.setFriction(0f);
                 physicFixture.setFriction(0f);
 
-                //Gdx.app.log("DEBUG", "JUMP BLOCKED - Player is JUMPING already - vX: " + getBody().getLinearVelocity().x + " vY: " + getBody().getLinearVelocity().y);
                 return;
             } else {
-                /*if (groundedPlatform != null *//*&& groundedPlatform.dist == 0*//*) {
-                    getBody().applyLinearImpulse(0, -0.01f, getX(), getY(), true);
-                }*/
-
-                physicFixture.setFriction(0.2f);
-                physicFixture.setFriction(0.2f);
+                physicFixture.setFriction(1f);
+                physicFixture.setFriction(1f);
             }
 
             if (getBody() != null) {
@@ -179,9 +128,8 @@ public final class Player extends Entity {
                         prepareAnimation("walk");
                         getGraphic().setAnimationSpeedScale(0f);
                     }
-                } else {
+                } else
                     prepareAnimation("jump");
-                }
             }
         }
         /*}*/
@@ -197,11 +145,6 @@ public final class Player extends Entity {
         if (resetForceY)
             getBody().setLinearVelocity(getBody().getLinearVelocity().x, 0f);
 
-        /*lastJumpTime = TimeUtils.millis();
-        jumping = true;*/
-
-        //Gdx.app.log("JUMP", "Player " + playerIndex + " started a Jump");
-
         mustJump = true;
     }
 
@@ -216,11 +159,6 @@ public final class Player extends Entity {
             return;
         }
 
-        /*if (TimeUtils.timeSinceMillis(lastJumpTime) < 850L) {
-            Gdx.app.log("DEBUG", "JUMP BLOCKED - Next jump is NOT READY yet");
-            return;
-        }*/
-
         if (!grounded)
             forceJump(false);
         else
@@ -233,24 +171,10 @@ public final class Player extends Entity {
     }
 
     public void eventDeath() {
-        /*alive = false;*/
         dispose();
 
-        //setPosition(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
         getController().getSound().playCharacterDeath();
-        getController().checkGameOver();
     }
-
-    /*public void restart() {
-        setPosition(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
-        disposeBody();
-        *//*alive = false;*//*
-
-        lastPositionCache = new Vector2();
-
-        lastJumpTime = 0L;
-        movementXMobile = 0f;
-    }*/
 
     @Override
     public void dispose() {
@@ -285,15 +209,6 @@ public final class Player extends Entity {
         physicFixture = body.getFixtureList().get(0);
 
         setPosition(spawnLocation.x, spawnLocation.y);
-
-        //setPosition(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
-        //setPosition(600f, 550f + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f);
-        //getController().getStage().bringToFront(this);
-
-        /*for (int i = 0; i < body.getFixtureList().size; i++)
-            body.getFixtureList().get(i).setFriction(0.01f);*/
-
-        /*Gdx.app.log("PLAYER", "Player " + playerIndex + " created.");*/
     }
 
     @Override
@@ -301,34 +216,21 @@ public final class Player extends Entity {
         super.draw(batch, parentAlpha);
 
         if (grounded && groundedPlatform != null) {
-            /*float difX = (groundedPlatform.getX() - groundedPlatformLastPosition.x);
-            float difY = (groundedPlatform.getY() - groundedPlatformLastPosition.y);*/
-            //Gdx.app.log("LAST P"," X: " + difX + " Y: " + difY);
 
-            //if (input.getMovementX() == 0f) {
             physicFixture.setFriction(0f);
             getBody().applyForceToCenter(groundedPlatform.getBody().getLinearVelocity().x * 1.2f, -1f, true);
-            //}
-
-            //setPosition(getX() + difX, getY() + difY);
-
 
             groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
         }
     }
 
     public void computeInput() {
-        /*input.update();*/
-
         if (getBody() != null) {
-            float movementX = input.getMovementX();
-
             if (Configurations.SIMULATE_MOBILE_ON_DESKTOP || Gdx.app.getType() != Application.ApplicationType.Desktop)
                 getBody().setLinearVelocity(input.getMovementX(), getBody().getLinearVelocity().y);
             else
-                getBody().setLinearVelocity(movementX, getBody().getLinearVelocity().y);
+                getBody().setLinearVelocity(input.getMovementX(), getBody().getLinearVelocity().y);
         }
-
     }
 
     private void computeDeath() {
@@ -386,8 +288,4 @@ public final class Player extends Entity {
         }
         grounded = false;
     }
-
-    /*public void endJump() {
-        jumping = false;
-    }*/
 }
