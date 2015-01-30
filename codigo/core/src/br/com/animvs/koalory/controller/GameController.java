@@ -53,7 +53,7 @@ public final class GameController implements Disposable {
         return sound;
     }
 
-    public UIController getUiController() {
+    public UIController getUI() {
         return ui;
     }
 
@@ -185,7 +185,7 @@ public final class GameController implements Disposable {
 
             resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-            getUiController().showUIInitial();
+            getUI().showUIInitial();
         }
     }
 
@@ -203,7 +203,7 @@ public final class GameController implements Disposable {
         if (initialized) {
             if (nextMap != null) {
                 clean();
-                level.loadMap(Configurations.CORE_LEVEL_DIR + nextMap + ".tmx");
+                level.loadMap(Configurations.CORE_LEVEL_DIR + nextMap);
                 nextMap = null;
 
                 return;
@@ -225,7 +225,7 @@ public final class GameController implements Disposable {
                 if (physics != null && Configurations.DEBUG_PHYSICS)
                     physics.renderDebug(stage.getCamera().combined);
 
-                checkGameOver();
+                entities.processMatchEnd();
                 camera.update();
             }
 
@@ -246,13 +246,6 @@ public final class GameController implements Disposable {
         try {
             disposable.dispose();
         } catch (Exception e) {
-        }
-    }
-
-    public void checkGameOver() {
-        if ((lives == 0) && (players.getTotalPlayersInGame() == 0)) {
-            getUiController().showUIGameOver();
-            endMatch();
         }
     }
 
@@ -277,7 +270,7 @@ public final class GameController implements Disposable {
         players.restart();
         stage.restart();
 
-        getUiController().showUIInGame();
+        getUI().showUIInGame();
         ui.castValueColors();
 
         if (level != null)

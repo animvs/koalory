@@ -74,6 +74,6 @@ public class UIGameOver extends UIBase {
     }
 
     private void goToUIInitial() {
-        getGameController().getUiController().showUIInitial();
+        getGameController().getUI().showUIInitial();
     }
 }

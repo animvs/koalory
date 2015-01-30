@@ -15,7 +15,7 @@ public abstract class UIBase extends AnimvsUI2 {
     }
 
     public UIBase(GameController controller, String caminhoUISkin) {
-        super(controller.getUiController(), controller.getLoad().getAssetManager(), caminhoUISkin, controller.getFonts().getFonts());
+        super(controller.getUI(), controller.getLoad().getAssetManager(), caminhoUISkin, controller.getFonts().getFonts());
 
         this.controller = controller;
     }

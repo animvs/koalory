@@ -29,14 +29,15 @@ public class Foe extends Entity {
         this.ia = ia;
         this.spawnPosition = spawnPosition;
 
-        float scale = 0.7f;
+        float scale = 0.3f;
 
-        getController().getEntities().createEntityBody(this, scale);
+        getController().getEntities().createEntityBody(this, 0.7f);
 
-        AnimacaoSkeletal graphic = new AnimacaoSkeletal(controller.getLoad().get(LoadController.SKELETON_KOALA, AnimacaoSkeletalData.class));
+        AnimacaoSkeletal graphic = new AnimacaoSkeletal(controller.getLoad().get(LoadController.SKELETON_SHADOW, AnimacaoSkeletalData.class));
         graphic.setEscala(scale, scale);
+        graphic.setSkin("standard");
         setGraphic(graphic);
-        graphic.setAnimation("walk", true);
+        graphic.setAnimation("idle", true);
 
         alive = true;
     }
@@ -63,7 +64,7 @@ public class Foe extends Entity {
         alive = false;
 
         disposeBody();
-        getGraphic().setAnimation("dead", false);
+        //getGraphic().setAnimation("dead", false);
 
         if (killer != null)
             killer.forceJump(true);
@@ -84,7 +85,7 @@ public class Foe extends Entity {
 
         setPosition(spawnPosition.x, spawnPosition.y);
         body.setFixedRotation(true);
-        getGraphic().setAnimation("walk", true);
+        getGraphic().setAnimation("idle", true);
 
         body.getFixtureList().get(0).setFriction(0.5f);
         //Gdx.app.log("FOE", "Koala spawned at X: " + getX() + " Y: " + getY());

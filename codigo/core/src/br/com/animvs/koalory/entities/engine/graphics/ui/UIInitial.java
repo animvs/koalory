@@ -38,7 +38,7 @@ public class UIInitial extends UIBase {
         ImageButton btnCredits = new ImageButton(getUiSkin(), "btn-credit");
         btnCredits.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                getGameController().getUiController().showUICredits();
+                getGameController().getUI().showUICredits();
                 return true;
             }
         });

@@ -107,7 +107,7 @@ public class UIInGame extends UIBase {
     }
 
     public void updateColors() {
-        imgRed.setText(getGameController().getUiController().getColorRecoveredCastCache() + "%");
+        imgRed.setText(getGameController().getUI().getColorRecoveredCastCache() + "%");
     }
 
     /*private void computeAction() {

@@ -1,15 +1,12 @@
 package br.com.animvs.koalory.entities.game;
 
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
 import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
 import br.com.animvs.engine2.graficos.loaders.AnimacaoSkeletalData;
-import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.controller.LoadController;
-import br.com.animvs.koalory.controller.PhysicsController;
 
 /**
  * Created by ANSCHAU on 24/01/2015.
@@ -43,8 +40,8 @@ public class Color extends Item {
 
     public void collect() {
         getController().addColorRecovered(colorRecovered);
-        getController().getEntities().processGameWin();
-        getController().getUiController().castValueColors();
+        getController().getEntities().processMatchEnd();
+        getController().getUI().castValueColors();
     }
 
     @Override
