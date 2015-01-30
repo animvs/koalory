@@ -25,25 +25,25 @@
   <object id="127" name="floor" x="2496.67" y="698">
    <polyline points="0,0 0,-56.6667 893.97,-56.1818 897.152,-56.1818 1088,-248 1215,-248 1407,-56.3333 1919,-56.3333 1919.67,-10.3333"/>
   </object>
-  <object id="134" x="11393.6" y="643">
+  <object id="134" name="create" x="11393.6" y="643">
    <polyline points="0,0 0.125,-65.125 64,-64.75 63.75,-129 127.875,-129 127.5,-193.125 191.5,-192.875 191.375,-256.75 255.5,-257.125 255.375,-320.625 383.5,-320.75 383.5,-0.125"/>
   </object>
-  <object id="137" x="10239.8" y="641.5">
+  <object id="137" name="floor" x="10239.8" y="641.5">
    <polyline points="-1343.25,0.25 2562.18,-0.0606061"/>
   </object>
-  <object id="139" x="4736" y="687.333">
+  <object id="139" name="floor" x="4736" y="687.333">
    <polyline points="0,0 0,-45.8333 1023.75,-45.5833 1088,-109.583 1086.67,12"/>
   </object>
-  <object id="140" x="5953" y="651">
+  <object id="140" name="floor" x="5953" y="651">
    <polyline points="-1.09091,-0.363636 -1,-74 63,-74 63,2"/>
   </object>
-  <object id="143" x="6144" y="689.333">
+  <object id="143" name="floor" x="6144" y="689.333">
    <polyline points="0,0 0,-110.667 62.6667,-46.6667 2558.67,-45.3333"/>
   </object>
-  <object id="145" x="8577.33" y="643.667">
+  <object id="145" name="create" x="8577.33" y="643.667">
    <polyline points="0,0 0.333333,-67 63.3333,-67.3333 63.6667,-130.667 124.667,-130.667 125.333,0"/>
   </object>
-  <object id="146" x="8896.33" y="641">
+  <object id="146" name="create" x="8896.33" y="641">
    <polyline points="-0.625,0.75 -0.791667,-128 63.625,-127.917 62.6667,-64 126.667,-64.3333 127.583,0.208333"/>
   </object>
  </objectgroup>
@@ -78,18 +78,6 @@
   <object id="56" name="color" x="703.03" y="576.182" width="62" height="64">
    <properties>
     <property name="power" value="0.05"/>
-   </properties>
-  </object>
-  <object id="80" name="spawn" x="4334.5" y="568.667" width="64" height="66.6667">
-   <properties>
-    <property name="spawnInterval" value="6"/>
-    <property name="speed" value="-0.8"/>
-   </properties>
-  </object>
-  <object id="81" name="spawn" x="4737.66" y="569.334" width="64" height="66.6667">
-   <properties>
-    <property name="spawnInterval" value="4.8"/>
-    <property name="speed" value="0.9"/>
    </properties>
   </object>
   <object id="82" name="color" x="1622.03" y="381.182" width="62" height="64">
@@ -147,7 +135,7 @@
     <property name="power" value="0.15"/>
    </properties>
   </object>
-  <object id="125" name="spawn" x="4266.83" y="569.833" width="62.5" height="64.5">
+  <object id="125" name="spawn" x="4363.8" y="563.772" width="62.5" height="64.5">
    <properties>
     <property name="spawnInterval" value="7"/>
     <property name="speed" value="-0.8"/>
