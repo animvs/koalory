@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="20" tilewidth="64" tileheight="64" nextobjectid="136">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="64" tileheight="64" nextobjectid="147">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
- <layer name="background" width="130" height="20">
+ <layer name="background" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt0qENACAQBEEKAwqgGfp3vERjPnlmkvUnrjUAAACooUcjmtlDSLWu+JcfwLudPQAAAACAMg7eEwLj
+   eJzt0zEOABAUREEHwwFcxv07v6QnSGaS12+zKQEAAAAAwFk5KlG9PQQe1KaAlX8Au/XbAwAAAAAAAAA+MACu5gLj
   </data>
  </layer>
- <layer name="groundBack" width="130" height="20">
+ <layer name="groundBack" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt1MEJg0AQheFNNzZgCrADD4E9efOkBejN0qOg+AirMchmdPk/GJyDjm8W0TkAAAAASEdhHQBBlXWAxNz1PJux2j+85yFlLea+TcTZIcsuz7lULv0wX/V//JK+G6sPzC+kvikP3LP3HXzmP+qXjJn0oX2XeWfyTM91O3Nj2NoFAAAAAABAeesAF+Tdei7ap6y2DnBBtVvPRfuUvQFmfQ4O
+   eJzt1kEKwjAQheF4Gy+gB+gNXAhZucuqHqDd9ehWrDCEtCY24xD5PxiMoC8voYLOAQAAAAAAAKipsy4AFLhZF/gz3OeLxj1Y3G0/z/0H+xzEWNM8b6+YnaJxlhqZGs/VN5nnZaSTWE/Lq/xfcxXrYZ4xkduJ+eSS8Zmt30fcP1dJx6NYp877ztvT5/m9YSO3JCe3x9pZSsm7HKP38eRYe6720MgEAAAAAAAAAABoibcukOCdbS+5f80uWrmavGunq4ZgXSAhONtecv+aXbRyNQXXTlcNDzchHOQ=
   </data>
  </layer>
- <layer name="ground" width="130" height="20">
+ <layer name="ground" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJztlVEKgzAQBfcqrb2GF/A397+LCikswabQGt92OwMP/NuXdYxmAAAAAACQlVID/0sxPOhx2zLXPMRdRlEshwejuu8O3LcsNZPlc6F14Fc9GNW/dSCjC0cOfLvHOVjUvfz8M7q8c8//v5Rnbr8bdZ4srqdqvn/+NL176NXdpdi5ukPvPajnn9Vld+HoO4zgAB5c50H0RDyjevd+vrpLRA/8fYYHuRLxjOrd+/nqLngQY766Cx7EmK/uggcx5qu7XJUVPThj8w==
+   eJztlk0KwkAMRucqVa/RC3TbvQu3XsDjW6GFWDpl2ubLD3wPAoNI5iWZiKUQQgghhBBCCCGEEKLPOAch5J+xcD9a6Kbo53g4uxAbxqKzH08dnbD8duM2xTDHvXBHjrJ+X9F/j9e7ccX3rWIUk/VuRNiRTpx7cY66s1vvK/J/lq3daHF9VT7/iHMfLK56be2G3JEj92v16CZyDeLc4hNhFho9yBjLvCLFwiA8ve6X571o8TyTFxlb76Hm7O3qFRHr1pzHmf2S92u6oPJq1b3njHSNHBZ1H52V9zzk/ZouqLwWvcjgiqrf26E2kwj3a7qg8lr0IoMrqv7W7+79T0XMxPtNaLug8lr0IoMrqn5vh9pMItyv6YLKa9GLDK6o+r0dajOJcL+mCyqvRS8yuKLq93aozSTC/ZouqLwWvcjgiqrf26E2kwj3a7qg8lr0IoMrIr4ODR1+
   </data>
  </layer>
  <objectgroup name="collision">
@@ -25,21 +25,36 @@
   <object id="127" name="floor" x="2496.67" y="698">
    <polyline points="0,0 0,-56.6667 893.97,-56.1818 897.152,-56.1818 1088,-248 1215,-248 1407,-56.3333 1919,-56.3333 1919.67,-10.3333"/>
   </object>
-  <object id="129" name="floor" x="4736.5" y="684">
-   <polyline points="0,0 0,-41.5 959.5,-42 1087,86 1408.5,85.5 1536.5,-42.5 3582,-42"/>
-  </object>
-  <object id="134" x="7040.62" y="641.5">
+  <object id="134" x="11393.6" y="643">
    <polyline points="0,0 0.125,-65.125 64,-64.75 63.75,-129 127.875,-129 127.5,-193.125 191.5,-192.875 191.375,-256.75 255.5,-257.125 255.375,-320.625 383.5,-320.75 383.5,-0.125"/>
+  </object>
+  <object id="137" x="10239.8" y="641.5">
+   <polyline points="-1343.25,0.25 2562.18,-0.0606061"/>
+  </object>
+  <object id="139" x="4736" y="687.333">
+   <polyline points="0,0 0,-45.8333 1023.75,-45.5833 1088,-109.583 1086.67,12"/>
+  </object>
+  <object id="140" x="5953" y="651">
+   <polyline points="-1.09091,-0.363636 -1,-74 63,-74 63,2"/>
+  </object>
+  <object id="143" x="6144" y="689.333">
+   <polyline points="0,0 0,-110.667 62.6667,-46.6667 2558.67,-45.3333"/>
+  </object>
+  <object id="145" x="8577.33" y="643.667">
+   <polyline points="0,0 0.333333,-67 63.3333,-67.3333 63.6667,-130.667 124.667,-130.667 125.333,0"/>
+  </object>
+  <object id="146" x="8896.33" y="641">
+   <polyline points="-0.625,0.75 -0.791667,-128 63.625,-127.917 62.6667,-64 126.667,-64.3333 127.583,0.208333"/>
   </object>
  </objectgroup>
  <objectgroup name="items">
-  <object id="38" name="spawn" x="3601.17" y="90" width="62.5" height="64.5">
+  <object id="38" name="spawn" x="2301.5" y="569" width="62.5" height="64.5">
    <properties>
-    <property name="spawnInterval" value="9"/>
-    <property name="speed" value="0.8"/>
+    <property name="spawnInterval" value="5"/>
+    <property name="speed" value="-0.8"/>
    </properties>
   </object>
-  <object id="47" name="spawn" x="6589.67" y="271.333" width="62" height="66">
+  <object id="47" name="spawn" x="5689.33" y="571.333" width="62" height="66">
    <properties>
     <property name="spawnInterval" value="4"/>
     <property name="speed" value="-0.8"/>
@@ -65,16 +80,16 @@
     <property name="power" value="0.05"/>
    </properties>
   </object>
-  <object id="80" name="spawn" x="3601" y="161.667" width="64" height="66.6667">
+  <object id="80" name="spawn" x="4334.5" y="568.667" width="64" height="66.6667">
    <properties>
     <property name="spawnInterval" value="6"/>
     <property name="speed" value="-0.8"/>
    </properties>
   </object>
-  <object id="81" name="spawn" x="6511.66" y="270" width="64" height="66.6667">
+  <object id="81" name="spawn" x="4737.66" y="569.334" width="64" height="66.6667">
    <properties>
     <property name="spawnInterval" value="4.8"/>
-    <property name="speed" value="-0.9"/>
+    <property name="speed" value="0.9"/>
    </properties>
   </object>
   <object id="82" name="color" x="1622.03" y="381.182" width="62" height="64">
@@ -107,7 +122,7 @@
     <property name="power" value="0.05"/>
    </properties>
   </object>
-  <object id="90" name="color" x="7464.33" y="214.667" width="62" height="64">
+  <object id="90" name="color" x="11130.3" y="168.667" width="62" height="64">
    <properties>
     <property name="power" value="0.16"/>
    </properties>
@@ -132,19 +147,19 @@
     <property name="power" value="0.15"/>
    </properties>
   </object>
-  <object id="125" name="spawn" x="4149.83" y="221.333" width="62.5" height="64.5">
+  <object id="125" name="spawn" x="4266.83" y="569.833" width="62.5" height="64.5">
    <properties>
-    <property name="spawnInterval" value="8"/>
-    <property name="speed" value="0.8"/>
+    <property name="spawnInterval" value="7"/>
+    <property name="speed" value="-0.8"/>
    </properties>
   </object>
-  <object id="135" name="spawn" x="2303" y="552.667" width="64" height="66.6667">
+  <object id="135" name="spawn" x="11143.3" y="568.333" width="64" height="66.6667">
    <properties>
     <property name="ia" value="jumper"/>
-    <property name="interval" value="1"/>
-    <property name="spawnInterval" value="4"/>
-    <property name="speed" value="-1.5"/>
-    <property name="speedY" value="5.5"/>
+    <property name="interval" value="0.8"/>
+    <property name="spawnInterval" value="6"/>
+    <property name="speed" value="-1.3"/>
+    <property name="speedY" value="4.6"/>
    </properties>
   </object>
  </objectgroup>

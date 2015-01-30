@@ -1,20 +1,20 @@
 
 skeleton.png
-size: 242,195
+size: 79,70
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 shadow-body
-  rotate: true
+  rotate: false
   xy: 2, 2
-  size: 191, 206
-  orig: 191, 206
+  size: 61, 66
+  orig: 61, 66
   offset: 0, 0
   index: -1
 shadow-eye
   rotate: false
-  xy: 210, 161
-  size: 30, 32
-  orig: 30, 32
+  xy: 65, 56
+  size: 12, 12
+  orig: 12, 12
   offset: 0, 0
   index: -1
