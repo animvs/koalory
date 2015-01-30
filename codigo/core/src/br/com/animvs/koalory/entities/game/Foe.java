@@ -18,6 +18,7 @@ public class Foe extends Entity {
     private Vector2 spawnPosition;
 
     private boolean alive;
+    private Vector2 offset;
 
     public boolean getAlive() {
         return alive;
@@ -33,30 +34,33 @@ public class Foe extends Entity {
 
         AnimacaoSkeletal graphic = new AnimacaoSkeletal(controller.getLoad().get(LoadController.SKELETON_SHADOW, AnimacaoSkeletalData.class));
         graphic.setSkin("standard");
+
+        //Fix to correct spine model with wrong rotation ?
+        offset = new Vector2(0f, -15f);
+        graphic.setRotacao(-25f);
+
         setGraphic(graphic);
         graphic.setAnimation("idle", true);
 
         alive = true;
     }
 
-    /*@Override
+    @Override
     public void setX(float x) {
         super.setX(x);
         if (getBody() != null)
             getBody().setTransform(getController().getPhysics().toBox(x), getBody().getPosition().y, getBody().getAngle());
 
         if (getGraphic() != null)
-            getGraphic().setPosicao(x, getY());
+            getGraphic().setPosicao(x + offset.x, getY());
     }
 
     @Override
     public void setY(float y) {
         super.setY(y);
-        if (getBody() != null)
-            getBody().setTransform(getBody().getPosition().x, getController().getPhysics().toBox(y), getBody().getAngle());
 
         if (getGraphic() != null)
-            getGraphic().setPosicao(getX(), y - (Configurations.GAMEPLAY_ENTITY_SIZE_Y * getGraphic().getEscala().y) / 2f);
+            getGraphic().setPosicao(getX() + offset.x, y + offset.y);
     }
 
     @Override
@@ -67,8 +71,8 @@ public class Foe extends Entity {
             getBody().setTransform(getController().getPhysics().toBox(x), getController().getPhysics().toBox(y), getBody().getAngle());
 
         if (getGraphic() != null)
-            getGraphic().setPosicao(x, y - (Configurations.GAMEPLAY_ENTITY_SIZE_Y * getGraphic().getEscala().y) / 2f);
-    }*/
+            getGraphic().setPosicao(x + offset.x, y + offset.y);
+    }
 
     @Override
     public void update() {
@@ -116,6 +120,8 @@ public class Foe extends Entity {
         getGraphic().setAnimation("idle", true);
 
         body.getFixtureList().get(0).setFriction(0.5f);
-        //Gdx.app.log("FOE", "Koala spawned at X: " + getX() + " Y: " + getY());
+
+        //Clean unused resources:
+        spawnPosition = null;
     }
 }
