@@ -32,7 +32,7 @@ public final class ProfileController extends BaseController {
 
         newGameModel.getLevels().clear();
 
-        LevelModel greenHills = new LevelModel("greenHills", false);
+        LevelModel greenHills = new LevelModel("greenHills1-1", false);
         LevelModel sandPlains = new LevelModel("sandPlains", false);
         LevelModel frostPlateau = new LevelModel("frostPlateau", false);
         LevelModel clastle1 = new LevelModel("clastle1", false);

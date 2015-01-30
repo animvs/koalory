@@ -23,7 +23,7 @@ public final class LoadController extends AnimvsLoadController {
     public static final String UI_SKIN_PATH = "data/graphics/ui/ui-main.atlas";
 
     public static final String LEVEL_MAIN = "data/maps/levelSelect.tmx";
-    public static final String LEVEL_GREENHILLS = "data/maps/greenHills.tmx";
+    public static final String LEVEL_GREENHILLS = "data/maps/greenHills1-1.tmx";
     public static final String LEVEL_SANDPLAINS = "data/maps/sandPlains.tmx";
     public static final String LEVEL_FROSTPLATEAU = "data/maps/frostPlateau.tmx";
     public static final String LEVEL_CASTLE1 = "data/maps/castle1.tmx";

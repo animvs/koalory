@@ -29,18 +29,46 @@ public class Foe extends Entity {
         this.ia = ia;
         this.spawnPosition = spawnPosition;
 
-        float scale = 0.3f;
-
         getController().getEntities().createEntityBody(this, 0.7f);
 
         AnimacaoSkeletal graphic = new AnimacaoSkeletal(controller.getLoad().get(LoadController.SKELETON_SHADOW, AnimacaoSkeletalData.class));
-        graphic.setEscala(scale, scale);
         graphic.setSkin("standard");
         setGraphic(graphic);
         graphic.setAnimation("idle", true);
 
         alive = true;
     }
+
+    /*@Override
+    public void setX(float x) {
+        super.setX(x);
+        if (getBody() != null)
+            getBody().setTransform(getController().getPhysics().toBox(x), getBody().getPosition().y, getBody().getAngle());
+
+        if (getGraphic() != null)
+            getGraphic().setPosicao(x, getY());
+    }
+
+    @Override
+    public void setY(float y) {
+        super.setY(y);
+        if (getBody() != null)
+            getBody().setTransform(getBody().getPosition().x, getController().getPhysics().toBox(y), getBody().getAngle());
+
+        if (getGraphic() != null)
+            getGraphic().setPosicao(getX(), y - (Configurations.GAMEPLAY_ENTITY_SIZE_Y * getGraphic().getEscala().y) / 2f);
+    }
+
+    @Override
+    public void setPosition(float x, float y) {
+        super.setPosition(x, y);
+
+        if (getBody() != null)
+            getBody().setTransform(getController().getPhysics().toBox(x), getController().getPhysics().toBox(y), getBody().getAngle());
+
+        if (getGraphic() != null)
+            getGraphic().setPosicao(x, y - (Configurations.GAMEPLAY_ENTITY_SIZE_Y * getGraphic().getEscala().y) / 2f);
+    }*/
 
     @Override
     public void update() {
