@@ -23,7 +23,6 @@ public final class Configurations {
     public static final float CORE_TILE_SIZE = 64f;
     public static final float CORE_PLATFORM_SIZE_Y = 18f;
     public static final String CORE_PLATFORM_USER_DATA = "p";
-    public static final float CORE_PLATFORM_SPEED = 5f;
     public static final float CORE_PLATFORM_PATH_DISTANCE_TOLERANCE = 50f;
     public static final int CORE_GAMEPAD_BUTTON_ACTION = 1;
 
@@ -39,7 +38,6 @@ public final class Configurations {
 
     public static final float GAMEPLAY_MOVEMENT_SPEED = 1f;
     public static final float GAMEPLAY_JUMP_FORCE = 10f;
-    public static final int GAMEPLAY_MAX_PLAYERS = 5;
     public static final int GAMEPLAY_LIVES_AT_START = 5;
 
     /*public static final float GAMEPLAY_FOE_SPEED = -0.35f;*/

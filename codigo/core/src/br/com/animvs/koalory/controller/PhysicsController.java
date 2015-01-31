@@ -72,36 +72,9 @@ public final class PhysicsController extends AnimvsPhysicsController {
         targetToCreate = new DelayedRemovalArray<TargetPhysicsParameters>();
     }
 
-    public void createRetangleBody(TargetPhysicsParameters parameters) {
-        targetToCreate.add(parameters);
-    }
-
     @Override
-    protected void eventAfterUpdate() {
-        super.eventAfterUpdate();
-
-        createBodies();
-    }
-
-    private void createBodies() {
-        targetToCreate.begin();
-        for (int i = 0; i < targetToCreate.size; i++) {
-            //Gdx.app.log("PHYSICS", "Creating body ...");
-            Body body = AnimvsBodyFactory.createRetangle(controller.getPhysics(),
-                    targetToCreate.get(i).position,
-                    targetToCreate.get(i).rotation,
-                    targetToCreate.get(i).bodyType,
-                    targetToCreate.get(i).width,
-                    targetToCreate.get(i).height,
-                    targetToCreate.get(i).density,
-                    targetToCreate.get(i).restitution,
-                    targetToCreate.get(i).sensor);
-
-            targetToCreate.get(i).bodyHolder.setBody(body);
-            targetToCreate.removeIndex(i);
-        }
-        targetToCreate.end();
-
+    public void initialize() {
+        super.initialize();
         getWorld().setContactListener(
                 new ContactListener() {
                     private Item isItem(Fixture fixtureA, Fixture fixtureB) {
@@ -215,5 +188,36 @@ public final class PhysicsController extends AnimvsPhysicsController {
                         }
                     }
                 });
+    }
+
+    public void createRetangleBody(TargetPhysicsParameters parameters) {
+        targetToCreate.add(parameters);
+    }
+
+    @Override
+    protected void eventAfterUpdate() {
+        super.eventAfterUpdate();
+
+        createBodies();
+    }
+
+    private void createBodies() {
+        targetToCreate.begin();
+        for (int i = 0; i < targetToCreate.size; i++) {
+            //Gdx.app.log("PHYSICS", "Creating body ...");
+            Body body = AnimvsBodyFactory.createRetangle(controller.getPhysics(),
+                    targetToCreate.get(i).position,
+                    targetToCreate.get(i).rotation,
+                    targetToCreate.get(i).bodyType,
+                    targetToCreate.get(i).width,
+                    targetToCreate.get(i).height,
+                    targetToCreate.get(i).density,
+                    targetToCreate.get(i).restitution,
+                    targetToCreate.get(i).sensor);
+
+            targetToCreate.get(i).bodyHolder.setBody(body);
+            targetToCreate.removeIndex(i);
+        }
+        targetToCreate.end();
     }
 }
