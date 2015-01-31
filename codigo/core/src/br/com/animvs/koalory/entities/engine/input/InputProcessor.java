@@ -1,5 +1,6 @@
 package br.com.animvs.koalory.entities.engine.input;
 
+import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.entities.game.Player;
 
 /**
@@ -7,6 +8,15 @@ import br.com.animvs.koalory.entities.game.Player;
  */
 public abstract class InputProcessor {
     private Player playerOwner;
+    private GameController controller;
+
+    protected GameController getController() {
+        return controller;
+    }
+
+    public InputProcessor(GameController controller) {
+        this.controller = controller;
+    }
 
     public final Player getPlayerOwner() {
         return playerOwner;

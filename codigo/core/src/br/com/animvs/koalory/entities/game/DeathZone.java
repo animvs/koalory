@@ -54,5 +54,8 @@ public final class DeathZone extends Item {
     protected void eventAfterBodyCreated(Body body) {
         super.eventAfterBodyCreated(body);
         setPosition(rectangle.getRectangle().x + rectangle.getRectangle().width / 2f, rectangle.getRectangle().y + rectangle.getRectangle().height / 2f);
+
+        //dispose unused resources:
+        rectangle = null;
     }
 }

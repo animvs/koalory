@@ -4,11 +4,12 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.math.MathUtils;
 
 import br.com.animvs.koalory.Configurations;
+import br.com.animvs.koalory.controller.GameController;
 
 /**
  * Created by DALDEGAN on 27/01/2015.
  */
-public final class JoystickMapper extends InputProcessor {
+public final class JoystickProcessor extends InputProcessor {
 
     private Controller joystick;
     private int actionButtonIndex;
@@ -16,7 +17,9 @@ public final class JoystickMapper extends InputProcessor {
     private boolean buttonActionPressedLastFrame;
     private boolean buttonActionPressedNow;
 
-    public JoystickMapper(Controller joystick, int actionButtonIndex) {
+    public JoystickProcessor(GameController controller, Controller joystick, int actionButtonIndex) {
+        super(controller);
+
         if (joystick == null)
             throw new RuntimeException("The parameter 'joystick' must be != NULL");
 
@@ -46,7 +49,7 @@ public final class JoystickMapper extends InputProcessor {
     @Override
     public void update() {
         buttonActionPressedLastFrame = buttonActionPressedNow;
-        buttonActionPressedNow = joystick.getButton(Configurations.CORE_GAMEPAD_BUTTON_ACTION);
+        buttonActionPressedNow = joystick.getButton(actionButtonIndex);
     }
 
     @Override

@@ -48,6 +48,7 @@ public class UIInGame extends UIBase {
             tbCenter.addListener(new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     /*computeAction();*/
+                    getGameController().getInput().setMobileTouchClicked(true);
                     return true;
                 }
             });
@@ -59,6 +60,7 @@ public class UIInGame extends UIBase {
             tbRodapeRight.addListener(new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     /*computeAction();*/
+                    getGameController().getInput().setMobileTouchClicked(true);
                     return true;
                 }
             });
