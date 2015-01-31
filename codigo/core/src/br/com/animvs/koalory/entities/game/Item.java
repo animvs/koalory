@@ -34,18 +34,28 @@ public abstract class Item extends Entity {
         return false;
     }
 
+    protected boolean getDisposeOnCollect() {
+        return true;
+    }
+
     public Item(GameController controller) {
         super(controller);
+    }
 
-        float tileSize = Configurations.CORE_TILE_SIZE;
+    public final void initialize() {
+        PhysicsController.TargetPhysicsParameters bodyParamters = createBody(Configurations.CORE_TILE_SIZE);
+        bodyParamters.bodyHolder = this;
 
+        getController().getPhysics().createRetangleBody(bodyParamters);
+
+        setGraphic(createGraphic());
+    }
+
+    protected PhysicsController.TargetPhysicsParameters createBody(float tileSize) {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(this, new Vector2(), 0f, getBodyType(),
                 tileSize * getBodyScaleX(), tileSize * getBodyScaleY(), getBodyDensity(), getBodyRestitution(), getBodySensor());
 
-        bodyParams.bodyHolder = this;
-        controller.getPhysics().createRetangleBody(bodyParams);
-
-        setGraphic(createGraphic());
+        return bodyParams;
     }
 
     protected abstract AnimacaoSkeletal createGraphic();
@@ -71,7 +81,10 @@ public abstract class Item extends Entity {
             getGraphic().setPosicao(x, y /*- Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f*/);
     }
 
-    public abstract void collect();
+    public void collect(Player player) {
+        if (getDisposeOnCollect())
+            dispose();
+    }
 
     @Override
     public void dispose() {

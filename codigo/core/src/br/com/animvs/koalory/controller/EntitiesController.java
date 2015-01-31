@@ -2,6 +2,7 @@ package br.com.animvs.koalory.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
@@ -10,6 +11,7 @@ import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.entities.engine.ia.IAJump;
 import br.com.animvs.koalory.entities.engine.ia.IAStraight;
 import br.com.animvs.koalory.entities.game.Color;
+import br.com.animvs.koalory.entities.game.DeathZone;
 import br.com.animvs.koalory.entities.game.Entity;
 import br.com.animvs.koalory.entities.game.Foe;
 import br.com.animvs.koalory.entities.game.Item;
@@ -67,16 +69,24 @@ public final class EntitiesController extends BaseController {
     }
 
     public void spawnItemColorProgress(float x, float y, float colorProgressAmount) {
-        Color newBaseItem = new Color(getController(), colorProgressAmount);
+        Color color = new Color(getController(), colorProgressAmount);
 
-        items.add(newBaseItem);
-        newBaseItem.setPosition(x + Configurations.CORE_TILE_SIZE / 2f, y + Configurations.CORE_TILE_SIZE / 2f);
+        items.add(color);
+        color.setPosition(x + Configurations.CORE_TILE_SIZE / 2f, y + Configurations.CORE_TILE_SIZE / 2f);
+        color.initialize();
         Gdx.app.log("ITEM", "Color pickup Spawned: X: " + x + " Y: " + y);
+    }
+
+    public void createDeathZone(RectangleMapObject rectangle) {
+        DeathZone sender = new DeathZone(getController(), rectangle);
+        sender.initialize();
+        items.add(sender);
     }
 
     public void createSender(Vector2 position, String map) {
         Sender sender = new Sender(getController(), map);
         sender.setPosition(position.x, position.y);
+        sender.initialize();
         items.add(sender);
     }
 
@@ -123,6 +133,9 @@ public final class EntitiesController extends BaseController {
     }
 
     public void update() {
+        for (int i = 0; i < items.size; i++)
+            items.get(i).update();
+
         for (int i = 0; i < foes.size; i++)
             foes.get(i).update();
 

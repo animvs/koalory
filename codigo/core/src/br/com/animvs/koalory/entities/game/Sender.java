@@ -52,7 +52,7 @@ public final class Sender extends Item {
     }
 
     @Override
-    public void collect() {
+    public void collect(Player player) {
         getController().startMatch(mapName);
     }
 

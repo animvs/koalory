@@ -79,6 +79,8 @@ public class LevelController implements Disposable {
         if (bodiesCollision != null) {
             for (int i = 0; i < bodiesCollision.size; i++)
                 controller.getPhysics().destroyBody(bodiesCollision.getValueAt(i));
+
+            bodiesCollision.clear();
         }
     }
 
@@ -141,7 +143,11 @@ public class LevelController implements Disposable {
                 Vector2 position = new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y);
 
                 controller.getEntities().createSender(position, mapName);
-            }
+            } else if (objects.get(i).getName().equals("deathzone")) {
+                RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
+                controller.getEntities().createDeathZone(rectangle);
+            } else
+                throw new RuntimeException("Unknown object type when loading map: " + objects.get(i).getName());
         }
     }
 }

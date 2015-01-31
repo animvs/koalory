@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="83" height="20" tilewidth="64" tileheight="64" nextobjectid="161">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="83" height="20" tilewidth="64" tileheight="64" nextobjectid="162">
  <properties>
   <property name="background" value=""/>
  </properties>
@@ -13,7 +13,7 @@
  </layer>
  <layer name="groundBack" width="83" height="20">
   <data encoding="base64" compression="zlib">
-   eJztlMsKwjAQRfM3imvRpa+tCC58ICKIb3TnA13qlzvBEUJpSdpMaNB74BA6yUzDpVQpAAAIw7PsC0TIIvHcdOi5kFvyatRWHneo8Tr3mPGlUnBPgiN5ytmzU58s98J3OQjMqBfcM+mympFRs3EnH4lalWxY+s+8zozamHyRS8s7e+SQ7JMDo37jmg8SWf4DLbJNdkq+x6+Ab0sOZCkHspQDWcqBLOVAlnKEynLKupxJ03V+TL06y0mGPmxYlzNpus6PqVdnuc4Q5AP/SzmQpRyhsnwDNcArPA==
+   eJztlMsKwjAQRfsfuldciy59bUUQ8YGIIL4quvOBLvXLvcERQmlJ2kxp0DlwCJ10JuFSGgSC4CcjUnCnBMsFnPss4EzfWUaemxY9F7iDV622drhDjdaFw4wvlYx7HBzhKWXPPvhkGTLf5cAwo55xT6dLKsZazcQdPiK1KmwY+s+0zrXaBL7gynBmDw5hHw60+o1qLnBk+Q+0YBt2Cr7HryDfFh+SJR+SJR+SJR+SJR+SJR95ZTkjbd6J03a+T70qy2mCLmxJm3fitJ3vU6/KcpOgkA75X/IhWfKRV5ZvEWAsGQ==
   </data>
  </layer>
  <layer name="ground" width="83" height="20">
@@ -52,6 +52,11 @@
     <property name="spawnInterval" value="9999"/>
     <property name="speed" value="-2"/>
     <property name="speedY" value="6"/>
+   </properties>
+  </object>
+  <object id="161" name="deathzone" x="62" y="191" width="126" height="22">
+   <properties>
+    <property name="power" value="0.99"/>
    </properties>
   </object>
  </objectgroup>
