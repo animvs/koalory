@@ -24,8 +24,8 @@ public final class LoadController extends AnimvsLoadController {
 
     public static final String LEVEL_MAIN = "data/maps/levelSelect.tmx";
     public static final String LEVEL_GREENHILLS = "data/maps/greenHills1-1.tmx";
-    public static final String LEVEL_SANDPLAINS = "data/maps/sandPlains.tmx";
-    public static final String LEVEL_FROSTPLATEAU = "data/maps/frostPlateau.tmx";
+    //public static final String LEVEL_SANDPLAINS = "data/maps/sandPlains.tmx";
+    //public static final String LEVEL_FROSTPLATEAU = "data/maps/frostPlateau.tmx";
     public static final String LEVEL_CASTLE1 = "data/maps/castle1.tmx";
 
     public static final String ATLAS_CHARACTER = "data/graphics/mobiles/character/skeleton.atlas";
@@ -61,8 +61,8 @@ public final class LoadController extends AnimvsLoadController {
         //Maps:
         loadParameters.add(new AnimvsLoadParameter(LEVEL_MAIN, TiledMap.class));
         loadParameters.add(new AnimvsLoadParameter(LEVEL_GREENHILLS, TiledMap.class));
-        loadParameters.add(new AnimvsLoadParameter(LEVEL_SANDPLAINS, TiledMap.class));
-        loadParameters.add(new AnimvsLoadParameter(LEVEL_FROSTPLATEAU, TiledMap.class));
+        /*loadParameters.add(new AnimvsLoadParameter(LEVEL_SANDPLAINS, TiledMap.class));
+        loadParameters.add(new AnimvsLoadParameter(LEVEL_FROSTPLATEAU, TiledMap.class));*/
         loadParameters.add(new AnimvsLoadParameter(LEVEL_CASTLE1, TiledMap.class));
 
         //Background:
