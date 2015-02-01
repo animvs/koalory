@@ -39,7 +39,10 @@ public class Color extends Item {
         return graphic;
     }
 
-    public void collect() {
+    @Override
+    public void collect(Player player) {
+        super.collect(player);
+
         getController().addColorRecovered(colorRecovered);
         getController().getEntities().processMatchEnd();
         getController().getUI().castValueColors();

@@ -25,31 +25,72 @@ public final class ProfileController extends BaseController {
 
     @Override
     public void initialize() {
+        FileHandle file = Gdx.files.local(Configurations.CORE_SAVEGAME);
+
+        if (!file.exists())
+            createNew(file);
+        else
+            load(file);
     }
 
-    public GameModel createNew() {
-        GameModel newGameModel = new GameModel();
+    public boolean checkCastleFreed() {
+        return checkLevelClear("greenHills1-1") && checkLevelClear("sandPlains") && checkLevelClear("frostPlateau");
+    }
 
-        newGameModel.getLevels().clear();
+    private boolean checkLevelClear(String map) {
+        for (int i = 0; i < model.getLevels().size; i++) {
+            if (model.getLevels().get(i).getMapName().equals(map)) {
+                return model.getLevels().get(i).getCompleted();
+            }
+        }
+
+        throw new RuntimeException("Map not found when checking level clear: " + map);
+    }
+
+    public void registerLevelClear(String level) {
+        for (int i = 0; i < model.getLevels().size; i++) {
+            if (model.getLevels().get(i).getMapName().equals(level)) {
+                model.getLevels().get(i).setCompleted(true);
+                save();
+                return;
+            }
+        }
+
+        throw new RuntimeException("Map not found when registering level clear: " + level);
+    }
+
+    public void resetProfile() {
+        createNew(Gdx.files.local(Configurations.CORE_SAVEGAME));
+    }
+
+    private void createNew(FileHandle file) {
+        model = new GameModel();
+
+        model.getLevels().clear();
 
         LevelModel greenHills = new LevelModel("greenHills1-1", false);
         LevelModel sandPlains = new LevelModel("sandPlains", false);
         LevelModel frostPlateau = new LevelModel("frostPlateau", false);
-        LevelModel clastle1 = new LevelModel("clastle1", false);
+        LevelModel castle1 = new LevelModel("castle1", false);
 
-        newGameModel.getLevels().add(greenHills);
+        model.getLevels().add(greenHills);
+        model.getLevels().add(sandPlains);
+        model.getLevels().add(frostPlateau);
+        model.getLevels().add(castle1);
 
-        return newGameModel;
+        Json json = new Json();
+        json.toJson(model, file);
     }
 
-    public void load() {
+    private void load(FileHandle file) {
+        Json json = new Json();
+        model = json.fromJson(GameModel.class, file);
+    }
+
+    private void save() {
         FileHandle file = Gdx.files.local(Configurations.CORE_SAVEGAME);
 
-        if (!file.exists())
-            createNew();
-        else {
-            Json json = new Json();
-            model = json.fromJson(GameModel.class, file);
-        }
+        Json json = new Json();
+        json.toJson(model, file);
     }
 }

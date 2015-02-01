@@ -37,7 +37,7 @@ public class LevelController implements Disposable {
 
     public void loadMap(String map) {
         mapName = map;
-        this.map = controller.getLoad().get(map + ".tmx", TiledMap.class);
+        this.map = controller.getLoad().get(Configurations.CORE_LEVEL_DIR + map + ".tmx", TiledMap.class);
 
         renderer = new TileRenderer(this.map, controller);
         renderer.setOverCache(1f);

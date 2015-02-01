@@ -73,6 +73,9 @@ public class UIInitial extends UIBase {
     }
 
     private void startGame() {
-        getGameController().startMatch(null);
+        if (getGameController().getProfile().checkCastleFreed())
+            getGameController().startMatch("castle1");
+        else
+            getGameController().startMatch(null);
     }
 }

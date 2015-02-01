@@ -154,10 +154,16 @@ public final class EntitiesController extends BaseController {
         if (getController().getColorRecovered() >= 1f) {
             getController().endMatch();
 
-            if (getController().getLevel().getMapName().equals("castle1"))
+            if (getController().getLevel().getMapName().equals("castle1")) {
+                getController().getProfile().resetProfile();
                 getController().getUI().showUIGameWin();
-            else
-                getController().startMatch(null);
+            } else {
+                getController().getProfile().registerLevelClear(getController().getLevel().getMapName());
+                if (getController().getProfile().checkCastleFreed())
+                    getController().startMatch("castle1");
+                else
+                    getController().startMatch(null);
+            }
         } else if ((getController().getLives() == 0) && (getController().getPlayers().getTotalPlayersInGame() == 0)) {
             getController().endMatch();
             getController().getUI().showUIGameOver();
