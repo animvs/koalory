@@ -150,6 +150,8 @@ public class LevelController implements Disposable {
             } else if (objects.get(i).getName().equals("deathzone")) {
                 RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
                 controller.getEntities().createDeathZone(rectangle);
+            } else if (objects.get(i).getName().equals("endlevel")) {
+                //TODO: Create a new 'endlevel' item
             } else
                 throw new RuntimeException("Unknown object type when loading map - Map: " + mapName + " object: " + objects.get(i).getName());
         }
