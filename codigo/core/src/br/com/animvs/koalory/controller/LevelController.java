@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -143,6 +144,35 @@ public class LevelController implements Disposable {
                     throw new RuntimeException("Item RECEIVER does not have the property 'map'");
 
                 String mapName = objects.get(i).getProperties().get("map").toString();
+
+                //Verfies if sender's level completed requirements are fulfilled:
+                Array<String> missingMaps = new Array<String>();
+                boolean cancelCreation = false;
+
+                if (objects.get(i).getProperties().get("requiredMaps") != null) {
+                    String[] requiredMaps = objects.get(i).getProperties().get("requiredMaps").toString().split(";");
+
+                    for (int j = 0; j < requiredMaps.length; j++) {
+                        if (!controller.getProfile().checkLevelClear(requiredMaps[j])) {
+                            missingMaps.add(requiredMaps[j]);
+                            cancelCreation = true;
+                        }
+                    }
+                }
+
+                if (cancelCreation) {
+                    String message = "Sender creation skipped, level clear requirements where not fulfilled, the following maps still not completed: \"";
+
+                    for (int j = 0; j < missingMaps.size; j++) {
+                        if (j > 0)
+                            message += ", ";
+                        message += missingMaps.get(j);
+                    }
+                    message += "\"";
+
+                    Gdx.app.log("ITEM SENDER", message);
+                    return;
+                }
 
                 RectangleMapObject rectangle = castLevelObject(objects.get(i));
                 Vector2 position = new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y);

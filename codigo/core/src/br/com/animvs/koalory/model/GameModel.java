@@ -6,17 +6,26 @@ import com.badlogic.gdx.utils.Array;
  * Created by DALDEGAN on 26/01/2015.
  */
 public final class GameModel {
-    private Array<LevelModel> levels;
+    private int version;
+    private Array<String> levelsCompleted;
 
-    public Array<LevelModel> getLevels() {
-        return levels;
+    public Array<String> getLevelsCompleted() {
+        return levelsCompleted;
+    }
+
+    public void setLevelsCompleted(Array<String> levelsCompleted) {
+        this.levelsCompleted = levelsCompleted;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     public GameModel() {
-        this.levels = new Array<LevelModel>();
-    }
-
-    public void setLevels(Array<LevelModel> levels) {
-        this.levels = levels;
+        this.levelsCompleted = new Array<String>();
     }
 }

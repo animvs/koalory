@@ -3,6 +3,7 @@ package br.com.animvs.koalory.model;
 /**
  * Created by DALDEGAN on 26/01/2015.
  */
+@Deprecated
 public final class LevelModel {
     private String mapName;
     private boolean completed;

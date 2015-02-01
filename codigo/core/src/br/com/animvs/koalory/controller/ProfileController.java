@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.Json;
 
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.model.GameModel;
-import br.com.animvs.koalory.model.LevelModel;
 
 /**
  * Created by DALDEGAN on 26/01/2015.
@@ -28,63 +27,46 @@ public final class ProfileController extends BaseController {
         FileHandle file = Gdx.files.local(Configurations.CORE_SAVEGAME);
 
         if (!file.exists())
-            createNew(file);
+            createNew();
         else
-            load(file);
+            load();
     }
 
-    public boolean checkCastleFreed() {
-        return checkLevelClear("greenHills1-1") && checkLevelClear("sandPlains") && checkLevelClear("frostPlateau");
-    }
-
-    private boolean checkLevelClear(String map) {
-        for (int i = 0; i < model.getLevels().size; i++) {
-            if (model.getLevels().get(i).getMapName().equals(map)) {
-                return model.getLevels().get(i).getCompleted();
-            }
-        }
-
-        throw new RuntimeException("Map not found when checking level clear: " + map);
+    public boolean checkLevelClear(String map) {
+        return model.getLevelsCompleted().contains(map, false);
     }
 
     public void registerLevelClear(String level) {
-        for (int i = 0; i < model.getLevels().size; i++) {
-            if (model.getLevels().get(i).getMapName().equals(level)) {
-                model.getLevels().get(i).setCompleted(true);
-                save();
-                return;
-            }
-        }
+        if (!model.getLevelsCompleted().contains(level, false))
+            model.getLevelsCompleted().add(level);
 
-        throw new RuntimeException("Map not found when registering level clear: " + level);
+        save();
     }
 
     public void resetProfile() {
-        createNew(Gdx.files.local(Configurations.CORE_SAVEGAME));
+        createNew();
     }
 
-    private void createNew(FileHandle file) {
+    private void createNew() {
         model = new GameModel();
 
-        model.getLevels().clear();
+        model.setVersion(1);
+        model.getLevelsCompleted().clear();
 
-        LevelModel greenHills = new LevelModel("greenHills1-1", false);
-        LevelModel sandPlains = new LevelModel("sandPlains1-1", false);
-        LevelModel frostPlateau = new LevelModel("frostPlateau1-1", false);
-        LevelModel castle1 = new LevelModel("castle1", false);
-
-        model.getLevels().add(greenHills);
-        model.getLevels().add(sandPlains);
-        model.getLevels().add(frostPlateau);
-        model.getLevels().add(castle1);
-
-        Json json = new Json();
-        json.toJson(model, file);
+        save();
     }
 
-    private void load(FileHandle file) {
+    private void load() {
+        FileHandle file = Gdx.files.local(Configurations.CORE_SAVEGAME);
+
         Json json = new Json();
         model = json.fromJson(GameModel.class, file);
+
+        //TODO: Deal game-save version upgrade:
+        if (model == null)
+            createNew();
+        else if (model.getVersion() == 0)
+            createNew();
     }
 
     private void save() {

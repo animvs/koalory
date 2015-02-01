@@ -159,9 +159,9 @@ public final class EntitiesController extends BaseController {
                 getController().getUI().showUIGameWin();
             } else {
                 getController().getProfile().registerLevelClear(getController().getLevel().getMapName());
-                if (getController().getProfile().checkCastleFreed())
+                /*if (getController().getProfile().checkCastleFreed())
                     getController().startMatch("castle1");
-                else
+                else*/
                     getController().startMatch(null);
             }
         } else if ((getController().getLives() == 0) && (getController().getPlayers().getTotalPlayersInGame() == 0)) {

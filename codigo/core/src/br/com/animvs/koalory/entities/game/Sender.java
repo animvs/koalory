@@ -1,6 +1,5 @@
 package br.com.animvs.koalory.entities.game;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
@@ -14,7 +13,6 @@ import br.com.animvs.koalory.controller.GameController;
 public final class Sender extends Item {
 
     private String mapName;
-    private Vector2 postionTMP;
 
     @Override
     protected BodyDef.BodyType getBodyType() {
@@ -35,9 +33,7 @@ public final class Sender extends Item {
         if (mapName.trim().length() == 0)
             throw new RuntimeException("The parameter 'mapName' cannot be EMPTY");
 
-        postionTMP = new Vector2();
         this.mapName = mapName;
-        //dgetController().getEntities().createEntityBody(this);
     }
 
     @Override
