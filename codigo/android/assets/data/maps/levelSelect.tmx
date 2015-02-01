@@ -32,12 +32,12 @@
   </object>
   <object id="152" name="sender" x="3198.84" y="253.333" width="64" height="65.3333">
    <properties>
-    <property name="map" value="sandPlains"/>
+    <property name="map" value="sandPlains1-1"/>
    </properties>
   </object>
   <object id="153" name="sender" x="2240.17" y="254.668" width="64" height="65.3333">
    <properties>
-    <property name="map" value="frostPlateau"/>
+    <property name="map" value="frostPlateau1-1"/>
    </properties>
   </object>
   <object id="154" name="sender" x="1344.5" y="255.668" width="64" height="65.3333">
