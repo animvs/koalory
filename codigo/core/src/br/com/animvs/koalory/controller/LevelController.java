@@ -3,6 +3,7 @@ package br.com.animvs.koalory.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -110,10 +111,10 @@ public class LevelController implements Disposable {
                 if (powerProperty == null)
                     throw new RuntimeException("Item color does not have the property 'power'");
 
-                RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
+                RectangleMapObject rectangle = castLevelObject(objects.get(i));
                 controller.getEntities().spawnItemColorProgress(rectangle.getRectangle().getX(), rectangle.getRectangle().getY(), Float.parseFloat(powerProperty.toString()));
             } else if (objects.get(i).getName().toLowerCase().trim().equals("spawn")) {
-                RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
+                RectangleMapObject rectangle = castLevelObject(objects.get(i));
 
                 float spawnInterval = Float.parseFloat(objects.get(i).getProperties().get("spawnInterval").toString());
                 float speedX = Float.parseFloat(objects.get(i).getProperties().get("speed").toString());
@@ -143,17 +144,24 @@ public class LevelController implements Disposable {
 
                 String mapName = objects.get(i).getProperties().get("map").toString();
 
-                RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
+                RectangleMapObject rectangle = castLevelObject(objects.get(i));
                 Vector2 position = new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y);
 
                 controller.getEntities().createSender(position, mapName);
             } else if (objects.get(i).getName().toLowerCase().trim().equals("deathzone")) {
-                RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
+                RectangleMapObject rectangle = castLevelObject(objects.get(i));
                 controller.getEntities().createDeathZone(rectangle);
             } else if (objects.get(i).getName().toLowerCase().trim().equals("endlevel")) {
                 //TODO: Create a new 'endlevel' item
             } else
                 throw new RuntimeException("Unknown object type when loading map - Map: " + mapName + " object: " + objects.get(i).getName());
         }
+    }
+
+    private RectangleMapObject castLevelObject(MapObject object) {
+        if (!(object instanceof RectangleMapObject))
+            throw new RuntimeException("Invalid object body defined on map, EXPECTING RECTANGLE - Map: " + mapName + " object: " + object.getName());
+
+        return (RectangleMapObject) object;
     }
 }

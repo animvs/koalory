@@ -69,8 +69,8 @@ public final class ProfileController extends BaseController {
         model.getLevels().clear();
 
         LevelModel greenHills = new LevelModel("greenHills1-1", false);
-        LevelModel sandPlains = new LevelModel("sandPlains", false);
-        LevelModel frostPlateau = new LevelModel("frostPlateau", false);
+        LevelModel sandPlains = new LevelModel("sandPlains1-1", false);
+        LevelModel frostPlateau = new LevelModel("frostPlateau1-1", false);
         LevelModel castle1 = new LevelModel("castle1", false);
 
         model.getLevels().add(greenHills);
