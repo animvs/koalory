@@ -101,7 +101,7 @@ public final class Player extends Entity {
                 prepareAnimation("jump");
 
                 setPosition(getX(), getY() + 10f);
-                getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_JUMP_FORCE, true);
+                getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_JUMP_FORCE * 1.98f, true);
             }
 
             computeDeath();

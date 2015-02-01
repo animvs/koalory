@@ -11,6 +11,9 @@ public class DesktopLauncher {
         config.foregroundFPS = 60;
         config.backgroundFPS = 60;
 
+        //config.vSyncEnabled = true;
+        //config.fullscreen = true;
+
         config.width = 1280;
         config.height = 768;
 

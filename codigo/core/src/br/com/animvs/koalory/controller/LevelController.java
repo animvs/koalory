@@ -151,7 +151,7 @@ public class LevelController implements Disposable {
                 RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
                 controller.getEntities().createDeathZone(rectangle);
             } else
-                throw new RuntimeException("Unknown object type when loading map: " + objects.get(i).getName());
+                throw new RuntimeException("Unknown object type when loading map - Map: " + mapName + " object: " + objects.get(i).getName());
         }
     }
 }

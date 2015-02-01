@@ -29,9 +29,8 @@ public final class PhysicsController extends AnimvsPhysicsController {
         Array<Body> bodies = new Array<Body>();
         getWorld().getBodies(bodies);
 
-        for (int i = 0; i < bodies.size; i++) {
+        for (int i = 0; i < bodies.size; i++)
             destroyBody(bodies.get(i));
-        }
     }
 
     public static class TargetPhysicsParameters {
@@ -64,8 +63,8 @@ public final class PhysicsController extends AnimvsPhysicsController {
     private GameController controller;
     private DelayedRemovalArray<TargetPhysicsParameters> targetToCreate;
 
-    public PhysicsController(GameController controller, boolean debug, float boxToWorld, float worldToBox, Vector2 gravity) {
-        super(debug, boxToWorld, worldToBox, gravity, 20, 30, 12, 5);
+    public PhysicsController(GameController controller, boolean debug, float boxToWorld, float worldToBox, Vector2 gravity, int minFPS, int maxFPS) {
+        super(debug, boxToWorld, worldToBox, gravity, minFPS, maxFPS, 8, 3);
 
         this.controller = controller;
 

@@ -32,7 +32,7 @@ public final class IAJump extends IABase {
         if (timeCounter >= interval) {
             timeCounter = 0f;
 
-            foeOwner.getBody().applyForceToCenter(forceX, forceY, true);
+            foeOwner.getBody().applyForceToCenter(forceX * 1.8f, forceY * 1.8f, true);
         }
     }
 }

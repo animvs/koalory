@@ -1,5 +1,6 @@
 package br.com.animvs.koalory.controller;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -163,7 +164,11 @@ public final class GameController implements Disposable {
             this.fonts.loadFonts();
 
             this.ui = new UIController(this, LoadController.UI_JSON_PATH, Configurations.RESOLUTION_REAL);
-            this.physics = new PhysicsController(this, Configurations.DEBUG_PHYSICS, 250f, 0.004f, new Vector2(0f, -10f));
+
+            int minFPS = Gdx.app.getType() == Application.ApplicationType.Desktop ? 60 : 20;
+            int maxFPS = Gdx.app.getType() == Application.ApplicationType.Desktop ? 60 : 30;
+
+            this.physics = new PhysicsController(this, Configurations.DEBUG_PHYSICS, 250f, 0.004f, new Vector2(0f, -10f), minFPS, maxFPS);
             //this.physics = new PhysicsController(this, Configurations.DEBUG_PHYSICS, 100f, 0.001f, new Vector2());
 
             ParallaxCamera newCamera = new ParallaxCamera(Configurations.RESOLUTION_REAL.x, Configurations.RESOLUTION_REAL.y);
