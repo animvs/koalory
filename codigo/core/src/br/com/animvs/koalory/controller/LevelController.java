@@ -104,7 +104,7 @@ public class LevelController implements Disposable {
         MapObjects objects = map.getLayers().get(Configurations.LEVEL_LAYER_ITEMS).getObjects();
 
         for (int i = 0; i < objects.getCount(); i++) {
-            if (objects.get(i).getName().equals("color")) {
+            if (objects.get(i).getName().toLowerCase().trim().equals("color")) {
                 Object powerProperty = objects.get(i).getProperties().get("power");
 
                 if (powerProperty == null)
@@ -112,7 +112,7 @@ public class LevelController implements Disposable {
 
                 RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
                 controller.getEntities().spawnItemColorProgress(rectangle.getRectangle().getX(), rectangle.getRectangle().getY(), Float.parseFloat(powerProperty.toString()));
-            } else if (objects.get(i).getName().equals("spawn")) {
+            } else if (objects.get(i).getName().toLowerCase().trim().equals("spawn")) {
                 RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
 
                 float spawnInterval = Float.parseFloat(objects.get(i).getProperties().get("spawnInterval").toString());
@@ -137,7 +137,7 @@ public class LevelController implements Disposable {
 
                 Vector2 position = new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y);
                 controller.getEntities().createSpawner(graphic, position, spawnInterval, ia, speedX, speedY, interval);
-            } else if (objects.get(i).getName().equals("sender")) {
+            } else if (objects.get(i).getName().toLowerCase().trim().equals("sender")) {
                 if (objects.get(i).getProperties().get("map") == null)
                     throw new RuntimeException("Item RECEIVER does not have the property 'map'");
 
@@ -147,10 +147,10 @@ public class LevelController implements Disposable {
                 Vector2 position = new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y);
 
                 controller.getEntities().createSender(position, mapName);
-            } else if (objects.get(i).getName().equals("deathzone")) {
+            } else if (objects.get(i).getName().toLowerCase().trim().equals("deathzone")) {
                 RectangleMapObject rectangle = ((RectangleMapObject) objects.get(i));
                 controller.getEntities().createDeathZone(rectangle);
-            } else if (objects.get(i).getName().equals("endlevel")) {
+            } else if (objects.get(i).getName().toLowerCase().trim().equals("endlevel")) {
                 //TODO: Create a new 'endlevel' item
             } else
                 throw new RuntimeException("Unknown object type when loading map - Map: " + mapName + " object: " + objects.get(i).getName());
