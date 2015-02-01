@@ -2,6 +2,7 @@ package br.com.animvs.koalory.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
@@ -10,6 +11,7 @@ import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.entities.engine.ia.IAJump;
 import br.com.animvs.koalory.entities.engine.ia.IAStraight;
 import br.com.animvs.koalory.entities.game.Color;
+import br.com.animvs.koalory.entities.game.DeathZone;
 import br.com.animvs.koalory.entities.game.Entity;
 import br.com.animvs.koalory.entities.game.Foe;
 import br.com.animvs.koalory.entities.game.Item;
@@ -67,21 +69,29 @@ public final class EntitiesController extends BaseController {
     }
 
     public void spawnItemColorProgress(float x, float y, float colorProgressAmount) {
-        Color newBaseItem = new Color(getController(), colorProgressAmount);
+        Color color = new Color(getController(), colorProgressAmount);
 
-        items.add(newBaseItem);
-        newBaseItem.setPosition(x + Configurations.CORE_TILE_SIZE / 2f, y + Configurations.CORE_TILE_SIZE / 2f);
+        items.add(color);
+        color.setPosition(x + Configurations.CORE_TILE_SIZE / 2f, y + Configurations.CORE_TILE_SIZE / 2f);
+        color.initialize();
         Gdx.app.log("ITEM", "Color pickup Spawned: X: " + x + " Y: " + y);
+    }
+
+    public void createDeathZone(RectangleMapObject rectangle) {
+        DeathZone sender = new DeathZone(getController(), rectangle);
+        sender.initialize();
+        items.add(sender);
     }
 
     public void createSender(Vector2 position, String map) {
         Sender sender = new Sender(getController(), map);
         sender.setPosition(position.x, position.y);
+        sender.initialize();
         items.add(sender);
     }
 
-    public void createSpawner(Vector2 position, float spawnInterval, String ia, float foeSpeedX, Float foeSpeedY, Float interval) {
-        spawners.add(new Spawner(getController(), position, spawnInterval, ia, foeSpeedX, foeSpeedY, interval));
+    public void createSpawner(String graphic, Vector2 position, float spawnInterval, String ia, float foeSpeedX, Float foeSpeedY, Float interval) {
+        spawners.add(new Spawner(getController(), graphic, position, spawnInterval, ia, foeSpeedX, foeSpeedY, interval));
     }
 
     public void createPlatform(PolylineMapObject line) {
@@ -106,9 +116,9 @@ public final class EntitiesController extends BaseController {
         getController().getPhysics().createRetangleBody(bodyParams);
     }
 
-    public void spawnFoe(float x, float y, float speedX, Float speedY, String ia, Float interval) {
+    public void spawnFoe(String graphic, float x, float y, float speedX, Float speedY, String ia, Float interval) {
         if (ia == null) {
-            Foe newFoe = new Foe(getController(), new IAStraight(getController(), speedX), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
+            Foe newFoe = new Foe(getController(), graphic, new IAStraight(getController(), speedX), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
             foes.add(newFoe);
         } else if (ia.trim().toLowerCase().equals("jumper")) {
             float intervalReal = 0f;
@@ -116,13 +126,16 @@ public final class EntitiesController extends BaseController {
             if (interval != null)
                 intervalReal = interval.floatValue();
 
-            Foe newFoe = new Foe(getController(), new IAJump(getController(), speedX, speedY, intervalReal), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
+            Foe newFoe = new Foe(getController(), graphic, new IAJump(getController(), speedX, speedY, intervalReal), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
             foes.add(newFoe);
         } else
             throw new RuntimeException("AI invalid when loading spawner from TMX: " + ia);
     }
 
     public void update() {
+        for (int i = 0; i < items.size; i++)
+            items.get(i).update();
+
         for (int i = 0; i < foes.size; i++)
             foes.get(i).update();
 
@@ -141,10 +154,16 @@ public final class EntitiesController extends BaseController {
         if (getController().getColorRecovered() >= 1f) {
             getController().endMatch();
 
-            if (getController().getLevel().getMapName().equals("castle1"))
+            if (getController().getLevel().getMapName().equals("castle1")) {
+                getController().getProfile().resetProfile();
                 getController().getUI().showUIGameWin();
-            else
-                getController().startMatch(null);
+            } else {
+                getController().getProfile().registerLevelClear(getController().getLevel().getMapName());
+                if (getController().getProfile().checkCastleFreed())
+                    getController().startMatch("castle1");
+                else
+                    getController().startMatch(null);
+            }
         } else if ((getController().getLives() == 0) && (getController().getPlayers().getTotalPlayersInGame() == 0)) {
             getController().endMatch();
             getController().getUI().showUIGameOver();

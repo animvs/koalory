@@ -1,5 +1,6 @@
 package br.com.animvs.koalory.entities.game;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
@@ -38,7 +39,10 @@ public class Color extends Item {
         return graphic;
     }
 
-    public void collect() {
+    @Override
+    public void collect(Player player) {
+        super.collect(player);
+
         getController().addColorRecovered(colorRecovered);
         getController().getEntities().processMatchEnd();
         getController().getUI().castValueColors();

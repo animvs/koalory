@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="64" tileheight="64" nextobjectid="152">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="64" tileheight="64" nextobjectid="164">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
  <layer name="background" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt1bsNgDAQREFSUuoBWqL/DDewCR/dWZqRNvcFT14WAACAHtaCwSy2gsEs9AFZpz72sWPs/PA+eKNLH/4ZOtIH9KeP567qB/A7fUCmD8j0AZk+INMHZPqATB+Q6QMyfVDhBsGLEJY=
+   eJzt1bENgDAQBEFSUuoBeqH/JnADFxnp32hGutwfrLxtAAD8yVP9AJiwFwxWcRQMVqEPyDr1cY5dY/eH98GMLn34Z+hIH9CfPiDTB2T6gEwfkOkDMn1Apg/I9AGZPiDTBxVe97AQiA==
   </data>
  </layer>
  <layer name="groundBack" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt0zEKwkAQQNGktPQyHsBTWNlZxQPo7VXYKmRCCNndEd6DIctChm3+MAAAAPR1/s6p9yMgubHDwL/QB8T00d699wPYLEsf2Tp6Vtw9VdzNsfSx7B3cX8v3snPv77/Xyl5Ykq0PyEQfENMHxPQBMX1ATB8Q0wfE9AGxln3cyszPWfdCyz4eZebnrHup5wPMSgnm
+   eJzt2b0KwjAQB/A6SUd9GB/A3dGiDkIHP0DBQQXdqk9uqwnUkKQfJrlr/f8gpMX2PEyOxjSKwnuWjmcE3w/gUiL6JWkWAADQB2NHMVIHcQBCG+Utpk7ijyXKuVzbzkMnAlYDgtZXD+oEwDlO9TFskDe3ubjL2zZve+pEiHEbl7I2uXGqj7ou0WcuXh3Eakqui1aiL+9ln0WfVcRYu0yIEcpxqdI2Ny710aSOQozD0WPsg8fYlDg+Q0+it+VmekdX/BfsWn2koj9rPlPf3zw11xSS6HtfLdNcczfcOxX9xPB5leK+myUuV2n1Je95phsXSf3dJTlOWcOcpJVybnqPZ8uNOx/rsF/V3eN2sRcOYOOiPsaaHnOXr1hpffbrPOT4/FCh1oBKF+oD/hvleqTr9YFnC/jU9foA8An1AWCG+gAwC1kfC9HUY65xAULWx0Y09ZhrXPDnBXriItk=
   </data>
  </layer>
  <layer name="ground" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJztmUsOgkAMQNmyNX4WcCq5gfc/hJBAMiF8Wpn2jdCXdGOgLcwrjFpVMu59PPq4ZY5nHy9hD0FQIrlmo04iZiQ4A+lsLLm95H+8R4IrYLWnihkJgiA4N00f7Q/nteO5zUK+YJtaEME+3RjBfzNfQ8k+NNimq643H2d8jg7r9559FvNxjK665nwMTPs2GskeSBMpJc9H6b7NZ6P0fo9S6jsi9+922twUJTu3NBuSXj+CY3I/D3M9TyUuePc09XXF+aC9oFz0+n9D64vEBe+eLGpqc1PQXlAu0j2srb/EBe+eLGpqc1PQXlAuWteY3lVaXyQueN4nq5ra3BS0q0SUeN3peuzh3ZNFTW1uCtoLykXpsen3Fg8XJS543iermtrcFLSrRJR43el67OHdk0VNbW4K2gvKRbqHtfWXuODdk0VNbW4K2gvKRbqHtfWXuODdk0VNbW4K2gvKRbqHtfWXuODdk0VNbW4K2gsivrPUfXs=
+   eJztmt1uwjAMhXOHdovYuICHQusTbE+yR18jqBSF2Nht4pMUf5IF6o/txsdJSwlBz2m2j4Kdmf3nZzeOszui9j9nOxbsK9x7obR/2UeZ948zIvlaQPXGMTmG2s9Z7B/vEWckuLXih9iusdyH94jjOM4+uMx2rXjOhTlPG2eP3AL/jLbYDZXgQEwPc8Ymr6HkvtThmcL79UdpHh2dWL/vbJv3xzam8J79EYn3YNw9mhWSeyCNpfTcH73rLe+N3vNdw1/yvdd1Yuvvdpzee++PXjVX6g1Jrr+CY2rPh7XmU4kerHJKn4mXvKj/EeTvgKjjRusPtC5QWqw9H9aaTyV6WPO+Jf2UvsdZG3NP64elBjjNWmvRIo7mfWJeD44a4y2pgSSmdD0ZuT9QOkVZMIihHc+0Hq/0YDlOrWJqfaNAa7WFJl/NZZrrjmvAwSD3vB4cVuO5NSb3DKL1jQKtaYRprttqbc3rwWE5Tq1ian2jkOgC/bzQojboHKj6S/RgnVOLmFrfKNC6QGkRnQNVf4kerHNqEVPrGwVaFygtonOg6i/Rg3VOLWJqfaNA6wKlRXQOVP0lerDOqUVMrW8UaF0g7B/+h36P
   </data>
  </layer>
  <objectgroup name="collision">
-  <object id="7" name="floor" x="2495.58" y="576.864" width="59.8337" height="708.167"/>
+  <object id="7" name="floor" x="2495.58" y="576.864" width="126.5" height="705.137"/>
   <object id="95" name="floor" x="63.6061" y="641.485" width="2303" height="51.3333"/>
   <object id="108" name="floor" x="2688.25" y="449.25" width="319.5" height="61.25"/>
   <object id="134" name="create" x="11393.6" y="643">
@@ -29,10 +29,10 @@
    <polyline points="-1343.25,0.25 2562.18,-0.0606061"/>
   </object>
   <object id="139" name="floor" x="3072" y="687.333">
-   <polyline points="0,0 0,-45.8333 1023.81,-46.2396 1663.96,-46.6555 1663.9,14.4638"/>
+   <polyline points="0,0 0,-45.8333 1023.81,-46.2396 1729.05,-47.0191 1727.35,-32.2635"/>
   </object>
   <object id="140" name="floor" x="6400.67" y="394.333">
-   <polyline points="-1.09091,-0.363636 -1,-74 575.042,-73.9583 575,9"/>
+   <polyline points="-64.6364,-74.1818 -1,-74 575.042,-73.9583 639,-73.8485"/>
   </object>
   <object id="143" name="floor" x="4928" y="617.333">
    <polyline points="0,0 -0.5,-103.667 1279.67,-103.667 1279.67,0.6667"/>
@@ -43,17 +43,20 @@
   <object id="146" name="create" x="8896.33" y="641">
    <polyline points="-0.625,0.75 -0.791667,-128 63.625,-127.917 62.6667,-64 126.667,-64.3333 127.583,0.208333"/>
   </object>
+  <object id="160" name="roof" x="384.25" y="256.25">
+   <polyline points="0,0 0.5,29.75 6.25,41.25 16.75,50 30.75,57.75 56.25,63 63.25,63.5 192.5,63.5 1983.25,63.75 1983.75,-0.75 1791.5,-193"/>
+  </object>
  </objectgroup>
  <objectgroup name="items">
-  <object id="38" name="spawn" x="2301.5" y="569" width="62.5" height="64.5">
+  <object id="38" name="spawn" x="2303.5" y="574" width="62.5" height="64.5">
    <properties>
     <property name="spawnInterval" value="5"/>
     <property name="speed" value="-0.8"/>
    </properties>
   </object>
-  <object id="47" name="spawn" x="6005.33" y="443.333" width="62" height="66">
+  <object id="47" name="spawn" x="5952.33" y="446.333" width="62" height="66">
    <properties>
-    <property name="spawnInterval" value="4"/>
+    <property name="spawnInterval" value="6.5"/>
     <property name="speed" value="-0.8"/>
    </properties>
   </object>
@@ -132,13 +135,13 @@
     <property name="power" value="0.15"/>
    </properties>
   </object>
-  <object id="125" name="spawn" x="4664.8" y="569.772" width="62.5" height="64.5">
+  <object id="125" name="spawn" x="4671.8" y="569.772" width="62.5" height="64.5">
    <properties>
     <property name="spawnInterval" value="7"/>
     <property name="speed" value="-0.8"/>
    </properties>
   </object>
-  <object id="135" name="spawn" x="11127.3" y="492.333" width="64" height="66.6667">
+  <object id="135" name="spawn" x="10980.6" y="559.666" width="64" height="66.6667">
    <properties>
     <property name="ia" value="jumper"/>
     <property name="interval" value="0.8"/>
@@ -147,28 +150,40 @@
     <property name="speedY" value="4.6"/>
    </properties>
   </object>
+  <object id="155" name="endLevel" x="12288" y="512" width="63.3333" height="63.3333"/>
+  <object id="157" name="deathZone" x="447.625" y="319.875">
+   <polyline points="0,0 10.625,16.625 22,0.125 32.125,26.25 42.875,0.25 53.5,17.125 64.125,0.75 74.75,32 85.75,0.125 96.125,32.375 106.875,0.625 117.375,31.875 128.625,0 125.125,-3.125 2.625,-4.625 0,0"/>
+  </object>
+  <object id="161" name="deathZone" x="1279.64" y="319.455">
+   <polyline points="0,0 10.5455,16.3636 21.4545,0.545455 32,26 43.0909,0.727273 52.9091,16.9091 64.3636,0.363636 74.7273,32 85.6364,0.909091 96,32 107.091,1.09091 117.455,32.7273 129.455,-0.545455 125.636,-4 3.63636,-4.36364 -0.363636,0.181818"/>
+  </object>
+  <object id="162" name="deathZone" x="1727" y="319.5">
+   <polyline points="0,0 11.25,16.75 22.75,0.25 32.5,27 44,1.25 53.5,17.5 65.5,1 61,-5.25 4.5,-5.5 0,0.25"/>
+  </object>
+  <object id="163" name="deathZone" x="2175.25" y="319.75">
+   <polyline points="0,0 10.5,31.25 21.75,0.75 32.25,31.5 43.5,1 53.75,32 65.75,0 61.75,-7 5.25,-7 -0.25,0.25"/>
+  </object>
  </objectgroup>
  <objectgroup name="platform">
-  <object id="149" name="path" x="7345.45" y="327.273">
+  <object id="149" name="path" x="7272.45" y="211.273">
    <properties>
     <property name="fall" value="true"/>
     <property name="loop" value="true"/>
     <property name="respawnInterval" value="5"/>
     <property name="size" value="3"/>
-    <property name="speed" value="1"/>
+    <property name="speed" value="0.8"/>
    </properties>
-   <polyline points="0,0 1.09091,503.03"/>
+   <polyline points="0,0 1.09091,391.03"/>
   </object>
-  <object id="151" name="path" x="8033.27" y="858.729" rotation="-270.716">
+  <object id="152" name="path" x="7542.67" y="321.333">
    <properties>
     <property name="fall" value="true"/>
-    <property name="loop" value="true"/>
+    <property name="loop" value="false"/>
     <property name="respawnInterval" value="5"/>
     <property name="size" value="3"/>
-    <property name="speed" value="1"/>
+    <property name="speed" value="0.8"/>
    </properties>
-   <polyline points="-333.496,-716.346 -7.469,460.496"/>
+   <polyline points="-24,1.33333 1129.82,0.727273"/>
   </object>
  </objectgroup>
- <objectgroup name="teleport"/>
 </map>

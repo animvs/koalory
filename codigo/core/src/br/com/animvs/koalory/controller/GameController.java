@@ -37,6 +37,7 @@ public final class GameController implements Disposable {
     private CameraController camera;
     private InputController input;
     private String nextMap;
+    private ProfileController profile;
 
     private ShaderColor shaderColor;
 
@@ -113,6 +114,10 @@ public final class GameController implements Disposable {
         return camera;
     }
 
+    public ProfileController getProfile() {
+        return profile;
+    }
+
     public GameController() {
         crypto = new AnimvsIntCrypto(Configurations.H_C);
         load = new LoadController(this);
@@ -170,6 +175,7 @@ public final class GameController implements Disposable {
             this.background = new BackgroundController(this);
             this.players = new PlayersController(this);
             this.input = new InputController(this);
+            this.profile = new ProfileController(this);
 
             level = new LevelController(this);
 
@@ -179,6 +185,7 @@ public final class GameController implements Disposable {
             players.initialize();
             camera.initialize();
             input.initialize();
+            profile.initialize();
 
             this.colorRecovered = 0f; //starts with 0% of recovered colors
             this.lives = Configurations.GAMEPLAY_LIVES_AT_START; // starts with 5 lives
@@ -203,7 +210,7 @@ public final class GameController implements Disposable {
         if (initialized) {
             if (nextMap != null) {
                 clean();
-                level.loadMap(Configurations.CORE_LEVEL_DIR + nextMap);
+                level.loadMap(nextMap);
                 nextMap = null;
 
                 return;

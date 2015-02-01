@@ -61,7 +61,7 @@
     <property name="power" value="0.99"/>
    </properties>
   </object>
-  <object id="83" name="color" x="1123.7" y="173.848" width="62" height="64">
+  <object id="83" name="color" x="785.7" y="571.848" width="62" height="64">
    <properties>
     <property name="power" value="0.05"/>
    </properties>

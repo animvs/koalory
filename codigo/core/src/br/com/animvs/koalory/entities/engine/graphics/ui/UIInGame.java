@@ -23,6 +23,9 @@ public class UIInGame extends UIBase {
     private ImageTextButton imgGreen;
     private Table tbLifes;
 
+    private int totalLivesRendered;
+    private int colorRecovered;
+
     private Touchpad touchpad;
 
     public UIInGame(GameController controller, String caminhoUISkin) {
@@ -31,7 +34,6 @@ public class UIInGame extends UIBase {
 
     @Override
     protected void eventBuild(int width, int height, float ratioX, float ratioY) {
-
         imgRed = new ImageTextButton("90%", getUiSkin(), "cores");
 
         tbLifes = new Table(getUiSkin());
@@ -48,6 +50,7 @@ public class UIInGame extends UIBase {
             tbCenter.addListener(new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     /*computeAction();*/
+                    getGameController().getInput().setMobileTouchClicked(true);
                     return true;
                 }
             });
@@ -59,6 +62,7 @@ public class UIInGame extends UIBase {
             tbRodapeRight.addListener(new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     /*computeAction();*/
+                    getGameController().getInput().setMobileTouchClicked(true);
                     return true;
                 }
             });
@@ -92,22 +96,31 @@ public class UIInGame extends UIBase {
     @Override
     public void render() {
         super.render();
-        tbLifes.clear();
         updateColors();
-        for (int i = 0; i < getGameController().getLives(); i++) {
-            Image life = new Image(getUiSkin(), "life");
-            tbLifes.add(life).width(59f * getController().getRatio().x).height(54f * getController().getRatio().y).pad(5f * getController().getRatio().y);
+
+        if (totalLivesRendered != getGameController().getLives()) {
+            totalLivesRendered = getGameController().getLives();
+
+            tbLifes.clear();
+            for (int i = 0; i < getGameController().getLives(); i++) {
+                Image life = new Image(getUiSkin(), "life");
+                tbLifes.add(life).width(59f * getController().getRatio().x).height(54f * getController().getRatio().y).pad(5f * getController().getRatio().y);
+            }
         }
 
-        if (Configurations.SIMULATE_MOBILE_ON_DESKTOP || Gdx.app.getType() != Application.ApplicationType.Desktop)
+        if (Configurations.SIMULATE_MOBILE_ON_DESKTOP || Gdx.app.getType() != Application.ApplicationType.Desktop) {
             if (touchpad != null)
+                getGameController().getInput().setTouchKnobMovementX(touchpad.getKnobPercentX());
                 /*if (touchpad.getKnobPercentX() != getGameController().getEntities().getPlayer(0).getMovementXMobile())*/
-                    getGameController().getInput().setTouchKnobMovementX(touchpad.getKnobPercentX());
+        }
 
     }
 
     public void updateColors() {
-        imgRed.setText(getGameController().getUI().getColorRecoveredCastCache() + "%");
+        if (colorRecovered != getGameController().getUI().getColorRecoveredCastCache()) {
+            colorRecovered = getGameController().getUI().getColorRecoveredCastCache();
+            imgRed.setText(getGameController().getUI().getColorRecoveredCastCache() + "%");
+        }
     }
 
     /*private void computeAction() {

@@ -23,14 +23,13 @@ public final class Configurations {
     public static final float CORE_TILE_SIZE = 64f;
     public static final float CORE_PLATFORM_SIZE_Y = 18f;
     public static final String CORE_PLATFORM_USER_DATA = "p";
-    public static final float CORE_PLATFORM_SPEED = 5f;
     public static final float CORE_PLATFORM_PATH_DISTANCE_TOLERANCE = 50f;
     public static final int CORE_GAMEPAD_BUTTON_ACTION = 1;
 
     public static final String GRAPHICS_SHADER_COLOR_FRAG = "data/graphics/shaders/frag/color.frag";
     public static final String GRAPHICS_SHADER_DEFAULT_VERT = "data/graphics/shaders/vert/default.vert";
 
-    public static final Vector2 GAMEPLAY_PLAYER_START = new Vector2(175f, 1734f);
+    public static final Vector2 GAMEPLAY_PLAYER_START = new Vector2(275f, 1734f);
 
     public static final float GAMEPLAY_ZOOM_MAX = 1.6f;
 
@@ -39,7 +38,6 @@ public final class Configurations {
 
     public static final float GAMEPLAY_MOVEMENT_SPEED = 1f;
     public static final float GAMEPLAY_JUMP_FORCE = 10f;
-    public static final int GAMEPLAY_MAX_PLAYERS = 5;
     public static final int GAMEPLAY_LIVES_AT_START = 5;
 
     /*public static final float GAMEPLAY_FOE_SPEED = -0.35f;*/
