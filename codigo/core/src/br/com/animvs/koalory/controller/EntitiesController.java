@@ -90,8 +90,8 @@ public final class EntitiesController extends BaseController {
         items.add(sender);
     }
 
-    public void createSpawner(Vector2 position, float spawnInterval, String ia, float foeSpeedX, Float foeSpeedY, Float interval) {
-        spawners.add(new Spawner(getController(), position, spawnInterval, ia, foeSpeedX, foeSpeedY, interval));
+    public void createSpawner(String graphic, Vector2 position, float spawnInterval, String ia, float foeSpeedX, Float foeSpeedY, Float interval) {
+        spawners.add(new Spawner(getController(), graphic, position, spawnInterval, ia, foeSpeedX, foeSpeedY, interval));
     }
 
     public void createPlatform(PolylineMapObject line) {
@@ -116,9 +116,9 @@ public final class EntitiesController extends BaseController {
         getController().getPhysics().createRetangleBody(bodyParams);
     }
 
-    public void spawnFoe(float x, float y, float speedX, Float speedY, String ia, Float interval) {
+    public void spawnFoe(String graphic, float x, float y, float speedX, Float speedY, String ia, Float interval) {
         if (ia == null) {
-            Foe newFoe = new Foe(getController(), new IAStraight(getController(), speedX), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
+            Foe newFoe = new Foe(getController(), graphic, new IAStraight(getController(), speedX), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
             foes.add(newFoe);
         } else if (ia.trim().toLowerCase().equals("jumper")) {
             float intervalReal = 0f;
@@ -126,7 +126,7 @@ public final class EntitiesController extends BaseController {
             if (interval != null)
                 intervalReal = interval.floatValue();
 
-            Foe newFoe = new Foe(getController(), new IAJump(getController(), speedX, speedY, intervalReal), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
+            Foe newFoe = new Foe(getController(), graphic, new IAJump(getController(), speedX, speedY, intervalReal), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
             foes.add(newFoe);
         } else
             throw new RuntimeException("AI invalid when loading spawner from TMX: " + ia);

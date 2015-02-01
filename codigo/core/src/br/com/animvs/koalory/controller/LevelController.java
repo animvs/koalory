@@ -118,9 +118,13 @@ public class LevelController implements Disposable {
                 float spawnInterval = Float.parseFloat(objects.get(i).getProperties().get("spawnInterval").toString());
                 float speedX = Float.parseFloat(objects.get(i).getProperties().get("speed").toString());
 
-                Float speedY = null;
+                String graphic = null;
                 String ia = null;
+                Float speedY = null;
                 Float interval = null;
+
+                if (objects.get(i).getProperties().get("graphic") != null)
+                    graphic = objects.get(i).getProperties().get("graphic").toString();
 
                 if (objects.get(i).getProperties().get("speedY") != null)
                     speedY = Float.parseFloat(objects.get(i).getProperties().get("speedY").toString());
@@ -132,7 +136,7 @@ public class LevelController implements Disposable {
                     interval = Float.parseFloat(objects.get(i).getProperties().get("interval").toString());
 
                 Vector2 position = new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y);
-                controller.getEntities().createSpawner(position, spawnInterval, ia, speedX, speedY, interval);
+                controller.getEntities().createSpawner(graphic, position, spawnInterval, ia, speedX, speedY, interval);
             } else if (objects.get(i).getName().equals("sender")) {
                 if (objects.get(i).getProperties().get("map") == null)
                     throw new RuntimeException("Item RECEIVER does not have the property 'map'");

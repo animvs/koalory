@@ -24,23 +24,14 @@ public class Foe extends Entity {
         return alive;
     }
 
-    public Foe(GameController controller, IABase ia, Vector2 spawnPosition) {
+    public Foe(GameController controller, String graphic, IABase ia, Vector2 spawnPosition) {
         super(controller);
 
         this.ia = ia;
         this.spawnPosition = spawnPosition;
 
         getController().getEntities().createEntityBody(this, 0.7f);
-
-        AnimacaoSkeletal graphic = new AnimacaoSkeletal(controller.getLoad().get(LoadController.SKELETON_SHADOW, AnimacaoSkeletalData.class));
-        graphic.setSkin("standard");
-
-        //Fix to correct spine model with wrong rotation ?
-        offset = new Vector2(0f, -15f);
-        graphic.setRotacao(-25f);
-
-        setGraphic(graphic);
-        graphic.setAnimation("idle", true);
+        prepareGraphic(graphic);
 
         alive = true;
     }
@@ -106,6 +97,32 @@ public class Foe extends Entity {
         getController().getSound().playDeathKoala();
     }
 
+    private void prepareGraphic(String graphicName) {
+        AnimacaoSkeletal graphic;
+        offset = new Vector2();
+
+        if (graphicName == null || graphicName.trim().length() == 0) {
+            graphic = new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_KOALA, AnimacaoSkeletalData.class));
+            //graphic.setSkin("standard");
+            graphic.setAnimation("walk", true);
+            graphic.setAnimationSpeedScale(3f);
+            graphic.setEscala(0.7f, 0.7f);
+            offset.set(0f, -35f);
+        } else if (graphicName.toLowerCase().trim().equals("fire")) {
+            graphic = new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_SHADOW, AnimacaoSkeletalData.class));
+            graphic.setSkin("standard");
+
+            offset.set(0f, -15f);
+            //Fix to correct spine model with wrong rotation ?
+            graphic.setRotacao(-25f);
+
+            graphic.setAnimation("idle", true);
+        } else
+            throw new RuntimeException("Unknown graphic when spawning Foe: " + graphicName);
+
+        setGraphic(graphic);
+    }
+
     private void checkFall() {
         if (getY() <= 0f)
             eventDeath(null);
@@ -117,7 +134,6 @@ public class Foe extends Entity {
 
         setPosition(spawnPosition.x, spawnPosition.y);
         body.setFixedRotation(true);
-        getGraphic().setAnimation("idle", true);
 
         body.getFixtureList().get(0).setFriction(0.5f);
 
