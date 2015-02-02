@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="64" tileheight="64" nextobjectid="164">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="64" tileheight="64" nextobjectid="169">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
@@ -15,12 +15,12 @@
  </layer>
  <layer name="ground" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJztmt1uwjAMhXOHdovYuICHQusTbE+yR18jqBSF2Nht4pMUf5IF6o/txsdJSwlBz2m2j4Kdmf3nZzeOszui9j9nOxbsK9x7obR/2UeZ948zIvlaQPXGMTmG2s9Z7B/vEWckuLXih9iusdyH94jjOM4+uMx2rXjOhTlPG2eP3AL/jLbYDZXgQEwPc8Ymr6HkvtThmcL79UdpHh2dWL/vbJv3xzam8J79EYn3YNw9mhWSeyCNpfTcH73rLe+N3vNdw1/yvdd1Yuvvdpzee++PXjVX6g1Jrr+CY2rPh7XmU4kerHJKn4mXvKj/EeTvgKjjRusPtC5QWqw9H9aaTyV6WPO+Jf2UvsdZG3NP64elBjjNWmvRIo7mfWJeD44a4y2pgSSmdD0ZuT9QOkVZMIihHc+0Hq/0YDlOrWJqfaNAa7WFJl/NZZrrjmvAwSD3vB4cVuO5NSb3DKL1jQKtaYRprttqbc3rwWE5Tq1ian2jkOgC/bzQojboHKj6S/RgnVOLmFrfKNC6QGkRnQNVf4kerHNqEVPrGwVaFygtonOg6i/Rg3VOLWJqfaNA6wKlRXQOVP0lerDOqUVMrW8UaF0g7B/+h36P
+   eJztmt1uwjAMhXM37RZt44I9FFqfAJ6ER6cRVIqy2Nht4pMUf5IF6o/txsdJSwlBz9dsnwU7MvuP/904zu6I2v+e7VCwn/DohdL+ZR9l3j/OiORrAdUbh+QYaj9nsX+8R5yR4NaKC7FdY7kP7xHHcZx9cJrtt+I5J+Y8bZw9cg78M9piZ1SCAzE9zRmbvIaS+1KHZwrv1x+leXR0Yv3+sm3eH9uYwnv2RyTeg3H3aFZI7oE0ltJzf/Sut7w3es93Dbfke6/rxNbf7Ti9994fvWqu1BuSXK+CY2rPh1ttef6U6ME6pzQv6n8E+Tsg6rjR+gOtC4RFas+HteZTiR7WvG9JP6XvcdbG3NP6YakBTrPWWrSIo3mfmNeDo8Z4S2ogiSldT0buD5ROURYMYmjHM63HKz1YjlOrmFrfKNBabaHJV3OZ5rrjGvBhkHteDw6r8dwak3sG0fpGgdY0wjTXbbW25vXgsBynVjG1vlFIdIF+XmhRG3QOVP0lerDOqUVMrW8UaF2gtIjOgaq/RA/WObWIqfWNAq0LlBbROVD1l+jBOqcWMbW+UaB1gdIiOgeq/hI9WOfUIqbWNwq0LhB2B5Tdft8=
   </data>
  </layer>
  <objectgroup name="collision">
   <object id="7" name="floor" x="2495.58" y="576.864" width="126.5" height="705.137"/>
-  <object id="95" name="floor" x="63.6061" y="641.485" width="2303" height="51.3333"/>
+  <object id="95" name="floor" x="63.6061" y="641.485" width="2367" height="38.3333"/>
   <object id="108" name="floor" x="2688.25" y="449.25" width="319.5" height="61.25"/>
   <object id="134" name="create" x="11393.6" y="643">
    <polyline points="0,0 0.125,-65.125 64,-64.75 63.75,-129 127.875,-129 127.5,-193.125 191.5,-192.875 191.375,-256.75 255.5,-257.125 255.375,-320.625 383.5,-320.75 383.5,-0.125"/>
@@ -151,18 +151,10 @@
    </properties>
   </object>
   <object id="155" name="endLevel" x="12288" y="512" width="63.3333" height="63.3333"/>
-  <object id="157" name="deathZone" x="447.625" y="319.875">
-   <polyline points="0,0 10.625,16.625 22,0.125 32.125,26.25 42.875,0.25 53.5,17.125 64.125,0.75 74.75,32 85.75,0.125 96.125,32.375 106.875,0.625 117.375,31.875 128.625,0 125.125,-3.125 2.625,-4.625 0,0"/>
-  </object>
-  <object id="161" name="deathZone" x="1279.64" y="319.455">
-   <polyline points="0,0 10.5455,16.3636 21.4545,0.545455 32,26 43.0909,0.727273 52.9091,16.9091 64.3636,0.363636 74.7273,32 85.6364,0.909091 96,32 107.091,1.09091 117.455,32.7273 129.455,-0.545455 125.636,-4 3.63636,-4.36364 -0.363636,0.181818"/>
-  </object>
-  <object id="162" name="deathZone" x="1727" y="319.5">
-   <polyline points="0,0 11.25,16.75 22.75,0.25 32.5,27 44,1.25 53.5,17.5 65.5,1 61,-5.25 4.5,-5.5 0,0.25"/>
-  </object>
-  <object id="163" name="deathZone" x="2175.25" y="319.75">
-   <polyline points="0,0 10.5,31.25 21.75,0.75 32.25,31.5 43.5,1 53.75,32 65.75,0 61.75,-7 5.25,-7 -0.25,0.25"/>
-  </object>
+  <object id="164" name="deathZone" x="452" y="320" width="121" height="24"/>
+  <object id="165" name="deathZone" x="1280.5" y="321" width="126.667" height="24.3333"/>
+  <object id="167" name="deathZone" x="1727.83" y="319.333" width="64" height="19.6667"/>
+  <object id="168" name="deathZone" x="2175.83" y="320.333" width="63" height="26"/>
  </objectgroup>
  <objectgroup name="platform">
   <object id="149" name="path" x="7272.45" y="211.273">
@@ -173,7 +165,7 @@
     <property name="size" value="3"/>
     <property name="speed" value="0.8"/>
    </properties>
-   <polyline points="0,0 1.09091,391.03"/>
+   <polyline points="0.333333,46.3333 -0.242423,298.363"/>
   </object>
   <object id="152" name="path" x="7542.67" y="321.333">
    <properties>
