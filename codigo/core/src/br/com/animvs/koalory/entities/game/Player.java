@@ -1,6 +1,5 @@
 package br.com.animvs.koalory.entities.game;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
@@ -101,24 +100,15 @@ public final class Player extends Entity {
                 prepareAnimation("jump");
 
                 setPosition(getX(), getY() + 10f);
-                getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_JUMP_FORCE * 1.98f, true);
+                getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_JUMP_FORCE * Configurations.CORE_PHYSICS_MULTIPLIER, true);
             }
 
             computeDeath();
 
             computePlayerGrounded();
 
-            if (!grounded) {
-                // disable friction while jumping
-
-                physicFixture.setFriction(0f);
-                physicFixture.setFriction(0f);
-
+            if (!grounded)
                 return;
-            } else {
-                physicFixture.setFriction(1f);
-                physicFixture.setFriction(1f);
-            }
 
             if (getBody() != null) {
                 if (!getJumping()) {
@@ -208,6 +198,13 @@ public final class Player extends Entity {
 
         physicFixture = body.getFixtureList().get(0);
 
+        if (getController().getLevel().getMapName().equals("frostPlateau1-1"))
+            physicFixture.setFriction(0.15f * 0.15f); //Less friction on ice
+        else if (getController().getLevel().getMapName().equals("sandPlains1-1")) {
+            physicFixture.setFriction(0.15f * 1.35f); //More friction on sand
+        } else
+            physicFixture.setFriction(0.15f); //Normal friction
+
         setPosition(spawnLocation.x, spawnLocation.y);
     }
 
@@ -218,7 +215,7 @@ public final class Player extends Entity {
         if (grounded && groundedPlatform != null) {
 
             physicFixture.setFriction(0f);
-            getBody().applyForceToCenter(groundedPlatform.getBody().getLinearVelocity().x * 1.2f, -1f, true);
+            getBody().applyForceToCenter(groundedPlatform.getBody().getLinearVelocity().x * 1.2f * Configurations.CORE_PHYSICS_MULTIPLIER, -1f, true);
 
             groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
         }
@@ -226,10 +223,18 @@ public final class Player extends Entity {
 
     public void computeInput() {
         if (getBody() != null) {
-            if (Configurations.SIMULATE_MOBILE_ON_DESKTOP || Gdx.app.getType() != Application.ApplicationType.Desktop)
+            /*if (Configurations.SIMULATE_MOBILE_ON_DESKTOP || Gdx.app.getType() != Application.ApplicationType.Desktop)
                 getBody().setLinearVelocity(input.getMovementX(), getBody().getLinearVelocity().y);
             else
-                getBody().setLinearVelocity(input.getMovementX(), getBody().getLinearVelocity().y);
+                getBody().setLinearVelocity(input.getMovementX(), getBody().getLinearVelocity().y);*/
+
+            getBody().applyForceToCenter(input.getMovementX() * 0.35f, 0f, true);
+
+            if (getBody().getLinearVelocity().x > 1f)
+                getBody().setLinearVelocity(1f, getBody().getLinearVelocity().y);
+
+            if (getBody().getLinearVelocity().x < -1f)
+                getBody().setLinearVelocity(-1f, getBody().getLinearVelocity().y);
         }
     }
 
@@ -244,7 +249,7 @@ public final class Player extends Entity {
         if (currentAnimationName == null || !currentAnimationName.equals(newAnimationName)) {
             if (newAnimationName.equals("jump")) {
                 //if (currentAnimationName != null)
-                    getGraphic().setAnimation(newAnimationName, false);
+                getGraphic().setAnimation(newAnimationName, false);
             } else
                 getGraphic().setAnimation(newAnimationName, true);
         }
