@@ -58,7 +58,6 @@ public final class StageController {
     }
 
     public void bringToFront(Entity entity) {
-        //TODO: Apparently not working. Entities aren't added to stage directly anymore, instead, they are added to row groups:
         controller.getStage().removeEntity(entity);
         controller.getStage().registerEntity(entity);
     }

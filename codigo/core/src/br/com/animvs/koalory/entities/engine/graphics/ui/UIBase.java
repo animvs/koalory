@@ -1,5 +1,7 @@
 package br.com.animvs.koalory.entities.engine.graphics.ui;
 
+import com.badlogic.gdx.math.Vector2;
+
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.ui.AnimvsUI2;
 
@@ -19,6 +21,8 @@ public abstract class UIBase extends AnimvsUI2 {
 
         this.controller = controller;
     }
+
+
 
     @Override
     public void render() {

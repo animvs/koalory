@@ -39,6 +39,10 @@ public final class CameraController extends BaseController {
         positionCache = new Vector2();
     }
 
+    public float getViewportWidth() {
+        return camera.viewportWidth;
+    }
+
     public Matrix4 calculateParallaxMatrix() {
         return camera.calculateParallaxMatrix(1f, 1f);
     }
