@@ -285,6 +285,7 @@ public final class GameController implements Disposable {
         players.restart();
         stage.restart();
         physics.restart();
+        level.restart();
 
         getUI().showUIInGame();
         ui.castValueColors();

@@ -23,6 +23,7 @@ public class LevelController implements Disposable {
     private TiledMap map;
     private String mapName;
     private TileRenderer renderer;
+    private Vector2 playerStart;
 
     private OrthographicCamera cameraCache;
 
@@ -31,10 +32,15 @@ public class LevelController implements Disposable {
 
     public LevelController(GameController controller) {
         this.controller = controller;
+        this.playerStart = new Vector2();
     }
 
     public String getMapName() {
         return mapName;
+    }
+
+    public Vector2 getPlayerStart() {
+        return playerStart;
     }
 
     public void loadMap(String map) {
@@ -45,6 +51,8 @@ public class LevelController implements Disposable {
         renderer.setOverCache(1f);
 
         bodiesCollision = MapBodyBuilder.buildShapes(this.map, controller.getPhysics().getBoxToWorld(), controller.getPhysics().getWorld(), Configurations.LEVEL_LAYER_COLLISION);
+
+        playerStart.set(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
 
         for (int i = 0; i < bodiesCollision.size; i++)
             bodiesCollision.getValueAt(i).setUserData("collision");
@@ -71,6 +79,10 @@ public class LevelController implements Disposable {
 
         controller.getShaderColor().update();
         renderer.render();
+    }
+
+    public void restart() {
+        playerStart.set(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
     }
 
     @Override
@@ -183,6 +195,9 @@ public class LevelController implements Disposable {
                 controller.getEntities().createDeathZone(rectangle);
             } else if (objects.get(i).getName().toLowerCase().trim().equals("endlevel")) {
                 //TODO: Create a new 'endlevel' item
+            } else if (objects.get(i).getName().toLowerCase().trim().equals("playerstart")) {
+                RectangleMapObject rectangle = castLevelObject(objects.get(i));
+                playerStart.set(rectangle.getRectangle().getX(), rectangle.getRectangle().getY());
             } else
                 throw new RuntimeException("Unknown object type when loading map - Map: " + mapName + " object: " + objects.get(i).getName());
         }
