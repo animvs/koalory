@@ -94,7 +94,7 @@ public class Foe extends Entity {
         /*else
             Gdx.app.log("FOE", "Koala has committed suicide");*/
 
-        getController().getSound().playDeathKoala();
+        //getController().getSound().playDeathKoala();
     }
 
     private void prepareGraphic(String graphicName) {

@@ -171,7 +171,7 @@ public class LevelController implements Disposable {
                     message += "\"";
 
                     Gdx.app.log("ITEM SENDER", message);
-                    return;
+                    continue;
                 }
 
                 RectangleMapObject rectangle = castLevelObject(objects.get(i));

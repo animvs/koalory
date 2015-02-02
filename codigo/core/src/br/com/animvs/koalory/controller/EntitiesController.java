@@ -78,9 +78,9 @@ public final class EntitiesController extends BaseController {
     }
 
     public void createDeathZone(RectangleMapObject rectangle) {
-        DeathZone sender = new DeathZone(getController(), rectangle);
-        sender.initialize();
-        items.add(sender);
+        DeathZone deathZone = new DeathZone(getController(), rectangle);
+        deathZone.initialize();
+        items.add(deathZone);
     }
 
     public void createSender(Vector2 position, String map) {

@@ -16,6 +16,12 @@ import br.com.animvs.koalory.controller.PhysicsController;
 public final class DeathZone extends Item {
 
     private RectangleMapObject rectangle;
+    private boolean killsIA;
+    private boolean killsPlayer;
+
+    public boolean getKillsIA() {
+        return killsIA;
+    }
 
     @Override
     protected boolean getDisposeOnCollect() {
@@ -29,6 +35,9 @@ public final class DeathZone extends Item {
     public DeathZone(GameController controller, RectangleMapObject rectangle) {
         super(controller);
         this.rectangle = rectangle;
+        this.killsPlayer = true; //TRUE by default
+
+        parseParameters();
     }
 
     @Override
@@ -46,6 +55,9 @@ public final class DeathZone extends Item {
 
     @Override
     public void collect(Player player) {
+        if (!killsPlayer)
+            return;
+
         Gdx.app.log("KILL", "Player " + getController().getPlayers().getPlayerIndex(player) + " has been killed by a death zone");
         player.eventDeath();
     }
@@ -55,7 +67,18 @@ public final class DeathZone extends Item {
         super.eventAfterBodyCreated(body);
         setPosition(rectangle.getRectangle().x + rectangle.getRectangle().width / 2f, rectangle.getRectangle().y + rectangle.getRectangle().height / 2f);
 
+        for (int i = 0; i < body.getFixtureList().size; i++)
+            body.getFixtureList().get(i).setSensor(true);
+
         //dispose unused resources:
         rectangle = null;
+    }
+
+    private void parseParameters() {
+        if (rectangle.getProperties().get("killsIA") != null)
+            killsIA = parsePropertyBoolean("killsIA", rectangle);
+
+        if (rectangle.getProperties().get("killsPlayer") != null)
+            killsPlayer = parsePropertyBoolean("killsPlayer", rectangle);
     }
 }

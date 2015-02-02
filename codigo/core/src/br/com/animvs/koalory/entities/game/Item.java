@@ -1,5 +1,7 @@
 package br.com.animvs.koalory.entities.game;
 
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
@@ -43,10 +45,10 @@ public abstract class Item extends Entity {
     }
 
     public final void initialize() {
-        PhysicsController.TargetPhysicsParameters bodyParamters = createBody(Configurations.CORE_TILE_SIZE);
-        bodyParamters.bodyHolder = this;
+        PhysicsController.TargetPhysicsParameters bodyParameters = createBody(Configurations.CORE_TILE_SIZE);
+        bodyParameters.bodyHolder = this;
 
-        getController().getPhysics().createRetangleBody(bodyParamters);
+        getController().getPhysics().createRetangleBody(bodyParameters);
 
         setGraphic(createGraphic());
     }
@@ -90,5 +92,57 @@ public abstract class Item extends Entity {
     public void dispose() {
         super.dispose();
         getController().getEntities().removeItem(this);
+    }
+
+    protected final boolean parsePropertyBoolean(String name, MapObject line) {
+        validateProperty(name, line);
+
+        String value = line.getProperties().get(name).toString().trim().toLowerCase();
+        if (value.equals("true"))
+            return true;
+        else if (value.equals("false"))
+            return false;
+
+        throw new RuntimeException("Invalid value for property '" + name + "' (of type Boolean): " + value + " - Expecting 'true' or 'false'");
+    }
+
+    protected final float parsePropertyFloat(String name, MapObject line) {
+        validateProperty(name, line);
+
+        String value = line.getProperties().get(name).toString();
+        try {
+            return Float.parseFloat(value);
+        } catch (Exception e) {
+            throw new RuntimeException("Invalid value for property '" + name + "' (of type Boolean): " + value + " - Expecting a decimal number");
+        }
+    }
+
+    protected final int parsePropertyInteger(String name, MapObject line) {
+        validateProperty(name, line);
+
+        String value = line.getProperties().get(name).toString();
+        try {
+            return Integer.parseInt(value);
+        } catch (Exception e) {
+            throw new RuntimeException("Invalid value for property '" + name + "' (of type Boolean): " + value + " - Expecting an integer number");
+        }
+    }
+
+    /**
+     * Validate if the property specified content is valid (size != 0 and NOT NULL)
+     *
+     * @throws RuntimeException when any requirement was not fulfilled
+     */
+    protected void validateProperty(String name, MapObject line) throws RuntimeException {
+        if (line.getProperties().get(name) == null)
+            throw new RuntimeException("Property '" + name + "' not found when loading platform");
+
+        String value = line.getProperties().get(name).toString();
+
+        /*if (value == null)
+            throw new RuntimeException("Property '" + name + "' must be != NULL");*/
+
+        if (value.trim().length() == 0)
+            throw new RuntimeException("Property '" + name + "' cannot be empty");
     }
 }

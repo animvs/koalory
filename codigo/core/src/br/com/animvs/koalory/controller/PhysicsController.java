@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import br.com.animvs.engine2.physics.AnimvsBodyFactory;
 import br.com.animvs.engine2.physics.AnimvsPhysicsController;
 import br.com.animvs.koalory.Configurations;
+import br.com.animvs.koalory.entities.game.DeathZone;
 import br.com.animvs.koalory.entities.game.Foe;
 import br.com.animvs.koalory.entities.game.Item;
 import br.com.animvs.koalory.entities.game.Player;
@@ -103,7 +104,16 @@ public final class PhysicsController extends AnimvsPhysicsController {
                         return null;
                     }
 
-                    private boolean isCollisionWall(Fixture fixtureA, Fixture fixtureB) {
+                    private DeathZone isDeathZone(Fixture fixtureA, Fixture fixtureB) {
+                        if (fixtureA.getBody().getUserData() != null && fixtureA.getBody().getUserData() instanceof DeathZone)
+                            return (DeathZone) fixtureA.getBody().getUserData();
+                        else if (fixtureB.getBody().getUserData() != null && fixtureB.getBody().getUserData() instanceof DeathZone)
+                            return (DeathZone) fixtureB.getBody().getUserData();
+
+                        return null;
+                    }
+
+                    /*private boolean isCollisionWall(Fixture fixtureA, Fixture fixtureB) {
                         if (fixtureA.getBody().getUserData() != null && fixtureA.getBody().getUserData() instanceof String) {
                             if (((String) fixtureA.getBody().getUserData()).equals("collision"))
                                 return true;
@@ -113,15 +123,15 @@ public final class PhysicsController extends AnimvsPhysicsController {
                         }
 
                         return false;
-                    }
+                    }*/
 
                     @Override
                     public void preSolve(Contact contact, Manifold oldManifold) {
-                        boolean player = false;
+                        /*boolean player = false;
                         if (contact.getFixtureA().getBody().getUserData() != null && contact.getFixtureA().getBody().getUserData() instanceof Player)
                             player = true;
                         else if (contact.getFixtureB().getBody().getUserData() != null && contact.getFixtureB().getBody().getUserData() instanceof Player)
-                            player = true;
+                            player = true;*/
 
                         /*if (player && contact.getWorldManifold().getNormal().y > 0.85f)
                             isPlayer(contact.getFixtureA(), contact.getFixtureB()).endJump();*/
@@ -183,6 +193,15 @@ public final class PhysicsController extends AnimvsPhysicsController {
                                     player.eventDeath();
                                 }
                                 return;
+                            }
+                        } else {
+                            Foe foe = isFoe(contact.getFixtureA(), contact.getFixtureB());
+
+                            if (foe != null) {
+                                DeathZone deathZone = isDeathZone(contact.getFixtureA(), contact.getFixtureB());
+
+                                if (deathZone != null && deathZone.getKillsIA())
+                                    foe.eventDeath(null);
                             }
                         }
                     }

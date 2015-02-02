@@ -243,7 +243,7 @@ public final class Player extends Entity {
 
         if (currentAnimationName == null || !currentAnimationName.equals(newAnimationName)) {
             if (newAnimationName.equals("jump")) {
-                if (currentAnimationName != null)
+                //if (currentAnimationName != null)
                     getGraphic().setAnimation(newAnimationName, false);
             } else
                 getGraphic().setAnimation(newAnimationName, true);
