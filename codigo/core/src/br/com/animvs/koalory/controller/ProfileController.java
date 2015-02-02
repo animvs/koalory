@@ -60,7 +60,11 @@ public final class ProfileController extends BaseController {
         FileHandle file = Gdx.files.local(Configurations.CORE_SAVEGAME);
 
         Json json = new Json();
-        model = json.fromJson(GameModel.class, file);
+        try {
+            model = json.fromJson(GameModel.class, file);
+        } catch (Exception e) {
+            Gdx.app.log("PROFILE", "Error reading profile (a new will be created): " + e.getMessage());
+        }
 
         //TODO: Deal game-save version upgrade:
         if (model == null)

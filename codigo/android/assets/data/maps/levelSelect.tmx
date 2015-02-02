@@ -52,14 +52,5 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="platform">
-  <object id="164" name="path" x="645" y="365">
-   <properties>
-    <property name="size" value="1"/>
-    <property name="speed" value="1"/>
-    <property name="waitStart" value="true"/>
-   </properties>
-   <polyline points="0,0 321,-21"/>
-  </object>
- </objectgroup>
+ <objectgroup name="platform"/>
 </map>
