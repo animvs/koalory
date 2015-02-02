@@ -207,6 +207,9 @@ public final class GameController implements Disposable {
 
         if (ui != null)
             ui.resize(width, height);
+
+        if (background != null)
+            background.resize(width, height);
     }
 
     public void update() {
@@ -277,7 +280,7 @@ public final class GameController implements Disposable {
         //Reservado para inicialização de testes:
     }
 
-    private void clean(){
+    private void clean() {
         entities.restart();
         players.restart();
         stage.restart();
@@ -289,6 +292,6 @@ public final class GameController implements Disposable {
         if (level != null)
             level.dispose();
 
-        Gdx.app.log("PHYSICS","Bodies remaining after clean: " + physics.getWorld().getBodyCount());
+        Gdx.app.log("PHYSICS", "Bodies remaining after clean: " + physics.getWorld().getBodyCount());
     }
 }

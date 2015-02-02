@@ -115,24 +115,13 @@ public final class Player extends Entity {
             if (!grounded)
                 return;
 
-
             if (getMovingHorizontally()) {
                 prepareAnimation("walk");
             } else if (grounded) {
                 prepareAnimation("walk");
                 getGraphic().setAnimationSpeedScale(0f);
             }
-
-
-            /*else {
-                prepareAnimation("walk");
-                getGraphic().setAnimationSpeedScale(0f);
-            }*/
-            //} else
-            //prepareAnimation("jump");
-
         }
-        /*}*/
 
         if (getBody() != null && getBody().getLinearVelocity().y > Configurations.GAMEPLAY_JUMP_FORCE * 0.5f)
             getBody().setLinearVelocity(getBody().getLinearVelocity().x, Configurations.GAMEPLAY_JUMP_FORCE * 0.5f);
@@ -180,8 +169,6 @@ public final class Player extends Entity {
             forceJump(false);
         else
             forceJump(true);
-
-        grounded = false;
 
         if (getController().getSound() != null)
             getController().getSound().playJump();
@@ -294,7 +281,7 @@ public final class Player extends Entity {
                 WorldManifold manifold = contact.getWorldManifold();
                 boolean below = true;
                 for (int j = 0; j < manifold.getNumberOfContactPoints(); j++)
-                    below &= (getController().getPhysics().toWorld(manifold.getPoints()[j].y) < positionCache.y - Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f);
+                    below |= (getController().getPhysics().toWorld(manifold.getPoints()[j].y) < positionCache.y - Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f);
 
                 groundedPlatform = null;
 

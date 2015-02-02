@@ -31,6 +31,7 @@ public class UIController extends AnimvsUIController2 {
 
     private int colorRecoveredCastCache;
     private UIBase uiBaseCache;
+    private Vector2 ratioCache;
 
     @Override
     public UIBase getUI() {
@@ -52,6 +53,7 @@ public class UIController extends AnimvsUIController2 {
     public UIController(GameController controller, String styleJSONPath, Vector2 resolutionReal) {
         super(styleJSONPath, resolutionReal);
         this.controller = controller;
+        this.ratioCache = new Vector2();
 
         uiSkin = AnimvsUIController.createSkin(controller.getLoad().getAssetManager(),
                 LoadController.UI_SKIN_PATH,
@@ -75,6 +77,11 @@ public class UIController extends AnimvsUIController2 {
     @Override
     protected Rectangle getBounds(Rectangle rectangleToBeSet) {
         return super.getBounds(rectangleToBeSet);
+    }
+
+    @Override
+    public Vector2 getRatio() {
+        return getRatio(ratioCache);
     }
 
     @Override

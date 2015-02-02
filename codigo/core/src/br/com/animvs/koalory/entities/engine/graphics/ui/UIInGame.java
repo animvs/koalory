@@ -34,7 +34,7 @@ public class UIInGame extends UIBase {
 
     @Override
     protected void eventBuild(int width, int height, float ratioX, float ratioY) {
-        imgRed = new ImageTextButton("90%", getUiSkin(), "cores");
+        imgRed = new ImageTextButton("0%", getUiSkin(), "cores");
 
         tbLifes = new Table(getUiSkin());
 
