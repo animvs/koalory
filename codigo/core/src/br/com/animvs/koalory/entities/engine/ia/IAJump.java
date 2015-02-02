@@ -2,6 +2,7 @@ package br.com.animvs.koalory.entities.engine.ia;
 
 import com.badlogic.gdx.Gdx;
 
+import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.entities.game.Foe;
 
@@ -32,7 +33,7 @@ public final class IAJump extends IABase {
         if (timeCounter >= interval) {
             timeCounter = 0f;
 
-            foeOwner.getBody().applyForceToCenter(forceX * 1.8f, forceY * 1.8f, true);
+            foeOwner.getBody().applyForceToCenter(forceX * Configurations.CORE_PHYSICS_MULTIPLIER, forceY * Configurations.CORE_PHYSICS_MULTIPLIER, true);
         }
     }
 }
