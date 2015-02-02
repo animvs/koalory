@@ -292,8 +292,10 @@ public final class Player extends Entity {
                     if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
                         groundedPlatform = (Platform) contact.getFixtureB().getBody().getUserData();
 
-                    if (groundedPlatform != null)
+                    if (groundedPlatform != null) {
                         groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
+                        groundedPlatform.eventPlayerSteped(this);
+                    }
 
                     grounded = true;
                     return;
