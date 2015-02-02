@@ -21,6 +21,7 @@ public final class IAJump extends IABase {
         this.forceY = forceY;
         this.forceX = forceX;
         this.interval = interval;
+        this.timeCounter = interval;
     }
 
     @Override

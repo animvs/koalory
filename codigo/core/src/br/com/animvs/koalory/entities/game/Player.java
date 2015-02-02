@@ -36,6 +36,8 @@ public final class Player extends Entity {
 
     private boolean mustJump;
 
+    private float friction;
+
     public InputProcessor getInput() {
         return input;
     }
@@ -128,6 +130,23 @@ public final class Player extends Entity {
             getBody().setLinearVelocity(getBody().getLinearVelocity().x, Configurations.GAMEPLAY_JUMP_FORCE * 0.5f);
     }
 
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+
+        if (grounded && groundedPlatform != null) {
+
+            physicFixture.setFriction(0f);
+            //getBody().applyForceToCenter(groundedPlatform.getBody().getLinearVelocity().x * 0.5f /** Configurations.CORE_PHYSICS_MULTIPLIER*/, -1f, true);
+            float speedX = groundedPlatform.getBody().getLinearVelocity().x + getInput().getMovementX();
+
+            getBody().setLinearVelocity(speedX, groundedPlatform.getBody().getLinearVelocity().y);
+
+            groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
+        } else
+            physicFixture.setFriction(friction);
+    }
+
     public void forceJump(boolean resetForceY) {
         if (getBody() == null)
             return;
@@ -199,26 +218,13 @@ public final class Player extends Entity {
         physicFixture = body.getFixtureList().get(0);
 
         if (getController().getLevel().getMapName().equals("frostPlateau1-1"))
-            physicFixture.setFriction(0.15f * 0.15f); //Less friction on ice
+            friction = 0.15f * 0.15f; //Less friction on ice
         else if (getController().getLevel().getMapName().equals("sandPlains1-1")) {
-            physicFixture.setFriction(0.15f * 1.35f); //More friction on sand
+            friction = 0.15f * 1.35f; //More friction on sand
         } else
-            physicFixture.setFriction(0.15f); //Normal friction
+            friction = 0.15f; //Normal friction
 
         setPosition(spawnLocation.x, spawnLocation.y);
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-
-        if (grounded && groundedPlatform != null) {
-
-            physicFixture.setFriction(0f);
-            getBody().applyForceToCenter(groundedPlatform.getBody().getLinearVelocity().x * 1.2f * Configurations.CORE_PHYSICS_MULTIPLIER, -1f, true);
-
-            groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
-        }
     }
 
     public void computeInput() {
@@ -228,13 +234,24 @@ public final class Player extends Entity {
             else
                 getBody().setLinearVelocity(input.getMovementX(), getBody().getLinearVelocity().y);*/
 
+            float maxX = 1f;
+            float minX = -1f;
+
+            if (grounded && groundedPlatform != null) {
+                if (groundedPlatform.getBody().getLinearVelocity().x > 0f)
+                    maxX += groundedPlatform.getBody().getLinearVelocity().x;
+
+                if (groundedPlatform.getBody().getLinearVelocity().x < 0f)
+                    minX -= groundedPlatform.getBody().getLinearVelocity().x;
+            }
+
             getBody().applyForceToCenter(input.getMovementX() * 0.35f, 0f, true);
 
-            if (getBody().getLinearVelocity().x > 1f)
-                getBody().setLinearVelocity(1f, getBody().getLinearVelocity().y);
+            if (getBody().getLinearVelocity().x > maxX)
+                getBody().setLinearVelocity(maxX, getBody().getLinearVelocity().y);
 
-            if (getBody().getLinearVelocity().x < -1f)
-                getBody().setLinearVelocity(-1f, getBody().getLinearVelocity().y);
+            if (getBody().getLinearVelocity().x < minX)
+                getBody().setLinearVelocity(minX, getBody().getLinearVelocity().y);
         }
     }
 
