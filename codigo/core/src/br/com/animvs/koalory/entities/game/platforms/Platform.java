@@ -167,7 +167,9 @@ public abstract class Platform extends Entity {
         //fall = parsePropertyBoolean("fall", line);
         //respawnInterval = parsePropertyFloat("respawnInterval", line);
         speed = parsePropertyFloat("speed", line);
-        waitStart = parsePropertyBoolean("waitStart", line);
+
+        if (line.getProperties().get("waitStart") != null)
+            waitStart = parsePropertyBoolean("waitStart", line);
 
         if (!waitStart)
             started = true;
