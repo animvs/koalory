@@ -45,13 +45,15 @@ public final class Player extends Entity {
     //private static final float ANIMATION_Y_VELOCITY_TOLERANCE = 1.3f;
     private static final float ANIMATION_X_VELOCITY_TOLERANCE = 0.3f;
 
-    public boolean getJumping() {
-        return !grounded;
-    }
-
     private boolean getMovingHorizontally() {
         if (getBody() == null)
             return false;
+
+        if (grounded && groundedPlatform != null) {
+            float platformVelocityX = groundedPlatform.getBody().getLinearVelocity().x;
+            float playerVelocityX = getBody().getLinearVelocity().x;
+            return platformVelocityX != playerVelocityX;
+        }
 
         float hVelocity = getBody().getLinearVelocity().x;
 
@@ -96,8 +98,11 @@ public final class Player extends Entity {
 
         if (getBody() != null) {
 
+            computePlayerGrounded();
+
             if (mustJump) {
                 mustJump = false;
+                grounded = false;
 
                 prepareAnimation("jump");
 
@@ -107,22 +112,25 @@ public final class Player extends Entity {
 
             computeDeath();
 
-            computePlayerGrounded();
-
             if (!grounded)
                 return;
 
-            if (getBody() != null) {
-                if (!getJumping()) {
-                    if (getMovingHorizontally())
-                        prepareAnimation("walk");
-                    else {
-                        prepareAnimation("walk");
-                        getGraphic().setAnimationSpeedScale(0f);
-                    }
-                } else
-                    prepareAnimation("jump");
+
+            if (getMovingHorizontally()) {
+                prepareAnimation("walk");
+            } else if (grounded) {
+                prepareAnimation("walk");
+                getGraphic().setAnimationSpeedScale(0f);
             }
+
+
+            /*else {
+                prepareAnimation("walk");
+                getGraphic().setAnimationSpeedScale(0f);
+            }*/
+            //} else
+            //prepareAnimation("jump");
+
         }
         /*}*/
 
@@ -242,7 +250,7 @@ public final class Player extends Entity {
                     maxX += groundedPlatform.getBody().getLinearVelocity().x;
 
                 if (groundedPlatform.getBody().getLinearVelocity().x < 0f)
-                    minX -= groundedPlatform.getBody().getLinearVelocity().x;
+                    minX += groundedPlatform.getBody().getLinearVelocity().x;
             }
 
             getBody().applyForceToCenter(input.getMovementX() * 0.35f, 0f, true);
