@@ -10,7 +10,7 @@
  </layer>
  <layer name="groundBack" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKwjAQheF4Gy+gB9BewIXQlbuu6gFacNGj22ALQ5gmLWaMyv/BYJV08hJiqXMAAAAAAAAAcjqVDgBscCsd4M+wny8W+1Bib9ux7h+YZydqi4tBFsv1toa9NRZrydHT4lyFPR8r7jlOJR2UcfK95iquu7H6hfFzpfgzPCTGxP4fYf61ZMbU/Htxra137hfmSfWV/H1dpK9XiTpH+sjP2DPCr2WYroflYUlyL/vg+1zaWfP8OqrgN+1cvZMv7Gnx3AQAAAAAAAAAAPh2dekAitqVzSXnz5nFqq+l2v1OVgtN6QCKxpXNJefPmcWqr6XG/U5WC088zyJR
+   eJzt1kEKwjAQheF4Gy+gB9BewIXQlbuu6gFacNGj22ALQ0iTFjOOyv/BYJR08hKi6BwAAAAAAACAkk7WAYANbtYB/gzn+aJxDhZn2451/8A6O1FbXBSyaO63Vewdo7GXEj017lXY87HimeNU0iEyT/6vuYpxN1a/MH+unDV3OPX9CPOvJTMOmbl7MY7td+4X5sn1lfxzXaKvV4k6J/rI19T5+r0M03hYnpYlz7IP3s8Vu2ue30cVfBa7V+/kC3tq/G4CAAAAAAAAAAB8u9o6QETtbHPJ9Utm0eqrqXa/k1VDYx0gonG2ueT6JbNo9dXUuN/JquEJUdAh0Q==
   </data>
  </layer>
  <layer name="ground" width="200" height="20">
@@ -46,17 +46,11 @@
   <object id="146" name="create" x="8896.33" y="641">
    <polyline points="-0.625,0.75 -0.791667,-128 63.625,-127.917 62.6667,-64 126.667,-64.3333 127.583,0.208333"/>
   </object>
-  <object id="161" name="ghostWall" x="191" y="703">
+  <object id="161" name="ghostWall" x="640" y="704">
    <polyline points="0,0 -0.0909091,-706.03"/>
   </object>
  </objectgroup>
  <objectgroup name="items">
-  <object id="38" name="spawn" x="2241.5" y="572.333" width="62.5" height="64.5">
-   <properties>
-    <property name="spawnInterval" value="6"/>
-    <property name="speed" value="-0.8"/>
-   </properties>
-  </object>
   <object id="47" name="spawn" x="5696" y="569.333" width="62" height="66">
    <properties>
     <property name="spawnInterval" value="7"/>
@@ -166,7 +160,7 @@
    </properties>
   </object>
   <object id="155" name="endLevel" x="12288.3" y="512" width="63" height="64.3333"/>
-  <object id="159" name="playerStart" x="320" y="512" width="64" height="62.6667"/>
+  <object id="159" name="playerStart" x="704" y="384" width="64" height="62.6667"/>
  </objectgroup>
  <objectgroup name="platform"/>
 </map>

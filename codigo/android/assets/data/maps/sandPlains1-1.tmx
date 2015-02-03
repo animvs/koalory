@@ -46,7 +46,6 @@
   <object id="164" name="creates" x="11455.5" y="775">
    <polyline points="0,0 0.5,-71 64.5,-71 64.5,-135.5 128.5,-135.5 129,-199 192.5,-199 192.5,-263 256,-262.5 256,-327 320,-327 320,2"/>
   </object>
-  <object id="168" name="deathZone" x="7937.33" y="737.333" width="125.333" height="31.3333"/>
   <object id="172" name="creates" x="7807.33" y="772.667">
    <polyline points="0,0 0,-68.6667 65.3333,-68.6667 65.3333,-132.667 128,-132.667 128.667,0.666667"/>
   </object>
@@ -189,6 +188,11 @@
   </object>
   <object id="170" name="endLevel" x="12288.2" y="640" width="63.8182" height="64.1818"/>
   <object id="178" name="playerStart" x="510" y="577" width="66" height="64"/>
+  <object id="168" name="deathZone" x="7937.33" y="737.333" width="125.333" height="31.3333">
+   <properties>
+    <property name="killsIA" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="platform"/>
 </map>
