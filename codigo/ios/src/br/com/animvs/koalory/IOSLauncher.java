@@ -10,6 +10,11 @@ public class IOSLauncher extends IOSApplication.Delegate {
     @Override
     protected IOSApplication createApplication() {
         IOSApplicationConfiguration config = new IOSApplicationConfiguration();
+        config.preferredFramesPerSecond = 60;
+
+        config.useAccelerometer = false;
+        config.useCompass = false;
+
         return new IOSApplication(new KoaloryGame(), config);
     }
 
