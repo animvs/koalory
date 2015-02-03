@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="83" height="20" tilewidth="64" tileheight="64" nextobjectid="169">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="83" height="10" tilewidth="64" tileheight="64" nextobjectid="169">
  <properties>
   <property name="background" value=""/>
  </properties>
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
- <layer name="background" width="83" height="20">
+ <layer name="background" width="83" height="10">
   <data encoding="base64" compression="zlib">
-   eJzt0LsJACAMRdFs4wLuP5tNChEt/HSeA49AyhvBTMlbc/2PPWUxztRhnNPyHS3vjQ01vaMjAAAA8JsGwFwG6Q==
+   eJzt0LEJADAIRFG3cQH3n83GIhxJoab8Dw7B8pvhxutG7fyhxx/DTMgwR8t/aLmnDWm6Q0cAKgEdbQbp
   </data>
  </layer>
- <layer name="groundBack" width="83" height="20">
+ <layer name="groundBack" width="83" height="10">
   <data encoding="base64" compression="zlib">
-   eJztlMkKwjAQhvs2imfRo9tVBA8uqAjiTj25oSfRJ3eCI4SSJqmZklDng4+2k0w6/JRGEaNi6nsAhikAT98DBMg88Vy36DmDG/Ai1ZYOM1TwOnM440vpxzUKYvCQsWcbfbLcEc+yJzijKt0fNWs62qhgINVM3MB7olYGa4b+E14nUm0IvsCF4Z0dsA92wZ5Uv2LNBTmvh2bt32mATbDleY6iwN8WHZwlHZwlHZwlHZwlHZwlHXllOUZt9qi0PT+kXpHlKEUX1qjNHpW254fUK7Jcpchkg/+XdHCWdOSV5RuoXyyI
+   eJxjYBgF2ED0QDtgFIyCYQAaB9oBgxDEofHNidBTAsRpQFyKJJZMgRu0oHQMBWbAgDqZctQA2UCcQ6KedAZIWGZQ2S2ZVDDDBIldhEcOH3CCYhAIRRIjBCqAuBJNTAOIzQjoL4bSUUhiYUDcBMSJBOx0BuJAIPYBYj8k8TKoGCUAObzq8ciNdGAPxA5A7DjA7hguYDRtUQ/QKiwB2e0P+A==
   </data>
  </layer>
- <layer name="ground" width="83" height="20">
+ <layer name="ground" width="83" height="10">
   <data encoding="base64" compression="zlib">
-   eJztliEOg0AURFdCKaZnwTQpuJYEVYeoLfe/Qr+AULF/hgUMZF7yDGTME5sfgojxWfhNcCpHIcTxQe+i3kxxRArzCizNd8SHWRMbZ5uZOfHibJ/mi9g6239i/1mLqQfCuwHYHdARETci4k7cAmqx5C5Syxm1VEu1nFHLtD1CLdP2CLVM2yPO1rIParlXy29Y33IYRdsByFqiLWuJtqwl2k7NPNVSLc/U8ge/PJmy
+   eJztljsKgDAQBbf023gWG0HtNGBlKVh7/yu4FoJF9r1gF9iBaRKmeUWIiBPjTDxzOL2h4zj5g95FfzOdHKnVBtiqe8RRnYiz0RZqSayMdlFXYjDaL7F7tsW7B8L6AzwewI2I2o6I2oGIWiH3aIuUfxFqLyDbErVsS9SyLVEr5P7vljeqqjoQ
   </data>
  </layer>
  <objectgroup name="collision">
