@@ -30,7 +30,7 @@ public class Foe extends Entity {
         this.ia = ia;
         this.spawnPosition = spawnPosition;
 
-        getController().getEntities().createEntityBody(this, 0.7f);
+        getController().getEntities().createEntityBody(this, 0.7f, true);
         prepareGraphic(graphic);
 
         alive = true;

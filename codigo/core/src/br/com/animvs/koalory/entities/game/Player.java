@@ -63,7 +63,7 @@ public final class Player extends Entity {
             return hVelocity > ANIMATION_X_VELOCITY_TOLERANCE;
     }
 
-    public Player(GameController controller, String skinName, InputProcessor inputMapper) {
+    public Player(GameController controller, String skinName, InputProcessor inputMapper, com.badlogic.gdx.graphics.Color color) {
         super(controller);
 
         if (inputMapper == null)
@@ -77,10 +77,12 @@ public final class Player extends Entity {
         /*lastPositionCache = new Vector2();*/
         //alive = true;
 
-        getController().getEntities().createEntityBody(this);
+        getController().getEntities().createEntityBody(this, 1f, false);
 
         setGraphic(new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_CHARACTER, AnimacaoSkeletalData.class)));
         getGraphic().setSkin(skinName);
+
+        getGraphic().getColor().set(color);
         getGraphic().setInterpolationDefault(0.25f);
     }
 
@@ -112,8 +114,10 @@ public final class Player extends Entity {
 
             computeDeath();
 
-            if (!grounded)
+            if (!grounded) {
+                clampByCamera();
                 return;
+            }
 
             if (getMovingHorizontally()) {
                 prepareAnimation("walk");
@@ -126,9 +130,7 @@ public final class Player extends Entity {
         if (getBody() != null && getBody().getLinearVelocity().y > Configurations.GAMEPLAY_JUMP_FORCE * 0.5f)
             getBody().setLinearVelocity(getBody().getLinearVelocity().x, Configurations.GAMEPLAY_JUMP_FORCE * 0.5f);
 
-        if (clampByCamera(positionCache)) {
-            setPosition(positionCache.x, positionCache.y);
-        }
+        clampByCamera();
     }
 
     @Override
@@ -210,7 +212,7 @@ public final class Player extends Entity {
                     break;
             }
 
-            spawnLocation.set(playerReference.getX(), playerReference.getY() + Configurations.GAMEPLAY_ENTITY_SIZE_Y * 1.25f);
+            spawnLocation.set(playerReference.getX(), playerReference.getY());//1.25f);
         } /*else
             spawnLocation.set(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);*/
 
@@ -312,30 +314,35 @@ public final class Player extends Entity {
         grounded = false;
     }
 
-    private boolean clampByCamera(Vector2 position) {
+    private void clampByCamera() {
         boolean clamped = false;
 
         float distanceAllowed = (Configurations.RESOLUTION_REAL.x * 0.95f) * getController().getCamera().getZoom();
 
-        float minX = getController().getCamera().getPlayerRight() != null ? getController().getCamera().getPlayerRight().getX() : 0f;
+        /*if (getController().getCamera().getPlayerLeft() == null)
+            Gdx.app.log("PLAYER DEBUGGER", "PLAYER LEFT is null during camera clamp");*/
+
+        /*if (getController().getCamera().getPlayerRight() == null)
+            Gdx.app.log("PLAYER DEBUGGER", "PLAYER RIGHT is null during camera clamp");*/
+
+        positionCache.set(getX(), getY());
+
+        float minX = getController().getCamera().getPlayerRight() != null ? getController().getCamera().getPlayerRight().getX() : getX();
         minX -= distanceAllowed;
 
-        if (position.x < minX) {
-            position.x = minX;
-            clamped = true;
-        }
-
-        if (getController().getCamera().getPlayerLeft() == null)
-            Gdx.app.log("ASD", "ASD");
-
-        float maxX = getController().getCamera().getPlayerLeft() != null ? getController().getCamera().getPlayerLeft().getX() : 0f;
+        float maxX = getController().getCamera().getPlayerLeft() != null ? getController().getCamera().getPlayerLeft().getX() : getX();
         maxX += distanceAllowed;
 
-        if (position.x > maxX) {
-            position.x = maxX;
+        if (getX() < minX) {
+            positionCache.x = minX;
+            clamped = true;
+        } else if (getX() > maxX) {
+
+            positionCache.x = maxX;
             clamped = true;
         }
 
-        return clamped;
+        if (clamped)
+            setPosition(positionCache.x, positionCache.y);
     }
 }

@@ -1,7 +1,6 @@
 package br.com.animvs.koalory.entities.game;
 
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
@@ -48,13 +47,14 @@ public abstract class Item extends Entity {
         PhysicsController.TargetPhysicsParameters bodyParameters = createBody(Configurations.CORE_TILE_SIZE);
         bodyParameters.bodyHolder = this;
 
-        getController().getPhysics().createRetangleBody(bodyParameters);
+        //getController().getPhysics().createRetangleBody(bodyParameters);
+        getController().getPhysics().createBody(bodyParameters);
 
         setGraphic(createGraphic());
     }
 
     protected PhysicsController.TargetPhysicsParameters createBody(float tileSize) {
-        PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(this, new Vector2(), 0f, getBodyType(),
+        PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(this, new Vector2(), 0f, getBodyType(), true,
                 tileSize * getBodyScaleX(), tileSize * getBodyScaleY(), getBodyDensity(), getBodyRestitution(), getBodySensor());
 
         return bodyParams;

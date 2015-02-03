@@ -44,8 +44,9 @@ public final class PhysicsController extends AnimvsPhysicsController {
         public float density;
         public float restitution;
         public boolean sensor;
+        public boolean rectangle;
 
-        public TargetPhysicsParameters(PhysicBodyHolder bodyHolder, Vector2 position, float rotation, BodyDef.BodyType bodyType, float width, float height, float density, float restitution, boolean sensor) {
+        public TargetPhysicsParameters(PhysicBodyHolder bodyHolder, Vector2 position, float rotation, BodyDef.BodyType bodyType, boolean rectangle, float width, float height, float density, float restitution, boolean sensor) {
             if (bodyHolder == null)
                 throw new RuntimeException("The parameter 'bodyHolder' must be != null");
 
@@ -58,6 +59,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
             this.density = density;
             this.restitution = restitution;
             this.sensor = sensor;
+            this.rectangle = rectangle;
         }
     }
 
@@ -221,7 +223,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
                 });
     }
 
-    public void createRetangleBody(TargetPhysicsParameters parameters) {
+    public void createBody(TargetPhysicsParameters parameters){
         targetToCreate.add(parameters);
     }
 
@@ -236,19 +238,45 @@ public final class PhysicsController extends AnimvsPhysicsController {
         targetToCreate.begin();
         for (int i = 0; i < targetToCreate.size; i++) {
             //Gdx.app.log("PHYSICS", "Creating body ...");
-            Body body = AnimvsBodyFactory.createRetangle(controller.getPhysics(),
-                    targetToCreate.get(i).position,
-                    targetToCreate.get(i).rotation,
-                    targetToCreate.get(i).bodyType,
-                    targetToCreate.get(i).width,
-                    targetToCreate.get(i).height,
-                    targetToCreate.get(i).density,
-                    targetToCreate.get(i).restitution,
-                    targetToCreate.get(i).sensor);
+
+            Body body;
+
+            if (targetToCreate.get(i).rectangle)
+                body = createRectangleBody(targetToCreate.get(i));
+            else
+                body = createTriangleBody(targetToCreate.get(i));
 
             targetToCreate.get(i).bodyHolder.setBody(body);
             targetToCreate.removeIndex(i);
         }
         targetToCreate.end();
+    }
+
+    private Body createTriangleBody(TargetPhysicsParameters parameters) {
+        Body body = AnimvsBodyFactory.createTriangle(controller.getPhysics(),
+                parameters.position,
+                parameters.rotation,
+                parameters.bodyType,
+                parameters.width,
+                parameters.height,
+                parameters.density,
+                parameters.restitution,
+                parameters.sensor);
+
+        return body;
+    }
+
+    private Body createRectangleBody(TargetPhysicsParameters parameters) {
+        Body body = AnimvsBodyFactory.createRetangle(controller.getPhysics(),
+                parameters.position,
+                parameters.rotation,
+                parameters.bodyType,
+                parameters.width,
+                parameters.height,
+                parameters.density,
+                parameters.restitution,
+                parameters.sensor);
+
+        return body;
     }
 }
