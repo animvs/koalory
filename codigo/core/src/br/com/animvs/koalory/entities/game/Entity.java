@@ -106,8 +106,13 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
             setY(controller.getPhysics().toWorld(physicBody.getPosition().y));
             setRotation(physicBody.getAngle() * MathUtils.radDeg);
 
-            if (getBody().getLinearVelocity().x != 0f)
-                facingRight = getBody().getLinearVelocity().x > 0f;
+            if (facingRight) {
+                if (getBody().getLinearVelocity().x <= -Configurations.CORE_DIRECTION_CHANGE_VELOCITY_MIN)
+                    facingRight = false;
+            } else {
+                if (getBody().getLinearVelocity().x >= Configurations.CORE_DIRECTION_CHANGE_VELOCITY_MIN)
+                    facingRight = true;
+            }
         } else
             setVisible(false);
     }

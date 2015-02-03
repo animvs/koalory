@@ -33,7 +33,6 @@ public final class Player extends Entity {
     private Platform groundedPlatform;
     private Vector2 groundedPlatformLastPosition;
     private boolean grounded;
-
     private boolean mustJump;
 
     private float friction;
@@ -285,9 +284,13 @@ public final class Player extends Entity {
                 positionCache.set(getX(), getY());
 
                 WorldManifold manifold = contact.getWorldManifold();
-                boolean below = true;
-                for (int j = 0; j < manifold.getNumberOfContactPoints(); j++)
-                    below |= (getController().getPhysics().toWorld(manifold.getPoints()[j].y) < positionCache.y - Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f);
+                boolean below = false;
+                for (int j = 0; j < manifold.getPoints().length; j++) {
+                    below = (getController().getPhysics().toWorld(manifold.getPoints()[j].y) < positionCache.y - Configurations.GAMEPLAY_ENTITY_SIZE_Y);
+
+                    if (below)
+                        break;
+                }
 
                 groundedPlatform = null;
 
@@ -327,17 +330,26 @@ public final class Player extends Entity {
 
         positionCache.set(getX(), getY());
 
-        float minX = getController().getCamera().getPlayerRight() != null ? getController().getCamera().getPlayerRight().getX() : getX();
-        minX -= distanceAllowed;
+        float minX;
+        float maxX;
 
-        float maxX = getController().getCamera().getPlayerLeft() != null ? getController().getCamera().getPlayerLeft().getX() : getX();
+        if (getController().getPlayers().getTotalPlayersInGame() > 1 && getController().getCamera().getPlayerRight() != null)
+            minX = getController().getCamera().getPlayerRight().getX();
+        else
+            minX = getX();
+
+        if (getController().getPlayers().getTotalPlayersInGame() > 1 && (getController().getCamera().getPlayerLeft() != null))
+            maxX = getController().getCamera().getPlayerLeft().getX();
+        else
+            maxX = getX();
+
+        minX -= distanceAllowed;
         maxX += distanceAllowed;
 
         if (getX() < minX) {
             positionCache.x = minX;
             clamped = true;
         } else if (getX() > maxX) {
-
             positionCache.x = maxX;
             clamped = true;
         }

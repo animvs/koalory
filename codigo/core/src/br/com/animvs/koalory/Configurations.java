@@ -19,6 +19,7 @@ public final class Configurations {
     public static final String CORE_LANGUAGE_PATH = "data/lang/";
     public static final String CORE_SAVEGAME = "br.com.animvs.koalory.profile";
     public static final float CORE_CAMERA_SPEED_MULTIPLIER = 1f;
+    public static final float CORE_DIRECTION_CHANGE_VELOCITY_MIN = 0.1f;
     public static final float CORE_PLAYER_ANIM_SPEED_MULTIPLIER = 3f;
     public static final float CORE_TILE_SIZE = 64f;
     public static final float CORE_PLATFORM_SIZE_Y = 18f;
