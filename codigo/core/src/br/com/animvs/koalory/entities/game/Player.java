@@ -125,6 +125,10 @@ public final class Player extends Entity {
 
         if (getBody() != null && getBody().getLinearVelocity().y > Configurations.GAMEPLAY_JUMP_FORCE * 0.5f)
             getBody().setLinearVelocity(getBody().getLinearVelocity().x, Configurations.GAMEPLAY_JUMP_FORCE * 0.5f);
+
+        if (clampByCamera(positionCache)) {
+            setPosition(positionCache.x, positionCache.y);
+        }
     }
 
     @Override
@@ -306,5 +310,32 @@ public final class Player extends Entity {
             }
         }
         grounded = false;
+    }
+
+    private boolean clampByCamera(Vector2 position) {
+        boolean clamped = false;
+
+        float distanceAllowed = (Configurations.RESOLUTION_REAL.x * 0.95f) * getController().getCamera().getZoom();
+
+        float minX = getController().getCamera().getPlayerRight() != null ? getController().getCamera().getPlayerRight().getX() : 0f;
+        minX -= distanceAllowed;
+
+        if (position.x < minX) {
+            position.x = minX;
+            clamped = true;
+        }
+
+        if (getController().getCamera().getPlayerLeft() == null)
+            Gdx.app.log("ASD", "ASD");
+
+        float maxX = getController().getCamera().getPlayerLeft() != null ? getController().getCamera().getPlayerLeft().getX() : 0f;
+        maxX += distanceAllowed;
+
+        if (position.x > maxX) {
+            position.x = maxX;
+            clamped = true;
+        }
+
+        return clamped;
     }
 }
