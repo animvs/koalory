@@ -74,13 +74,14 @@ public final class CameraController extends BaseController {
             camera.zoom = MathUtils.lerp(camera.zoom, desiredZoom, Gdx.graphics.getDeltaTime() * Configurations.CORE_CAMERA_SPEED_MULTIPLIER);
         }
 
-        float minX = (Configurations.RESOLUTION_REAL.x / 2f) * (Configurations.GAMEPLAY_ZOOM_MAX - camera.zoom);
-        float minY = (Configurations.RESOLUTION_REAL.y / 2f) * (Configurations.GAMEPLAY_ZOOM_MAX - camera.zoom);
+        float minX = ((Configurations.RESOLUTION_REAL.x / 2f) * camera.zoom) * (Configurations.GAMEPLAY_ZOOM_MAX - camera.zoom);
+        float minY = ((Configurations.RESOLUTION_REAL.y / 2f) * camera.zoom) * (Configurations.GAMEPLAY_ZOOM_MAX - camera.zoom);
 
         if (camera.position.x < minX || camera.position.y < minX) {
             if (camera.position.x < minX) {
                 camera.position.x = minX;
                 positionCache.set(minX, positionCache.y);
+                desiredPosition.set(minX, positionCache.y);
             }
 
             /*if (camera.position.y < minY) {
@@ -162,8 +163,8 @@ public final class CameraController extends BaseController {
         float zoomNeededX = 1f;
         float zoomNeededY = 1f;
 
-        zoomNeededX = coverageX / Configurations.RESOLUTION_REAL.x * 2f;
-        zoomNeededY = coverageY / Configurations.RESOLUTION_REAL.y * 2f;
+        zoomNeededX = coverageX / Configurations.RESOLUTION_REAL.x * 3f;
+        zoomNeededY = coverageY / Configurations.RESOLUTION_REAL.y * 3f;
 
         if (zoomNeededX > zoomNeededY)
             desiredZoom = zoomNeededX;
