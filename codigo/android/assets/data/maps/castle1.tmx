@@ -1,44 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="69" tilewidth="64" tileheight="64" nextobjectid="239">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="69" tilewidth="64" tileheight="64" nextobjectid="243">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
  <layer name="background" width="130" height="69">
   <data encoding="base64" compression="zlib">
-   eJztmEFuxDAIAPOo/P9tFYe9pHaMCTEEz0ioEiU22NNVtscBAAAAFTkbAfsR5QG+5QIPQMADEHg/+E/rTKqfzU6zasGD2rNCHzwAAQ9AwAMQ8AAEPAABD0DAAxBWeHD3fxkib3gTPU+VuDvP2bPW1Huj3csjVznuZp09B029N3iABzN74UGu8GbWy9az2tyTOd8+h1l28uDs1Fhymr3uZow+d4970dZe67J6YPHlUK5n7XO38Mbaw1MPrvVv9Fk5PFnpG+QFD0DAAxDwAH7gAQiZPPDaP3qOL4IHOVl9H9HfgwlbeDJan3zevCd48N28J3jw3bw3LReI/OFN9DzEHh5Y99U8M6pZMZ/n+ezogWZvTd2qOaI9uNZ5E+mBZv9Rzao5Vp/Pbh6MetD8fsUc1T3IxHn5eVejWacK1r8vqAUegIAHIOz2fgBt8AAEPADhyftB9Pdi4t3QEt0n8W0PemuQz5XXgge181rwoHbeCh7Uyluxfj68FXf9eeaj51x1flqi+x7N0KrpPavNZ5z9Sx48oXcHs/31ep7Jz/TrdR+r1rOCB+M9n97dyvWs4MF4TzzAAzzAAzzAg908AAAAAPgD26Zp0w==
+   eJztmFGKAyEMQOdQc/+zLflYWFxHo0YT9T0IhTTVRF9h2ucBAACAE3kzAffh5QG+xQIPQMADEHg++E/uTE4/m5tm1YIHZ88K3+ABCHgAAh6AgAcg4AEIeAACHoCwwoPS/zJE3LDGe55TonSerWetqbdGu5dF7uQozdp6Dpp6a/AAD1r2woNYYU2rl7nPanMjc84+h1Zu8uD9qOnJafYqzeh97hb3oq1N66J60OPLo1yvt8/bwpreHkY9SOtn9HlyWLLSN4gLHoCAByDgAfyCByBE8sBqf+85dgQPYrL6Prx/BxN9YUltffJx85bgwb55S/Bg37w1OReI+GGN9zzEHR707qv5TK1mxXyW53OjB5q9NXWr5vD2IK2zxtMDzf61mlVzrD6f2zyo9aB5f8Ucp3sQiTd5LdVo1jmF3u8XnAUegIAHINz2fAB58AAEPABh5PnA+3cxMTe0ePdJ7O3B1xrky/nV56wFD/BgpMfR/m7NR/UgBQ/m5k/zgNgjevHum9jPA4s9/uZ6evp6vyXf2rPFfeBBuweta1p7YH0ns+4bD/CgNG8PeFBfGw/wAA/w4CYPAAAAAH4AYOtw7w==
   </data>
  </layer>
  <layer name="shadow" width="130" height="69">
   <data encoding="base64" compression="zlib">
-   eJztmMGOwyAMBdv//+nqnSpFARxisIEZyReviW0yu2r38wEAAIAd+d4EnAcegMADEHgAAg9A4AEIPACBByDwAAQegMADEHgAAg9A4MGf03cf7cFdDyJ/eBO9zy5Ru8+nd22p98bayyO3c9R2fXoP1npP8AAPWr3u6t7kiDHueZDVg9qcGdjJAcs+dzU9OUuv2o7R9+7xXqy117oTPeid87TwJnof617R82ULb2b1gdzgAQg8AIEHIPAARCYPvPpH77EieAAi+nsw0Rfe1J5PPm/eGzxYM+8NHqyZ9+bqAbFGeBO9D3GGBz19LWdG1kT9/EQPLL0tdTNqRp633se1zptID1r9s9SMPF/iNA9qM1hmnFEz8nyJ2R5Afnp/v2Av8AAEHoDg8wEIPACBByDefD4Y/X8BIjasRM9JrO1B6Rnkc+Wt4MHeeSt4sHe+FzzYK99L79+HUVGbzzMfvees+7MSPXdrh7ua0llrPuPuK3nwhtI7eDpfaeYn+Sfzer2PWc/rBQ/aPd++u5nP6wUP2j3xAA/wAA/wAA9O8wAAAADgByS1C48=
+   eJztmNEOwjAIRfX/f9rcJ82yVtrRQttzEl4YG9AdE/X1AgAAgB153wScBx6AwAMQeAACD0DgAQg8AIEHIPAABB6AwAMQeAACD0DgwZfTdx/twV0PIn94E73PLlE7z9azttR7Y+3lkds5aru2noO13hM8wIN/ve7qnuSIMe55kNWD2pwZ2MkByz53NT05S6/ajtHn7vFerLXXuhM96J3ztPAmeh/rXtHzZQtvZvWB3OABCDwAgQcg8ABEJg+8+kfvsSJ4ACL6dzDRF97Unk8+b94bPFgz7w0erJn35uoBsUZ4E70PcYYHPX0t94ysibp+ogeW3pa6GTUj77eex7XOm0gP/vXPUjPy/hKneVCbwTLjjJqR95eY7QHkp/fzBXuBByDwAATfD0DgAQg8APHk+8Ho/wWI2LASPSextgelZ5Cv52efsxU8wIMnMz6d79R8Vg+u4MHY/G4eEGtEL9FzE+t54NHjN9czU+l6S751Zo/3gQfreeD9Tka9bzzAg9q+PeBBW3888Onxm+uZqXS9Jd8yLx7gwUkeAAAAAHwAdXcL2g==
   </data>
  </layer>
  <layer name="groundBack" width="130" height="69">
   <data encoding="base64" compression="zlib">
-   eJzt2t0JwyAUBtBs0E26QBfoAqULdBBHL3mM/cFLNYbecyCIQeUKH+ThZlkAAAAA4D+dPjwRpXNNAAAAAAAAEFGC72GUMrsAAAAAAACanKtx7/0cw6Ua997PMcgBKzlgJQc5lWp+rcbR+wGAV/fZBXAYj9kFAAAAsFH/I5H9n4nI/VvW9j5vlLoXlr03Frl/y9re540iB1ty8H6eTdYc1L3x7L3yrDlgSw5YycFvbrMLCPhWa+S72LK293kAAAAAAKM9ARNQE/Y=
+   eJzt2tEJwjAUBdBu4ALO4AIu4ALSBRwko0s+jQkmapuQngPh0ULg9XEhH+myAAAAAMCcToXVIvy5JwAAAAAAAGgRGt/DVkLvBgAAAAAAqHJJ6t77GcM1qXvvZwxyQCQHRHJwTCF5viV16/0AwLu1dwMM49G7AQAAAF74RyKvNJdP8zpXrtG4C8srzWXWec36Xb+SA6Kj5cDdeN7RckCeHBDJwXfuvRtoUNNr6bx0jgIAAAAAs3sCSKQQNw==
   </data>
  </layer>
  <layer name="ground" width="130" height="69">
   <data encoding="base64" compression="zlib">
-   eJztnE1OwzAQRnOAim4RYgvsoXvgBt1xAQ7C0YmlVlTGk4yd8W/ekz5BLHvikEcQ6iinaZpOikCfaO5tTKBP8AAceDA2r3MOXkKU8EA6txX+dfrXez/nYWX+iDgH3ibdPRrheRC7l9Dc0XyQHMCD9fmj+LDkQCkPvirE0oPefVhzoJQH3xWyxYOR0DiAB+FrHoW7OcdJd49CWHvQW6T/NXoNHhBtQtTeE8EDggcEDwgekPoJUXtPZEwPUnjcMAY2tOAB1AcPwIEH4MADcJT0INQHtmVMy1qPXu3PhlzOCddlSennQWhOypjWh5gevZbQuKOd688L0asH1++XfIjt0dszpTw4Tn99EkcvKWMn7+vBm+uOl3pz/Np7TykPrM9D2o5E7X0RPCB4QPCA4IG/lxbq7CkSNfbyY3R+qzp7igS9A21TygNoGzwABx6AAw/AgQfg6M0D6TP254i51r0oa3XONym5PobePJDO+zSFXQitrT0n5/rUezGKBxoX9uZBzLPB2oNa70LyXVhaq6mfc07O9am/n9Ye1HoHTsgFaa2mfs45OddLP5O1Z4O1B6T9hKi9J4IHBA8IHhA8IPUTosQ5oH3wABx4AA48AAcegMPag7MX6IMRngeh953E9oxI45p+lxHo3QPt+06kvcWMuzFNv0uPlPDAoudLOta+78TKg6sLob1+zPmc/v9t1Ob9UiNXvZdLPel6c3tgUU861u7D0oPcz8Ia9fBAP44HeJByzlTwAA9uz1OynrUHKb2lmnrSsXYfS3vTjqdc+5Ze3JL1rD1I7S1dqycda/extDfteMq1b+nFLVkPD/AAD/AAD/Ag5R79AtnFRtA=
+   eJztnE1OwzAQRn2Aim4RYgsHgO4RN2DXC/QgHJ2OREVlxontjH/znvQJCPbYSV4jVR315Jw7RQTGJObepgTGBA9AwIO5ebvm4EWjhgehta3wz9M/38drnlbGz4g48O7i7tEMz4PUvWhjZ/Mh5AAerI+fxYclB2p5cG4QSw9G92HNgVoeXBpkiwczEeMAHujnPAsP1xxd3D3SsPZgtITea4waPCCx0Wi9J4IHBA8IHhA8IO2j0XpPZE4PcnjecAxs6MEDaA8egIAHIOABCDU90PrAthyLZa1Hr/VnQ5KvjPOypPbzQBuTcyzWh5QevZ6IcSd2rD9OY1QPbr8v+ZDao7dnanlwdH99EkcvOcdO3s+DN1b+XurN8WvvPbU8sF6H9J0QrfdF8IDgAcEDggf+Xnqos6eEaLGXb6P1rersKSHoHeibWh5A3+ABCHgAAh6AgAcgjOZB6DP214Sx1r0oa3W+7lJzfgqjeRBa98XpLmhzW48pOT/3XsziQYwLe/Mg5dlg7UGr70LyXViaG1O/5JiS83Nfn9YetPoOHM2F0NyY+iXHlJwfuiZrzwZrD0j/0Wi9J4IHBA8IHhA8IO2jUWMN6B88AAEPQMADEPAABDwAAQ/6wqIXJgc86ItW193ag7UeKst+L8uaVmt9etfglnu0/3/8zs+97ktr+2t8uv+UfB70VCv0ugkda/UsLL12aCwe2F0TC/AAD2qsjQd4cKtvuW4oKT2lNWtpNc8Lxyxql+jD3bp2aKy1B6k9pbVqaTUvC8csapfqw92ydmgsHuABHuABHuBBzro/ghFBxQ==
   </data>
  </layer>
  <objectgroup name="collision">
-  <object id="127" name="floor" x="576" y="3584" width="768" height="64"/>
   <object id="131" name="floor" x="1343.45" y="3609.73">
-   <polyline points="0,0 0.363636,42.1818 128.364,42.5455 128.727,106.545 256.182,105.818 256.364,169.818 576.364,169.818 576,617.091"/>
+   <polyline points="-703.45,38.27 -703.45,166.27 -383.45,166.27 0.55,166.27 128.55,166.27 256.55,166.27 512.55,166.27 512.55,614.27"/>
   </object>
-  <object id="132" name="floor" x="2049" y="3780" width="125" height="446"/>
-  <object id="133" name="floor" x="2816" y="3648" width="384" height="64"/>
-  <object id="134" name="floor" x="3392" y="3650" width="190.5" height="61.5"/>
-  <object id="135" name="floor" x="3776" y="3648" width="384" height="64"/>
+  <object id="132" name="floor" x="2049" y="3780" width="1152" height="448"/>
+  <object id="134" name="floor" x="3392" y="3776" width="190.5" height="61.5"/>
   <object id="136" name="floor" x="4160" y="4224">
-   <polyline points="0,0 0,-576 64,-576 192,-448 512,-448 510,2"/>
+   <polyline points="-384,0 -384,-448 -64,-448 192,-448 512,-448 510,2"/>
   </object>
-  <object id="140" name="floor" x="2305" y="4225">
-   <polyline points="-1,-1 -1,-449 127,-449 255,-577 511,-577 510,0"/>
-  </object>
-  <object id="142" name="floor" x="4672" y="3776" width="2688.08" height="16.5833"/>
+  <object id="142" name="floor" x="4672" y="3776" width="448" height="64"/>
   <object id="157" name="floor" x="7359.33" y="2815.67">
    <polyline points="0,0 -191.667,0.666667 -191.667,-128 -383.333,-127.667 -383.333,-256.333 -576,-255.667 -574.667,-33"/>
   </object>
@@ -93,6 +87,11 @@
   <object id="236" name="ghostWall" x="640" y="3712">
    <polyline points="0,0 0,-512"/>
   </object>
+  <object id="239" name="floor" x="5312" y="3776" width="448" height="64"/>
+  <object id="240" name="floor" x="6144" y="4096">
+   <polyline points="-384,128 -384,-448 -64,-448 192,-448 512,-448 512,128"/>
+  </object>
+  <object id="242" name="floor" x="6656" y="3776" width="768" height="64"/>
  </objectgroup>
  <objectgroup name="items">
   <object id="51" name="color" x="6848.67" y="2438" width="62" height="64">
@@ -110,7 +109,7 @@
     <property name="power" value="0.10"/>
    </properties>
   </object>
-  <object id="56" name="color" x="2080.37" y="3710.85" width="62" height="64">
+  <object id="56" name="color" x="2304" y="3648" width="62" height="64">
    <properties>
     <property name="power" value="0.05"/>
    </properties>
@@ -170,22 +169,12 @@
     <property name="killsIA" value="true"/>
    </properties>
   </object>
-  <object id="149" name="deathZone" x="1918.88" y="4152.74" width="5761.36" height="261.849">
+  <object id="149" name="deathZone" x="1855.88" y="4152.74" width="5824" height="256">
    <properties>
     <property name="killsIA" value="true"/>
    </properties>
   </object>
-  <object id="151" name="spawn" x="2240" y="4007" width="64" height="64">
-   <properties>
-    <property name="graphic" value="fire"/>
-    <property name="ia" value="jumper"/>
-    <property name="interval" value="7"/>
-    <property name="spawnInterval" value="5"/>
-    <property name="speed" value="0"/>
-    <property name="speedY" value="8"/>
-   </properties>
-  </object>
-  <object id="153" name="spawn" x="1983.36" y="4008.52" width="64" height="64">
+  <object id="153" name="spawn" x="1952.36" y="4008.52" width="64" height="64">
    <properties>
     <property name="graphic" value="fire"/>
     <property name="ia" value="jumper"/>
@@ -351,7 +340,7 @@
     <property name="killsIA" value="true"/>
    </properties>
   </object>
-  <object id="230" name="deathZone" x="2880.17" y="600.833" width="383.667" height="42.3333"/>
+  <object id="230" name="deathZone" x="5888" y="3227" width="640" height="64"/>
   <object id="225" name="spawn" x="960" y="172" width="64" height="64">
    <properties>
     <property name="ia" value="jumper"/>
@@ -359,6 +348,16 @@
     <property name="spawnInterval" value="60"/>
     <property name="speed" value="0"/>
     <property name="speedY" value="5"/>
+   </properties>
+  </object>
+  <object id="241" name="spawn" x="5216" y="4032" width="64" height="64">
+   <properties>
+    <property name="graphic" value="fire"/>
+    <property name="ia" value="jumper"/>
+    <property name="interval" value="7"/>
+    <property name="spawnInterval" value="5"/>
+    <property name="speed" value="0"/>
+    <property name="speedY" value="9"/>
    </properties>
   </object>
  </objectgroup>
