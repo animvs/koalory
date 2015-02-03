@@ -194,7 +194,7 @@ public final class Player extends Entity {
 
         body.setFixedRotation(true);
 
-        Vector2 spawnLocation = new Vector2();
+        Vector2 spawnLocation = new Vector2(getController().getLevel().getPlayerStart());
         PlayersController playersController = getController().getPlayers();
 
         if (playersController.getTotalPlayersInGame() > 1) {
@@ -207,8 +207,8 @@ public final class Player extends Entity {
             }
 
             spawnLocation.set(playerReference.getX(), playerReference.getY() + Configurations.GAMEPLAY_ENTITY_SIZE_Y * 1.25f);
-        } else
-            spawnLocation.set(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
+        } /*else
+            spawnLocation.set(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);*/
 
         physicFixture = body.getFixtureList().get(0);
 
@@ -292,8 +292,10 @@ public final class Player extends Entity {
                     if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
                         groundedPlatform = (Platform) contact.getFixtureB().getBody().getUserData();
 
-                    if (groundedPlatform != null)
+                    if (groundedPlatform != null) {
                         groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
+                        groundedPlatform.eventPlayerSteped(this);
+                    }
 
                     grounded = true;
                     return;

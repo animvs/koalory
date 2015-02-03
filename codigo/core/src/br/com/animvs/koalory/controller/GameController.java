@@ -165,8 +165,8 @@ public final class GameController implements Disposable {
 
             this.ui = new UIController(this, LoadController.UI_JSON_PATH, Configurations.RESOLUTION_REAL);
 
-            int minFPS = Gdx.app.getType() == Application.ApplicationType.Desktop ? 60 : 20;
-            int maxFPS = Gdx.app.getType() == Application.ApplicationType.Desktop ? 60 : 30;
+            int minFPS = Gdx.app.getType() == Application.ApplicationType.Desktop ? 60 : 60;
+            int maxFPS = Gdx.app.getType() == Application.ApplicationType.Desktop ? 60 : 60;
 
             this.physics = new PhysicsController(this, Configurations.DEBUG_PHYSICS, 250f, 0.004f, new Vector2(0f, -10f), minFPS, maxFPS);
             //this.physics = new PhysicsController(this, Configurations.DEBUG_PHYSICS, 100f, 0.001f, new Vector2());
@@ -285,6 +285,7 @@ public final class GameController implements Disposable {
         players.restart();
         stage.restart();
         physics.restart();
+        level.restart();
 
         getUI().showUIInGame();
         ui.castValueColors();

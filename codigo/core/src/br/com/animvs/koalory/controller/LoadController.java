@@ -66,14 +66,14 @@ public final class LoadController extends AnimvsLoadController {
         loadParameters.add(new AnimvsLoadParameter(LEVEL_CASTLE1, TiledMap.class));
 
         //Background:
-        loadParameters.add(new AnimvsLoadParameter(TEXTURE_BACKGROUND, Texture.class));
+        loadParameters.add(new AnimvsLoadParameter(TEXTURE_BACKGROUND, Texture.class, getBackgroundTextureParameter()));
 
         // Skeletal Animations:
-        loadParameters.add(new AnimvsLoadParameter(SKELETON_CHARACTER, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_CHARACTER)));
-        loadParameters.add(new AnimvsLoadParameter(SKELETON_KOALA, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_KOALA)));
-        loadParameters.add(new AnimvsLoadParameter(SKELETON_SHADOW, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_SHADOW)));
-        loadParameters.add(new AnimvsLoadParameter(SKELETON_COLOR, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_OBJECTS)));
-        loadParameters.add(new AnimvsLoadParameter(SKELETON_PLATFORM, AnimacaoSkeletalData.class, createeSkeletalParameters(ATLAS_OBJECTS)));
+        loadParameters.add(new AnimvsLoadParameter(SKELETON_CHARACTER, AnimacaoSkeletalData.class, createSkeletalParameters(ATLAS_CHARACTER)));
+        loadParameters.add(new AnimvsLoadParameter(SKELETON_KOALA, AnimacaoSkeletalData.class, createSkeletalParameters(ATLAS_KOALA)));
+        loadParameters.add(new AnimvsLoadParameter(SKELETON_SHADOW, AnimacaoSkeletalData.class, createSkeletalParameters(ATLAS_SHADOW)));
+        loadParameters.add(new AnimvsLoadParameter(SKELETON_COLOR, AnimacaoSkeletalData.class, createSkeletalParameters(ATLAS_OBJECTS)));
+        loadParameters.add(new AnimvsLoadParameter(SKELETON_PLATFORM, AnimacaoSkeletalData.class, createSkeletalParameters(ATLAS_OBJECTS)));
 
         //Sounds:
         loadParameters.add(new AnimvsLoadParameter(SOUND_FX_JUMP, Sound.class));
@@ -114,11 +114,24 @@ public final class LoadController extends AnimvsLoadController {
         textureParameter.format = Pixmap.Format.RGB565;
         textureParameter.wrapU = Texture.TextureWrap.Repeat;
         textureParameter.wrapV = Texture.TextureWrap.Repeat;
+        textureParameter.genMipMaps = true;
 
         return textureParameter;
     }
 
-    private AnimacaoSkeletalDataLoader.AnimacaoSkeletalDataParameter createeSkeletalParameters(String atlasPath) {
+    private TextureLoader.TextureParameter getAtlasParameter() {
+        TextureLoader.TextureParameter textureParameter = new TextureLoader.TextureParameter();
+        textureParameter.minFilter = Texture.TextureFilter.Linear;
+        textureParameter.magFilter = Texture.TextureFilter.Linear;
+        textureParameter.format = Pixmap.Format.RGBA8888;
+        textureParameter.wrapU = Texture.TextureWrap.Repeat;
+        textureParameter.wrapV = Texture.TextureWrap.Repeat;
+        textureParameter.genMipMaps = true;
+
+        return textureParameter;
+    }
+
+    private AnimacaoSkeletalDataLoader.AnimacaoSkeletalDataParameter createSkeletalParameters(String atlasPath) {
         AnimacaoSkeletalDataLoader.AnimacaoSkeletalDataParameter skeletonParameters = new AnimacaoSkeletalDataLoader.AnimacaoSkeletalDataParameter();
         skeletonParameters.binario = true;
         skeletonParameters.caminhoAtlas = atlasPath;

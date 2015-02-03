@@ -13,6 +13,7 @@ import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.controller.LoadController;
 import br.com.animvs.koalory.entities.game.Entity;
+import br.com.animvs.koalory.entities.game.Player;
 
 /**
  * Created by DALDEGAN on 27/01/2015.
@@ -23,26 +24,18 @@ public abstract class Platform extends Entity {
     private Vector2 initialPosition;
 
     private int size;
-    private boolean fall;
-    private float respawnInterval;
     private float speed;
+    private boolean waitStart;
 
     private Vector2 positionCache;
     private Vector2[] path;
     private int pathIndex;
-    private float timeCounter;
+    //private float timeCounter;
 
     private boolean increasingIndex;
+    private boolean started;
 
     private ArrayMap<AnimacaoSkeletal, Vector2> graphics;
-
-    protected final boolean getFall() {
-        return fall;
-    }
-
-    protected final float getRespawnInterval() {
-        return respawnInterval;
-    }
 
     public Platform(GameController controller, PolylineMapObject line) {
         super(controller);
@@ -105,33 +98,30 @@ public abstract class Platform extends Entity {
 
     @Override
     public void update() {
-        //float distanceFromNextNode = positionCache.dst2(path[pathIndex]);
+        updateGraphic();
 
-        timeCounter += Gdx.graphics.getDeltaTime();
-
-        //positionCache.interpolate(path[pathIndex], timeCounter / speed , Interpolation.exp5);
-        //positionCache.set(getX(), getY());
+        if (!started) {
+            super.update();
+            return;
+        }
 
         Vector2 desiredPosition;
 
-        if (increasingIndex) {
+        if (increasingIndex)
             desiredPosition = path[pathIndex + 1];
-        } else {
+        else
             desiredPosition = path[pathIndex - 1];
-        }
+
 
         positionCache.sub(desiredPosition);
         positionCache.nor().scl(-1f);
 
         getBody().setLinearVelocity(positionCache.x * speed, positionCache.y * speed);
 
-        for (int i = 0; i < graphics.size; i++)
-            graphics.getKeyAt(i).setPosicao(getX() - graphics.getValueAt(i).x, getY() - graphics.getValueAt(i).y);
-
         //if (timeCounter >= speed) {
         positionCache.set(getX(), getY());
         if (positionCache.dst2(desiredPosition) <= Configurations.CORE_PLATFORM_PATH_DISTANCE_TOLERANCE) {
-            timeCounter = 0f;
+            //timeCounter = 0f;
 
             if (increasingIndex) {
                 pathIndex++;
@@ -152,6 +142,11 @@ public abstract class Platform extends Entity {
         super.update();
     }
 
+    public void eventPlayerSteped(Player player) {
+        if (waitStart)
+            started = true;
+    }
+
     @Override
     public void dispose() {
         super.dispose();
@@ -169,9 +164,15 @@ public abstract class Platform extends Entity {
 
     protected void parseParameters(PolylineMapObject line) {
         size = parsePropertyInteger("size", line);
-        fall = parsePropertyBoolean("fall", line);
-        respawnInterval = parsePropertyFloat("respawnInterval", line);
+        //fall = parsePropertyBoolean("fall", line);
+        //respawnInterval = parsePropertyFloat("respawnInterval", line);
         speed = parsePropertyFloat("speed", line);
+
+        if (line.getProperties().get("waitStart") != null)
+            waitStart = parsePropertyBoolean("waitStart", line);
+
+        if (!waitStart)
+            started = true;
     }
 
     protected final boolean parsePropertyBoolean(String name, PolylineMapObject line) {
@@ -237,5 +238,10 @@ public abstract class Platform extends Entity {
         }
 
         path = worldVertices;
+    }
+
+    private void updateGraphic() {
+        for (int i = 0; i < graphics.size; i++)
+            graphics.getKeyAt(i).setPosicao(getX() - graphics.getValueAt(i).x, getY() - graphics.getValueAt(i).y);
     }
 }
