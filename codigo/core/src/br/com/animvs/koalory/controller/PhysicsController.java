@@ -223,7 +223,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
                 });
     }
 
-    public void createBody(TargetPhysicsParameters parameters){
+    public void createBody(TargetPhysicsParameters parameters) {
         targetToCreate.add(parameters);
     }
 
@@ -244,7 +244,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
             if (targetToCreate.get(i).rectangle)
                 body = createRectangleBody(targetToCreate.get(i));
             else
-                body = createTriangleBody(targetToCreate.get(i));
+                body = createPlayerBody(targetToCreate.get(i));
 
             targetToCreate.get(i).bodyHolder.setBody(body);
             targetToCreate.removeIndex(i);
@@ -264,6 +264,18 @@ public final class PhysicsController extends AnimvsPhysicsController {
                 parameters.sensor);
 
         return body;
+    }
+
+    private Body createPlayerBody(TargetPhysicsParameters parameters) {
+        Vector2[] vertices = new Vector2[5];
+        vertices[0] = new Vector2(0f * parameters.width, -0.5f * parameters.height);
+        vertices[1] = new Vector2(0.5f * parameters.width, 0f * parameters.height);
+        vertices[2] = new Vector2(0.25f * parameters.width, 0.5f * parameters.height);
+        vertices[3] = new Vector2(-0.25f * parameters.width, 0.5f * parameters.height);
+        vertices[4] = new Vector2(-0.5f * parameters.width, 0f * parameters.height);
+
+        return AnimvsBodyFactory.createByVertex(this, parameters.position, parameters.rotation, parameters.bodyType, vertices,
+                parameters.density * 1.6f, parameters.restitution, parameters.width, parameters.height, parameters.sensor);
     }
 
     private Body createRectangleBody(TargetPhysicsParameters parameters) {

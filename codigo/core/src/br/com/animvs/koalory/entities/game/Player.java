@@ -286,7 +286,7 @@ public final class Player extends Entity {
 
                 WorldManifold manifold = contact.getWorldManifold();
                 boolean below = true;
-                for (int j = 0; j < manifold.getNumberOfContactPoints(); j++)
+                for (int j = 0; j < manifold.getPoints().length; j++)
                     below |= (getController().getPhysics().toWorld(manifold.getPoints()[j].y) < positionCache.y - Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f);
 
                 groundedPlatform = null;
