@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.entities.engine.graphics.ParallaxCamera;
@@ -19,6 +20,17 @@ public final class CameraController extends BaseController {
     private float desiredZoom;
     private Vector2 desiredPosition;
     private Vector2 positionCache;
+
+    private Player playerLeft;
+    private Player playerRight;
+
+    public Player getPlayerLeft() {
+        return playerLeft;
+    }
+
+    public Player getPlayerRight() {
+        return playerRight;
+    }
 
     public float getZoom() {
         return camera.zoom;
@@ -41,6 +53,10 @@ public final class CameraController extends BaseController {
 
     public float getViewportWidth() {
         return camera.viewportWidth;
+    }
+
+    public Vector3 getPosition() {
+        return camera.position;
     }
 
     public Matrix4 calculateParallaxMatrix() {
@@ -74,9 +90,10 @@ public final class CameraController extends BaseController {
             camera.zoom = MathUtils.lerp(camera.zoom, desiredZoom, Gdx.graphics.getDeltaTime() * Configurations.CORE_CAMERA_SPEED_MULTIPLIER);
         }
 
-        float minX = ((Configurations.RESOLUTION_REAL.x / 2f * camera.zoom) * camera.zoom) * (Configurations.GAMEPLAY_ZOOM_MAX - camera.zoom);
+        float minX = ((Configurations.RESOLUTION_REAL.x) * camera.zoom);// * camera.zoom) * (Configurations.GAMEPLAY_ZOOM_MAX - camera.zoom);
         float minY = (Configurations.RESOLUTION_REAL.y / 2f) * camera.zoom;
 
+        //Limit the camera at the beginning of the level:
         if (camera.position.x < minX || camera.position.y < minY) {
             if (camera.position.x < minX) {
                 camera.position.x = minX;
@@ -147,6 +164,9 @@ public final class CameraController extends BaseController {
             if (playersController.getPlayer(i).getY() < playerBottom.getY())
                 playerBottom = playersController.getPlayer(i);
         }
+
+        this.playerLeft = playerLeft;
+        this.playerRight = playerRight;
 
         float averageX = playerLeft.getX() + (playerRight.getX() - playerLeft.getX()) / 2f;
         float averageY = playerLeft.getY() + (playerRight.getY() - playerLeft.getY()) / 2f;
