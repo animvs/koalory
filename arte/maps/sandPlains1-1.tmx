@@ -179,7 +179,7 @@
     <property name="speed" value="-0.7"/>
    </properties>
   </object>
-  <object id="166" name="spawn" x="11331" y="701.667" width="64" height="66.6667">
+  <object id="166" name="spawn" x="11341" y="701.667" width="64" height="66.6667">
    <properties>
     <property name="graphic" value="fire"/>
     <property name="ia" value="jumper"/>
