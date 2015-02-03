@@ -182,7 +182,14 @@ public final class PhysicsController extends AnimvsPhysicsController {
                                 if (player.getY() - Configurations.CORE_TILE_SIZE / 2f > foe.getY()) {
                                     //if (contact.getWorldManifold().getNormal().y == 1f || contact.getWorldManifold().getNormal().y == -1f) {
                                     //Player has killed the foe by jumping it's head:
-                                    Gdx.app.log("KILL", "Player " + controller.getPlayers().getPlayerIndex(player) + " has killed a Koala");
+
+                                    int playerIndex = -1;
+                                    try {
+                                        playerIndex = controller.getPlayers().getPlayerIndex(player);
+                                    } catch (Exception e) {
+                                    }
+
+                                    Gdx.app.log("KILL", "Player " + (playerIndex == -1 ? "UNKNOWN" : String.valueOf(playerIndex)) + " has killed a Koala");
                                     foe.eventDeath(player);
                                 } else {
                                     if (Configurations.DEBUG_PLAYER_IMMORTAL)
