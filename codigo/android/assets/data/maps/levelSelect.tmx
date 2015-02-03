@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="83" height="10" tilewidth="64" tileheight="64" nextobjectid="169">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="90" height="10" tilewidth="64" tileheight="64" nextobjectid="169">
  <properties>
   <property name="background" value=""/>
  </properties>
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
- <layer name="background" width="83" height="10">
+ <layer name="background" width="90" height="10">
   <data encoding="base64" compression="zlib">
-   eJzt0LEJADAIRFG3cQH3n83GIhxJoab8Dw7B8pvhxutG7fyhxx/DTMgwR8t/aLmnDWm6Q0cAKgEdbQbp
+   eJzt0LEJAEAIBEG7sQH7r83EQISHDzyjHTgEwzXDL68btf7DHn8M+2IMGnS+QWet2ZfeOjQGcCkBi8kG6Q==
   </data>
  </layer>
- <layer name="groundBack" width="83" height="10">
+ <layer name="groundBack" width="90" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF2ED0QDtgFIyCYQAaB9oBgxDEofHNidBTAsRpQFyKJJZMgRu0oHQMBWbAgDqZctQA2UCcQ6KedAZIWGZQ2S2ZVDDDBIldhEcOH3CCYhAIRRIjBCqAuBJNTAOIzQjoL4bSUUhiYUDcBMSJBOx0BuJAIPYBYj8k8TKoGCUAObzq8ciNdGAPxA5A7DjA7hguYDRtUQ/QKiwB2e0P+A==
+   eJxjYBgFxILogXbAKBgFowAraBxoBwwxEIfGNydCTwkQpwFxKZJYMgVu0ILSMRSYAQPqZMrRGmQDcQ6JetIZIOGcQWW3ZFLBDBMkdhEeOXKBExSDQCiSGCFQAcSVaGIaQGxGQH8xlI5CEgsD4iYgTiRgpzMQBwKxDxD7IYmXQcUoAchhWY9HbhTgBvZA7ADEjgPsjpEARtMkfQCtwxkA11oP+A==
   </data>
  </layer>
- <layer name="ground" width="83" height="10">
+ <layer name="ground" width="90" height="10">
   <data encoding="base64" compression="zlib">
-   eJztljsKgDAQBbf023gWG0HtNGBlKVh7/yu4FoJF9r1gF9iBaRKmeUWIiBPjTDxzOL2h4zj5g95FfzOdHKnVBtiqe8RRnYiz0RZqSayMdlFXYjDaL7F7tsW7B8L6AzwewI2I2o6I2oGIWiH3aIuUfxFqLyDbErVsS9SyLVEr5P7vljeqqjoQ
+   eJztlrEKg0AQRLeMiTb5Fhsh2qlglVJI7f//QlZEsLidObx2HrzmlrliimXNRC6/zDdRRhsohBAp0B7Wjhbi4OXWwMb9Jvy4PXEIsg+3Ij6D7OhOxDnIXknNWRdnH3eJ7pjdFbgQUfZNRNmOiLJG5qiL0tsO/bsBWc8oy3pGWdYzyhqZl/b8B+ahOhA=
   </data>
  </layer>
  <objectgroup name="collision">
-  <object id="133" name="floor" x="61" y="450.333" width="4928" height="13.3333"/>
-  <object id="167" name="ghostWall" x="512" y="512">
+  <object id="133" name="floor" x="381" y="450.333" width="4928" height="13.3333"/>
+  <object id="167" name="ghostWall" x="832" y="512">
    <polyline points="0,0 0,-576"/>
   </object>
-  <object id="168" name="ghostWall" x="4864" y="448">
+  <object id="168" name="ghostWall" x="5184" y="448">
    <polyline points="0,0 0,-576"/>
   </object>
  </objectgroup>
  <objectgroup name="items">
-  <object id="56" name="color" x="576" y="320" width="62" height="64">
+  <object id="56" name="color" x="896" y="320" width="62" height="64">
    <properties>
     <property name="power" value="0.99"/>
    </properties>
   </object>
-  <object id="152" name="sender" x="3198.84" y="253.333" width="64" height="65.3333">
+  <object id="152" name="sender" x="3518.84" y="253.333" width="64" height="65.3333">
    <properties>
     <property name="map" value="sandPlains1-1"/>
    </properties>
   </object>
-  <object id="153" name="sender" x="2240.17" y="254.668" width="64" height="65.3333">
+  <object id="153" name="sender" x="2560.17" y="254.668" width="64" height="65.3333">
    <properties>
     <property name="map" value="frostPlateau1-1"/>
    </properties>
   </object>
-  <object id="154" name="sender" x="1344.5" y="255.668" width="64" height="65.3333">
+  <object id="154" name="sender" x="1664.5" y="255.668" width="64" height="65.3333">
    <properties>
     <property name="map" value="greenHills1-1"/>
    </properties>
   </object>
-  <object id="161" name="sender" x="4617" y="361.333" width="64" height="65.3333">
+  <object id="161" name="sender" x="4937" y="361.333" width="64" height="65.3333">
    <properties>
     <property name="map" value="castle1"/>
     <property name="requireMaps" value="greenHills1-1;sandPlains1-1;frostPlateau1-1"/>
    </properties>
   </object>
-  <object id="164" name="playerStart" x="576" y="128" width="64" height="64"/>
+  <object id="164" name="playerStart" x="896" y="128" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="platform"/>
 </map>
