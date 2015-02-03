@@ -51,6 +51,8 @@ public final class InputController extends BaseController {
         //TODO: Configurable input mappers:
         inputMappers.add(new KeyboardProcessor(getController(), Input.Keys.A, Input.Keys.D, Input.Keys.SPACE));
         inputMappers.add(new KeyboardProcessor(getController(), Input.Keys.LEFT, Input.Keys.RIGHT, Input.Keys.ENTER));
+        inputMappers.add(new KeyboardProcessor(getController(), Input.Keys.F, Input.Keys.H, Input.Keys.G));
+        inputMappers.add(new KeyboardProcessor(getController(), Input.Keys.J, Input.Keys.K, Input.Keys.L));
 
         if (Configurations.SIMULATE_MOBILE_ON_DESKTOP || Gdx.app.getType() != Application.ApplicationType.Desktop)
             inputMappers.add(new TouchProcessor(getController()));

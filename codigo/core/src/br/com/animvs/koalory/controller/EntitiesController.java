@@ -99,21 +99,21 @@ public final class EntitiesController extends BaseController {
     }
 
     public void createEntityBody(Entity entityOwner) {
-        createEntityBody(entityOwner, 1f);
+        createEntityBody(entityOwner, 1f, true);
     }
 
-    public void createEntityBody(Entity entityOwner, float scale) {
+    public void createEntityBody(Entity entityOwner, float scale, boolean rectangle) {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(entityOwner, new Vector2(600f, 550f), 0f,
-                BodyDef.BodyType.DynamicBody, Configurations.GAMEPLAY_ENTITY_SIZE_X * scale, Configurations.GAMEPLAY_ENTITY_SIZE_Y * scale, 1f, 0f, false);
+                BodyDef.BodyType.DynamicBody, rectangle, Configurations.GAMEPLAY_ENTITY_SIZE_X * scale, Configurations.GAMEPLAY_ENTITY_SIZE_Y * scale, 1f, 0f, false);
 
-        getController().getPhysics().createRetangleBody(bodyParams);
+        getController().getPhysics().createBody(bodyParams);
     }
 
     public void createPlatformBody(Platform platform, int size) {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(platform, new Vector2(), 0f,
-                BodyDef.BodyType.KinematicBody, Configurations.CORE_TILE_SIZE * size, Configurations.CORE_PLATFORM_SIZE_Y, 1f, 0f, false);
+                BodyDef.BodyType.KinematicBody, true, Configurations.CORE_TILE_SIZE * size, Configurations.CORE_PLATFORM_SIZE_Y, 1f, 0f, false);
 
-        getController().getPhysics().createRetangleBody(bodyParams);
+        getController().getPhysics().createBody(bodyParams);
     }
 
     public void spawnFoe(String graphic, float x, float y, float speedX, Float speedY, String ia, Float interval) {
@@ -162,7 +162,7 @@ public final class EntitiesController extends BaseController {
                 /*if (getController().getProfile().checkCastleFreed())
                     getController().startMatch("castle1");
                 else*/
-                    getController().startMatch(null);
+                getController().startMatch(null);
             }
         } else if ((getController().getLives() == 0) && (getController().getPlayers().getTotalPlayersInGame() == 0)) {
             getController().endMatch();

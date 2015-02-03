@@ -1,9 +1,12 @@
 package br.com.animvs.koalory.controller;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 
+import br.com.animvs.engine2.matematica.Random;
 import br.com.animvs.koalory.entities.engine.input.InputProcessor;
 import br.com.animvs.koalory.entities.game.Player;
 
@@ -21,6 +24,9 @@ public final class PlayersController extends BaseController {
         return playersInGame.size;
     }
 
+    private Array<com.badlogic.gdx.graphics.Color> playerColors;
+    private int nextPlayerColorIndex;
+
     public int getPlayerIndex(Player player) {
         int playerIndex = playersInGame.indexOf(player, true);
 
@@ -36,9 +42,13 @@ public final class PlayersController extends BaseController {
 
         getController().subtractLife();
 
-        String skinName = MathUtils.randomBoolean() ? "blue" : "green";
+        String skinName = Random.randomBoolean() ? "blue" : "green";
+        nextPlayerColorIndex++;
 
-        Player newPLayer = new Player(getController(), skinName, inputMapper);
+        if (nextPlayerColorIndex == playerColors.size)
+            nextPlayerColorIndex = 0;
+
+        Player newPLayer = new Player(getController(), skinName, inputMapper, playerColors.get(nextPlayerColorIndex));
         playersInGame.add(newPLayer);
         inputMapper.setPlayer(newPLayer);
 
@@ -55,6 +65,20 @@ public final class PlayersController extends BaseController {
     public PlayersController(GameController controller) {
         super(controller);
         playersInGame = new DelayedRemovalArray<Player>();
+
+        float minColor = 0.7f;
+        float maxColor = 1f;
+
+        playerColors = new Array<Color>();
+        playerColors.add(new Color(maxColor, minColor, minColor, 1f));
+        playerColors.add(new Color(minColor, maxColor, minColor, 1f));
+        playerColors.add(new Color(minColor, minColor, maxColor, 1f));
+
+        float secondRowSaturation = 0.3f;
+
+        playerColors.add(new Color(maxColor * secondRowSaturation, minColor * secondRowSaturation, minColor * secondRowSaturation, 1f));
+        playerColors.add(new Color(minColor * secondRowSaturation, maxColor * secondRowSaturation, minColor * secondRowSaturation, 1f));
+        playerColors.add(new Color(minColor * secondRowSaturation, minColor * secondRowSaturation, maxColor * secondRowSaturation, 1f));
     }
 
     public void unregisterPlayer(Player player) {
@@ -80,10 +104,10 @@ public final class PlayersController extends BaseController {
             if (input.getActionPressed()) {
                 if (input.getPlayerOwner() == null) {
                     if (getController().getLives() > 0) {
-                        Player joiningPlayer = getController().getPlayers().spawnPlayer(getController().getInput().getInputMappers().get(i));
+                        getController().getPlayers().spawnPlayer(getController().getInput().getInputMappers().get(i));
                         Gdx.app.log("PLAYER", "Player " + getController().getPlayers().getTotalPlayersInGame() + " has been spawned");
                     } else
-                        Gdx.app.log("PLAYER","Player spawn blocked: No lives left");
+                        Gdx.app.log("PLAYER", "Player spawn blocked: No lives left");
                 } else
                     input.getPlayerOwner().tryJump();
             }
