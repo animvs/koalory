@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="64" tileheight="64" nextobjectid="158">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="64" tileheight="64" nextobjectid="162">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
@@ -10,12 +10,12 @@
  </layer>
  <layer name="groundBack" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKwjAQheF4Gy+gB9BewIXQlbuu6gFacNGj26CFIcSk1YxD9f9gsEo6eQkR4hwAAAAAAACAkg4Lx59UUgDzXKwD/Bj280FjHyz2th3r+oV5NqKsaa63Vewdo7GWEj01zlXY8zbjnf2zpF1knLzXnMVzN1b/YvxUOf4ONGTGpP4fYf65ZMbc/FvxHFvv1C/Mk+sr+fe6RF+vEnVM9JGfqTumX8sg6l1yL/vg+1Sxs+b5dVTBb7Fz9Um+sCf3bgAAAAAAAAAA8I9q6wARtbPNJecvmUWrr6barSerhsY6QETjbHPJ+Utm0eqrqXHryarhDmIdItE=
+   eJzt1kEKwjAQheF4Gy+gB9BewIXQlbuu6gFacNGj26CFIYxJqxlj5f9gsEo6eQmx1DkAAAAAAAAAOR1KBwAWuJQO8GfYzweLfSixt+1Y1y/MsxG1xMkgi+V6W8PeGou15Ohpca7CnrcZ9+yfJe2UcfK95iyuu7H6F+OnSvFneEiMif0/wvxzyYyp+bfiWlvv1C/Mk+or+fu6SF+vEnWM9JGfsWeEX8sg6l1yL/vg+1TaWfP8OqrgN+1cfZIv7Gnx3AQAAAAAAAAAAPh1dekAitqVzSXnz5nFqq+l2q0nq4WmdABF48rmkvPnzGLV11Lj1pPVwh1nvyLR
   </data>
  </layer>
  <layer name="ground" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJztlkuqwzAMRb2VfraRDWSaeQeddgNdflNIwDVWcBpdSQ73gKCUh3QkWY+mRAghhBBCCCGEEEKIPtMShJBfpsT7aOEyx7DE3dmF2DAlnft46OiE5Xsb1znGJW6JN7KX8n1F/39c3sYR35eKUUzK24h2I4O3QAO19xX5N0vtNlpcn8L37+zzECyOetVuI7+RPfU1Z7QyJhnv2UvOEd2s+pfeklesjJmnV/3881a0eNbylvuw7LP2HiTnlhmcMSL2rbmPf95dXl/TBZVXq+8tZ6Rr5LDoe++uvPeR19d0QeW1mEUPrqj+vR2knUSor+mCymsxix5cUf23/q3V72TvfeT1NV1QeS1m0YMrqn9vB2knEepruqDyWsyiB1dU/94O0k4i1Nd0QeW1mEUPrqj+vR2knUSor+mCymsxix5cUf17O0g7iVBf0wWV12IWPbgi4gObIhxG
+   eJztlksKg0AMhucqfVzDC7h130W3vUCPXxcVpjKRsebPQ/4PAiIl+ZLMFEshhBBCCCGEEEIIIUSf6RuEkF+mwvtBSIup6NyPh44OOTHr8xX9/3h9N474vlSMYnKZYxDi7ui1MHgLdNA6X5G/WVp3o8f1Kbx/V8/SWfKKo17XOUYhbjvra85oYSwy3rOXnCO6WfUvnSWvWBgrT6/69fNW9Hi28q73Ydln6zxIzj0zOGNE7FtzH/+cu7q+pgsqr1bfW85I18hh0ffeXXnvo66v6YLKazGLDK6o/r0dpJ1EqK/pgsprMYsMrqj+e39r9Z3svY+6vqYLKq/FLDK4ovr3dpB2EqG+pgsqr8UsMrii+vd2kHYSob6mCyqvxSwyuKL693aQdhKhvqYLKq/FLDK4ovr3dpB2EqG+pgsqr8UsMrgi4gMpgBpq
   </data>
  </layer>
  <objectgroup name="collision">
@@ -23,7 +23,7 @@
   <object id="95" name="floor" x="63.6061" y="641.485" width="2303" height="51.3333"/>
   <object id="108" name="floor" x="2751.75" y="449.75" width="191" height="50.75"/>
   <object id="127" name="floor" x="2496.67" y="698">
-   <polyline points="0,0 0,-56.6667 893.97,-56.1818 897.152,-56.1818 1088,-248 1215,-248 1407,-56.3333 1919,-56.3333 1919.67,-10.3333"/>
+   <polyline points="0,0 0,-56.6667 893.97,-56.1818 897.152,-56.1818 962,-122 1341.23,-122.182 1407,-56.3333 1919,-56.3333 1919.67,-10.3333"/>
   </object>
   <object id="134" name="create" x="11393.6" y="643">
    <polyline points="0,0 0.125,-65.125 64,-64.75 63.75,-129 127.875,-129 127.5,-193.125 191.5,-192.875 191.375,-256.75 255.5,-257.125 255.375,-320.625 383.5,-320.75 383.5,-0.125"/>
@@ -45,6 +45,9 @@
   </object>
   <object id="146" name="create" x="8896.33" y="641">
    <polyline points="-0.625,0.75 -0.791667,-128 63.625,-127.917 62.6667,-64 126.667,-64.3333 127.583,0.208333"/>
+  </object>
+  <object id="161" name="ghostWall" x="191" y="703">
+   <polyline points="0,0 -0.0909091,-706.03"/>
   </object>
  </objectgroup>
  <objectgroup name="items">
@@ -135,7 +138,7 @@
     <property name="power" value="0.15"/>
    </properties>
   </object>
-  <object id="125" name="spawn" x="4287.47" y="570.772" width="62.5" height="64.5">
+  <object id="125" name="spawn" x="4287.47" y="567.772" width="62.5" height="64.5">
    <properties>
     <property name="spawnInterval" value="7"/>
     <property name="speed" value="-0.8"/>
@@ -169,6 +172,7 @@
    </properties>
   </object>
   <object id="155" name="endLevel" x="12288.3" y="512" width="63" height="64.3333"/>
+  <object id="159" name="playerStart" x="320" y="512" width="64" height="62.6667"/>
  </objectgroup>
  <objectgroup name="platform"/>
 </map>
