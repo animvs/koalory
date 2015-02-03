@@ -89,7 +89,7 @@ public class TileRenderer implements TiledMapRenderer, Disposable {
 
     private GameController controller;
 
-    private static final int CACHE_SIZE = 4000;
+    private static final int CACHE_SIZE = 5460;
 
     /**
      * Creates a renderer with a unit scale of 1 and cache size of CACHE_SIZE.
