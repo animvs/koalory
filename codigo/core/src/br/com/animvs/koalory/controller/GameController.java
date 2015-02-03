@@ -231,6 +231,7 @@ public final class GameController implements Disposable {
                 physics.update(Gdx.graphics.getDeltaTime());
                 entities.update();
 
+                background.getViewport().apply();
                 background.render();
 
                 stage.getViewport().apply();
