@@ -95,6 +95,10 @@ public final class GameController implements Disposable {
         lives--;
     }
 
+    public void incrementLife() {
+        lives++;
+    }
+
     public float getColorRecovered() {
         return colorRecovered;
     }
