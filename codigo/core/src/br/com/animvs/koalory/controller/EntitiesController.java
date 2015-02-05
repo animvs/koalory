@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.entities.engine.ia.IAJump;
 import br.com.animvs.koalory.entities.engine.ia.IAStraight;
+import br.com.animvs.koalory.entities.game.CheckPoint;
 import br.com.animvs.koalory.entities.game.Color;
 import br.com.animvs.koalory.entities.game.DeathZone;
 import br.com.animvs.koalory.entities.game.Entity;
@@ -89,6 +90,15 @@ public final class EntitiesController extends BaseController {
         life.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
 
         items.add(life);
+    }
+
+    public void createCheckpoint(RectangleMapObject rectangle) {
+        CheckPoint checkpoint = new CheckPoint(getController());
+        checkpoint.initialize();
+
+        checkpoint.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
+
+        items.add(checkpoint);
     }
 
     public void createSender(Vector2 position, String map) {

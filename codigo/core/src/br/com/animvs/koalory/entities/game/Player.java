@@ -114,7 +114,10 @@ public final class Player extends Entity {
 
             if (!grounded) {
                 clampByCamera();
-                getBody().setAwake(true);
+
+                /*if (getBody() != null)
+                    getBody().setAwake(true);*/
+
                 return;
             }
 

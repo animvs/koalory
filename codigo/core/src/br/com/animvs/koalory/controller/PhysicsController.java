@@ -276,7 +276,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
         vertices[5] = new Vector2(-0.5f * parameters.width, 0f * parameters.height);
 
         return AnimvsBodyFactory.createByVertex(this, parameters.position, parameters.rotation, parameters.bodyType, vertices,
-                parameters.density * 1.6f, parameters.restitution, parameters.width, parameters.height, parameters.sensor);
+                parameters.density * 1.7f, parameters.restitution, parameters.width, parameters.height, parameters.sensor);
     }
 
     private Body createRectangleBody(TargetPhysicsParameters parameters) {
