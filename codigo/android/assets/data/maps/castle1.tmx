@@ -1,201 +1,207 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="69" tilewidth="64" tileheight="64" nextobjectid="258">
-=======
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="69" tilewidth="64" tileheight="64" nextobjectid="251">
->>>>>>> ef83407672d68206381f8b494d539090649a02ea
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="90" tilewidth="64" tileheight="64" nextobjectid="276">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
- <layer name="background" width="130" height="69">
+ <layer name="background" width="130" height="90">
   <data encoding="base64" compression="zlib">
-   eJztmFGOwyAMBXOo3v9slT9WqrIJMfCIDcxI78elwYap1PY4AAAAYEU+F4H9wAMw8AAMPAADD/5zdSarn81Os3rBg7VnhXvwAAw8AAMPwMADMPAADDwAAw/AeMOD0v8yJG/URM+zSkrnWXvWnvVqvHspaiunNGvtOXjWq8EDPKjZCw9yRU2tl1fv9dZ65hx9DrXs5MHnZk1LzbNXacboc1fci3fteV1WD1p8OZzPa+1zt6hp7aHXg/P6EX2uHCVv+gZ5wQMw8AAMPIA/8ACMTB6o9o+eY0bwICdv30f072DSFiVPz6eet64ED+atK8GDeetqrlwg+aMmeh6yhwet+3re87TmjfmU57OjB569lUTfd68H53VqIj142l9J9H3XzribB6UelETfd3YPMrH6fK2M/ozAHOABGHgAxm7fD+AaPAADD8Do+X4Q/buYjI2X6D7J3B7cPYN6uf72OXvBAzzo6bG3v13rWT04gwdj66t5QOZIK9F9k/k8UOzxW2vp6e71mnptz4r7wIN6D2qfqfZAfSej7hsP8KA0bwt48PxsPMADPMCDnTwAAAAA+AKL+mYr
+   eJzt2FFuqzAQQNEsqvtf29N8VH2KCLHNwNhwjuQfl4CNb6u2rxcAAADw66dhcH86IOiAoAOCDgg6IPR20HL9zINtOiDogKADgg4IOiDogFB9LjqYQ/W56GAO1eeigzn0vrvqc9TBOUY6aP1c9RnroF3Gz4Oee135fa6DdhkdVI+evbFt9Q5698a2lTsY2Rt/jrzv6rPvOU8d7NMBT6IDgg4IOiDogKADgg4IOiBc0UH1/1GMsZGtej93GXvvs/ddt1yfrfVZGXN3Hnt77X0PLddn04EOep6lg7lGtt4utz7bOndkn2e/h15P6uDnwzUjcy3P2ttj9XvPOJfWa9+vm7WDkV5ejfcbXefTRrbRNRzt4P36M9Z555Hpyt6Ylw4IOiDogF86IMzUQdbzq/exIh3M6erzqP472Bgbmb7d3/y885l0sO58Jh2sO59tqwVj/pGtej/GMzoYfW7LZ75dc8X+Mt/PEztoeXam6vM+2sH7ddkqO/j2/EzV5927x6d1sLeGTNXnPXsHM7n7/kad/T3CGnRA0AHhab8fsE0HBB0Qjvx+UP13sXHuaFW9TmPtDj7dw/z+/NXvuZUOdHBkjUfX99T5WTt4p4Nz5+/WgbHGGFW9bmO9DjKe8f/cyJo+fb1nvnfNGeehg/4Oeu+Z3UH2mZx13jrQwd5+R+jg+711oAMd6OBJHQAA/ANRozBW
   </data>
  </layer>
- <layer name="shadow" width="130" height="69">
+ <layer name="shadow" width="130" height="90">
   <data encoding="base64" compression="zlib">
-   eJztl8tuwzAMBNP//+liTwkMW6bklanHDLAXSg1Jewoknw8AAACsyN9JYD/wAAQegMADEHgAAg9A4AEIPACBByDwAAQegMADEHgAAg++7L57bw/OepDx4yZ7n1VSep61zzpy3020l6O2ckq71j6H6H0neIAHd73O7j2pkT7uORjVg9KcI7CSA5F9zu601CK9SjtmP3fHe4nePd7b0YPWOXeLm+x9ontlzzda3LzVB8YGD0DgAQg8AIEHIEbywNU/e48ZwQMQ2b+DSVvclD6f+rh1N3gwZ90NHsxZd3P0gMwRN9n7kD08aOkb+ZvaO5FepfOaWVvPd/Qg0tvJW3u2nt3NeLznJtODu/5OZvCgNO/xzE22B6UZnOABzE7v/xGYAzwAgQcg+H4AAg9A4AGIJ98Pev9eJrmJkj0nmduDq8+gXq6//Zyj4AEePJnx6Xy71kf14Age9K2v5gGZI61kz03m88DR47fWMtPVeU29dmbH+8CD+Txwv5Ne7xsP8KC0bwt4UNcfDzw9fmstM12d19Rr5sUDPNjJAwAAAIB/jkMLxw==
+   eJzt2NFu4yAQQNHu///0ah5WW0UOATL2gH2OxAt2A9i3VdufHwAAAOCfPx2D+9MBQQcEHRB0QNABYbSDnvtXHhzTAUEHBB0QdEDQAUEHhOr3ooM1VL8XHayh+r3oYA2jz676PergHLMd9H5t5TvWQb+Mnwcjn3Xl97kO+mV0UN3FyNk4dkYHV3YxejaOXdHBWV3MnI1jFR2c/XOgtVeO6YC70wFBBwQdEHRA0AFBBwQd/Pf0s5/dQfX/UYy5ka36PHcZrec5+qx77s/Wu1bG3J1H66yjz6H3/kw60MGntY7u+2bOOKe9DKt20NrnCu7UQM95ju6ZmetZq3XG6uee8V56732974kdzO7zaSNb9Xl6z1W9v9VGtqvWYW06IOiAoAOCDggrdZC1fvU5dqQDQvXfwcbcyNb6fPPrzmfTwZ7z2XSw53y21w6MPUa26vMYz+hgZt2erxm9p2et1vWRvc5ef2IHPWtnuuqcs9c+7fH1vmyVHXxaP9MOHbT2+3otW3UHrT1k0gG7O/t7hD3ogKADgt8PCDog6IDwze8HZ/+9bNSOXtX7NPbu4N1nmG/PX/2ce+lAB9/s8dv9PXV+1Q5e6eDc+bt1YOwxZlXv29ivg4w1fs/N7Ond9ZH50T1nvA8d7NdB9js5633rQAet887Qwdj6OshZ4/fczJ7eXR+ZH9mvDnTwpA4AAP4CxX0PrA==
   </data>
  </layer>
- <layer name="groundBack" width="130" height="69">
+ <layer name="groundBack" width="130" height="90">
   <data encoding="base64" compression="zlib">
-   eJzt2tEJwjAQBuBu4CYu4AIuIC7gIBld8iSGRFpbPLl8H5SjFMLl+CEP6bIAAAAAQE6nwbNFObgnAAAAAAAAWKPs/A5HK9ENAAAAAADw0bmp0esQ49LU6HWIIQdUckAlB3Mqzfu1qb9eBwB4uUc3wN94RDcAAADAG/9I9I3mknVe7sL6RnPJOq+s+9pLDqhmy4G78b7ZckCfHFDJwXdu0Q1ssKbX0XnpHAUAAAAAsnsCDToPHw==
+   eJzt2s0JwzAMBtBM1AWyQBcoXSCDePTgU6mxQ35KVOz3LiIEhCI+8MGZJgAAAAAAAAAAAAAAAAAAAO6UogcAAAAAAABgSOnie/i1FD0AAAAAAACbHkWN7kOMuajRfYghB2RyQCYHY0rF87Ood/cBAD7e0QPwN5boAQAAAPjiH4m61l563Ze7sLrWXnrdV6/fdZUckI2WA3fjdaPlgDo5IJODc17RAxywZ9bWeekcBQAAAAB6twKfaQ7F
   </data>
  </layer>
- <layer name="ground" width="130" height="69">
+ <layer name="ground" width="130" height="90">
   <data encoding="base64" compression="zlib">
-   eJztnU1u2zAQRnkAI94WSbbpAVrvC9/Au1wgB8nR4wFqNGCH4pAa/kh6D/iQSCL4Iz8QMDSQLyGEiyGwTSyfbUlgm+ABCHiwb37dc4qisQcP4nXG6/1xz3Om/R4RB34H22fk7cH7gJQ6qbXdmw8pB3p58DEgHh7syYclB/CgbM1b9SHnAB7oa85xM7SZBYsDeKCveS883XMOts9Iw9uDrSX1XWOrwQNijcboORE8IHhA8IDgARkfjdFzIvv0oIbXFefAhxk8gPHgAQh4AAIegNDTA60ObM05K7kavdHPhiSjn2/33g+0NjXnrD6U1OjNhMUda9u4nebcVj14/L/kQ2mN3pHp5cE5/KuTOEepOXeJ/p6itnK8VJsT93309PLAexwyd1KMnhfBA4IHBA8IHsRzmaGfIyXFiLl8Oo3v1c+RkoLagbnp5QHMDR6AgAcg4AEIeABCLw9Sz8JLj1P5uTBmizy4/U2qtmTpemjQT229Ti8P4uu1x6m8Bd2FVmu1rtN6zauf2r15Lx5YXDiaByV7g7cHuXearT22ulDyXrWW67Re8+qn1NsH3h7k3l2z9rjEBev7c1qu03rNq5/UfHN7g7cHZP5ojJ4TwQOCBwQPCB6Q8dHoMQaUMeJ+48F84AEIeAACHoCAByDgAQgvBfECD0Dw9iBXQ1VT+xUc+iqp4VrT/zW6B498R7v+p9G42hjX8D8t94OZ+krtV6lzo/bC1uOm2uOB3z3xAA/woHbs0v69xsUDPMjFsy60RY2pVtfpVc/a8jeKvcZNtff2wLMutEWNqVbX6VXP2vK3KL3GTbXHAzzAAzzAAzyoGfcLW+5l1A==
+   eJztnE1u2zAQRrlPmh6g2aYHaL0vcoPscoEcJEdvB6gBm+FIQ2rIoaT3gA+2RII/wgM3HislAACAY/DYkMhxIZbLTXr0h32AB35833G2eBC99q2xcjlZeCYEDwgeEDwgeEDwIOb5zYC3B3sHD/BAwAM8EPAADwQ8wAMBD/BAwAM8EPBg3/vwAg/2vQ8v8GDf+/ACD9r3caS6Qzxo30fe/+FfvvkuczO/kq1WFg/8PMiJ9kIc+J1se8ODfh7kjPRCcwAP7onwIKeXF0sO4ME9M3iQ4+HFmgN4cI/H2mfbt8UBPLjnaB48pa//wYj04Kxp+a9jj+ABsaZE9JoIHhA8IHhA8IDEp0T0msgxPWjhecM98GEGDyAePAABD0DAAxBGelCqkdtyz8pajV70b0OSt4Z9eTL6PCj1abln9aGmRm8mat7NWtuv5NxePbh+X/KhtkbvzIzy4PZdlaX3V9beu2Sfj1lfuV6qzYl+b+VsGeWB9zxk7mhEr4vgAcEDggcED/K1zDDOmaIRsZZPp/m9xjlTNKgdmJtRHsDc4AEIeAACHoCAByCM8kD7Lbz2WsvPhTl75Mrb/2i1JUvtqcM4rfU6ozzI21uvtbyksgu99mrdp7XNa5zWs/koHlhcOJsHNWeDtwfvSvL21murC0trGLlPa5vXOLXeXvH24ENJ3t56XeOCtoaR+7S2eY2jrXftbPD2gMyfEtFrInhA8IDgAcEDEp8SI+aAOiKeNx7MBx6AgAcg4AEIeAACHoDwoyJe4AEI3h6s1VC11H4lh7Fqari2jP+aPYNrbim1/+k0b2mO1/SVnufBTGNp55V2L+os7D2v1h8P/J6JB3iAB61z147vNS8e4MFaPOtCe9SYluo6vepZLfWn1vrUXvNq/b098KwL7VFjWqrr9KpntdSfWutTe82r9ccDPMADPMADPGiZ9y+n3Ag7
   </data>
  </layer>
  <objectgroup name="collision">
-  <object id="131" name="floor" x="1343.45" y="3609.73">
+  <object id="131" name="floor" x="1343.45" y="4953.73">
    <polyline points="-703.45,38.27 -703.45,166.27 -383.45,166.27 0.55,166.27 128.55,166.27 256.55,166.27 512.55,166.27 512.55,614.27"/>
   </object>
-  <object id="132" name="floor" x="2049" y="3780" width="1152" height="448"/>
-  <object id="134" name="floor" x="3392" y="3776" width="190.5" height="61.5"/>
-  <object id="136" name="floor" x="4160" y="4224">
+  <object id="132" name="floor" x="2049" y="5124" width="1152" height="448"/>
+  <object id="134" name="floor" x="3392" y="5120" width="190.5" height="61.5"/>
+  <object id="136" name="floor" x="4160" y="5568">
    <polyline points="-384,0 -384,-448 -64,-448 192,-448 512,-448 510,2"/>
   </object>
-  <object id="142" name="floor" x="4672" y="3776" width="448" height="64"/>
-  <object id="157" name="floor" x="7359.33" y="2815.67">
+  <object id="142" name="floor" x="4672" y="5120" width="448" height="64"/>
+  <object id="157" name="floor" x="7359.33" y="4159.67">
    <polyline points="0,0 -191.667,0.666667 -191.667,-128 -383.333,-127.667 -383.333,-256.333 -576,-255.667 -574.667,-33"/>
   </object>
-  <object id="158" name="floor" x="5632" y="2560" width="960" height="64"/>
-  <object id="159" name="floor" x="4480" y="2560" width="960" height="64"/>
-  <object id="163" name="floor" x="2880" y="2560" width="1472" height="64"/>
-  <object id="164" name="floor" x="2815" y="2815">
+  <object id="158" name="floor" x="5632" y="3904" width="960" height="64"/>
+  <object id="159" name="floor" x="4480" y="3904" width="960" height="64"/>
+  <object id="163" name="floor" x="2880" y="3904" width="1472" height="64"/>
+  <object id="164" name="floor" x="2815" y="4159">
    <polyline points="65,65 -255,-255 -767,-255 -767,65"/>
   </object>
-  <object id="177" name="floor" x="1088" y="1472.67" width="190.667" height="63.3333"/>
-  <object id="178" name="floor" x="1408" y="1472" width="190.667" height="63.3333"/>
-  <object id="179" name="floor" x="1729.33" y="1471.33" width="189.333" height="64"/>
-  <object id="180" name="floor" x="2048" y="1470" width="191.333" height="66"/>
-  <object id="181" name="floor" x="2305.33" y="1536" width="61.3333" height="64"/>
-  <object id="182" name="floor" x="2432" y="1600" width="63.3333" height="64"/>
-  <object id="183" name="floor" x="2560.67" y="1663.33" width="62.6667" height="64"/>
-  <object id="186" name="floor" x="2817" y="1730">
+  <object id="177" name="floor" x="1088" y="2816.67" width="190.667" height="63.3333"/>
+  <object id="178" name="floor" x="1408" y="2816" width="190.667" height="63.3333"/>
+  <object id="179" name="floor" x="1729.33" y="2815.33" width="189.333" height="64"/>
+  <object id="180" name="floor" x="2048" y="2814" width="191.333" height="66"/>
+  <object id="181" name="floor" x="2305.33" y="2880" width="61.3333" height="64"/>
+  <object id="182" name="floor" x="2432" y="2944" width="63.3333" height="64"/>
+  <object id="183" name="floor" x="2560.67" y="3007.33" width="62.6667" height="64"/>
+  <object id="186" name="floor" x="2817" y="3074">
    <polyline points="-1,-2 -1,-66 63,-66 255,-258 511,-258 511,-2"/>
   </object>
-  <object id="193" name="floor" x="3520" y="1472" width="2112" height="64"/>
-  <object id="198" name="floor" x="5888" y="1537" width="576" height="62.75"/>
-  <object id="201" name="floor" x="6592" y="1537" width="511.75" height="62.875"/>
-  <object id="202" name="floor" x="7232" y="1537" width="192" height="64"/>
-  <object id="204" name="bridge" x="5631.62" y="1472.62" width="64.375" height="18.875"/>
-  <object id="208" name="roof" x="7693" y="2175">
+  <object id="193" name="floor" x="3520" y="2816" width="2112" height="64"/>
+  <object id="198" name="floor" x="5888" y="2881" width="576" height="62.75"/>
+  <object id="201" name="floor" x="6592" y="2881" width="511.75" height="62.875"/>
+  <object id="202" name="floor" x="7232" y="2881" width="192" height="64"/>
+  <object id="204" name="bridge" x="5631.62" y="2816.62" width="64.375" height="18.875"/>
+  <object id="208" name="roof" x="7693" y="3519">
    <polyline points="0,0 -3469,0 -3469,-127 -3662,-127 -3661,0 -4045,2 -4109,1 -4173,1 -4238,0 -4622,0 -4620,-129 -4815,-130 -4815,2 -6670,-1 -6670,-446"/>
   </object>
-  <object id="211" name="wall" x="7684.85" y="4400">
-   <polyline points="0,0 -2.84848,-4394"/>
+  <object id="211" name="wall" x="7684.85" y="5744">
+   <polyline points="0,0 -4.85,-5360"/>
   </object>
-  <object id="212" name="wall" x="639.636" y="3.45455">
-   <polyline points="0,0 0.363636,2876.55"/>
+  <object id="212" name="wall" x="639.636" y="1347.45">
+   <polyline points="0.364,-963.455 0.363636,2876.55"/>
   </object>
-  <object id="213" name="roof" x="644" y="1150">
+  <object id="213" name="roof" x="644" y="2494">
    <polyline points="0,0 6714,4 6716,-896"/>
   </object>
-  <object id="214" name="tuppi" x="7364.5" y="255.75">
-   <polyline points="-4.25,0.875 -4.25,-63.625 -260.75,-63.75 -645.5,320.5 -580.25,320.25 -580.75,385.25 -644.25,385.25 -3908.99,386.447 -3909.5,255.583"/>
+  <object id="214" name="tuppi" x="7364.5" y="1599.75">
+   <polyline points="-4.25,0.875 -4.25,-63.625 -260.75,-63.75 -645.5,320.5 -580.25,320.25 -580.75,385.25 -644.25,385.25 -4100.5,384.25 -4484.5,384.25"/>
   </object>
-<<<<<<< HEAD
-=======
-  <object id="223" name="floor" x="960" y="256" width="64" height="64"/>
->>>>>>> ef83407672d68206381f8b494d539090649a02ea
-  <object id="226" name="floor" x="3968" y="511.5">
-   <polyline points="0,0 0,-64 -128.5,-64 -128,-128 -256,-128 -255.5,-192 -385,-191 -384.5,-256 -704.667,-255.5 -703.667,128.167"/>
+  <object id="227" name="floor" x="2879" y="1984">
+   <polyline points="0,0 -575,0 -1407,0 -2239,0"/>
   </object>
-  <object id="227" name="floor" x="2879" y="640">
-   <polyline points="0,0 1.5,-385 -384,-384 -383.5,0.5"/>
-  </object>
-  <object id="231" name="floor" x="3005" y="255" width="131" height="40"/>
-  <object id="233" name="floor" x="7358" y="2818">
+  <object id="233" name="floor" x="7358" y="4162">
    <polyline points="0,0 2,446 -7355,445"/>
   </object>
-  <object id="236" name="ghostWall" x="640" y="3712">
+  <object id="236" name="ghostWall" x="640" y="5056">
    <polyline points="0,0 0,-512"/>
   </object>
-  <object id="239" name="floor" x="5312" y="3776" width="448" height="64"/>
-  <object id="240" name="floor" x="6144" y="4096">
+  <object id="239" name="floor" x="5312" y="5120" width="448" height="64"/>
+  <object id="240" name="floor" x="6144" y="5440">
    <polyline points="-384,128 -384,-320 0,-320 64,-320 448,-320 448,128"/>
   </object>
-  <object id="242" name="floor" x="6592" y="3776" width="832" height="64"/>
-  <object id="243" name="floor" x="6272" y="3328">
+  <object id="242" name="floor" x="6592" y="5120" width="832" height="64"/>
+  <object id="243" name="floor" x="6272" y="4672">
    <polyline points="-448,-128 -448,320 -256,320 0,320 256,320 256,-128"/>
   </object>
-  <object id="244" name="floor" x="1792" y="2560" width="128" height="320"/>
-  <object id="245" name="floor" x="1536" y="2560" width="128" height="320"/>
-  <object id="246" name="floor" x="1280" y="2560" width="128" height="320"/>
-  <object id="247" name="floor" x="1024" y="2560" width="128" height="320"/>
-  <object id="255" x="3968" y="512">
-   <polyline points="0,0 64,0"/>
+  <object id="244" name="floor" x="1792" y="3904" width="128" height="320"/>
+  <object id="245" name="floor" x="1536" y="3904" width="128" height="320"/>
+  <object id="246" name="floor" x="1280" y="3904" width="128" height="320"/>
+  <object id="247" name="floor" x="1024" y="3904" width="128" height="320"/>
+  <object id="258" name="floor" x="4416" y="1472" width="190.667" height="354.667"/>
+  <object id="259" name="floor" x="4672" y="1536" width="128" height="64"/>
+  <object id="261" name="floor" x="4928" y="1600" width="128" height="64"/>
+  <object id="262" name="floor" x="5184" y="1664" width="128" height="64"/>
+  <object id="263" name="floor" x="5440" y="1728" width="128" height="64"/>
+  <object id="264" name="floor" x="5696" y="1792" width="128" height="64"/>
+  <object id="266" name="floor" x="3328" y="640" width="512" height="1344"/>
+  <object id="270" name="roof" x="7680" y="832">
+   <polyline points="0,0 -3072,0 -3072,448 -3264,448 -3264,-64 -3264,-128 -3264,-192"/>
   </object>
-  <object id="257" name="deathZone" x="640" y="348" width="1856" height="320">
+  <object id="271" name="deathZone" x="4608" y="384" width="3072" height="64">
    <properties>
     <property name="killsIA" value="true"/>
    </properties>
   </object>
+  <object id="272" name="deathZone" x="640" y="384" width="3008" height="64">
+   <properties>
+    <property name="killsIA" value="true"/>
+   </properties>
+  </object>
+  <object id="273" x="3840" y="192">
+   <polyline points="0,0 -832,0"/>
+  </object>
+  <object id="275" x="4416" y="192">
+   <polyline points="0,0 832,0"/>
+  </object>
  </objectgroup>
  <objectgroup name="items">
-  <object id="51" name="color" x="6848.67" y="2438" width="62" height="64">
+  <object id="51" name="color" x="6848.67" y="3782" width="62" height="64">
    <properties>
     <property name="power" value="0.10"/>
    </properties>
   </object>
-  <object id="52" name="color" x="3842.02" y="3508.08" width="62" height="64">
+  <object id="52" name="color" x="3842.02" y="4852.08" width="62" height="64">
    <properties>
     <property name="power" value="0.10"/>
    </properties>
   </object>
-  <object id="55" name="color" x="3073.7" y="3570.51" width="62" height="64">
+  <object id="55" name="color" x="3073.7" y="4914.51" width="62" height="64">
    <properties>
     <property name="power" value="0.10"/>
    </properties>
   </object>
-  <object id="56" name="color" x="2304" y="3648" width="62" height="64">
+  <object id="56" name="color" x="2304" y="4992" width="62" height="64">
    <properties>
     <property name="power" value="0.05"/>
    </properties>
   </object>
-  <object id="82" name="color" x="3038" y="36" width="62" height="64">
+  <object id="82" name="color" x="3201" y="1664" width="62" height="64">
    <properties>
     <property name="power" value="0.99"/>
    </properties>
   </object>
-  <object id="83" name="color" x="3037" y="109" width="62" height="64">
+  <object id="83" name="color" x="3200" y="1737" width="62" height="64">
    <properties>
     <property name="power" value="0.05"/>
    </properties>
   </object>
-  <object id="85" name="color" x="3037.33" y="178.67" width="62" height="64">
+  <object id="85" name="color" x="3200.33" y="1806.67" width="62" height="64">
    <properties>
     <property name="power" value="0.05"/>
    </properties>
   </object>
-  <object id="87" name="color" x="2176" y="1380" width="62" height="64">
+  <object id="87" name="color" x="2176" y="2724" width="62" height="64">
    <properties>
     <property name="power" value="0.015"/>
    </properties>
   </object>
-  <object id="88" name="color" x="2368" y="2432" width="62" height="64">
+  <object id="88" name="color" x="2368" y="3776" width="62" height="64">
    <properties>
     <property name="power" value="0.015"/>
    </properties>
   </object>
-  <object id="89" name="color" x="2240" y="2432" width="62" height="64">
+  <object id="89" name="color" x="2240" y="3776" width="62" height="64">
    <properties>
     <property name="power" value="0.05"/>
    </properties>
   </object>
-  <object id="90" name="color" x="3841.35" y="3573.39" width="62" height="64">
+  <object id="90" name="color" x="3841.35" y="4917.39" width="62" height="64">
    <properties>
     <property name="power" value="0.16"/>
    </properties>
   </object>
-  <object id="91" name="color" x="3073.33" y="3504" width="62" height="64">
+  <object id="91" name="color" x="3073.33" y="4848" width="62" height="64">
    <properties>
     <property name="power" value="0.10"/>
    </properties>
   </object>
-  <object id="93" name="color" x="3200" y="1344" width="62" height="64">
+  <object id="93" name="color" x="3200" y="2688" width="62" height="64">
    <properties>
     <property name="power" value="0.020"/>
    </properties>
   </object>
-  <object id="94" name="color" x="3136" y="1344" width="62" height="64">
+  <object id="94" name="color" x="3136" y="2688" width="62" height="64">
    <properties>
     <property name="power" value="0.15"/>
    </properties>
   </object>
-  <object id="148" name="deathZone" x="640.879" y="2781.74" width="6143" height="97.6667">
+  <object id="148" name="deathZone" x="640.879" y="4125.74" width="6143" height="97.6667">
    <properties>
     <property name="killsIA" value="true"/>
    </properties>
   </object>
-  <object id="149" name="deathZone" x="1855.88" y="4152.74" width="5824" height="256">
+  <object id="149" name="deathZone" x="1855.88" y="5496.74" width="5824" height="256">
    <properties>
     <property name="killsIA" value="true"/>
    </properties>
   </object>
-  <object id="153" name="spawn" x="1952.36" y="4008.52" width="64" height="64">
+  <object id="153" name="spawn" x="1952.36" y="5352.52" width="64" height="64">
    <properties>
     <property name="graphic" value="fire"/>
     <property name="ia" value="jumper"/>
@@ -205,7 +211,7 @@
     <property name="speedY" value="8"/>
    </properties>
   </object>
-  <object id="154" name="spawn" x="3295" y="4031" width="64" height="64">
+  <object id="154" name="spawn" x="3295" y="5375" width="64" height="64">
    <properties>
     <property name="graphic" value="fire"/>
     <property name="ia" value="jumper"/>
@@ -215,7 +221,7 @@
     <property name="speedY" value="9"/>
    </properties>
   </object>
-  <object id="155" name="spawn" x="3679" y="4033" width="64" height="64">
+  <object id="155" name="spawn" x="3679" y="5377" width="64" height="64">
    <properties>
     <property name="graphic" value="fire"/>
     <property name="ia" value="jumper"/>
@@ -225,7 +231,7 @@
     <property name="speedY" value="9"/>
    </properties>
   </object>
-  <object id="165" name="spawn" x="1984" y="2688" width="64" height="64">
+  <object id="165" name="spawn" x="1984" y="4032" width="64" height="64">
    <properties>
     <property name="graphic" value="fire"/>
     <property name="ia" value="jumper"/>
@@ -235,7 +241,7 @@
     <property name="speedY" value="7"/>
    </properties>
   </object>
-  <object id="166" name="spawn" x="1728" y="2688" width="64" height="64">
+  <object id="166" name="spawn" x="1728" y="4032" width="64" height="64">
    <properties>
     <property name="graphic" value="fire"/>
     <property name="ia" value="jumper"/>
@@ -245,7 +251,7 @@
     <property name="speedY" value="7"/>
    </properties>
   </object>
-  <object id="167" name="spawn" x="1472" y="2688" width="64" height="64">
+  <object id="167" name="spawn" x="1472" y="4032" width="64" height="64">
    <properties>
     <property name="graphic" value="fire"/>
     <property name="ia" value="jumper"/>
@@ -255,7 +261,7 @@
     <property name="speedY" value="7"/>
    </properties>
   </object>
-  <object id="168" name="spawn" x="1216" y="2688" width="64" height="64">
+  <object id="168" name="spawn" x="1216" y="4032" width="64" height="64">
    <properties>
     <property name="graphic" value="fire"/>
     <property name="ia" value="jumper"/>
@@ -265,51 +271,51 @@
     <property name="speedY" value="7"/>
    </properties>
   </object>
-  <object id="169" name="spawn" x="5824" y="2495" width="63" height="64.5">
+  <object id="169" name="spawn" x="5824" y="3839" width="63" height="64.5">
    <properties>
     <property name="spawnInterval" value="5"/>
     <property name="speed" value="0.8"/>
    </properties>
   </object>
-  <object id="171" name="spawn" x="4672" y="2496" width="63" height="64.5">
+  <object id="171" name="spawn" x="4672" y="3840" width="63" height="64.5">
    <properties>
     <property name="spawnInterval" value="5"/>
     <property name="speed" value="0.8"/>
    </properties>
   </object>
-  <object id="172" name="spawn" x="4065.17" y="2091.42" width="63" height="64.5">
+  <object id="172" name="spawn" x="4065.17" y="3435.42" width="63" height="64.5">
    <properties>
     <property name="spawnInterval" value="5"/>
     <property name="speed" value="0.7"/>
    </properties>
   </object>
-  <object id="174" name="spawn" x="2910.5" y="2089.75" width="63" height="64.5">
+  <object id="174" name="spawn" x="2910.5" y="3433.75" width="63" height="64.5">
    <properties>
     <property name="spawnInterval" value="5"/>
     <property name="speed" value="0.7"/>
    </properties>
   </object>
-  <object id="187" name="deathZone" x="1023.33" y="1701.33" width="6657.09" height="27.6667">
+  <object id="187" name="deathZone" x="1023.33" y="3045.33" width="6657.09" height="27.6667">
    <properties>
     <property name="killsIA" value="true"/>
    </properties>
   </object>
-  <object id="190" name="deathZone" x="1472.5" y="1150.5" width="61" height="41"/>
-  <object id="191" name="deathZone" x="1793.5" y="1152.5" width="61" height="41"/>
-  <object id="192" name="deathZone" x="2113.5" y="1151.5" width="61" height="41"/>
-  <object id="194" name="spawn" x="5505" y="1404.25" width="63" height="64.5">
+  <object id="190" name="deathZone" x="1472.5" y="2494.5" width="61" height="41"/>
+  <object id="191" name="deathZone" x="1793.5" y="2496.5" width="61" height="41"/>
+  <object id="192" name="deathZone" x="2113.5" y="2495.5" width="61" height="41"/>
+  <object id="194" name="spawn" x="5505" y="2748.25" width="63" height="64.5">
    <properties>
     <property name="spawnInterval" value="5"/>
     <property name="speed" value="-0.8"/>
    </properties>
   </object>
-  <object id="197" name="spawn" x="4992" y="1408" width="63" height="64.5">
+  <object id="197" name="spawn" x="4992" y="2752" width="63" height="64.5">
    <properties>
     <property name="spawnInterval" value="5"/>
     <property name="speed" value="-0.8"/>
    </properties>
   </object>
-  <object id="203" name="spawn" x="7234" y="1468" width="64" height="64">
+  <object id="203" name="spawn" x="7234" y="2812" width="64" height="64">
    <properties>
     <property name="graphic" value="fire"/>
     <property name="ia" value="jumper"/>
@@ -319,51 +325,39 @@
     <property name="speedY" value="4.6"/>
    </properties>
   </object>
-  <object id="207" name="deathZone" x="1023.67" y="2176" width="64.6667" height="37.6667"/>
-  <object id="209" name="playerStart" x="2112" y="1344" width="47.3333" height="41"/>
-  <object id="215" name="deathZone" x="6655" y="604" width="129" height="37">
+  <object id="207" name="deathZone" x="1023.67" y="3520" width="64.6667" height="37.6667"/>
+  <object id="209" name="playerStart" x="7168" y="1472" width="47.3333" height="41"/>
+  <object id="215" name="deathZone" x="6655" y="1948" width="129" height="37">
    <properties>
     <property name="killsIA" value="true"/>
    </properties>
   </object>
-  <object id="217" name="spawn" x="3520" y="512" width="63" height="64.5">
+  <object id="217" name="spawn" x="4288" y="1856" width="63" height="64.5">
    <properties>
-    <property name="spawnInterval" value="5"/>
+    <property name="spawnInterval" value="6"/>
     <property name="speed" value="0.8"/>
    </properties>
   </object>
-  <object id="218" name="spawn" x="3456" y="512" width="63" height="64.5">
+  <object id="218" name="spawn" x="4159" y="1856" width="63" height="64.5">
    <properties>
-    <property name="spawnInterval" value="5"/>
+    <property name="spawnInterval" value="6"/>
     <property name="speed" value="0.8"/>
    </properties>
   </object>
-  <object id="219" name="spawn" x="3584" y="512" width="63" height="64.5">
+  <object id="219" name="spawn" x="4416" y="1856" width="63" height="64.5">
    <properties>
-    <property name="spawnInterval" value="5"/>
+    <property name="spawnInterval" value="6"/>
     <property name="speed" value="0.8"/>
    </properties>
   </object>
-  <object id="221" name="spawn" x="3840" y="576" width="63" height="64.5">
+  <object id="221" name="spawn" x="4544" y="1856" width="63" height="64.5">
    <properties>
     <property name="spawnInterval" value="3"/>
     <property name="speed" value="0.8"/>
    </properties>
   </object>
-  <object id="230" name="deathZone" x="5834.33" y="3598.33" width="683.818" height="63.4545"/>
-<<<<<<< HEAD
-=======
-  <object id="225" name="spawn" x="704" y="192" width="64" height="64">
-   <properties>
-    <property name="ia" value="jumper"/>
-    <property name="interval" value="7"/>
-    <property name="spawnInterval" value="60"/>
-    <property name="speed" value="0"/>
-    <property name="speedY" value="5"/>
-   </properties>
-  </object>
->>>>>>> ef83407672d68206381f8b494d539090649a02ea
-  <object id="241" name="spawn" x="5216" y="4032" width="64" height="64">
+  <object id="230" name="deathZone" x="5834.33" y="4942.33" width="683.818" height="63.4545"/>
+  <object id="241" name="spawn" x="5216" y="5376" width="64" height="64">
    <properties>
     <property name="graphic" value="fire"/>
     <property name="ia" value="jumper"/>
@@ -373,18 +367,14 @@
     <property name="speedY" value="9"/>
    </properties>
   </object>
-<<<<<<< HEAD
-  <object id="250" name="life" x="5184" y="3584" width="64" height="64"/>
-  <object id="251" name="life" x="6912" y="3584" width="64" height="64"/>
-  <object id="252" name="life" x="2304" y="2368" width="64" height="64"/>
-  <object id="253" name="life" x="3168" y="1280" width="64" height="64"/>
-  <object id="254" name="life" x="7232" y="64" width="64" height="64"/>
-=======
-  <object id="250" name="endLevel" x="960" y="64" width="64" height="64"/>
->>>>>>> ef83407672d68206381f8b494d539090649a02ea
+  <object id="250" name="life" x="5184" y="4928" width="64" height="64"/>
+  <object id="251" name="life" x="6912" y="4928" width="64" height="64"/>
+  <object id="252" name="life" x="2304" y="3712" width="64" height="64"/>
+  <object id="253" name="life" x="3168" y="2624" width="64" height="64"/>
+  <object id="254" name="life" x="7232" y="1408" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="platform">
-  <object id="143" name="platform" x="7520.67" y="3802.67">
+  <object id="143" name="platform" x="7520.67" y="5146.67">
    <properties>
     <property name="size" value="3"/>
     <property name="speed" value="0.6"/>
@@ -392,7 +382,7 @@
    </properties>
    <polyline points="0,0 -0.666667,-1175.67"/>
   </object>
-  <object id="206" name="platform" x="7552" y="1534">
+  <object id="206" name="platform" x="7552" y="2878">
    <properties>
     <property name="respawnInterval" value="5"/>
     <property name="size" value="3"/>
@@ -400,13 +390,21 @@
    </properties>
    <polyline points="0,0 0.333333,-1404.67"/>
   </object>
-  <object id="248" name="platform" x="832" y="2624">
+  <object id="248" name="platform" x="832" y="3968">
    <properties>
     <property name="size" value="5"/>
     <property name="speed" value="0.6"/>
     <property name="waitStart" value="true"/>
    </properties>
    <polyline points="0,0 0,-1152"/>
+  </object>
+  <object id="267" name="platform" x="4128" y="1536">
+   <properties>
+    <property name="size" value="9"/>
+    <property name="speed" value="0.6"/>
+    <property name="waitStart" value="true"/>
+   </properties>
+   <polyline points="-32,0 -32,-1344"/>
   </object>
  </objectgroup>
 </map>
