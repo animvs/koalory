@@ -12,6 +12,7 @@ import br.com.animvs.koalory.entities.engine.ia.IAStraight;
 import br.com.animvs.koalory.entities.game.CheckPoint;
 import br.com.animvs.koalory.entities.game.Color;
 import br.com.animvs.koalory.entities.game.DeathZone;
+import br.com.animvs.koalory.entities.game.EndLevel;
 import br.com.animvs.koalory.entities.game.Entity;
 import br.com.animvs.koalory.entities.game.Foe;
 import br.com.animvs.koalory.entities.game.Item;
@@ -84,6 +85,14 @@ public final class EntitiesController extends BaseController {
         items.add(deathZone);
     }
 
+    public void createEndLevel(RectangleMapObject rectangle) {
+        EndLevel endLevel = new EndLevel(getController());
+        endLevel.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
+        endLevel.initialize();
+
+        items.add(endLevel);
+    }
+
     public void createLife(RectangleMapObject rectangle) {
         Life life = new Life(getController());
         life.initialize();
@@ -101,9 +110,9 @@ public final class EntitiesController extends BaseController {
         items.add(checkpoint);
     }
 
-    public void createSender(Vector2 position, String map) {
+    public void createSender(RectangleMapObject rectangle, String map) {
         Sender sender = new Sender(getController(), map);
-        sender.setPosition(position.x, position.y);
+        sender.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
         sender.initialize();
         items.add(sender);
     }
@@ -114,10 +123,6 @@ public final class EntitiesController extends BaseController {
 
     public void createPlatform(PolylineMapObject line) {
         platforms.add(new StaticPlatform(getController(), line));
-    }
-
-    public void createEntityBody(Entity entityOwner) {
-        createEntityBody(entityOwner, 1f, true);
     }
 
     public void createEntityBody(Entity entityOwner, float scale, boolean rectangle) {
@@ -169,20 +174,7 @@ public final class EntitiesController extends BaseController {
     }
 
     public void processMatchEnd() {
-        if (getController().getColorRecovered() >= 1f) {
-            getController().endMatch();
-
-            if (getController().getLevel().getMapName().equals("castle1")) {
-                getController().getProfile().resetProfile();
-                getController().getUI().showUIGameWin();
-            } else {
-                getController().getProfile().registerLevelClear(getController().getLevel().getMapName());
-                /*if (getController().getProfile().checkCastleFreed())
-                    getController().startMatch("castle1");
-                else*/
-                getController().startMatch(null);
-            }
-        } else if ((getController().getLives() == 0) && (getController().getPlayers().getTotalPlayersInGame() == 0)) {
+        if ((getController().getLives() == 0) && (getController().getPlayers().getTotalPlayersInGame() == 0)) {
             getController().endMatch();
             getController().getUI().showUIGameOver();
         }

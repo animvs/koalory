@@ -38,6 +38,8 @@ public final class LoadController extends AnimvsLoadController {
     public static final String SKELETON_SHADOW = "data/graphics/mobiles/shadow/skeleton.skel";
 
     public static final String TEXTURE_BACKGROUND = "data/graphics/background/background.png";
+    public static final String TEXTURE_BACKGROUND_CASTLE = "data/graphics/background/castle.png";
+    public static final String TEXTURE_BACKGROUND_DESERT = "data/graphics/background/desert.png";
 
     public static final String SKELETON_COLOR = "data/graphics/objects/color.skel";
     public static final String SKELETON_PLATFORM = "data/graphics/objects/platform.skel";
@@ -67,6 +69,8 @@ public final class LoadController extends AnimvsLoadController {
 
         //Background:
         loadParameters.add(new AnimvsLoadParameter(TEXTURE_BACKGROUND, Texture.class, getBackgroundTextureParameter()));
+        loadParameters.add(new AnimvsLoadParameter(TEXTURE_BACKGROUND_CASTLE, Texture.class, getBackgroundTextureParameter()));
+        loadParameters.add(new AnimvsLoadParameter(TEXTURE_BACKGROUND_DESERT, Texture.class, getBackgroundTextureParameter()));
 
         // Skeletal Animations:
         loadParameters.add(new AnimvsLoadParameter(SKELETON_CHARACTER, AnimacaoSkeletalData.class, createSkeletalParameters(ATLAS_CHARACTER)));

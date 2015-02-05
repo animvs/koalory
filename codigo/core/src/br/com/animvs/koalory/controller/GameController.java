@@ -123,6 +123,10 @@ public final class GameController implements Disposable {
         return profile;
     }
 
+    public BackgroundController getBackground() {
+        return background;
+    }
+
     public GameController() {
         crypto = new AnimvsIntCrypto(Configurations.H_C);
         load = new LoadController(this);

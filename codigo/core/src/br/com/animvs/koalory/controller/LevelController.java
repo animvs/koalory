@@ -59,6 +59,7 @@ public class LevelController implements Disposable {
 
         createItemsAndSpawners();
         createPlatforms();
+        preparebackground(map);
     }
 
     public void render() {
@@ -112,6 +113,15 @@ public class LevelController implements Disposable {
 
             controller.getEntities().createPlatform(line);
         }
+    }
+
+    private void preparebackground(String map) {
+        if (map.equals("castle1"))
+            controller.getBackground().setType(BackgroundController.Type.CASTLE);
+        else if (map.equals("sandPlains1-1"))
+            controller.getBackground().setType(BackgroundController.Type.DESERT);
+        else
+            controller.getBackground().setType(BackgroundController.Type.JUNGLE);
     }
 
     private void createItemsAndSpawners() {
@@ -187,14 +197,13 @@ public class LevelController implements Disposable {
                 }
 
                 RectangleMapObject rectangle = castLevelObject(objects.get(i));
-                Vector2 position = new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y);
-
-                controller.getEntities().createSender(position, mapName);
+                controller.getEntities().createSender(rectangle, mapName);
             } else if (objects.get(i).getName().toLowerCase().trim().equals("deathzone")) {
                 RectangleMapObject rectangle = castLevelObject(objects.get(i));
                 controller.getEntities().createDeathZone(rectangle);
             } else if (objects.get(i).getName().toLowerCase().trim().equals("endlevel")) {
-                //TODO: Create a new 'endlevel' item
+                RectangleMapObject rectangle = castLevelObject(objects.get(i));
+                controller.getEntities().createEndLevel(rectangle);
             } else if (objects.get(i).getName().toLowerCase().trim().equals("playerstart")) {
                 RectangleMapObject rectangle = castLevelObject(objects.get(i));
                 playerStart.set(rectangle.getRectangle().getX(), rectangle.getRectangle().getY());
