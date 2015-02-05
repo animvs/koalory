@@ -115,7 +115,7 @@ public class LevelController implements Disposable {
         }
     }
 
-    private void preparebackground(String map){
+    private void preparebackground(String map) {
         if (map.equals("castle1"))
             controller.getBackground().setType(BackgroundController.Type.CASTLE);
         else if (map.equals("sandPlains1-1"))
@@ -204,7 +204,8 @@ public class LevelController implements Disposable {
                 RectangleMapObject rectangle = castLevelObject(objects.get(i));
                 controller.getEntities().createDeathZone(rectangle);
             } else if (objects.get(i).getName().toLowerCase().trim().equals("endlevel")) {
-                //TODO: Create a new 'endlevel' item
+                RectangleMapObject rectangle = castLevelObject(objects.get(i));
+                controller.getEntities().createEndLevel(rectangle);
             } else if (objects.get(i).getName().toLowerCase().trim().equals("playerstart")) {
                 RectangleMapObject rectangle = castLevelObject(objects.get(i));
                 playerStart.set(rectangle.getRectangle().getX(), rectangle.getRectangle().getY());

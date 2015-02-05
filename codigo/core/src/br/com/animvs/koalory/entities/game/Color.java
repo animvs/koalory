@@ -44,7 +44,6 @@ public class Color extends Item {
         super.collect(player);
 
         getController().addColorRecovered(colorRecovered);
-        getController().getEntities().processMatchEnd();
         getController().getUI().castValueColors();
     }
 

@@ -12,6 +12,7 @@ import br.com.animvs.koalory.entities.engine.ia.IAStraight;
 import br.com.animvs.koalory.entities.game.CheckPoint;
 import br.com.animvs.koalory.entities.game.Color;
 import br.com.animvs.koalory.entities.game.DeathZone;
+import br.com.animvs.koalory.entities.game.EndLevel;
 import br.com.animvs.koalory.entities.game.Entity;
 import br.com.animvs.koalory.entities.game.Foe;
 import br.com.animvs.koalory.entities.game.Item;
@@ -82,6 +83,14 @@ public final class EntitiesController extends BaseController {
         DeathZone deathZone = new DeathZone(getController(), rectangle);
         deathZone.initialize();
         items.add(deathZone);
+    }
+
+    public void createEndLevel(RectangleMapObject rectangle) {
+        EndLevel endLevel = new EndLevel(getController());
+        endLevel.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
+        endLevel.initialize();
+
+        items.add(endLevel);
     }
 
     public void createLife(RectangleMapObject rectangle) {
@@ -169,20 +178,7 @@ public final class EntitiesController extends BaseController {
     }
 
     public void processMatchEnd() {
-        if (getController().getColorRecovered() >= 1f) {
-            getController().endMatch();
-
-            if (getController().getLevel().getMapName().equals("castle1")) {
-                getController().getProfile().resetProfile();
-                getController().getUI().showUIGameWin();
-            } else {
-                getController().getProfile().registerLevelClear(getController().getLevel().getMapName());
-                /*if (getController().getProfile().checkCastleFreed())
-                    getController().startMatch("castle1");
-                else*/
-                getController().startMatch(null);
-            }
-        } else if ((getController().getLives() == 0) && (getController().getPlayers().getTotalPlayersInGame() == 0)) {
+        if ((getController().getLives() == 0) && (getController().getPlayers().getTotalPlayersInGame() == 0)) {
             getController().endMatch();
             getController().getUI().showUIGameOver();
         }
