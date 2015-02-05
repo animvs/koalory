@@ -59,7 +59,7 @@ public final class DeathZone extends Item {
             return;
 
         Gdx.app.log("KILL", "Player " + getController().getPlayers().getPlayerIndex(player) + " has been killed by a death zone");
-        player.eventDeath();
+        player.death(this);
     }
 
     @Override

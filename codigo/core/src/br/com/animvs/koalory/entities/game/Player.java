@@ -30,8 +30,6 @@ public final class Player extends Mobile {
     private Vector2 positionCache;
     private boolean mustJump;
 
-    /*private float friction;*/
-
     private Platform groundedPlatform;
     private Vector2 groundedPlatformLastPosition;
     private boolean grounded;
@@ -103,8 +101,6 @@ public final class Player extends Mobile {
                 getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_JUMP_FORCE * Configurations.CORE_PHYSICS_MULTIPLIER, true);
             }
 
-            computeDeath();
-
             if (!grounded) {
                 clampByCamera();
 
@@ -134,7 +130,7 @@ public final class Player extends Mobile {
     public void draw(Batch batch, float parentAlpha) {
         if (grounded && groundedPlatform != null) {
 
-            setPhysicsFriction(0f);
+            //setPhysicsFriction(0f);
             //getBody().applyForceToCenter(groundedPlatform.getBody().getLinearVelocity().x * 0.5f *//** Configurations.CORE_PHYSICS_MULTIPLIER*//*, -1f, true);
             float speedX = groundedPlatform.getBody().getLinearVelocity().x + getInput().getMovementX();
 
@@ -176,12 +172,6 @@ public final class Player extends Mobile {
             getController().getSound().playJump();
     }
 
-    public void eventDeath() {
-        dispose();
-
-        getController().getSound().playCharacterDeath();
-    }
-
     @Override
     public void dispose() {
         super.dispose();
@@ -209,24 +199,19 @@ public final class Player extends Mobile {
             }
 
             spawnLocation.set(playerReference.getX(), playerReference.getY());//1.25f);
-        } /*else
-            spawnLocation.set(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);*/
+        }
 
-        //physicFixture = body.getFixtureList().get(0);
-
-        /*if (getController().getLevel().getMapName().equals("frostPlateau1-1"))
-            friction = 0.15f * 0.15f; //Less friction on ice
-        else if (getController().getLevel().getMapName().equals("sandPlains1-1")) {
-            friction = 0.15f * 1.35f; //More friction on sand
-        } else
-            friction = 0.15f; //Normal friction*/
+        for (int i = 0; i < body.getFixtureList().size; i++)
+            body.getFixtureList().get(i).setRestitution(0.1f);
 
         setPosition(spawnLocation.x, spawnLocation.y);
     }
 
     @Override
     protected void eventDeath(Entity killer) {
+        dispose();
 
+        getController().getSound().playCharacterDeath();
     }
 
     public void computeInput() {
@@ -251,11 +236,6 @@ public final class Player extends Mobile {
 
             getBody().applyForceToCenter(input.getMovementX() * 0.35f, 0f, true);
         }
-    }
-
-    private void computeDeath() {
-        if (getY() <= 0f)
-            eventDeath();
     }
 
     public void prepareAnimation(String newAnimationName) {

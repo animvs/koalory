@@ -194,16 +194,16 @@ public final class PhysicsController extends AnimvsPhysicsController {
                                     Gdx.app.log("KILL", "Player " + (playerIndex == -1 ? "UNKNOWN" : String.valueOf(playerIndex)) + " has killed a Koala");
                                     foe.death(player);
                                 } else {
-                                    //Player has killed the foe by jumping it's head:
+                                    //Player has been touched by a foe:
                                     //DEPRECATED: Player's no longer are instant killed by foes
                                     int playerIndex = -1;
                                     if (Configurations.DEBUG_PLAYER_IMMORTAL)
                                         return;
 
-                                    try {
+                                    /*try {
                                         playerIndex = controller.getPlayers().getPlayerIndex(player);
                                     } catch (Exception e) {
-                                    }
+                                    }*/
 
                                     //Player has been damaged by the foe:
                                     /*Gdx.app.log("KILL", "Player " + (playerIndex == -1 ? "UNKNOWN" : String.valueOf(playerIndex)) + " has been killed by a Koala");
