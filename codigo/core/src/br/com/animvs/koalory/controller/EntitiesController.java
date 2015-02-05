@@ -110,9 +110,9 @@ public final class EntitiesController extends BaseController {
         items.add(checkpoint);
     }
 
-    public void createSender(Vector2 position, String map) {
+    public void createSender(RectangleMapObject rectangle, String map) {
         Sender sender = new Sender(getController(), map);
-        sender.setPosition(position.x, position.y);
+        sender.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
         sender.initialize();
         items.add(sender);
     }

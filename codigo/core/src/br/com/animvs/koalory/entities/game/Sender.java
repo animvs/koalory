@@ -39,7 +39,7 @@ public final class Sender extends Item {
     @Override
     protected void eventAfterBodyCreated(Body body) {
         super.eventAfterBodyCreated(body);
-        setPosition(getX() + (Configurations.GAMEPLAY_ENTITY_SIZE_X) / 2f, getY() + (Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
+        setPosition(getX(), getY());
     }
 
     @Override

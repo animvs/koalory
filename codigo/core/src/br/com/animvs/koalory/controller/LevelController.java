@@ -197,9 +197,7 @@ public class LevelController implements Disposable {
                 }
 
                 RectangleMapObject rectangle = castLevelObject(objects.get(i));
-                Vector2 position = new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y);
-
-                controller.getEntities().createSender(position, mapName);
+                controller.getEntities().createSender(rectangle, mapName);
             } else if (objects.get(i).getName().toLowerCase().trim().equals("deathzone")) {
                 RectangleMapObject rectangle = castLevelObject(objects.get(i));
                 controller.getEntities().createDeathZone(rectangle);
