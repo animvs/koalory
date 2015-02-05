@@ -1,12 +1,9 @@
 package br.com.animvs.koalory.controller;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -18,7 +15,41 @@ import br.com.animvs.koalory.Configurations;
 public final class BackgroundController extends BaseController {
     private Stage stage;
 
-    public Viewport getViewport(){
+    public enum Type {
+        JUNGLE, DESERT, CASTLE
+    }
+
+    private Type type;
+
+    public void setType(Type type) {
+        if (this.type == type)
+            return;
+
+        this.type = type;
+
+        Image newBackground;
+
+        switch (type) {
+            case JUNGLE:
+                newBackground = new Image(getController().getLoad().get(LoadController.TEXTURE_BACKGROUND, Texture.class));
+                break;
+            case CASTLE:
+                newBackground = new Image(getController().getLoad().get(LoadController.TEXTURE_BACKGROUND_CASTLE, Texture.class));
+                break;
+            case DESERT:
+                newBackground = new Image(getController().getLoad().get(LoadController.TEXTURE_BACKGROUND_DESERT, Texture.class));
+                break;
+            default:
+                throw new RuntimeException("Unknown background type: " + type.name());
+        }
+
+        stage.clear();
+        stage.addActor(newBackground);
+
+        //resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+
+    public Viewport getViewport() {
         return stage.getViewport();
     }
 
@@ -29,11 +60,7 @@ public final class BackgroundController extends BaseController {
 
         //TODO: The right viewport should be FitViewport but for some reason, it's not working:
         stage = new Stage(new FitViewport(Configurations.RESOLUTION_REAL.x, Configurations.RESOLUTION_REAL.y), batch);
-
-        Image background = new Image(getController().getLoad().get(LoadController.TEXTURE_BACKGROUND, Texture.class));
-
-        stage.addActor(background);
-        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        setType(Type.JUNGLE);
     }
 
     @Override

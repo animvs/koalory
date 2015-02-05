@@ -59,6 +59,7 @@ public class LevelController implements Disposable {
 
         createItemsAndSpawners();
         createPlatforms();
+        preparebackground(map);
     }
 
     public void render() {
@@ -112,6 +113,15 @@ public class LevelController implements Disposable {
 
             controller.getEntities().createPlatform(line);
         }
+    }
+
+    private void preparebackground(String map){
+        if (map.equals("castle1"))
+            controller.getBackground().setType(BackgroundController.Type.CASTLE);
+        else if (map.equals("sandPlains1-1"))
+            controller.getBackground().setType(BackgroundController.Type.DESERT);
+        else
+            controller.getBackground().setType(BackgroundController.Type.JUNGLE);
     }
 
     private void createItemsAndSpawners() {
