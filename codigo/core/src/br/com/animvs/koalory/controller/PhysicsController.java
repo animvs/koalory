@@ -206,9 +206,9 @@ public final class PhysicsController extends AnimvsPhysicsController {
                                     }
 
                                     //Player has been damaged by the foe:
-                                    Gdx.app.log("KILL", "Player " + (playerIndex == -1 ? "UNKNOWN" : String.valueOf(playerIndex)) + " has been killed by a Koala");
-                                    player.eventDeath();
-                                    //player.eventTouched(foe, contact);
+                                    /*Gdx.app.log("KILL", "Player " + (playerIndex == -1 ? "UNKNOWN" : String.valueOf(playerIndex)) + " has been killed by a Koala");
+                                    player.eventDeath();*/
+                                    player.eventTouched(foe, contact);
                                 }
                                 return;
                             }
