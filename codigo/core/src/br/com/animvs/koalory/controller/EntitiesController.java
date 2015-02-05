@@ -1,6 +1,5 @@
 package br.com.animvs.koalory.controller;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
@@ -15,6 +14,7 @@ import br.com.animvs.koalory.entities.game.DeathZone;
 import br.com.animvs.koalory.entities.game.Entity;
 import br.com.animvs.koalory.entities.game.Foe;
 import br.com.animvs.koalory.entities.game.Item;
+import br.com.animvs.koalory.entities.game.Life;
 import br.com.animvs.koalory.entities.game.Sender;
 import br.com.animvs.koalory.entities.game.Spawner;
 import br.com.animvs.koalory.entities.game.platforms.Platform;
@@ -74,13 +74,21 @@ public final class EntitiesController extends BaseController {
         items.add(color);
         color.setPosition(x + Configurations.CORE_TILE_SIZE / 2f, y + Configurations.CORE_TILE_SIZE / 2f);
         color.initialize();
-        Gdx.app.log("ITEM", "Color pickup Spawned: X: " + x + " Y: " + y);
+        //Gdx.app.log("ITEM", "Color pickup Spawned: X: " + x + " Y: " + y);
     }
 
     public void createDeathZone(RectangleMapObject rectangle) {
         DeathZone deathZone = new DeathZone(getController(), rectangle);
         deathZone.initialize();
         items.add(deathZone);
+    }
+
+    public void createLife(RectangleMapObject rectangle) {
+        Life life = new Life(getController());
+        life.initialize();
+        life.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
+
+        items.add(life);
     }
 
     public void createSender(Vector2 position, String map) {

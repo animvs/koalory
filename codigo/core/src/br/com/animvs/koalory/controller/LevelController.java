@@ -198,6 +198,9 @@ public class LevelController implements Disposable {
             } else if (objects.get(i).getName().toLowerCase().trim().equals("playerstart")) {
                 RectangleMapObject rectangle = castLevelObject(objects.get(i));
                 playerStart.set(rectangle.getRectangle().getX(), rectangle.getRectangle().getY());
+            } else if (objects.get(i).getName().toLowerCase().trim().equals("life")) {
+                RectangleMapObject rectangle = castLevelObject(objects.get(i));
+                controller.getEntities().createLife(rectangle);
             } else
                 throw new RuntimeException("Unknown object type when loading map - Map: " + mapName + " object: " + objects.get(i).getName());
         }
