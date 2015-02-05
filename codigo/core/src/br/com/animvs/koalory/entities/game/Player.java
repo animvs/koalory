@@ -352,7 +352,7 @@ public final class Player extends Mobile {
 
         float repulsionForce = 50f;
 
-        contactCache.set(getX() - foe.getX(),getY() - foe.getY()).nor();
+        contactCache.set(getX() - foe.getX(), getY() - foe.getY()).nor();
 
         /*getBody().applyForce(contact.getWorldManifold().getNormal().x * foe.getBody().getLinearVelocity().x * -repulsionForce,
                 foe.getBody().getLinearVelocity().x * -repulsionForce * 0.25f,
