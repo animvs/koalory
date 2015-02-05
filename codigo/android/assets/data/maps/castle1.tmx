@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="69" tilewidth="64" tileheight="64" nextobjectid="250">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="69" tilewidth="64" tileheight="64" nextobjectid="251">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
@@ -72,7 +72,7 @@
   <object id="214" name="tuppi" x="7364.5" y="255.75">
    <polyline points="-4.25,0.875 -4.25,-63.625 -260.75,-63.75 -645.5,320.5 -580.25,320.25 -580.75,385.25 -644.25,385.25 -3908.99,386.447 -3909.5,255.583"/>
   </object>
-  <object id="223" name="floor" x="980" y="256" width="26" height="67"/>
+  <object id="223" name="floor" x="960" y="256" width="64" height="64"/>
   <object id="226" name="floor" x="3968" y="511.5">
    <polyline points="0,0 0,-64 -128.5,-64 -128,-128 -256,-128 -255.5,-192 -385,-191 -384.5,-256 -704.667,-255.5 -703.667,128.167"/>
   </object>
@@ -347,7 +347,7 @@
    </properties>
   </object>
   <object id="230" name="deathZone" x="5834.33" y="3598.33" width="683.818" height="63.4545"/>
-  <object id="225" name="spawn" x="960" y="172" width="64" height="64">
+  <object id="225" name="spawn" x="704" y="192" width="64" height="64">
    <properties>
     <property name="ia" value="jumper"/>
     <property name="interval" value="7"/>
@@ -366,6 +366,7 @@
     <property name="speedY" value="9"/>
    </properties>
   </object>
+  <object id="250" name="endLevel" x="960" y="64" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="platform">
   <object id="143" name="platform" x="7520.67" y="3802.67">

@@ -125,10 +125,6 @@ public final class EntitiesController extends BaseController {
         platforms.add(new StaticPlatform(getController(), line));
     }
 
-    public void createEntityBody(Entity entityOwner) {
-        createEntityBody(entityOwner, 1f, true);
-    }
-
     public void createEntityBody(Entity entityOwner, float scale, boolean rectangle) {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(entityOwner, new Vector2(600f, 550f), 0f,
                 BodyDef.BodyType.DynamicBody, rectangle, Configurations.GAMEPLAY_ENTITY_SIZE_X * scale, Configurations.GAMEPLAY_ENTITY_SIZE_Y * scale, 1f, 0f, false);
