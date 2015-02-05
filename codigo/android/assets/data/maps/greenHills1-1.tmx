@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="64" tileheight="64" nextobjectid="162">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="13" tilewidth="64" tileheight="64" nextobjectid="162">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
- <layer name="background" width="200" height="20">
+ <layer name="background" width="200" height="13">
   <data encoding="base64" compression="zlib">
-   eJzt0zEOABAUREEHwwFcxv07v6QnSGaS12+zKQEAAAAAwFk5KlG9PQQe1KaAlX8Au/XbAwAAAAAAAAA+MACu5gLj
+   eJzt0zEOABAUREEHwwFcxv07v6QnJGaS12+zKQEAAAAAwFk5KlG9PQQe1KaAlX8Au/XbAwDgMwOFlQLj
   </data>
  </layer>
- <layer name="groundBack" width="200" height="20">
+ <layer name="groundBack" width="200" height="13">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKwjAQheF4Gy+gB9BewIXQlbuu6gFacNGj22ALQ0iTFjOOyv/BYJR08hKi6BwAAAAAAACAkk7WAYANbtYB/gzn+aJxDhZn2451/8A6O1FbXBSyaO63Vewdo7GXEj017lXY87HimeNU0iEyT/6vuYpxN1a/MH+unDV3OPX9CPOvJTMOmbl7MY7td+4X5sn1lfxzXaKvV4k6J/rI19T5+r0M03hYnpYlz7IP3s8Vu2ue30cVfBa7V+/kC3tq/G4CAAAAAAAAAAB8u9o6QETtbHPJ9Utm0eqrqXa/k1VDYx0gonG2ueT6JbNo9dXUuN/JquEJUdAh0Q==
+   eJzt1lEKwjAMgOF5Gy+gB9BdwAdfvcA8wAY+9OiuuEIIWdvhYkH+D4Ld6GIS6rDrAAAAAAAAAOzp0roAYINH6wL+DPP88JhDi9kOczx/8D0HEVvcHGrx7HdwzG3x6GWPnB7nSud8VTxzXkI6Gfvk/5q7WI9zTCv7U5TUnOHc70PXX0vWGAp7j2Jt9Zvy6XpKeaX43JjJG/Uirpk88jM339hLWNZhfVuRnOWkrlNYZy2KffTqnnWuvqlP5/R4bwIAACDvDWTMF3s=
   </data>
  </layer>
- <layer name="ground" width="200" height="20">
+ <layer name="ground" width="200" height="13">
   <data encoding="base64" compression="zlib">
-   eJztlksKg0AMhucqfVzDC7h130W3vUCPXxcVpjKRsebPQ/4PAiIl+ZLMFEshhBBCCCGEEEIIIUSf6RuEkF+mwvtBSIup6NyPh44OOTHr8xX9/3h9N474vlSMYnKZYxDi7ui1MHgLdNA6X5G/WVp3o8f1Kbx/V8/SWfKKo17XOUYhbjvra85oYSwy3rOXnCO6WfUvnSWvWBgrT6/69fNW9Hi28q73Ydln6zxIzj0zOGNE7FtzH/+cu7q+pgsqr1bfW85I18hh0ffeXXnvo66v6YLKazGLDK6o/r0dpJ1EqK/pgsprMYsMrqj+e39r9Z3svY+6vqYLKq/FLDK4ovr3dpB2EqG+pgsqr8UsMrii+vd2kHYSob6mCyqvxSwyuKL693aQdhKhvqYLKq/FLDK4ovr3dpB2EqG+pgsqr8UsMrgi4gMpgBpq
+   eJzt1j0OgzAMhuFcpT/X4AJZs3fo2gv0+GVopBDZKC0GW+h9pE9CDPAlOFVTAgAAAAAAAOyVbwAslcT5ACQl2ZyPh00dnFg/X9F/j/uzsaXvy6RRTJc5k5K7Y69q8i4wQJqvyP9ZpLMx0vWp3H8319oseWVrr+ucrOT24/st96jKSee991rniN2OWr82S16pctPT6/3t9VpGekrP7b/HkeuU5kHrPLIHZ0zEdVt+j3/mrn2/ZZe9nmu17rXOe3aNnA+R/aIx
   </data>
  </layer>
  <objectgroup name="collision">
-  <object id="7" name="floor" x="4543.58" y="642.864" width="63.8337" height="630.167"/>
+  <object id="7" name="floor" x="4543.58" y="642.864" width="64" height="192"/>
   <object id="95" name="floor" x="63.6061" y="641.485" width="2303" height="51.3333"/>
   <object id="108" name="floor" x="2751.75" y="449.75" width="191" height="50.75"/>
   <object id="127" name="floor" x="2496.67" y="698">
@@ -140,6 +140,7 @@
   </object>
   <object id="135" name="spawn" x="11072.6" y="567" width="64" height="66.6667">
    <properties>
+    <property name="graphic" value="fire"/>
     <property name="ia" value="jumper"/>
     <property name="interval" value="0.8"/>
     <property name="spawnInterval" value="7"/>
