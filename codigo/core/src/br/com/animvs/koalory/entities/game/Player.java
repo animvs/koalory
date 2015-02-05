@@ -34,6 +34,9 @@ public final class Player extends Mobile {
     private Vector2 groundedPlatformLastPosition;
     private boolean grounded;
 
+    /*private boolean inDamage;
+    private float damageTimeCounter;*/
+
     public InputProcessor getInput() {
         return input;
     }
@@ -100,6 +103,8 @@ public final class Player extends Mobile {
                 setPosition(getX(), getY() + 10f);
                 getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_JUMP_FORCE * Configurations.CORE_PHYSICS_MULTIPLIER, true);
             }
+
+            /*processDamage();*/
 
             if (!grounded) {
                 clampByCamera();
@@ -202,7 +207,7 @@ public final class Player extends Mobile {
         }
 
         for (int i = 0; i < body.getFixtureList().size; i++)
-            body.getFixtureList().get(i).setRestitution(0.1f);
+            body.getFixtureList().get(i).setRestitution(0f);
 
         setPosition(spawnLocation.x, spawnLocation.y);
     }
@@ -219,7 +224,7 @@ public final class Player extends Mobile {
             /*if (grounded)
                 getBody().setLinearVelocity(input.getMovementX(), getBody().getLinearVelocity().y);
             else*/
-                getBody().applyForceToCenter(input.getMovementX() * 0.35f, 0f, true);
+            getBody().applyForceToCenter(input.getMovementX() * 0.35f, 0f, true);
         }
     }
 
@@ -311,20 +316,44 @@ public final class Player extends Mobile {
         grounded = false;
     }
 
-    public void eventTouched(Foe foe, Contact contact) {
-        if (getBody() == null || foe.getBody() == null)
+    /*public void eventTouched(Foe foe, Contact contact) {
+        if (inDamage || getBody() == null || foe.getBody() == null)
             return;
 
-        float repulsionForce = 50f;
+        inDamage = true;
+        damageTimeCounter = 0f;
 
         contactCache.set(getX() - foe.getX(), getY() - foe.getY()).nor();
 
-        /*getBody().applyForce(contact.getWorldManifold().getNormal().x * foe.getBody().getLinearVelocity().x * -repulsionForce,
-                foe.getBody().getLinearVelocity().x * -repulsionForce * 0.25f,
-                contact.getWorldManifold().getPoints()[0].x, contact.getWorldManifold().getPoints()[0].y, true);*/
+        float repulsionForce = 150f;
+
+        contactCache.set(getX() - foe.getX(), getY() - foe.getY()).nor();
+
+        if (grounded)
+            contactCache.set(contactCache.x, Math.abs(contactCache.y));
+            //contactCache.set(contactCache.x + contactCache.y, 0f);
 
         getBody().applyForce(contactCache.x * foe.getBody().getLinearVelocity().x * -repulsionForce,
-                contactCache.y * repulsionForce,
+                contactCache.y * repulsionForce * 0.35f,
                 contact.getWorldManifold().getPoints()[0].x, contact.getWorldManifold().getPoints()[0].y, true);
+
+        Gdx.app.log("DAMAGE", "Damage started ...");
     }
+
+    private void processDamage() {
+        if (!inDamage)
+            return;
+
+        damageTimeCounter += Gdx.graphics.getDeltaTime();
+
+        float power = 0.01f;
+
+        //getBody().applyLinearImpulse(contactCache.x * power, contactCache.y * power * 7f, 0f,0f, true);
+
+        if (damageTimeCounter >= 0.5f) {
+            inDamage = false;
+            Gdx.app.log("DAMAGE", "Damage ended");
+        } else
+            Gdx.app.log("DAMAGE", "Current damage time: " + damageTimeCounter);
+    }*/
 }
