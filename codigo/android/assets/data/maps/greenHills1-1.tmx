@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="13" tilewidth="64" tileheight="64" nextobjectid="162">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="13" tilewidth="64" tileheight="64" nextobjectid="176">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
@@ -15,7 +15,7 @@
  </layer>
  <layer name="ground" width="200" height="13">
   <data encoding="base64" compression="zlib">
-   eJzt1j0OgzAMhuFcpT/X4AJZs3fo2gv0+GVopBDZKC0GW+h9pE9CDPAlOFVTAgAAAAAAAOyVbwAslcT5ACQl2ZyPh00dnFg/X9F/j/uzsaXvy6RRTJc5k5K7Y69q8i4wQJqvyP9ZpLMx0vWp3H8319oseWVrr+ucrOT24/st96jKSee991rniN2OWr82S16pctPT6/3t9VpGekrP7b/HkeuU5kHrPLIHZ0zEdVt+j3/mrn2/ZZe9nmu17rXOe3aNnA+R/aIx
+   eJzt1k0OgjAQhuFexZ9reADrsnsWbr2AxxcSSErTwSoDMyHvk3wJYQFfy9QYAgAAAAAAAKAvjQEwlwLnA6hJQed8dDp1cGDlfHn/PS7Pxpq+L5VGPp363IRcDXsN7mOPh3GPb2rz5fk/S+1stHR9Cvff2bU0S1ZZ2+vcJwq5/Ph+zT2axCCz3nups8due61fmiWrTGLW0+r9+fVSWnrWnlt+jz3XWZsHqXPLHhwxHtet+T3+mbv8/Zpdtnqu1rqXOm/Z1XM+9T+ixQ==
   </data>
  </layer>
  <objectgroup name="collision">
@@ -34,9 +34,6 @@
   <object id="139" name="floor" x="4736" y="687.333">
    <polyline points="0,0 0,-45.8333 1023.75,-45.5833 1086.67,-45.583 1086.67,12"/>
   </object>
-  <object id="140" name="floor" x="5953" y="651">
-   <polyline points="-1.09091,-0.363636 -1,-74 63,-74 63,2"/>
-  </object>
   <object id="143" name="floor" x="6144" y="689.333">
    <polyline points="-0.5,16.5 255.667,16.4997 255.667,-45.6667 2558.67,-45.3333"/>
   </object>
@@ -48,6 +45,10 @@
   </object>
   <object id="161" name="ghostWall" x="640" y="704">
    <polyline points="0,0 -0.0909091,-706.03"/>
+  </object>
+  <object id="170" name="floor" x="5888" y="576" width="192" height="36.6667"/>
+  <object id="175" name="ghostWall" x="12800" y="640">
+   <polyline points="0,0 0,-768 -192,-768"/>
   </object>
  </objectgroup>
  <objectgroup name="items">
@@ -62,7 +63,7 @@
     <property name="power" value="0.10"/>
    </properties>
   </object>
-  <object id="52" name="color" x="6641.7" y="574.848" width="62" height="64">
+  <object id="52" name="color" x="6848" y="580.181" width="62" height="64">
    <properties>
     <property name="power" value="0.10"/>
    </properties>
@@ -122,12 +123,12 @@
     <property name="power" value="0.015"/>
    </properties>
   </object>
-  <object id="93" name="color" x="6672.33" y="506.667" width="62" height="64">
+  <object id="93" name="color" x="6878.63" y="512" width="62" height="64">
    <properties>
     <property name="power" value="0.020"/>
    </properties>
   </object>
-  <object id="94" name="color" x="6711" y="575" width="62" height="64">
+  <object id="94" name="color" x="6917.3" y="580.333" width="62" height="64">
    <properties>
     <property name="power" value="0.15"/>
    </properties>
@@ -162,6 +163,9 @@
   </object>
   <object id="155" name="endLevel" x="12288.3" y="512" width="63" height="64.3333"/>
   <object id="159" name="playerStart" x="704" y="384" width="64" height="62.6667"/>
+  <object id="162" name="life" x="4736" y="512" width="64" height="64"/>
+  <object id="167" name="life" x="9408" y="512" width="64" height="64"/>
+  <object id="172" name="checkpoint" x="5952" y="448" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="platform"/>
 </map>

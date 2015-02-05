@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="15" tilewidth="64" tileheight="64" nextobjectid="190">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="15" tilewidth="64" tileheight="64" nextobjectid="194">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
  <layer name="background" width="200" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt07ENADAMwzC/1f8f6xgggOd2IC/QogQAAAAAANjO6wD4mD+g8wd0/oDOHwAAMC6H3QEe
+   eJzt07EJACAUQ8G/lvsvZi+kFA3cTZAibwYAAAAAADit1wPgY/qATB+QNffRvJ0OzR9r3g636QMyfUCmj5kNnwkCOw==
   </data>
  </layer>
  <layer name="groundBack" width="200" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt2L0OwiAQwPF7A5/HWePk0qibk5s+QDuZ8OguNamEL9tDoP5/CWFpjwOONkEEAAAAAABg3Y6lEwAAAAAqdy2dAL7yUIhxUoiRQiPXXwidgUHamUdMq2fdWH3IsHAs19nYLozpszRX7bp8esa4B97pJT6Pbuxd9zMmnpbTbuZ7IdN55LxL6uKPFGHntRlbjOt8pKzfXsL72CfECK2lqy5NQkyfm2eMlDxr8d6Xs3x+Vy/Wc7XWaIty/T/WhDX6X1p7n7OGqE+UolV7h0lr0QsZvRP0
+   eJzt2L0OwiAQwPHzCXyezhonl0bdnNz0AdrJhEfXoSaV8FUBgeb/S0iX9jjgrk0qAgAAAAAAsG7H0gkAAAAAlbuWTgCLPBLEOCWIESJFrv/g6oFR2lmHT6u9rrSryxg5l6k3uvfYRMY1ic01dV0+LXPcHc8M4l9HP11N/2eUPy2j3Y/PuczXkfNfUu+/pQg9r+00fEz9EbJ/e3Gf4xAQw7WXprpUATFtbpY5QvKsxedczvL9Xr1o99Vaoy3K9f1Yk650AigmVX/krCHqE6Wk6o/DbLToBT4RE/k=
   </data>
  </layer>
  <layer name="ground" width="200" height="15">
   <data encoding="base64" compression="zlib">
-   eJztlksOgzAMRM1B+jlG6ZIFKxatcv+7FBaRrNRJnDpVEjFPGglSSO3BQ0sEAAAAAAAAAAAAAAA4I49d665n60IA6JSpdQEnxrUuAGRBPtrgCPkYgRHzMfr/QkfIxyj0lA8XOZbOe6q7BEfIx0ho5mwR1lamGKvyuoNwXvi5NEsj5iPMhjUfGzsOvbbqxeTha6l778a+LsoaObX7t2pmkjyj4Jq5Qi+cqQMPepAn9PrQO7KuUY7UvTdjT9cfavRr0ny2EK9D8kzyUOOt1o+pUh9LJR+kZ7IZ99M8Z8nT0j1yXku0mLWwl3/XU+Jfym+pRqLv77D2wrHmI/eb2MvesXes//wDHBeMPg==
+   eJztlksOgzAMRJ2D9HOM0iULVixa5f53KSwiWamTmDoopMyTRoIAxp7YLUQAAAAAAAAAAAAAAIAz8lg0LXq2TgSAg+JaJ3BifOsEQBHMRxs8YT56oMf5CN+FvX4besJ89MKR5sMnjqXzI+W9BU+Yj57Q9NkorE1MKSblfStxv/BzqZd6nI94NqzzMbPj2GurXkwBvpZ79m6s66LMkVO7fqsGJskziu4ZKtTCccZY/6JA7PWqd2JdoxK5Z2/Gmq4/5BjWpP5sIZ6H5JnkocZbrR/OGCtorOSDtCezMZ5mnyVPt8YoeS3RotfiWvbOZ4t/Ob+lHIm+32GthWOdj9J/Yq39tMZO/caG6x+FlovM
   </data>
  </layer>
  <objectgroup name="collision">
@@ -41,7 +41,7 @@
    <polyline points="0,0 0,-81.3333 893.333,-80.6667 891.167,-82.1667"/>
   </object>
   <object id="163" name="sand" x="8640" y="850.5">
-   <polyline points="0,0 0,-80.75 4159.75,-80.75 4159.75,14.25"/>
+   <polyline points="64,45.5 64,-82.5 4159.75,-80.75 4159.75,14.25"/>
   </object>
   <object id="164" name="creates" x="11455.5" y="775">
    <polyline points="0,0 0.5,-71 64.5,-71 64.5,-135.5 128.5,-135.5 129,-199 192.5,-199 192.5,-263 256,-262.5 256,-327 320,-327 320,2"/>
@@ -58,8 +58,11 @@
   <object id="180" name="ghostWall" x="384" y="773">
    <polyline points="0,0 -2,-793"/>
   </object>
-  <object id="184" name="sand" x="8512" y="576" width="192" height="64"/>
+  <object id="184" name="sand" x="8512" y="576" width="256" height="64"/>
   <object id="188" name="bridge" x="6720" y="768" width="128" height="64"/>
+  <object id="193" name="ghostWall" x="12800" y="768">
+   <polyline points="0,0 0,-896 -128,-896"/>
+  </object>
  </objectgroup>
  <objectgroup name="items">
   <object id="22" name="spawn" x="1344.33" y="702.667" width="64" height="66.6667">
@@ -109,7 +112,7 @@
     <property name="power" value="0.05"/>
    </properties>
   </object>
-  <object id="83" name="color" x="2047.7" y="701.848" width="62" height="64">
+  <object id="83" name="color" x="2048" y="704" width="62" height="64">
    <properties>
     <property name="power" value="0.05"/>
    </properties>
@@ -194,6 +197,9 @@
     <property name="killsPlayer" value="false"/>
    </properties>
   </object>
+  <object id="190" name="life" x="2080" y="640" width="64" height="64"/>
+  <object id="191" name="life" x="8673" y="679" width="64" height="64"/>
+  <object id="192" name="checkpoint" x="7200" y="576" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="platform"/>
 </map>
