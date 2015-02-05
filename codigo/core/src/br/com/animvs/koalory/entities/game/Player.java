@@ -96,8 +96,6 @@ public final class Player extends Entity {
 
         updateInputOnly();
 
-        getBody().setAwake(true);
-
         if (getBody() != null) {
 
             computePlayerGrounded();
@@ -116,6 +114,7 @@ public final class Player extends Entity {
 
             if (!grounded) {
                 clampByCamera();
+                getBody().setAwake(true);
                 return;
             }
 
@@ -125,10 +124,12 @@ public final class Player extends Entity {
                 prepareAnimation("walk");
                 getGraphic().setAnimationSpeedScale(0f);
             }
-        }
 
-        if (getBody() != null && getBody().getLinearVelocity().y > Configurations.GAMEPLAY_JUMP_FORCE * 0.5f)
-            getBody().setLinearVelocity(getBody().getLinearVelocity().x, Configurations.GAMEPLAY_JUMP_FORCE * 0.5f);
+            if (getBody().getLinearVelocity().y > Configurations.GAMEPLAY_JUMP_FORCE * 0.5f)
+                getBody().setLinearVelocity(getBody().getLinearVelocity().x, Configurations.GAMEPLAY_JUMP_FORCE * 0.5f);
+
+            getBody().setAwake(true);
+        }
 
         clampByCamera();
     }
@@ -315,6 +316,9 @@ public final class Player extends Entity {
     }
 
     private void clampByCamera() {
+        if (getController().getPlayers().getTotalPlayersInGame() == 1)
+            return;
+
         boolean clamped = false;
 
         float distanceAllowed = (Configurations.RESOLUTION_REAL.x * 0.95f) * getController().getCamera().getZoom();
