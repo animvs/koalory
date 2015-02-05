@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.WorldManifold;
 import com.badlogic.gdx.utils.Array;
 
@@ -22,45 +21,37 @@ import br.com.animvs.koalory.entities.game.platforms.Platform;
 /**
  * Created by DALDEGAN on 24/01/2015.
  */
-public final class Player extends Entity {
+public final class Player extends Mobile {
     private InputProcessor input;
 
     //private long lastJumpTime;
-    private Fixture physicFixture;
+    //private Fixture physicFixture;
 
     private Vector2 positionCache;
+    private boolean mustJump;
+
+    /*private float friction;*/
 
     private Platform groundedPlatform;
     private Vector2 groundedPlatformLastPosition;
     private boolean grounded;
-
-    private boolean mustJump;
-
-    private float friction;
 
     public InputProcessor getInput() {
         return input;
     }
 
     //private static final float ANIMATION_Y_VELOCITY_TOLERANCE = 1.3f;
-    private static final float ANIMATION_X_VELOCITY_TOLERANCE = 0.3f;
+    private Vector2 contactCache;
 
-    private boolean getMovingHorizontally() {
-        if (getBody() == null)
-            return false;
-
+    @Override
+    protected boolean getMovingHorizontally() {
         if (grounded && groundedPlatform != null) {
             float platformVelocityX = groundedPlatform.getBody().getLinearVelocity().x;
             float playerVelocityX = getBody().getLinearVelocity().x;
             return platformVelocityX != playerVelocityX;
         }
 
-        float hVelocity = getBody().getLinearVelocity().x;
-
-        if (hVelocity < 0f)
-            return hVelocity < ANIMATION_X_VELOCITY_TOLERANCE;
-        else
-            return hVelocity > ANIMATION_X_VELOCITY_TOLERANCE;
+        return super.getMovingHorizontally();
     }
 
     public Player(GameController controller, String skinName, InputProcessor inputMapper, com.badlogic.gdx.graphics.Color color) {
@@ -69,6 +60,7 @@ public final class Player extends Entity {
         if (inputMapper == null)
             throw new RuntimeException("The parameter 'inputMapper' must be != NULL");
 
+        contactCache = new Vector2();
         positionCache = new Vector2();
         groundedPlatformLastPosition = new Vector2();
         input = inputMapper;
@@ -79,6 +71,7 @@ public final class Player extends Entity {
 
         getController().getEntities().createEntityBody(this, 1f, false);
 
+        getGraphicOffset().set(0f, -50f);
         setGraphic(new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_CHARACTER, AnimacaoSkeletalData.class)));
         getGraphic().setSkin(skinName);
 
@@ -91,14 +84,14 @@ public final class Player extends Entity {
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void act(float delta) {
+        super.act(delta);
 
         updateInputOnly();
 
         if (getBody() != null) {
 
-            computePlayerGrounded();
+            computeGrounded();
 
             if (mustJump) {
                 mustJump = false;
@@ -139,19 +132,18 @@ public final class Player extends Entity {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-
         if (grounded && groundedPlatform != null) {
 
-            physicFixture.setFriction(0f);
-            //getBody().applyForceToCenter(groundedPlatform.getBody().getLinearVelocity().x * 0.5f /** Configurations.CORE_PHYSICS_MULTIPLIER*/, -1f, true);
+            setPhysicsFriction(0f);
+            //getBody().applyForceToCenter(groundedPlatform.getBody().getLinearVelocity().x * 0.5f *//** Configurations.CORE_PHYSICS_MULTIPLIER*//*, -1f, true);
             float speedX = groundedPlatform.getBody().getLinearVelocity().x + getInput().getMovementX();
 
             getBody().setLinearVelocity(speedX, groundedPlatform.getBody().getLinearVelocity().y);
 
             groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
-        } else
-            physicFixture.setFriction(friction);
+        }
+
+        super.draw(batch, parentAlpha);
     }
 
     public void forceJump(boolean resetForceY) {
@@ -220,16 +212,21 @@ public final class Player extends Entity {
         } /*else
             spawnLocation.set(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);*/
 
-        physicFixture = body.getFixtureList().get(0);
+        //physicFixture = body.getFixtureList().get(0);
 
-        if (getController().getLevel().getMapName().equals("frostPlateau1-1"))
+        /*if (getController().getLevel().getMapName().equals("frostPlateau1-1"))
             friction = 0.15f * 0.15f; //Less friction on ice
         else if (getController().getLevel().getMapName().equals("sandPlains1-1")) {
             friction = 0.15f * 1.35f; //More friction on sand
         } else
-            friction = 0.15f; //Normal friction
+            friction = 0.15f; //Normal friction*/
 
         setPosition(spawnLocation.x, spawnLocation.y);
+    }
+
+    @Override
+    protected void eventDeath(Entity killer) {
+
     }
 
     public void computeInput() {
@@ -239,7 +236,7 @@ public final class Player extends Entity {
             else
                 getBody().setLinearVelocity(input.getMovementX(), getBody().getLinearVelocity().y);*/
 
-            float maxX = 1f;
+/*            float maxX = 1f;
             float minX = -1f;
 
             if (grounded && groundedPlatform != null) {
@@ -248,15 +245,11 @@ public final class Player extends Entity {
 
                 if (groundedPlatform.getBody().getLinearVelocity().x < 0f)
                     minX += groundedPlatform.getBody().getLinearVelocity().x;
-            }
+            }*/
+
+            //computePlatformPhysics();
 
             getBody().applyForceToCenter(input.getMovementX() * 0.35f, 0f, true);
-
-            if (getBody().getLinearVelocity().x > maxX)
-                getBody().setLinearVelocity(maxX, getBody().getLinearVelocity().y);
-
-            if (getBody().getLinearVelocity().x < minX)
-                getBody().setLinearVelocity(minX, getBody().getLinearVelocity().y);
         }
     }
 
@@ -277,45 +270,6 @@ public final class Player extends Entity {
         }
 
         getGraphic().setAnimationSpeedScale(Configurations.CORE_PLAYER_ANIM_SPEED_MULTIPLIER);
-    }
-
-    private void computePlayerGrounded() {
-        //groundedPlatform = null;
-        Array<Contact> contactList = getController().getPhysics().getWorld().getContactList();
-        for (int i = 0; i < contactList.size; i++) {
-            Contact contact = contactList.get(i);
-            if (contact.isTouching() && (contact.getFixtureA() == physicFixture || contact.getFixtureB() == physicFixture)) {
-
-                positionCache.set(getX(), getY());
-
-                WorldManifold manifold = contact.getWorldManifold();
-                boolean below = true;
-                for (int j = 0; j < manifold.getPoints().length; j++)
-                    below |= (getController().getPhysics().toWorld(manifold.getPoints()[j].y) < positionCache.y - Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f);
-
-                groundedPlatform = null;
-
-                if (below) {
-                    if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
-                        groundedPlatform = (Platform) contact.getFixtureA().getBody().getUserData();
-
-                    if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
-                        groundedPlatform = (Platform) contact.getFixtureB().getBody().getUserData();
-
-                    if (groundedPlatform != null) {
-                        groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
-                        groundedPlatform.eventPlayerSteped(this);
-                    }
-
-                    grounded = true;
-                    return;
-                }
-
-                grounded = false;
-                return;
-            }
-        }
-        grounded = false;
     }
 
     private void clampByCamera() {
@@ -351,5 +305,61 @@ public final class Player extends Entity {
 
         if (clamped)
             setPosition(positionCache.x, positionCache.y);
+    }
+
+    private void computeGrounded() {
+        //groundedPlatform = null;
+        Array<Contact> contactList = getController().getPhysics().getWorld().getContactList();
+        for (int i = 0; i < contactList.size; i++) {
+            Contact contact = contactList.get(i);
+            if (contact.isTouching() && (checkOwnsFixture(contact.getFixtureA()) || checkOwnsFixture(contact.getFixtureB()))) {
+
+                positionCache.set(getX(), getY());
+
+                WorldManifold manifold = contact.getWorldManifold();
+                boolean below = true;
+                for (int j = 0; j < manifold.getPoints().length; j++)
+                    below |= (getController().getPhysics().toWorld(manifold.getPoints()[j].y) < positionCache.y - Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f);
+
+                groundedPlatform = null;
+
+                if (below) {
+                    if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
+                        groundedPlatform = (Platform) contact.getFixtureA().getBody().getUserData();
+
+                    if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
+                        groundedPlatform = (Platform) contact.getFixtureB().getBody().getUserData();
+
+                    if (groundedPlatform != null) {
+                        groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
+                        groundedPlatform.eventPlayerSteped(this);
+                    }
+
+                    grounded = true;
+                    return;
+                }
+
+                grounded = false;
+                return;
+            }
+        }
+        grounded = false;
+    }
+
+    public void eventTouched(Foe foe, Contact contact) {
+        if (getBody() == null || foe.getBody() == null)
+            return;
+
+        float repulsionForce = 50f;
+
+        contactCache.set(getX() - foe.getX(),getY() - foe.getY()).nor();
+
+        /*getBody().applyForce(contact.getWorldManifold().getNormal().x * foe.getBody().getLinearVelocity().x * -repulsionForce,
+                foe.getBody().getLinearVelocity().x * -repulsionForce * 0.25f,
+                contact.getWorldManifold().getPoints()[0].x, contact.getWorldManifold().getPoints()[0].y, true);*/
+
+        getBody().applyForce(contactCache.x * foe.getBody().getLinearVelocity().x * -repulsionForce,
+                contactCache.y * repulsionForce,
+                contact.getWorldManifold().getPoints()[0].x, contact.getWorldManifold().getPoints()[0].y, true);
     }
 }

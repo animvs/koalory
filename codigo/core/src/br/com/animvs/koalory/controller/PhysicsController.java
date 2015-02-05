@@ -183,8 +183,8 @@ public final class PhysicsController extends AnimvsPhysicsController {
                             if (foe != null && foe.getAlive()) {
                                 if (player.getY() - Configurations.CORE_TILE_SIZE / 2f > foe.getY()) {
                                     //if (contact.getWorldManifold().getNormal().y == 1f || contact.getWorldManifold().getNormal().y == -1f) {
-                                    //Player has killed the foe by jumping it's head:
 
+                                    //Player has killed the foe by jumping it's head:
                                     int playerIndex = -1;
                                     try {
                                         playerIndex = controller.getPlayers().getPlayerIndex(player);
@@ -192,8 +192,10 @@ public final class PhysicsController extends AnimvsPhysicsController {
                                     }
 
                                     Gdx.app.log("KILL", "Player " + (playerIndex == -1 ? "UNKNOWN" : String.valueOf(playerIndex)) + " has killed a Koala");
-                                    foe.eventDeath(player);
+                                    foe.death(player);
                                 } else {
+                                    //Player has killed the foe by jumping it's head:
+                                    //DEPRECATED: Player's no longer are instant killed by foes
                                     int playerIndex = -1;
                                     if (Configurations.DEBUG_PLAYER_IMMORTAL)
                                         return;
@@ -204,8 +206,9 @@ public final class PhysicsController extends AnimvsPhysicsController {
                                     }
 
                                     //Player has been damaged by the foe:
-                                    Gdx.app.log("KILL", "Player " + (playerIndex == -1 ? "UNKNOWN" : String.valueOf(playerIndex)) + " has killed a Koala");
-                                    player.eventDeath();
+                                    //Gdx.app.log("KILL", "Player " + (playerIndex == -1 ? "UNKNOWN" : String.valueOf(playerIndex)) + " has been killed by a Koala");*/
+                                    //player.eventDeath();
+                                    player.eventTouched(foe, contact);
                                 }
                                 return;
                             }
@@ -216,7 +219,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
                                 DeathZone deathZone = isDeathZone(contact.getFixtureA(), contact.getFixtureB());
 
                                 if (deathZone != null && deathZone.getKillsIA())
-                                    foe.eventDeath(null);
+                                    foe.death(deathZone);
                             }
                         }
                     }

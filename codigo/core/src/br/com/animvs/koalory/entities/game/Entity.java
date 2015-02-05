@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -21,7 +23,7 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
 
     private boolean disposed;
 
-    private boolean facingRight;
+    /*private boolean facingRight;*/
 
     protected final GameController getController() {
         return controller;
@@ -37,8 +39,14 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
 
     private PolygonSpriteBatch polygonSpriteBatchCache;
 
+    private Vector2 graphicOffset;
+
     protected final boolean getDisposed() {
         return disposed;
+    }
+
+    public final Vector2 getGraphicOffset() {
+        return graphicOffset;
     }
 
     @Override
@@ -69,7 +77,7 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
             physicBody.setTransform(controller.getPhysics().toBox(x), controller.getPhysics().toBox(y), physicBody.getAngle());
 
         if (graphic != null)
-            graphic.setPosicao(x, y - (Configurations.GAMEPLAY_ENTITY_SIZE_Y * graphic.getEscala().y) / 2f);
+            graphic.setPosicao(x + graphicOffset.x, (y - (Configurations.GAMEPLAY_ENTITY_SIZE_Y * graphic.getEscala().y) / 2f) + graphicOffset.y);
     }
 
     @Override
@@ -98,32 +106,15 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
         this.eventAfterBodyCreated(body);
     }
 
-    public void update() {
-        if (physicBody != null) {
-            setVisible(true);
-
-            setX(controller.getPhysics().toWorld(physicBody.getPosition().x));
-            setY(controller.getPhysics().toWorld(physicBody.getPosition().y));
-            setRotation(physicBody.getAngle() * MathUtils.radDeg);
-
-            if (facingRight) {
-                if (getBody().getLinearVelocity().x <= -Configurations.CORE_DIRECTION_CHANGE_VELOCITY_MIN)
-                    facingRight = false;
-            } else {
-                if (getBody().getLinearVelocity().x >= Configurations.CORE_DIRECTION_CHANGE_VELOCITY_MIN)
-                    facingRight = true;
-            }
-        } else
-            setVisible(false);
-    }
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
         if (polygonSpriteBatchCache == null)
             polygonSpriteBatchCache = (PolygonSpriteBatch) batch;
 
         if (graphic != null) {
-            graphic.flipX(!facingRight);
+            /*graphic.flipX(!facingRight);*/
+
+            graphic.setPosicao(getX() + graphicOffset.x, getY() + graphicOffset.y);
 
             batch.end();
             graphic.render(polygonSpriteBatchCache, Gdx.graphics.getDeltaTime());
@@ -135,6 +126,7 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
 
     public Entity(GameController controller) {
         this.controller = controller;
+        this.graphicOffset = new Vector2();
         controller.getStage().registerEntity(this);
     }
 
@@ -154,6 +146,15 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
         graphic = null;
 
         disposeBody();
+    }
+
+    protected final boolean checkOwnsFixture(Fixture fixture) {
+        for (int i = 0; i < getBody().getFixtureList().size; i++) {
+            if (getBody().getFixtureList().get(i) == fixture)
+                return true;
+        }
+
+        return false;
     }
 
     protected final void disposeBody() {

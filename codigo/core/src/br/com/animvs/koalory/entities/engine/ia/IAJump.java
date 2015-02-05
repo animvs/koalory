@@ -26,7 +26,7 @@ public final class IAJump extends IABase {
 
     @Override
     public void update(Foe foeOwner) {
-        if (!foeOwner.getAlive())
+        if (!foeOwner.getAlive() || foeOwner.getBody() == null)
             return;
 
         timeCounter += Gdx.graphics.getDeltaTime();

@@ -118,8 +118,8 @@ public final class PlayersController extends BaseController {
         if (!getController().getInGame())
             return;
 
-        for (int i = 0; i < playersInGame.size; i++)
-            playersInGame.get(i).update();
+        /*for (int i = 0; i < playersInGame.size; i++)
+            playersInGame.get(i).update();*/
 
         if (getController().getInGame())
             TMP_checkActionButtonRequestInGameMode();

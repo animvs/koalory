@@ -4,7 +4,6 @@ import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.utils.DelayedRemovalArray;
 
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.entities.engine.ia.IAJump;
@@ -27,18 +26,18 @@ import br.com.animvs.koalory.entities.game.platforms.StaticPlatform;
  */
 public final class EntitiesController extends BaseController {
     //private DelayedRemovalArray<Player> players;
-    private DelayedRemovalArray<Item> items;
+    /*private DelayedRemovalArray<Item> items;
     private DelayedRemovalArray<Foe> foes;
     private DelayedRemovalArray<Spawner> spawners;
-    private DelayedRemovalArray<Platform> platforms;
+    private DelayedRemovalArray<Platform> platforms;*/
 
     public EntitiesController(GameController controller) {
         super(controller);
         //players = new DelayedRemovalArray<Player>();
-        items = new DelayedRemovalArray<Item>();
+        /*items = new DelayedRemovalArray<Item>();
         foes = new DelayedRemovalArray<Foe>();
         spawners = new DelayedRemovalArray<Spawner>();
-        platforms = new DelayedRemovalArray<Platform>();
+        platforms = new DelayedRemovalArray<Platform>();*/
     }
 
     @Override
@@ -49,7 +48,7 @@ public final class EntitiesController extends BaseController {
         /*for (int i = 0; i < Configurations.GAMEPLAY_MAX_PLAYERS; i++)
             players.get(i).restart();*/
 
-        items.begin();
+        /*items.begin();
         for (int i = 0; i < items.size; i++)
             items.get(i).dispose();
         items.end();
@@ -67,22 +66,24 @@ public final class EntitiesController extends BaseController {
         items.clear();
         foes.clear();
         spawners.clear();
-        platforms.clear();
+        platforms.clear();*/
     }
 
     public void spawnItemColorProgress(float x, float y, float colorProgressAmount) {
         Color color = new Color(getController(), colorProgressAmount);
 
-        items.add(color);
         color.setPosition(x + Configurations.CORE_TILE_SIZE / 2f, y + Configurations.CORE_TILE_SIZE / 2f);
         color.initialize();
+
+        getController().getStage().registerActor(color);
         //Gdx.app.log("ITEM", "Color pickup Spawned: X: " + x + " Y: " + y);
     }
 
     public void createDeathZone(RectangleMapObject rectangle) {
         DeathZone deathZone = new DeathZone(getController(), rectangle);
         deathZone.initialize();
-        items.add(deathZone);
+
+        getController().getStage().registerActor(deathZone);
     }
 
     public void createEndLevel(RectangleMapObject rectangle) {
@@ -90,7 +91,7 @@ public final class EntitiesController extends BaseController {
         endLevel.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
         endLevel.initialize();
 
-        items.add(endLevel);
+        getController().getStage().registerActor(endLevel);
     }
 
     public void createLife(RectangleMapObject rectangle) {
@@ -98,7 +99,7 @@ public final class EntitiesController extends BaseController {
         life.initialize();
         life.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
 
-        items.add(life);
+        getController().getStage().registerActor(life);
     }
 
     public void createCheckpoint(RectangleMapObject rectangle) {
@@ -107,22 +108,24 @@ public final class EntitiesController extends BaseController {
 
         checkpoint.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
 
-        items.add(checkpoint);
+        getController().getStage().registerActor(checkpoint);
     }
 
     public void createSender(RectangleMapObject rectangle, String map) {
         Sender sender = new Sender(getController(), map);
         sender.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
         sender.initialize();
-        items.add(sender);
+
+        getController().getStage().registerActor(sender);
     }
 
     public void createSpawner(String graphic, Vector2 position, float spawnInterval, String ia, float foeSpeedX, Float foeSpeedY, Float interval) {
-        spawners.add(new Spawner(getController(), graphic, position, spawnInterval, ia, foeSpeedX, foeSpeedY, interval));
+        //spawners.add(new Spawner(getController(), graphic, position, spawnInterval, ia, foeSpeedX, foeSpeedY, interval));
+        getController().getStage().registerActor(new Spawner(getController(), graphic, position, spawnInterval, ia, foeSpeedX, foeSpeedY, interval));
     }
 
     public void createPlatform(PolylineMapObject line) {
-        platforms.add(new StaticPlatform(getController(), line));
+        getController().getStage().registerActor(new StaticPlatform(getController(), line));
     }
 
     public void createEntityBody(Entity entityOwner, float scale, boolean rectangle) {
@@ -142,7 +145,7 @@ public final class EntitiesController extends BaseController {
     public void spawnFoe(String graphic, float x, float y, float speedX, Float speedY, String ia, Float interval) {
         if (ia == null) {
             Foe newFoe = new Foe(getController(), graphic, new IAStraight(getController(), speedX), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
-            foes.add(newFoe);
+            getController().getStage().registerActor(newFoe);
         } else if (ia.trim().toLowerCase().equals("jumper")) {
             float intervalReal = 0f;
 
@@ -150,12 +153,12 @@ public final class EntitiesController extends BaseController {
                 intervalReal = interval.floatValue();
 
             Foe newFoe = new Foe(getController(), graphic, new IAJump(getController(), speedX, speedY, intervalReal), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
-            foes.add(newFoe);
+            getController().getStage().registerActor(newFoe);
         } else
             throw new RuntimeException("AI invalid when loading spawner from TMX: " + ia);
     }
 
-    public void update() {
+    /*public void update() {
         for (int i = 0; i < items.size; i++)
             items.get(i).update();
 
@@ -167,10 +170,10 @@ public final class EntitiesController extends BaseController {
 
         for (int i = 0; i < platforms.size; i++)
             platforms.get(i).update();
-    }
+    }*/
 
     public void removeItem(Item item) {
-        items.removeValue(item, true);
+        getController().getStage().removeActor(item);
     }
 
     public void processMatchEnd() {
