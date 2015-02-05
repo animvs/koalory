@@ -267,16 +267,19 @@ public final class PhysicsController extends AnimvsPhysicsController {
     }
 
     private Body createPlayerBody(TargetPhysicsParameters parameters) {
-        Vector2[] vertices = new Vector2[6];
+        Vector2[] vertices = new Vector2[5];
         vertices[0] = new Vector2(0f * parameters.width, -0.5f * parameters.height);
         vertices[1] = new Vector2(0.5f * parameters.width, 0f * parameters.height);
-        vertices[2] = new Vector2(0.25f * parameters.width, 0.4f * parameters.height);
-        vertices[3] = new Vector2(0f * parameters.width, 0.5f * parameters.height);
-        vertices[4] = new Vector2(-0.25f * parameters.width, 0.4f * parameters.height);
-        vertices[5] = new Vector2(-0.5f * parameters.width, 0f * parameters.height);
+        //vertices[2] = new Vector2(0.25f * parameters.width, 0.4f * parameters.height);
+
+        vertices[2] = new Vector2(0.125f * parameters.width, 0.5f * parameters.height);
+        vertices[3] = new Vector2(-0.125f * parameters.width, 0.5f * parameters.height);
+
+        //vertices[5] = new Vector2(-0.25f * parameters.width, 0.4f * parameters.height);
+        vertices[4] = new Vector2(-0.5f * parameters.width, 0f * parameters.height);
 
         return AnimvsBodyFactory.createByVertex(this, parameters.position, parameters.rotation, parameters.bodyType, vertices,
-                parameters.density * 1.7f, parameters.restitution, parameters.width, parameters.height, parameters.sensor);
+                parameters.density * 1.8f, parameters.restitution, parameters.width, parameters.height, parameters.sensor);
     }
 
     private Body createRectangleBody(TargetPhysicsParameters parameters) {
