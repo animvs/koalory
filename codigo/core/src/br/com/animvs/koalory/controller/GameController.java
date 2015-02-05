@@ -237,7 +237,7 @@ public final class GameController implements Disposable {
             if (inGame) {
                 players.update();
                 physics.update(Gdx.graphics.getDeltaTime());
-                entities.update();
+                //entities.update();
 
                 background.getViewport().apply();
                 background.render();

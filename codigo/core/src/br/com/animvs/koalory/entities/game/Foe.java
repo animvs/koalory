@@ -13,16 +13,9 @@ import br.com.animvs.koalory.entities.engine.ia.IABase;
 /**
  * Created by DALDEGAN on 24/01/2015.
  */
-public class Foe extends Entity {
+public class Foe extends Mobile {
     private IABase ia;
     private Vector2 spawnPosition;
-
-    private boolean alive;
-    private Vector2 offset;
-
-    public boolean getAlive() {
-        return alive;
-    }
 
     public Foe(GameController controller, String graphic, IABase ia, Vector2 spawnPosition) {
         super(controller);
@@ -32,42 +25,11 @@ public class Foe extends Entity {
 
         getController().getEntities().createEntityBody(this, 0.7f, true);
         prepareGraphic(graphic);
-
-        alive = true;
     }
 
     @Override
-    public void setX(float x) {
-        super.setX(x);
-        if (getBody() != null)
-            getBody().setTransform(getController().getPhysics().toBox(x), getBody().getPosition().y, getBody().getAngle());
-
-        if (getGraphic() != null)
-            getGraphic().setPosicao(x + offset.x, getY());
-    }
-
-    @Override
-    public void setY(float y) {
-        super.setY(y);
-
-        if (getGraphic() != null)
-            getGraphic().setPosicao(getX() + offset.x, y + offset.y);
-    }
-
-    @Override
-    public void setPosition(float x, float y) {
-        super.setPosition(x, y);
-
-        if (getBody() != null)
-            getBody().setTransform(getController().getPhysics().toBox(x), getController().getPhysics().toBox(y), getBody().getAngle());
-
-        if (getGraphic() != null)
-            getGraphic().setPosicao(x + offset.x, y + offset.y);
-    }
-
-    @Override
-    public void update() {
-        super.update();
+    public void act(float delta) {
+        super.act(delta);
 
         if (getBody() != null) {
             if (getBody().getLinearVelocity().x != 0f) {
@@ -80,17 +42,13 @@ public class Foe extends Entity {
         checkFall();
     }
 
-    public void eventDeath(Player killer) {
-        if (!alive)
-            return;
-
-        alive = false;
-
+    @Override
+    protected void eventDeath(Entity killer) {
         disposeBody();
         //getGraphic().setAnimation("dead", false);
 
-        if (killer != null)
-            killer.forceJump(true);
+        if (killer != null && killer instanceof Player)
+            ((Player) killer).forceJump(true);
         /*else
             Gdx.app.log("FOE", "Koala has committed suicide");*/
 
@@ -99,7 +57,6 @@ public class Foe extends Entity {
 
     private void prepareGraphic(String graphicName) {
         AnimacaoSkeletal graphic;
-        offset = new Vector2();
 
         if (graphicName == null || graphicName.trim().length() == 0) {
             graphic = new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_KOALA, AnimacaoSkeletalData.class));
@@ -107,12 +64,12 @@ public class Foe extends Entity {
             graphic.setAnimation("walk", true);
             graphic.setAnimationSpeedScale(3f);
             graphic.setEscala(0.7f, 0.7f);
-            offset.set(0f, -35f);
+            getGraphicOffset().set(0f, -35f);
         } else if (graphicName.toLowerCase().trim().equals("fire")) {
             graphic = new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_SHADOW, AnimacaoSkeletalData.class));
             graphic.setSkin("standard");
 
-            offset.set(0f, -15f);
+            getGraphicOffset().set(0f, -15f);
             //Fix to correct spine model with wrong rotation ?
             graphic.setRotacao(-25f);
 

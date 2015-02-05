@@ -62,6 +62,14 @@ public final class StageController {
         controller.getStage().registerEntity(entity);
     }
 
+    public void registerActor(Actor actor){
+        stage.addActor(actor);
+    }
+
+    public void removeActor(Actor actor){
+        stage.getActors().removeValue(actor, true);
+    }
+
     public void resize(int width, int height) {
         stage.getViewport().update(width, height);
     }

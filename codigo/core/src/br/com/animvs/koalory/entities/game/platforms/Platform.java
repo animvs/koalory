@@ -97,13 +97,13 @@ public abstract class Platform extends Entity {
     }
 
     @Override
-    public void update() {
+    public void act(float delta) {
+        super.act(delta);
+
         updateGraphic();
 
-        if (!started) {
-            super.update();
+        if (!started)
             return;
-        }
 
         Vector2 desiredPosition;
 
@@ -138,8 +138,6 @@ public abstract class Platform extends Entity {
                 }
             }
         }
-
-        super.update();
     }
 
     public void eventPlayerSteped(Player player) {

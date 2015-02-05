@@ -8,9 +8,7 @@ import br.com.animvs.koalory.controller.GameController;
 /**
  * Created by DALDEGAN on 25/01/2015.
  */
-public final class Spawner {
-    private GameController controller;
-
+public final class Spawner extends Entity {
     private float spawnInterval;
 
     private float spawnTimer;
@@ -23,7 +21,7 @@ public final class Spawner {
     private String graphic;
 
     public Spawner(GameController controller, String graphic, Vector2 position, float spawnInterval, String ia, float foeSpeedX, Float foeSpeedY, Float interval) {
-        this.controller = controller;
+        super(controller);
         this.spawnInterval = spawnInterval;
         this.ia = ia;
         this.foeSpeedX = foeSpeedX;
@@ -33,12 +31,15 @@ public final class Spawner {
         this.graphic = graphic;
     }
 
-    public final void update() {
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+
         spawnTimer += Gdx.graphics.getDeltaTime();
 
         if (spawnTimer >= spawnInterval) {
             spawnTimer = 0f;
-            controller.getEntities().spawnFoe(graphic, position.x, position.y, foeSpeedX, foeSpeedY, ia, interval);
+            getController().getEntities().spawnFoe(graphic, position.x, position.y, foeSpeedX, foeSpeedY, ia, interval);
         }
     }
 }

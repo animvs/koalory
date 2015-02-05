@@ -1,5 +1,6 @@
 package br.com.animvs.koalory.entities.game;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -92,6 +93,11 @@ public abstract class Item extends Entity {
     public void dispose() {
         super.dispose();
         getController().getEntities().removeItem(this);
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
     }
 
     protected final boolean parsePropertyBoolean(String name, MapObject line) {

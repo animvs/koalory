@@ -16,9 +16,10 @@ public final class IAStraight extends IABase {
 
     @Override
     public void update(Foe foeOwner) {
-        if (!foeOwner.getAlive())
+        if (!foeOwner.getAlive() || foeOwner.getBody() == null)
             return;
 
         foeOwner.getBody().setLinearVelocity(speed, foeOwner.getBody().getLinearVelocity().y);
+        //foeOwner.getBody().applyForceToCenter(speed * 0.5f, 0f, true);
     }
 }
