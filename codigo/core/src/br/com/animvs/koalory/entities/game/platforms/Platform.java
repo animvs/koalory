@@ -28,6 +28,7 @@ public abstract class Platform extends Entity {
     private boolean waitStart;
 
     private Vector2 positionCache;
+    private Vector2 directionCache;
     private Vector2[] path;
     private int pathIndex;
     //private float timeCounter;
@@ -42,6 +43,7 @@ public abstract class Platform extends Entity {
 
         increasingIndex = true;
         positionCache = new Vector2();
+        directionCache = new Vector2();
 
         preparePath(line);
         parseParameters(line);
@@ -100,29 +102,27 @@ public abstract class Platform extends Entity {
     public void act(float delta) {
         super.act(delta);
 
-        updateGraphic();
-
         if (!started)
             return;
 
         Vector2 desiredPosition;
 
+        positionCache.set(getController().getPhysics().toWorld(getBody().getPosition().x), getController().getPhysics().toWorld(getBody().getPosition().y));
         if (increasingIndex)
             desiredPosition = path[pathIndex + 1];
         else
             desiredPosition = path[pathIndex - 1];
 
+        directionCache.set(positionCache);
+        directionCache.sub(desiredPosition);
+        directionCache.nor().scl(-1f);
 
-        positionCache.sub(desiredPosition);
-        positionCache.nor().scl(-1f);
-
-        getBody().setLinearVelocity(positionCache.x * speed, positionCache.y * speed);
+        getBody().setLinearVelocity(directionCache.x * speed, directionCache.y * speed);
 
         //if (timeCounter >= speed) {
-        positionCache.set(getX(), getY());
+        Gdx.app.log("ASD","position X: " + positionCache.x + " Y: " + positionCache.y + " desired X: " + desiredPosition.x + " Y: " + desiredPosition.y + " distance: " + positionCache.dst2(desiredPosition));
         if (positionCache.dst2(desiredPosition) <= Configurations.CORE_PLATFORM_PATH_DISTANCE_TOLERANCE) {
             //timeCounter = 0f;
-
             if (increasingIndex) {
                 pathIndex++;
                 if (pathIndex == path.length - 1) {
@@ -138,6 +138,8 @@ public abstract class Platform extends Entity {
                 }
             }
         }
+
+        setPosition(positionCache.x, positionCache.y);
     }
 
     public void eventPlayerSteped(Player player) {
@@ -152,11 +154,14 @@ public abstract class Platform extends Entity {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
+        //super.draw(batch, parentAlpha);
+
+        updateGraphic();
 
         batch.end();
-        for (int i = 0; i < graphics.size; i++)
+        for (int i = 0; i < graphics.size; i++) {
             graphics.getKeyAt(i).render(batch, Gdx.graphics.getDeltaTime());
+        }
         batch.begin();
     }
 
