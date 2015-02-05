@@ -216,25 +216,10 @@ public final class Player extends Mobile {
 
     public void computeInput() {
         if (getBody() != null) {
-            /*if (Configurations.SIMULATE_MOBILE_ON_DESKTOP || Gdx.app.getType() != Application.ApplicationType.Desktop)
+            /*if (grounded)
                 getBody().setLinearVelocity(input.getMovementX(), getBody().getLinearVelocity().y);
-            else
-                getBody().setLinearVelocity(input.getMovementX(), getBody().getLinearVelocity().y);*/
-
-/*            float maxX = 1f;
-            float minX = -1f;
-
-            if (grounded && groundedPlatform != null) {
-                if (groundedPlatform.getBody().getLinearVelocity().x > 0f)
-                    maxX += groundedPlatform.getBody().getLinearVelocity().x;
-
-                if (groundedPlatform.getBody().getLinearVelocity().x < 0f)
-                    minX += groundedPlatform.getBody().getLinearVelocity().x;
-            }*/
-
-            //computePlatformPhysics();
-
-            getBody().applyForceToCenter(input.getMovementX() * 0.35f, 0f, true);
+            else*/
+                getBody().applyForceToCenter(input.getMovementX() * 0.35f, 0f, true);
         }
     }
 
