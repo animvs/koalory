@@ -14,11 +14,8 @@ import br.com.animvs.koalory.controller.PhysicsController;
  */
 public final class Weight extends Item {
 
-    private Vector2 spawnPosition;
-
     private final float radius;
 
-    private Vector2 movementDirection;
     private Vector2 vectorCache;
 
     private final float lifeInterval;
@@ -46,7 +43,7 @@ public final class Weight extends Item {
         return true;
     }
 
-    public Weight(GameController controller, Vector2 spawnPosition, Vector2 movementDirection, float lifeInterval, float radius) {
+    public Weight(GameController controller, Vector2 spawnPosition, float lifeInterval, float radius) {
         super(controller, spawnPosition);
 
         if (lifeInterval == 0f)
@@ -55,11 +52,8 @@ public final class Weight extends Item {
         if (spawnPosition == null)
             throw new RuntimeException("The parameter 'spawnPosition' must be != NULL");
 
-        this.spawnPosition = spawnPosition;
         this.radius = radius;
         this.lifeInterval = lifeInterval;
-        this.movementDirection = movementDirection;
-        this.spawnPosition = spawnPosition;
         this.vectorCache = new Vector2();
     }
 
@@ -117,12 +111,6 @@ public final class Weight extends Item {
             if (target.getAlive())
                 break;
         }
-
-        setPosition(spawnPosition.x, spawnPosition.y);
-        //body.applyForceToCenter(forceX, forceY, true);
-
-        //Clean unused resources:
-        spawnPosition = null;
     }
 
     @Override
@@ -132,9 +120,16 @@ public final class Weight extends Item {
         if (!player.getAlive() || player.getBody() == null)
             return;
 
-        vectorCache.set(getX(),getY());
-        //vectorCache.sub()
+        vectorCache.set(getX(), getY());
+        vectorCache.sub(player.getX(), player.getY()).nor().scl(-1f);
 
-        //player.getBody().applyForceToCenter();
+        float force = 65f;
+
+        player.setPhysicsFriction(0.05f);
+        if (player.getGrounded())
+            vectorCache.set(vectorCache.x * 1.5f, 0f);
+            //vectorCache.y = Math.abs(vectorCache.y);
+
+        player.getBody().applyForceToCenter(vectorCache.x * force, vectorCache.y * force * 1.25f, true);
     }
 }

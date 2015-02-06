@@ -43,7 +43,11 @@ public final class Player extends Mobile {
     }
 
     //private static final float ANIMATION_Y_VELOCITY_TOLERANCE = 1.3f;
-    private Vector2 contactCache;
+
+
+    public boolean getGrounded() {
+        return grounded;
+    }
 
     @Override
     protected boolean getMovingHorizontally() {
@@ -62,7 +66,6 @@ public final class Player extends Mobile {
         if (inputMapper == null)
             throw new RuntimeException("The parameter 'inputMapper' must be != NULL");
 
-        contactCache = new Vector2();
         positionCache = new Vector2();
         groundedPlatformLastPosition = new Vector2();
         input = inputMapper;

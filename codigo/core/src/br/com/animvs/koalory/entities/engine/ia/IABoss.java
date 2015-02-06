@@ -120,8 +120,7 @@ public final class IABoss extends IABase {
             /*getController().getEntities().spawnWeight(spawnPosition, new Vector2(directionCache.x * forceToUse, directionCache.y * forceToUse),
                     lifeInterval, Random.random(radiusMin, radiusMax));*/
 
-            Vector2 forceInitial = new Vector2(0f, Configurations.GAMEPLAY_MOVEMENT_SPEED);
-            getController().getEntities().spawnWeight(spawnPosition, forceInitial, lifeInterval, Random.random(radiusMin, radiusMax));
+            getController().getEntities().spawnWeight(spawnPosition, lifeInterval, Random.random(radiusMin, radiusMax));
         }
     }
 }

@@ -138,8 +138,8 @@ public final class EntitiesController extends BaseController {
         getController().getPhysics().createBody(bodyParams);
     }
 
-    public void spawnWeight(Vector2 position, Vector2 forceInitial, float lifeInterval, float radius) {
-        Weight weight = new Weight(getController(), position, forceInitial, lifeInterval, radius);
+    public void spawnWeight(Vector2 position, float lifeInterval, float radius) {
+        Weight weight = new Weight(getController(), position, lifeInterval, radius);
         weight.initialize();
     }
 
@@ -165,7 +165,7 @@ public final class EntitiesController extends BaseController {
 
     public void spawnBoss(Vector2 spawnPosition) {
         final float waitInterval = 5f;
-        final int attackTimes = 1;
+        final int attackTimes = 10;
         final float attackInterval = 0.7f;
 
         Foe newBoss = new Foe(getController(), spawnPosition, "boss", 2.5f, new IABoss(getController(), waitInterval, attackTimes, attackInterval));
