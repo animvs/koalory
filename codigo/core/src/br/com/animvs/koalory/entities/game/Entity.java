@@ -50,6 +50,22 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
     }
 
     @Override
+    public float getX() {
+        if (getBody() == null)
+            return super.getX();
+
+        return getController().getPhysics().toWorld(getBody().getPosition().x);
+    }
+
+    @Override
+    public float getY() {
+        if (getBody() == null)
+            return super.getY();
+
+        return getController().getPhysics().toWorld(getBody().getPosition().y);
+    }
+
+    @Override
     public void setX(float x) {
         super.setX(x);
         if (physicBody != null)

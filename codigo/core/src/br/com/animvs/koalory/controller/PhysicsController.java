@@ -283,7 +283,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
     }
 
     private Body createCircleBody(TargetPhysicsParameters parameters) {
-        return AnimvsBodyFactory.createSphere(controller.getPhysics(), parameters.position, parameters.bodyType, parameters.width, parameters.density, parameters.restitution);
+        return AnimvsBodyFactory.createSphere(controller.getPhysics(), parameters.position, parameters.bodyType, parameters.width, parameters.density, parameters.restitution, parameters.sensor);
     }
 
     private Body createPlayerBody(TargetPhysicsParameters parameters) {

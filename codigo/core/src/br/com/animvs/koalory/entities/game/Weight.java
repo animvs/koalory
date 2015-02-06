@@ -1,9 +1,9 @@
 package br.com.animvs.koalory.entities.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 
 import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
 import br.com.animvs.koalory.controller.GameController;
@@ -18,28 +18,35 @@ public final class Weight extends Item {
 
     private final float radius;
 
-    private final float forceX;
-    private final float forceY;
+    private Vector2 movementDirection;
+    private Vector2 directionCache;
 
     private final float lifeInterval;
     private float lifeCounter;
 
+    private Player target;
+
     @Override
     protected float getBodyDensity() {
-        return 5f;
+        return 1f;
     }
 
     @Override
     protected boolean getDisposeOnCollect() {
-        return false;
+        return true;
     }
 
     @Override
-    protected float getBodyRestitution() {
-        return 0.5f;
+    protected BodyDef.BodyType getBodyType() {
+        return BodyDef.BodyType.KinematicBody;
     }
 
-    public Weight(GameController controller, Vector2 spawnPosition, float forceX, float forceY, float lifeInterval, float radius) {
+    @Override
+    protected boolean getBodySensor() {
+        return true;
+    }
+
+    public Weight(GameController controller, Vector2 spawnPosition, Vector2 movementDirection, float lifeInterval, float radius) {
         super(controller);
 
         if (lifeInterval == 0f)
@@ -51,9 +58,9 @@ public final class Weight extends Item {
         this.spawnPosition = spawnPosition;
         this.radius = radius;
         this.lifeInterval = lifeInterval;
-        this.forceX = forceX;
-        this.forceY = forceY;
+        this.movementDirection = movementDirection;
         this.spawnPosition = spawnPosition;
+        this.directionCache = new Vector2();
     }
 
     @Override
@@ -78,13 +85,24 @@ public final class Weight extends Item {
 
         lifeCounter += Gdx.graphics.getDeltaTime();
 
-        if (lifeCounter >= lifeInterval)
+        if (lifeCounter >= lifeInterval) {
             dispose();
-    }
+            return;
+        }
 
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
+        if (target != null) {
+            if (!target.getAlive())
+                target = null;
+            else {
+                directionCache.set(target.getX(), target.getY());
+                directionCache.sub(getX(), getY()).nor();
+
+                /*Gdx.app.log("WEIGHT", "X: " + directionCache.x + " Y: " + directionCache.y);
+                Gdx.app.log("WEIGHT TARGET", "X: " + target.getX() + " Y: " + target.getY());*/
+            }
+        }
+
+        getBody().setLinearVelocity(directionCache.x, directionCache.y);
     }
 
     @Override
@@ -93,9 +111,15 @@ public final class Weight extends Item {
 
         //Gdx.app.log("WEIGHT", "Weight spawned at X: " + spawnPosition.x + " Y: " + spawnPosition.y);
 
-        body.setBullet(true);
+        while (true) {
+            target = getController().getPlayers().getPlayer(getController().getPlayers().getTotalPlayersInGame() - 1);
+
+            if (target.getAlive())
+                break;
+        }
+
         setPosition(spawnPosition.x, spawnPosition.y);
-        body.applyForceToCenter(forceX, forceY, true);
+        //body.applyForceToCenter(forceX, forceY, true);
 
         //Clean unused resources:
         spawnPosition = null;

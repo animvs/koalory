@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 import br.com.animvs.engine2.matematica.Random;
+import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.entities.game.Foe;
-import br.com.animvs.koalory.entities.game.Player;
 
 /**
  * Created by DALDEGAN on 05/02/2015.
@@ -23,7 +23,7 @@ public final class IABoss extends IABase {
 
     private State state;
 
-    private Vector2 directionCache;
+    //private Vector2 directionCache;
 
     private enum State {
         WAIT, ATTACK
@@ -56,7 +56,7 @@ public final class IABoss extends IABase {
         this.attackTimes = attackTimes;
         this.attackInterval = attackInterval;
 
-        this.directionCache = new Vector2();
+        //this.directionCache = new Vector2();
     }
 
     @Override
@@ -105,20 +105,23 @@ public final class IABoss extends IABase {
             float radiusMin = 10f;
             float radiusMax = 20f;
 
-            Player target = getController().getPlayers().getPlayer(Random.random(getController().getPlayers().getTotalPlayersInGame() - 1));
+            /*Player target = getController().getPlayers().getPlayer(Random.random(getController().getPlayers().getTotalPlayersInGame() - 1));
 
             directionCache.set(foeOwner.getX(), foeOwner.getY());
             directionCache.sub(target.getX(), target.getY()).nor();
-            directionCache.scl(-1f);
+            directionCache.scl(-1f);*/
 
             Vector2 spawnPosition = new Vector2(foeOwner.getX(), foeOwner.getY());
-            if (directionCache.x < 0f)
+            /*if (directionCache.x < 0f)
                 spawnPosition.x -= 150f;
             else
-                spawnPosition.x += 150f;
+                spawnPosition.x += 150f;*/
 
-            getController().getEntities().spawnWeight(spawnPosition, directionCache.x * forceToUse, directionCache.y * forceToUse,
-                    lifeInterval, Random.random(radiusMin, radiusMax));
+            /*getController().getEntities().spawnWeight(spawnPosition, new Vector2(directionCache.x * forceToUse, directionCache.y * forceToUse),
+                    lifeInterval, Random.random(radiusMin, radiusMax));*/
+
+            Vector2 forceInitial = new Vector2(0f, Configurations.GAMEPLAY_MOVEMENT_SPEED);
+            getController().getEntities().spawnWeight(spawnPosition, forceInitial, lifeInterval, Random.random(radiusMin, radiusMax));
         }
     }
 }
