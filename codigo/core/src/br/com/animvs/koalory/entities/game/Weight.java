@@ -1,0 +1,103 @@
+package br.com.animvs.koalory.entities.game;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+
+import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
+import br.com.animvs.koalory.controller.GameController;
+import br.com.animvs.koalory.controller.PhysicsController;
+
+/**
+ * Created by DALDEGAN on 05/02/2015.
+ */
+public final class Weight extends Item {
+
+    private Vector2 spawnPosition;
+
+    private final float radius;
+
+    private final float forceX;
+    private final float forceY;
+
+    private final float lifeInterval;
+    private float lifeCounter;
+
+    @Override
+    protected float getBodyDensity() {
+        return 5f;
+    }
+
+    @Override
+    protected boolean getDisposeOnCollect() {
+        return false;
+    }
+
+    @Override
+    protected float getBodyRestitution() {
+        return 0.5f;
+    }
+
+    public Weight(GameController controller, Vector2 spawnPosition, float forceX, float forceY, float lifeInterval, float radius) {
+        super(controller);
+
+        if (lifeInterval == 0f)
+            throw new RuntimeException("The parameter 'lifeInterval' must be > 0");
+
+        if (spawnPosition == null)
+            throw new RuntimeException("The parameter 'spawnPosition' must be != NULL");
+
+        this.spawnPosition = spawnPosition;
+        this.radius = radius;
+        this.lifeInterval = lifeInterval;
+        this.forceX = forceX;
+        this.forceY = forceY;
+        this.spawnPosition = spawnPosition;
+    }
+
+    @Override
+    protected PhysicsController.TargetPhysicsParameters createBody(float tileSize) {
+        PhysicsController.TargetPhysicsParameters parameters = new PhysicsController.TargetPhysicsParameters(this, new Vector2(),
+                getRotation(), getBodyType(), PhysicsController.TargetPhysicsParameters.Type.CIRCLE, radius, radius, getBodyDensity(), getBodyRestitution(), getBodySensor());
+
+        return parameters;
+    }
+
+    @Override
+    protected AnimacaoSkeletal createGraphic() {
+        return null;
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+
+        if (getDisposed())
+            return;
+
+        lifeCounter += Gdx.graphics.getDeltaTime();
+
+        if (lifeCounter >= lifeInterval)
+            dispose();
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+    }
+
+    @Override
+    protected void eventAfterBodyCreated(Body body) {
+        super.eventAfterBodyCreated(body);
+
+        //Gdx.app.log("WEIGHT", "Weight spawned at X: " + spawnPosition.x + " Y: " + spawnPosition.y);
+
+        body.setBullet(true);
+        setPosition(spawnPosition.x, spawnPosition.y);
+        body.applyForceToCenter(forceX, forceY, true);
+
+        //Clean unused resources:
+        spawnPosition = null;
+    }
+}

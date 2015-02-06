@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
 import br.com.animvs.koalory.Configurations;
+import br.com.animvs.koalory.entities.engine.ia.IABoss;
 import br.com.animvs.koalory.entities.engine.ia.IAJump;
 import br.com.animvs.koalory.entities.engine.ia.IAStraight;
 import br.com.animvs.koalory.entities.game.CheckPoint;
@@ -18,6 +19,7 @@ import br.com.animvs.koalory.entities.game.Item;
 import br.com.animvs.koalory.entities.game.Life;
 import br.com.animvs.koalory.entities.game.Sender;
 import br.com.animvs.koalory.entities.game.Spawner;
+import br.com.animvs.koalory.entities.game.Weight;
 import br.com.animvs.koalory.entities.game.platforms.Platform;
 import br.com.animvs.koalory.entities.game.platforms.StaticPlatform;
 
@@ -128,23 +130,31 @@ public final class EntitiesController extends BaseController {
         getController().getStage().registerActor(new StaticPlatform(getController(), line));
     }
 
-    public void createEntityBody(Entity entityOwner, float scale, boolean rectangle) {
+    public void createEntityBody(Entity entityOwner, float scale, PhysicsController.TargetPhysicsParameters.Type type) {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(entityOwner, new Vector2(600f, 550f), 0f,
-                BodyDef.BodyType.DynamicBody, rectangle, Configurations.GAMEPLAY_ENTITY_SIZE_X * scale, Configurations.GAMEPLAY_ENTITY_SIZE_Y * scale, 1f, 0f, false);
+                BodyDef.BodyType.DynamicBody, type, Configurations.GAMEPLAY_ENTITY_SIZE_X * scale, Configurations.GAMEPLAY_ENTITY_SIZE_Y * scale, 1f, 0f, false);
 
         getController().getPhysics().createBody(bodyParams);
     }
 
     public void createPlatformBody(Platform platform, int size) {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(platform, new Vector2(), 0f,
-                BodyDef.BodyType.KinematicBody, true, Configurations.CORE_TILE_SIZE * size, Configurations.CORE_PLATFORM_SIZE_Y, 1f, 0f, false);
+                BodyDef.BodyType.KinematicBody, PhysicsController.TargetPhysicsParameters.Type.RECTANGLE,
+                Configurations.CORE_TILE_SIZE * size, Configurations.CORE_PLATFORM_SIZE_Y, 1f, 0f, false);
 
         getController().getPhysics().createBody(bodyParams);
     }
 
-    public void spawnFoe(String graphic, float x, float y, float speedX, Float speedY, String ia, Float interval) {
+    public void spawnWeight(Vector2 position, float forceX, float forceY, float lifeInterval, float radius) {
+        Weight weight = new Weight(getController(), position, forceX, forceY, lifeInterval, radius);
+        weight.initialize();
+    }
+
+    public void spawnFoe(String graphic, float physicsScale, float x, float y, float speedX, Float speedY, String ia, Float interval) {
         if (ia == null) {
-            Foe newFoe = new Foe(getController(), graphic, new IAStraight(getController(), speedX), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
+            Foe newFoe = new Foe(getController(), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f), graphic, physicsScale,
+                    new IAStraight(getController(), speedX));
+
             getController().getStage().registerActor(newFoe);
         } else if (ia.trim().toLowerCase().equals("jumper")) {
             float intervalReal = 0f;
@@ -152,10 +162,21 @@ public final class EntitiesController extends BaseController {
             if (interval != null)
                 intervalReal = interval.floatValue();
 
-            Foe newFoe = new Foe(getController(), graphic, new IAJump(getController(), speedX, speedY, intervalReal), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f));
+            Foe newFoe = new Foe(getController(), new Vector2(x, y + Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f), graphic, physicsScale,
+                    new IAJump(getController(), speedX, speedY, intervalReal));
+
             getController().getStage().registerActor(newFoe);
         } else
             throw new RuntimeException("AI invalid when loading spawner from TMX: " + ia);
+    }
+
+    public void spawnBoss(Vector2 spawnPosition) {
+        final float waitInterval = 5f;
+        final int attackTimes = 15;
+        final float attackInterval = 0.7f;
+
+        Foe newBoss = new Foe(getController(), spawnPosition, "boss", 2.5f, new IABoss(getController(), waitInterval, attackTimes, attackInterval));
+        getController().getStage().registerActor(newBoss);
     }
 
     /*public void update() {

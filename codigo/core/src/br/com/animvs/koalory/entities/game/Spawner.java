@@ -39,7 +39,7 @@ public final class Spawner extends Entity {
 
         if (spawnTimer >= spawnInterval) {
             spawnTimer = 0f;
-            getController().getEntities().spawnFoe(graphic, position.x, position.y, foeSpeedX, foeSpeedY, ia, interval);
+            getController().getEntities().spawnFoe(graphic, 0.7f, position.x, position.y, foeSpeedX, foeSpeedY, ia, interval);
         }
     }
 }

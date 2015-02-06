@@ -119,8 +119,7 @@ public abstract class Platform extends Entity {
 
         getBody().setLinearVelocity(directionCache.x * speed, directionCache.y * speed);
 
-        //if (timeCounter >= speed) {
-        Gdx.app.log("ASD","position X: " + positionCache.x + " Y: " + positionCache.y + " desired X: " + desiredPosition.x + " Y: " + desiredPosition.y + " distance: " + positionCache.dst2(desiredPosition));
+        //Gdx.app.log("ASD","position X: " + positionCache.x + " Y: " + positionCache.y + " desired X: " + desiredPosition.x + " Y: " + desiredPosition.y + " distance: " + positionCache.dst2(desiredPosition));
         if (positionCache.dst2(desiredPosition) <= Configurations.CORE_PLATFORM_PATH_DISTANCE_TOLERANCE) {
             //timeCounter = 0f;
             if (increasingIndex) {

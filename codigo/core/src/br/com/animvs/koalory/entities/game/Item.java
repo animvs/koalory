@@ -55,7 +55,8 @@ public abstract class Item extends Entity {
     }
 
     protected PhysicsController.TargetPhysicsParameters createBody(float tileSize) {
-        PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(this, new Vector2(), 0f, getBodyType(), true,
+        PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(this, new Vector2(), 0f, getBodyType(),
+                PhysicsController.TargetPhysicsParameters.Type.RECTANGLE,
                 tileSize * getBodyScaleX(), tileSize * getBodyScaleY(), getBodyDensity(), getBodyRestitution(), getBodySensor());
 
         return bodyParams;

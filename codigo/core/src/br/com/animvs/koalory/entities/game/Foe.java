@@ -8,6 +8,7 @@ import br.com.animvs.engine2.graficos.loaders.AnimacaoSkeletalData;
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.controller.LoadController;
+import br.com.animvs.koalory.controller.PhysicsController;
 import br.com.animvs.koalory.entities.engine.ia.IABase;
 
 /**
@@ -15,15 +16,13 @@ import br.com.animvs.koalory.entities.engine.ia.IABase;
  */
 public class Foe extends Mobile {
     private IABase ia;
-    private Vector2 spawnPosition;
 
-    public Foe(GameController controller, String graphic, IABase ia, Vector2 spawnPosition) {
-        super(controller);
+    public Foe(GameController controller, Vector2 spawnPosition, String graphic, float physicsScale, IABase ia) {
+        super(controller, spawnPosition);
 
         this.ia = ia;
-        this.spawnPosition = spawnPosition;
 
-        getController().getEntities().createEntityBody(this, 0.7f, true);
+        getController().getEntities().createEntityBody(this, physicsScale, PhysicsController.TargetPhysicsParameters.Type.RECTANGLE);
         prepareGraphic(graphic);
     }
 
@@ -58,7 +57,7 @@ public class Foe extends Mobile {
     private void prepareGraphic(String graphicName) {
         AnimacaoSkeletal graphic;
 
-        if (graphicName == null || graphicName.trim().length() == 0) {
+        if (graphicName == null || graphicName.trim().length() == 0 || graphicName.trim().equals("koala")) {
             graphic = new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_KOALA, AnimacaoSkeletalData.class));
             //graphic.setSkin("standard");
             graphic.setAnimation("walk", true);
@@ -68,12 +67,20 @@ public class Foe extends Mobile {
         } else if (graphicName.toLowerCase().trim().equals("fire")) {
             graphic = new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_SHADOW, AnimacaoSkeletalData.class));
             graphic.setSkin("standard");
+            graphic.setEscala(0.7f, 0.7f);
 
             getGraphicOffset().set(0f, -15f);
             //Fix to correct spine model with wrong rotation ?
             graphic.setRotacao(-25f);
 
             graphic.setAnimation("idle", true);
+        } else if (graphicName.trim().equals("boss")) {
+            graphic = new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_KOALA, AnimacaoSkeletalData.class));
+            //graphic.setSkin("standard");
+            graphic.setAnimation("walk", true);
+            graphic.setAnimationSpeedScale(3f);
+            graphic.setEscala(2.5f, 2.5f);
+            getGraphicOffset().set(0f, -125f);
         } else
             throw new RuntimeException("Unknown graphic when spawning Foe: " + graphicName);
 
@@ -89,12 +96,7 @@ public class Foe extends Mobile {
     protected void eventAfterBodyCreated(Body body) {
         super.eventAfterBodyCreated(body);
 
-        setPosition(spawnPosition.x, spawnPosition.y);
         body.setFixedRotation(true);
-
         body.getFixtureList().get(0).setFriction(0.5f);
-
-        //Clean unused resources:
-        spawnPosition = null;
     }
 }

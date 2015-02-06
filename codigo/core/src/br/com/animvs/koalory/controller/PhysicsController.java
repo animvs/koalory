@@ -35,18 +35,22 @@ public final class PhysicsController extends AnimvsPhysicsController {
     }
 
     public static class TargetPhysicsParameters {
-        public PhysicBodyHolder bodyHolder;
-        public Vector2 position;
-        public float rotation;
-        public BodyDef.BodyType bodyType;
-        public float width;
-        public float height;
-        public float density;
-        public float restitution;
-        public boolean sensor;
-        public boolean rectangle;
+        public static enum Type {
+            RECTANGLE, TRIANGLE, CIRCLE
+        }
 
-        public TargetPhysicsParameters(PhysicBodyHolder bodyHolder, Vector2 position, float rotation, BodyDef.BodyType bodyType, boolean rectangle, float width, float height, float density, float restitution, boolean sensor) {
+        public PhysicBodyHolder bodyHolder;
+        public final Vector2 position;
+        public final float rotation;
+        public final BodyDef.BodyType bodyType;
+        public final float width;
+        public final float height;
+        public final float density;
+        public final float restitution;
+        public final boolean sensor;
+        public final Type type;
+
+        public TargetPhysicsParameters(PhysicBodyHolder bodyHolder, Vector2 position, float rotation, BodyDef.BodyType bodyType, Type type, float width, float height, float density, float restitution, boolean sensor) {
             if (bodyHolder == null)
                 throw new RuntimeException("The parameter 'bodyHolder' must be != null");
 
@@ -59,7 +63,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
             this.density = density;
             this.restitution = restitution;
             this.sensor = sensor;
-            this.rectangle = rectangle;
+            this.type = type;
         }
     }
 
@@ -244,10 +248,19 @@ public final class PhysicsController extends AnimvsPhysicsController {
 
             Body body;
 
-            if (targetToCreate.get(i).rectangle)
-                body = createRectangleBody(targetToCreate.get(i));
-            else
-                body = createPlayerBody(targetToCreate.get(i));
+            switch (targetToCreate.get(i).type) {
+                case RECTANGLE:
+                    body = createRectangleBody(targetToCreate.get(i));
+                    break;
+                case TRIANGLE:
+                    body = createPlayerBody(targetToCreate.get(i));
+                    break;
+                case CIRCLE:
+                    body = createCircleBody(targetToCreate.get(i));
+                    break;
+                default:
+                    throw new RuntimeException("Unknown body type: " + targetToCreate.get(i).type.name());
+            }
 
             targetToCreate.get(i).bodyHolder.setBody(body);
             targetToCreate.removeIndex(i);
@@ -267,6 +280,10 @@ public final class PhysicsController extends AnimvsPhysicsController {
                 parameters.sensor);
 
         return body;
+    }
+
+    private Body createCircleBody(TargetPhysicsParameters parameters) {
+        return AnimvsBodyFactory.createSphere(controller.getPhysics(), parameters.position, parameters.bodyType, parameters.width, parameters.density, parameters.restitution);
     }
 
     private Body createPlayerBody(TargetPhysicsParameters parameters) {

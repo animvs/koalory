@@ -14,26 +14,27 @@ import br.com.animvs.koalory.controller.GameController;
 public abstract class Mobile extends Entity {
     private static final float ANIMATION_X_VELOCITY_TOLERANCE = 0.3f;
 
-    private Vector2 positionCache;
+    //private Vector2 positionCache;
 
-    private float physicsLinervelocityMinX;
-    private float physicsLinervelocityMaxX;
+    private float physicsLinerVelocityMinX;
+    private float physicsLinerVelocityMaxX;
     private float friction;
 
     private boolean graphicsFacingRight;
 
     private boolean alive;
+    private Vector2 spawnPosition;
 
     public final boolean getAlive() {
         return alive;
     }
 
-    public float getPhysicsLinervelocityMinX() {
-        return physicsLinervelocityMinX;
+    public float getPhysicsLinerVelocityMinX() {
+        return physicsLinerVelocityMinX;
     }
 
-    public float getPhysicsLinervelocityMaxX() {
-        return physicsLinervelocityMaxX;
+    public float getPhysicsLinerVelocityMaxX() {
+        return physicsLinerVelocityMaxX;
     }
 
     public float getPhysicsFriction() {
@@ -63,13 +64,14 @@ public abstract class Mobile extends Entity {
             return hVelocity > ANIMATION_X_VELOCITY_TOLERANCE;
     }
 
-    public Mobile(GameController controller) {
+    public Mobile(GameController controller, Vector2 spawnPosition) {
         super(controller);
 
-        positionCache = new Vector2();
+        this.spawnPosition = spawnPosition;
+        //positionCache = new Vector2();
 
-        physicsLinervelocityMinX = -1f;
-        physicsLinervelocityMaxX = 1f;
+        physicsLinerVelocityMinX = -1f;
+        physicsLinerVelocityMaxX = 1f;
         alive = true;
     }
 
@@ -99,10 +101,10 @@ public abstract class Mobile extends Entity {
             }
 
             if (getLimitPhysicsVelocityX()) {
-                if (getBody().getLinearVelocity().x < physicsLinervelocityMinX)
-                    getBody().setLinearVelocity(physicsLinervelocityMinX, getBody().getLinearVelocity().y);
-                else if (getBody().getLinearVelocity().x > physicsLinervelocityMaxX)
-                    getBody().setLinearVelocity(physicsLinervelocityMaxX, getBody().getLinearVelocity().y);
+                if (getBody().getLinearVelocity().x < physicsLinerVelocityMinX)
+                    getBody().setLinearVelocity(physicsLinerVelocityMinX, getBody().getLinearVelocity().y);
+                else if (getBody().getLinearVelocity().x > physicsLinerVelocityMaxX)
+                    getBody().setLinearVelocity(physicsLinerVelocityMaxX, getBody().getLinearVelocity().y);
             }
 
             //Mobiles whoes falls beyond Y 0 dies:
@@ -116,12 +118,17 @@ public abstract class Mobile extends Entity {
     protected void eventAfterBodyCreated(Body body) {
         super.eventAfterBodyCreated(body);
 
+        setPosition(spawnPosition.x, spawnPosition.y);
+
         if (getController().getLevel().getMapName().equals("frostPlateau1-1"))
             setPhysicsFriction(0.15f * 0.15f); //Less friction on ice
         else if (getController().getLevel().getMapName().equals("sandPlains1-1")) {
             setPhysicsFriction(0.15f * 1.35f); //More friction on sand
         } else
             setPhysicsFriction(0.15f); //Normal friction
+
+        //Clean unused resources:
+        spawnPosition = null;
     }
 
     private void updatePhysicsFriction(float friction) {

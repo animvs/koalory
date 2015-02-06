@@ -14,6 +14,7 @@ import br.com.animvs.engine2.graficos.loaders.AnimacaoSkeletalData;
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.controller.LoadController;
+import br.com.animvs.koalory.controller.PhysicsController;
 import br.com.animvs.koalory.controller.PlayersController;
 import br.com.animvs.koalory.entities.engine.input.InputProcessor;
 import br.com.animvs.koalory.entities.game.platforms.Platform;
@@ -56,7 +57,7 @@ public final class Player extends Mobile {
     }
 
     public Player(GameController controller, String skinName, InputProcessor inputMapper, com.badlogic.gdx.graphics.Color color) {
-        super(controller);
+        super(controller, new Vector2(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y));
 
         if (inputMapper == null)
             throw new RuntimeException("The parameter 'inputMapper' must be != NULL");
@@ -65,12 +66,11 @@ public final class Player extends Mobile {
         positionCache = new Vector2();
         groundedPlatformLastPosition = new Vector2();
         input = inputMapper;
-        setPosition(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
 
         /*lastPositionCache = new Vector2();*/
         //alive = true;
 
-        getController().getEntities().createEntityBody(this, 1f, false);
+        getController().getEntities().createEntityBody(this, 1f, PhysicsController.TargetPhysicsParameters.Type.TRIANGLE);
 
         getGraphicOffset().set(0f, -50f);
         setGraphic(new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_CHARACTER, AnimacaoSkeletalData.class)));
