@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="100" tilewidth="64" tileheight="64" nextobjectid="278">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="100" tilewidth="64" tileheight="64" nextobjectid="279">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
  <layer name="background" width="130" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2IFqqzAUgGEfqu//bJcDG3eUapN49ET9PgiMzprE/BvrlgUAAAAAAADgHK+fcaWvv61/5D2zf320Gfaog7oOXhcevfu4475nVLnOOzw/9tMBQQcEHRB0QNAB4UmfGzW9TgcEHRB0QNABQQcEHRCqz0UHc6g+Fx3MofpcdDCH3mdXfY46OMZIB63vqz5jHbTL+H3Qc68zf8510C6jg+rRszc+u3oHvXvjsyt3MLI3/tvzvKvPvuc8dbBNBzyJDgg6IOiAoAOCDgg6IOiAcEYH1f9HMcZGtur93GVsPc/eZ91yfbbWuTJeu/PY2mvvc2i5PpsOdNAzlw7mGtl6u/z03tbX9uzz6OfQ60kdvFauGXmtZa6tPVY/94xzab32/bpZOxjpZWm83+g6nzayja5hbwfv1x+xzjuPTGf2xrx0QNABQQf80gFhpg6y5q/exxXpYE5nn0f152BjbGQanfeI66vmXbu+6j7f5tCBDpbl8333muk8dFDXQcbajJqRrXo/xjM6GJ235T3frjljf5nP54kdtMydqfq8MzpYVt6XobKDb/Nnqj7v3j0+rYOtNWSqPu/ZO5jJ3fc36uifEa5BBwQdEJ729wGf6YCgA8Kevw+qPxcbx45W1es0ntXB2pxZazn6/r3zVj63ZeW6LTrQwVFr18H1Onh3VhfGOWNU9boNHRjX7CBjjr+vjaxp7fs9r/euOeM8dNDfQe89szvIPpOjzlsHOtja7wgdfL+3DnSgAx08qQMAgH9e9o6W
+   eJzt2A1q6zAQRWEtKvtf2+NCyyvBP5rxSDOWzgeCkjqWZJ2Wpq0BALCGz8+o8jVyfAoNvAtnCqEDCB1A6ABCBxA6gNABhA4gdBAj6n+wM78+Wr+lgwp7eLLnESrskQ7yOuh5flWHdR8r7ruizHWu8PzwHB1A6ABCBxA6gNABZKfPjTR9jg4gdAChAwgdQOgAQgeQ7HOhgxqyz4UOasg+Fzqowfrsss+RDsbwdND7vuwzpoN+Eb8PLPea+XNOB/0iOsgelr3h2Ns7sO4Nx97cgWdv+O/J884+e8t50sE1OsBO6ABCBxA6gNABhA4gdAChA8iMDrL/j8LwjWjZ+1llXD1P67PuuT5a71wRr608rvZqfQ4910ejAzqwzEUHtUY0a5dH7+197ck+Rz8Hq506+Jxc43mtZ66rPWY/94hz6b32+7qqHXh6aZ33865ztxHNu4anHXxfP2KdK49IM3tDXXQAoQMIHeAXHUAqdRA1f/Y+3ogOapp9Htmfgxm+Eck774jrs+Y9uz7rPndz0AEdtHZ836cqnQcd5HUQsTZGzoiWvR/GHh145+15z901M/YX+Xx27KBn7kjZ5x3RQTt5X4TMDu7mj5R93tY97tbB1RoiZZ939Q4qWX1/XqN/RvAOdAChA8hufx/gGB1A6ADy5O+D7M/FjLGjV/Y6GXt1cDZn1FpG3986b+ZzayfXXaEDOhi1djp4XwffZnXBmDO8stfNoAPGOzuImOPva541nX3f8rp1zRHnQQf2Dqz3jO4g+kxGnTcd0MHVfj3o4P7edEAHdEAHO3UAAADwD5npq9Y=
   </data>
  </layer>
  <layer name="shadow" width="130" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2Itq4zAQQFH3/396GVjYbvFDUkceOT4HBMV2Ism+DU23DQAAAAAAAOAeX3/Hk36+Wv/Ia1b/ebYV9qiDug6+Hjx69/GJ++Z/7h9BBwQdEHRA0AFBB4Q3fW/U9DEdEHRA0AFBBwQdEHRAqH4uOlhD9XPRwRqqn4sO1tB776qfow7mGO2g9bWVz1gH7TI+D3re687fcx20y+iguouevbFvRgd3dtG7N/bd0cGsLkb2xr6KDmZ/DpytlX064NPpgKADgg4IOiDogKADgg7+efveZ3dQ/X8UY2xkq97Pp4yz+9l7r1uuz9Y6V8axTx5ne+29D63XZ9KBDq7m2rvuN8eMOe1lWLWDs3Wu4JMaaNnP3jUjx1rmOttj9X3PeC6t1/687o0djK7zbSNb9X5a91W9vtVGtrvmYW06IOiAoAOCDggrdZA1f/U+nkgHhOrvwcbYyDYy74zrq+Y9ur7qfa7m0IEOtm3/fTOs8jx08IwOjLVGtur9GO/oYGTeltf0XtMy19n5nrWOnn9jBy1zZ7prn6PnWta4HbwuQ2UHV/NnekIHV+vdtuvXjaru4GwNmXTA083+HeEZdEDQAcHfBwQdEHRA+M3fB7O/Lxu1o1X1Oo13dXA0Z9ZaZr9/77yV9207uO6MDnQwa+06eF4HP93VhXHPGFW9bkMHxjM7yJjj+7GRNR2d7zneu+aM56GD53WQ/UxmPW8d6OBsvyN00De/DnLm+H5sZE1H53uO96xXBzp4UwcAAH8A8LQReg==
+   eJzt2IFqAyEQRVHz/z9dHhSaBtedMaOj6z0glM0m6npb2pYCAMAzvH7HKl8jx2uhgb1wphA6gNABhA4gdAChAwgdQOgAQgcxov4HO/Pr2vo9Haywh2/2PMIKe6SDvA4sz2/V4d3HE/eN/3h+EDqA0AGEDiB0AKEDyEl/N9L0NTqA0AGEDiB0AKEDCB1Ass+FDtaQfS50sIbsc6GDNXifXfY50sEYvR1Y35t5xnRgF/HzwPNZM7/P6cAuooPsLjx7Q92IDmZ24d0b6mZ0MKqLnr2hLqOD0T8HWmtFHR3g6egAQgcQOoDQAYQOIHQAoYM/p+99dAfZ/0dh9I1o2ft5ymg9T++zttwfzTpXxLUnj9Zevc/Ben8kOqCDu7lq931zjTGmvQirdtBa5wqe1IBlP7V7eq5Z5mrtMfu5R5yL9d7P+07soHedp41o2fux7it7fauNaLPmwdroAEIHEDqA0AFkpQ6i5s/ex47oAJL9dzCjb0TrmXfE/VnzXt2f9Tl3c9ABHZRS/9wIq5wHHezRAWOtES17P4wzOuiZ1/Ie7z2WuVqve9ba+/qJHVjmjjRrn72vWdZYLt4XIbODu/kj7dDB3XpLuX9fr+wOWmuIRAfY3ejvEeyBDiB0AOH3AwgdQOgA8s3vB6P/XmbkDqvsdTLO6uBqzqi1jP5877yZz61c3NdCB3Qwau10sF8Hn2Z1wZgzemWvm0EHjD07iJjj/VrPmq5e91z3rjniPOhgvw6iz2TUedMBHbT224MOfPPTQcwc79d61nT1uue6Z710QAcndQAAAPADu7ISCg==
   </data>
  </layer>
  <layer name="groundBack" width="130" height="100">
@@ -370,6 +370,7 @@
     <property name="killsPlayer" value="true"/>
    </properties>
   </object>
+  <object id="278" name="boss" x="3520" y="192" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="platform">
   <object id="143" name="platform" x="7520.67" y="5786.67">
