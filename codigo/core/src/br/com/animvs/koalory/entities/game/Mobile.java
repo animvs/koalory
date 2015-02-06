@@ -23,7 +23,6 @@ public abstract class Mobile extends Entity {
     private boolean graphicsFacingRight;
 
     private boolean alive;
-    private Vector2 spawnPosition;
 
     public final boolean getAlive() {
         return alive;
@@ -65,11 +64,9 @@ public abstract class Mobile extends Entity {
     }
 
     public Mobile(GameController controller, Vector2 spawnPosition) {
-        super(controller);
+        super(controller, spawnPosition);
 
-        this.spawnPosition = spawnPosition;
         //positionCache = new Vector2();
-
         physicsLinerVelocityMinX = -1f;
         physicsLinerVelocityMaxX = 1f;
         alive = true;
@@ -118,17 +115,12 @@ public abstract class Mobile extends Entity {
     protected void eventAfterBodyCreated(Body body) {
         super.eventAfterBodyCreated(body);
 
-        setPosition(spawnPosition.x, spawnPosition.y);
-
         if (getController().getLevel().getMapName().equals("frostPlateau1-1"))
             setPhysicsFriction(0.15f * 0.15f); //Less friction on ice
         else if (getController().getLevel().getMapName().equals("sandPlains1-1")) {
             setPhysicsFriction(0.15f * 1.35f); //More friction on sand
         } else
             setPhysicsFriction(0.15f); //Normal friction
-
-        //Clean unused resources:
-        spawnPosition = null;
     }
 
     private void updatePhysicsFriction(float friction) {

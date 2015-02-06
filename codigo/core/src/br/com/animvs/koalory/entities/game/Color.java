@@ -2,6 +2,7 @@ package br.com.animvs.koalory.entities.game;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
 import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
@@ -26,8 +27,8 @@ public class Color extends Item {
         return true;
     }
 
-    public Color(GameController controller, float colorRecovered) {
-        super(controller);
+    public Color(GameController controller, Vector2 spawnPosition, float colorRecovered) {
+        super(controller, spawnPosition);
         this.colorRecovered = colorRecovered;
     }
 

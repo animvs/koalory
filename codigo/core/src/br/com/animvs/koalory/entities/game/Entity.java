@@ -17,6 +17,7 @@ import br.com.animvs.koalory.entities.physics.PhysicBodyHolder;
 
 public abstract class Entity extends Group implements Disposable, PhysicBodyHolder {
     private GameController controller;
+    private Vector2 spawnPosition;
     private Body physicBody;
 
     private AnimacaoSkeletal graphic;
@@ -124,11 +125,11 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (polygonSpriteBatchCache == null)
-            polygonSpriteBatchCache = (PolygonSpriteBatch) batch;
-
         if (graphic != null) {
             /*graphic.flipX(!facingRight);*/
+
+            if (polygonSpriteBatchCache == null)
+                polygonSpriteBatchCache = (PolygonSpriteBatch) batch;
 
             graphic.setPosicao(getX() + graphicOffset.x, getY() + graphicOffset.y);
 
@@ -140,8 +141,9 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
         super.draw(batch, parentAlpha);
     }
 
-    public Entity(GameController controller) {
+    public Entity(GameController controller, Vector2 spawnPosition) {
         this.controller = controller;
+        this.spawnPosition = spawnPosition;
         this.graphicOffset = new Vector2();
         controller.getStage().registerEntity(this);
     }
@@ -149,6 +151,11 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
     protected void eventAfterBodyCreated(Body body) {
         physicBody = body;
         physicBody.setUserData(this);
+
+        setPosition(spawnPosition.x, spawnPosition.y);
+
+        //Clean unused resources:
+        spawnPosition = null;
     }
 
     @Override

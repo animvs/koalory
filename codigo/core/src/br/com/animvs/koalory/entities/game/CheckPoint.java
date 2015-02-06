@@ -1,5 +1,6 @@
 package br.com.animvs.koalory.entities.game;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
 import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
@@ -25,8 +26,8 @@ public final class CheckPoint extends Item {
         return null;
     }
 
-    public CheckPoint(GameController controller) {
-        super(controller);
+    public CheckPoint(GameController controller, Vector2 spawnPosition) {
+        super(controller, spawnPosition);
     }
 
     @Override

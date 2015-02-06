@@ -19,7 +19,7 @@ public final class Weight extends Item {
     private final float radius;
 
     private Vector2 movementDirection;
-    private Vector2 directionCache;
+    private Vector2 vectorCache;
 
     private final float lifeInterval;
     private float lifeCounter;
@@ -47,7 +47,7 @@ public final class Weight extends Item {
     }
 
     public Weight(GameController controller, Vector2 spawnPosition, Vector2 movementDirection, float lifeInterval, float radius) {
-        super(controller);
+        super(controller, spawnPosition);
 
         if (lifeInterval == 0f)
             throw new RuntimeException("The parameter 'lifeInterval' must be > 0");
@@ -60,7 +60,7 @@ public final class Weight extends Item {
         this.lifeInterval = lifeInterval;
         this.movementDirection = movementDirection;
         this.spawnPosition = spawnPosition;
-        this.directionCache = new Vector2();
+        this.vectorCache = new Vector2();
     }
 
     @Override
@@ -94,15 +94,15 @@ public final class Weight extends Item {
             if (!target.getAlive())
                 target = null;
             else {
-                directionCache.set(target.getX(), target.getY());
-                directionCache.sub(getX(), getY()).nor();
+                vectorCache.set(target.getX(), target.getY());
+                vectorCache.sub(getX(), getY()).nor();
 
-                /*Gdx.app.log("WEIGHT", "X: " + directionCache.x + " Y: " + directionCache.y);
+                /*Gdx.app.log("WEIGHT", "X: " + vectorCache.x + " Y: " + vectorCache.y);
                 Gdx.app.log("WEIGHT TARGET", "X: " + target.getX() + " Y: " + target.getY());*/
             }
         }
 
-        getBody().setLinearVelocity(directionCache.x, directionCache.y);
+        getBody().setLinearVelocity(vectorCache.x, vectorCache.y);
     }
 
     @Override
@@ -123,5 +123,18 @@ public final class Weight extends Item {
 
         //Clean unused resources:
         spawnPosition = null;
+    }
+
+    @Override
+    public void collect(Player player) {
+        super.collect(player);
+
+        if (!player.getAlive() || player.getBody() == null)
+            return;
+
+        vectorCache.set(getX(),getY());
+        //vectorCache.sub()
+
+        //player.getBody().applyForceToCenter();
     }
 }

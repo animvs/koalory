@@ -1,5 +1,7 @@
 package br.com.animvs.koalory.entities.game;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
@@ -24,8 +26,8 @@ public final class Sender extends Item {
         return true;
     }
 
-    public Sender(GameController controller, String mapName) {
-        super(controller);
+    public Sender(GameController controller, Vector2 spawnPosition, String mapName) {
+        super(controller, spawnPosition);
 
         if (mapName == null)
             throw new RuntimeException("The parameter 'mapName' must be != NULL");
@@ -37,9 +39,24 @@ public final class Sender extends Item {
     }
 
     @Override
+    public float getX() {
+        return super.getX();
+    }
+
+    @Override
     protected void eventAfterBodyCreated(Body body) {
         super.eventAfterBodyCreated(body);
         setPosition(getX(), getY());
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
     }
 
     @Override

@@ -72,9 +72,7 @@ public final class EntitiesController extends BaseController {
     }
 
     public void spawnItemColorProgress(float x, float y, float colorProgressAmount) {
-        Color color = new Color(getController(), colorProgressAmount);
-
-        color.setPosition(x + Configurations.CORE_TILE_SIZE / 2f, y + Configurations.CORE_TILE_SIZE / 2f);
+        Color color = new Color(getController(), new Vector2(x + Configurations.CORE_TILE_SIZE / 2f, y + Configurations.CORE_TILE_SIZE / 2f), colorProgressAmount);
         color.initialize();
 
         getController().getStage().registerActor(color);
@@ -89,33 +87,28 @@ public final class EntitiesController extends BaseController {
     }
 
     public void createEndLevel(RectangleMapObject rectangle) {
-        EndLevel endLevel = new EndLevel(getController());
-        endLevel.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
+        EndLevel endLevel = new EndLevel(getController(), new Vector2(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f));
         endLevel.initialize();
 
         getController().getStage().registerActor(endLevel);
     }
 
     public void createLife(RectangleMapObject rectangle) {
-        Life life = new Life(getController());
+        Life life = new Life(getController(), new Vector2(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f));
         life.initialize();
-        life.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
 
         getController().getStage().registerActor(life);
     }
 
     public void createCheckpoint(RectangleMapObject rectangle) {
-        CheckPoint checkpoint = new CheckPoint(getController());
+        CheckPoint checkpoint = new CheckPoint(getController(), new Vector2(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f));
         checkpoint.initialize();
-
-        checkpoint.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
 
         getController().getStage().registerActor(checkpoint);
     }
 
     public void createSender(RectangleMapObject rectangle, String map) {
-        Sender sender = new Sender(getController(), map);
-        sender.setPosition(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f);
+        Sender sender = new Sender(getController(), new Vector2(rectangle.getRectangle().x + Configurations.CORE_TILE_SIZE / 2f, rectangle.getRectangle().y + Configurations.CORE_TILE_SIZE / 2f), map);
         sender.initialize();
 
         getController().getStage().registerActor(sender);
@@ -123,11 +116,11 @@ public final class EntitiesController extends BaseController {
 
     public void createSpawner(String graphic, Vector2 position, float spawnInterval, String ia, float foeSpeedX, Float foeSpeedY, Float interval) {
         //spawners.add(new Spawner(getController(), graphic, position, spawnInterval, ia, foeSpeedX, foeSpeedY, interval));
-        getController().getStage().registerActor(new Spawner(getController(), graphic, position, spawnInterval, ia, foeSpeedX, foeSpeedY, interval));
+        getController().getStage().registerActor(new Spawner(getController(), position, graphic, position, spawnInterval, ia, foeSpeedX, foeSpeedY, interval));
     }
 
     public void createPlatform(PolylineMapObject line) {
-        getController().getStage().registerActor(new StaticPlatform(getController(), line));
+        getController().getStage().registerActor(new StaticPlatform(getController(), new Vector2(), line));
     }
 
     public void createEntityBody(Entity entityOwner, float scale, PhysicsController.TargetPhysicsParameters.Type type) {

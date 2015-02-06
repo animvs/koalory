@@ -20,8 +20,8 @@ public final class Spawner extends Entity {
     private Float interval;
     private String graphic;
 
-    public Spawner(GameController controller, String graphic, Vector2 position, float spawnInterval, String ia, float foeSpeedX, Float foeSpeedY, Float interval) {
-        super(controller);
+    public Spawner(GameController controller, Vector2 spawnPosition, String graphic, Vector2 position, float spawnInterval, String ia, float foeSpeedX, Float foeSpeedY, Float interval) {
+        super(controller, spawnPosition);
         this.spawnInterval = spawnInterval;
         this.ia = ia;
         this.foeSpeedX = foeSpeedX;

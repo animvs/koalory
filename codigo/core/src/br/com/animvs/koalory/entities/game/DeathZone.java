@@ -33,7 +33,7 @@ public final class DeathZone extends Item {
     }
 
     public DeathZone(GameController controller, RectangleMapObject rectangle) {
-        super(controller);
+        super(controller, new Vector2(rectangle.getRectangle().x + rectangle.getRectangle().width / 2f, rectangle.getRectangle().y + rectangle.getRectangle().height / 2f));
         this.rectangle = rectangle;
         this.killsPlayer = true; //TRUE by default
 
@@ -66,7 +66,6 @@ public final class DeathZone extends Item {
     @Override
     protected void eventAfterBodyCreated(Body body) {
         super.eventAfterBodyCreated(body);
-        setPosition(rectangle.getRectangle().x + rectangle.getRectangle().width / 2f, rectangle.getRectangle().y + rectangle.getRectangle().height / 2f);
 
         for (int i = 0; i < body.getFixtureList().size; i++)
             body.getFixtureList().get(i).setSensor(true);

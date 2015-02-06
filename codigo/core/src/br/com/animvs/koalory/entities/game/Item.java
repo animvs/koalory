@@ -40,8 +40,8 @@ public abstract class Item extends Entity {
         return true;
     }
 
-    public Item(GameController controller) {
-        super(controller);
+    public Item(GameController controller, Vector2 spawnPosition){
+        super(controller, spawnPosition);
     }
 
     public final void initialize() {

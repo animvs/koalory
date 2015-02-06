@@ -38,8 +38,8 @@ public abstract class Platform extends Entity {
 
     private ArrayMap<AnimacaoSkeletal, Vector2> graphics;
 
-    public Platform(GameController controller, PolylineMapObject line) {
-        super(controller);
+    public Platform(GameController controller, Vector2 spawnPosition, PolylineMapObject line) {
+        super(controller, spawnPosition);
 
         increasingIndex = true;
         positionCache = new Vector2();
