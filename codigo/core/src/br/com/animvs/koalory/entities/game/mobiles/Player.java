@@ -47,10 +47,9 @@ public final class Player extends Mobile {
 
     //private static final float ANIMATION_Y_VELOCITY_TOLERANCE = 1.3f;
 
-
     @Override
     protected float getBodyScaleX() {
-        return 0.85f;
+        return 0.7f;
     }
 
     @Override

@@ -18,12 +18,32 @@ public final class Foe extends Mobile {
     private IABase ia;
 
     private String graphicName;
+    private final float physicsScale;
+
+    @Override
+    protected float getBodyScaleX() {
+        return physicsScale * 0.7f;
+    }
+
+    @Override
+    protected float getBodyScaleY() {
+        return physicsScale * 1.1f;
+    }
+
+    @Override
+    protected float getBodyFriction() {
+        return 0.5f;
+    }
 
     public Foe(GameController controller, Vector2 spawnPosition, String graphicName, float physicsScale, IABase ia) {
         super(controller, spawnPosition);
 
+        if (physicsScale <= 0f)
+            throw new RuntimeException("The parameter 'physicScale' must be > 0");
+
         this.ia = ia;
         this.graphicName = graphicName;
+        this.physicsScale = physicsScale;
 
 
         /*getController().getEntities().createEntityBody(this, physicsScale, PhysicsController.TargetPhysicsParameters.Type.RECTANGLE);
