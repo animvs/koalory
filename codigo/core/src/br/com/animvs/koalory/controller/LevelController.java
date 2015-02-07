@@ -144,6 +144,10 @@ public class LevelController implements Disposable {
                 createLife(objects.get(i));
             else if (objects.get(i).getName().toLowerCase().trim().equals("checkpoint"))
                 createCheckpoint(objects.get(i));
+            else if (objects.get(i).getName().toLowerCase().trim().equals("teleportsender"))
+                createTeleportSender(objects.get(i));
+            else if (objects.get(i).getName().toLowerCase().trim().equals("teleportreceiver"))
+                createTeleportReceiver(objects.get(i));
             else if (objects.get(i).getName().toLowerCase().trim().equals("boss"))
                 createBoss(objects.get(i));
             else
@@ -228,6 +232,26 @@ public class LevelController implements Disposable {
 
         RectangleMapObject rectangle = castLevelObject(mapObject);
         controller.getEntities().createSender(rectangle, mapName);
+    }
+
+    public void createTeleportSender(MapObject mapObject) {
+        Object idProperty = mapObject.getProperties().get("id");
+
+        if (idProperty == null)
+            throw new RuntimeException("Item 'TeleportSender' does not have the property 'id'");
+
+        RectangleMapObject rectangle = castLevelObject(mapObject);
+        controller.getEntities().createTeleportSender(rectangle, idProperty.toString());
+    }
+
+    public void createTeleportReceiver(MapObject mapObject) {
+        Object idProperty = mapObject.getProperties().get("id");
+
+        if (idProperty == null)
+            throw new RuntimeException("Item 'TeleportReceiver' does not have the property 'id'");
+
+        RectangleMapObject rectangle = castLevelObject(mapObject);
+        controller.getEntities().createTeleportReceiver(rectangle, idProperty.toString());
     }
 
     private void createSpawn(MapObject mapObject) {

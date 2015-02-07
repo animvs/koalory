@@ -38,6 +38,8 @@ public final class Player extends Mobile {
     private String graphicSkin;
     private com.badlogic.gdx.graphics.Color graphicColor;
 
+    private Vector2 teleportTo;
+
     /*private boolean inDamage;
     private float damageTimeCounter;*/
 
@@ -126,6 +128,11 @@ public final class Player extends Mobile {
         if (getBody() != null) {
 
             computeGrounded();
+
+            if (teleportTo != null) {
+                setPosition(teleportTo.x, teleportTo.y);
+                teleportTo = null;
+            }
 
             if (mustJump) {
                 mustJump = false;
@@ -325,19 +332,19 @@ public final class Player extends Mobile {
                 groundedPlatform = null;
 
                 /*if (below) {*/
-                    if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
-                        groundedPlatform = (Platform) contact.getFixtureA().getBody().getUserData();
+                if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
+                    groundedPlatform = (Platform) contact.getFixtureA().getBody().getUserData();
 
-                    if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
-                        groundedPlatform = (Platform) contact.getFixtureB().getBody().getUserData();
+                if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
+                    groundedPlatform = (Platform) contact.getFixtureB().getBody().getUserData();
 
-                    if (groundedPlatform != null) {
-                        groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
-                        groundedPlatform.eventPlayerSteped(this);
-                    }
+                if (groundedPlatform != null) {
+                    groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
+                    groundedPlatform.eventPlayerSteped(this);
+                }
 
-                    grounded = true;
-                    return;
+                grounded = true;
+                return;
                 /*}*/
 
                 /*grounded = false;
@@ -345,6 +352,10 @@ public final class Player extends Mobile {
             }
         }
         grounded = false;
+    }
+
+    public void teleportTo(float x, float y) {
+        teleportTo = new Vector2(x, y);
     }
 
     /*public void eventTouched(Foe foe, Contact contact) {

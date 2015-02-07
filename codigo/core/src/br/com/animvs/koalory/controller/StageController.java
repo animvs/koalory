@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.entities.engine.graphics.ParallaxCamera;
 import br.com.animvs.koalory.entities.game.Entity;
+import br.com.animvs.koalory.entities.game.items.TeleportReceiver;
 
 public final class StageController {
     private GameController controller;
@@ -62,11 +63,11 @@ public final class StageController {
         controller.getStage().registerEntity(entity);
     }
 
-    public void registerActor(Actor actor){
+    public void registerActor(Actor actor) {
         stage.addActor(actor);
     }
 
-    public void removeActor(Actor actor){
+    public void removeActor(Actor actor) {
         stage.getActors().removeValue(actor, true);
     }
 
@@ -81,6 +82,19 @@ public final class StageController {
         resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         //stage.getCamera().position.set(0f, stage.getCamera().position.y, 0f);
         //stage.getCamera().update();
+    }
+
+    public TeleportReceiver findTeleportReceiver(String id) {
+        for (int i = 0; i < stage.getActors().size; i++) {
+            if (stage.getActors().get(i) instanceof TeleportReceiver) {
+                TeleportReceiver receiver = (TeleportReceiver) stage.getActors().get(i);
+
+                if (receiver.getID().equals(id))
+                    return receiver;
+            }
+        }
+
+        throw new RuntimeException("Teleport receiver not found - id: " + id);
     }
 
     public void restart() {

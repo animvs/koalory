@@ -17,6 +17,8 @@ import br.com.animvs.koalory.entities.game.items.EndLevel;
 import br.com.animvs.koalory.entities.game.items.Item;
 import br.com.animvs.koalory.entities.game.items.Life;
 import br.com.animvs.koalory.entities.game.items.Sender;
+import br.com.animvs.koalory.entities.game.items.TeleportReceiver;
+import br.com.animvs.koalory.entities.game.items.TeleportSender;
 import br.com.animvs.koalory.entities.game.mobiles.Foe;
 import br.com.animvs.koalory.entities.game.platforms.StaticPlatform;
 
@@ -91,6 +93,20 @@ public final class EntitiesController extends BaseController {
         platform.initialize();
 
         getController().getStage().registerActor(platform);
+    }
+
+    public void createTeleportSender(RectangleMapObject rectangleMapObject, String id){
+        TeleportSender teleportSender = new TeleportSender(getController(), rectangleMapObject, id);
+        teleportSender.initialize();
+
+        getController().getStage().registerActor(teleportSender);
+    }
+
+    public void createTeleportReceiver(RectangleMapObject rectangleMapObject, String id){
+        TeleportReceiver teleportReceiver = new TeleportReceiver(getController(), rectangleMapObject, id);
+        teleportReceiver.initialize();
+
+        getController().getStage().registerActor(teleportReceiver);
     }
 
     public void spawnProjectile(Vector2 position, float lifeInterval, Foe boss) {
