@@ -53,6 +53,7 @@ public final class Foe extends Mobile {
         this.ia = ia;
         this.graphicName = graphicName;
         this.physicsScale = physicsScale;
+        this.playerCanKill = true;
 
 
         /*getController().getEntities().createEntityBody(this, physicsScale, PhysicsController.TargetPhysicsParameters.Type.RECTANGLE);

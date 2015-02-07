@@ -49,10 +49,8 @@ public final class CheckPoint extends ItemTiled {
         super.draw(batch, parentAlpha);
 
         if (regionCache == null)
-            regionCache = getController().getLoad().get(LoadController.UI_SKIN_PATH, TextureAtlas.class).findRegion("life");
+            regionCache = getController().getLoad().get(LoadController.ATLAS_OBJECTS, TextureAtlas.class).findRegion("clock");
 
-        batch.setColor(0.01f, 0.01f, 0.01f, parentAlpha);
         batch.draw(regionCache, getX() - regionCache.getRegionWidth() / 2f, getY() - regionCache.getRegionHeight() / 2f);
-        batch.setColor(1f, 1f, 1f, parentAlpha);
     }
 }
