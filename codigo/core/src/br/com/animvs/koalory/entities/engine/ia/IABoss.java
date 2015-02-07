@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
+import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.entities.game.mobiles.Foe;
 import br.com.animvs.koalory.entities.game.mobiles.Player;
@@ -12,10 +13,6 @@ import br.com.animvs.koalory.entities.game.mobiles.Player;
  * Created by DALDEGAN on 05/02/2015.
  */
 public final class IABoss extends IABase {
-
-    private final float attackInterval;
-    private final int attackTimes;
-    private final float waitInterval;
 
     private float waitCounter;
     private int attacksPerformed;
@@ -45,16 +42,10 @@ public final class IABoss extends IABase {
         this.state = newState;
     }
 
-    public IABoss(GameController controller, float waitInterval, int attackTimes, float attackInterval) {
+    public IABoss(GameController controller) {
         super(controller);
 
-        if (attackTimes <= 0)
-            throw new RuntimeException("The parameter 'attackTimes' must be > 0");
-
         this.state = State.WAIT;
-        this.waitInterval = waitInterval;
-        this.attackTimes = attackTimes;
-        this.attackInterval = attackInterval;
 
         //this.directionCache = new Vector2();
     }
@@ -92,7 +83,7 @@ public final class IABoss extends IABase {
         }
             //foeOwner.getBody().setLinearVelocity(-0.2f, 0f);
 
-        if (waitCounter >= waitInterval)
+        if (waitCounter >= Configurations.GAMEPLAY_BOSS_WAIT_INTERVAL)
             setState(State.ATTACK);
     }
 
@@ -101,21 +92,19 @@ public final class IABoss extends IABase {
         if (getController().getPlayers().getTotalPlayersInGame() == 0)
             return;
 
-        if (attacksPerformed >= attackTimes) {
+        if (attacksPerformed >= Configurations.GAMEPLAY_BOSS_ATTACKS_PER_STATE) {
             setState(State.WAIT);
             return;
         }
 
         attackCounter += Gdx.graphics.getDeltaTime();
 
-        if (attackCounter >= attackInterval) {
+        if (attackCounter >= Configurations.GAMEPLAY_BOSS_ATTACK_INTERVAL) {
             attackCounter = 0f;
             attacksPerformed++;
 
-            float lifeInterval = 3f;
-
             Vector2 spawnPosition = new Vector2(foeOwner.getX(), foeOwner.getY() + 200f);
-            getController().getEntities().spawnProjectile(spawnPosition, lifeInterval, foeOwner);
+            getController().getEntities().spawnProjectile(spawnPosition, Configurations.GAMEPLAY_BOSS_PROJECTILES_LIFE_INTERVAL, foeOwner);
         }
     }
 }

@@ -121,11 +121,11 @@ public final class EntitiesController extends BaseController {
     }
 
     public void spawnBoss(Vector2 spawnPosition) {
-        final float waitInterval = 1f;
-        final int attackTimes = 5;
-        final float attackInterval = 0.7f;
+        //final float waitInterval = 1f;
+        //final int attackTimes = 5;
+        //final float attackInterval = 0.7f;
 
-        Foe newBoss = new Foe(getController(), spawnPosition, "boss", 3.5f, new IABoss(getController(), waitInterval, attackTimes, attackInterval));
+        Foe newBoss = new Foe(getController(), spawnPosition, "boss", 3.5f, new IABoss(getController()));
         newBoss.initialize();
         newBoss.setPlayerCanKill(false);
         newBoss.setFixedFacing(true);
