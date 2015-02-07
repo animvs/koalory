@@ -16,12 +16,12 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import br.com.animvs.engine2.physics.AnimvsBodyFactory;
 import br.com.animvs.engine2.physics.AnimvsPhysicsController;
 import br.com.animvs.koalory.Configurations;
-import br.com.animvs.koalory.entities.game.Entity;
 import br.com.animvs.koalory.entities.game.Projectile;
 import br.com.animvs.koalory.entities.game.items.DeathZone;
 import br.com.animvs.koalory.entities.game.items.Item;
 import br.com.animvs.koalory.entities.game.mobiles.Foe;
 import br.com.animvs.koalory.entities.game.mobiles.Player;
+import br.com.animvs.koalory.entities.game.platforms.Platform;
 import br.com.animvs.koalory.entities.physics.PhysicBodyHolder;
 
 /**
@@ -38,8 +38,8 @@ public final class PhysicsController extends AnimvsPhysicsController {
     }
 
     public static class TargetPhysicsParameters {
-        public static enum Type {
-            RECTANGLE, PLAYER, CIRCLE
+        public static enum Shape {
+            RECTANGLE, PLAYER, CIRCLE, PLATFORM
         }
 
         public PhysicBodyHolder bodyHolder;
@@ -52,9 +52,9 @@ public final class PhysicsController extends AnimvsPhysicsController {
         public final float friction;
         public final float restitution;
         public final boolean sensor;
-        public final Type type;
+        public final Shape shape;
 
-        public TargetPhysicsParameters(PhysicBodyHolder bodyHolder, Vector2 position, float rotation, BodyDef.BodyType bodyType, Type type, float width, float height, float density, float friction, float restitution, boolean sensor) {
+        public TargetPhysicsParameters(PhysicBodyHolder bodyHolder, Vector2 position, float rotation, BodyDef.BodyType bodyType, Shape shape, float width, float height, float density, float friction, float restitution, boolean sensor) {
             if (bodyHolder == null)
                 throw new RuntimeException("The parameter 'bodyHolder' must be != null");
 
@@ -68,7 +68,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
             this.friction = friction;
             this.restitution = restitution;
             this.sensor = sensor;
-            this.type = type;
+            this.shape = shape;
         }
     }
 
@@ -273,20 +273,20 @@ public final class PhysicsController extends AnimvsPhysicsController {
         createBodies();
     }
 
-    public void createEntityBody(Entity entityOwner, float scale, PhysicsController.TargetPhysicsParameters.Type type) {
+    /*public void createEntityBody(Entity entityOwner, float scale, TargetPhysicsParameters.Shape shape) {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(entityOwner, new Vector2(600f, 550f), 0f,
-                BodyDef.BodyType.DynamicBody, type, Configurations.GAMEPLAY_ENTITY_SIZE_X * scale, Configurations.GAMEPLAY_ENTITY_SIZE_Y * scale, 1f, 0.1f, 0f, false);
-
-        controller.getPhysics().createBody(bodyParams);
-    }
-
-    /*public void createPlatformBody(Platform platform, int size) {
-        PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(platform, new Vector2(), 0f,
-                BodyDef.BodyType.KinematicBody, PhysicsController.TargetPhysicsParameters.Type.RECTANGLE,
-                Configurations.CORE_TILE_SIZE * size, Configurations.CORE_PLATFORM_SIZE_Y, 1f, 0.1f, 0f, false);
+                BodyDef.BodyType.DynamicBody, shape, Configurations.GAMEPLAY_ENTITY_SIZE_X * scale, Configurations.GAMEPLAY_ENTITY_SIZE_Y * scale, 1f, 0.1f, 0f, false);
 
         controller.getPhysics().createBody(bodyParams);
     }*/
+
+    public void createPlatformBody(Platform platform, int size) {
+        PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(platform, new Vector2(), 0f,
+                BodyDef.BodyType.KinematicBody, TargetPhysicsParameters.Shape.RECTANGLE,
+                Configurations.CORE_TILE_SIZE * size, Configurations.CORE_PLATFORM_SIZE_Y, 1f, 0.1f, 0f, false);
+
+        controller.getPhysics().createBody(bodyParams);
+    }
 
     private void createBodies() {
         targetToCreate.begin();
@@ -295,7 +295,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
 
             Body body;
 
-            switch (targetToCreate.get(i).type) {
+            switch (targetToCreate.get(i).shape) {
                 case RECTANGLE:
                     body = createRectangleBody(targetToCreate.get(i));
                     break;
@@ -306,7 +306,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
                     body = createCircleBody(targetToCreate.get(i));
                     break;
                 default:
-                    throw new RuntimeException("Unknown body type: " + targetToCreate.get(i).type.name());
+                    throw new RuntimeException("Unknown body type: " + targetToCreate.get(i).shape.name());
             }
 
             targetToCreate.get(i).bodyHolder.setBody(body);

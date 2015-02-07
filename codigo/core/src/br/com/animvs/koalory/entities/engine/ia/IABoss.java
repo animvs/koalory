@@ -59,6 +59,7 @@ public final class IABoss extends IABase {
         switch (state) {
             case WAIT_CAMERA:
                 processWaitStart(foeOwner);
+                break;
             case MOVE:
                 processMoveForward(foeOwner);
                 break;
@@ -73,8 +74,9 @@ public final class IABoss extends IABase {
     private void processWaitStart(Foe foeOwner) {
         distanceCameraCache.set(foeOwner.getX(), foeOwner.getY());
 
-        if (distanceCameraCache.dst2(getController().getCamera().getPosition().x, getController().getCamera().getPosition().y ) > 0.1f) {
+        if (distanceCameraCache.dst(getController().getCamera().getPosition().x, getController().getCamera().getPosition().y ) < 500f) {
             setState(State.MOVE);
+            Gdx.app.log("BOSS", "BOSS started ...");
         }
     }
 
@@ -86,22 +88,6 @@ public final class IABoss extends IABase {
 
         if (timeCounter >= Configurations.GAMEPLAY_BOSS_WAIT_INTERVAL)
             setState(State.ATTACK);
-    }
-
-    private void move(Foe foeOwner) {
-        if (foeOwner == null || !foeOwner.getAlive() || foeOwner.getBody() == null)
-            return;
-
-        Player target = getController().getPlayers().getPlayerRandom();
-        if (target == null)
-            return;
-
-        boolean directionRight = foeOwner.getX() < target.getX();
-
-        if (directionRight)
-            foeOwner.getBody().applyLinearImpulse(Configurations.GAMEPLAY_BOSS_SPEED, 0f, foeOwner.getX(), foeOwner.getY(), true);
-        else
-            foeOwner.getBody().applyLinearImpulse(-Configurations.GAMEPLAY_BOSS_SPEED, 0f, foeOwner.getX(), foeOwner.getY(), true);
     }
 
     private void processStateAttack(Foe foeOwner) {
@@ -123,5 +109,21 @@ public final class IABoss extends IABase {
             Vector2 spawnPosition = new Vector2(foeOwner.getX(), foeOwner.getY() + 200f);
             getController().getEntities().spawnProjectile(spawnPosition, Configurations.GAMEPLAY_BOSS_PROJECTILES_LIFE_INTERVAL, foeOwner);
         }
+    }
+
+    private void move(Foe foeOwner) {
+        if (foeOwner == null || !foeOwner.getAlive() || foeOwner.getBody() == null)
+            return;
+
+        Player target = getController().getPlayers().getPlayerRandom();
+        if (target == null)
+            return;
+
+        boolean directionRight = foeOwner.getX() < target.getX();
+
+        if (directionRight)
+            foeOwner.getBody().applyLinearImpulse(Configurations.GAMEPLAY_BOSS_SPEED, 0f, foeOwner.getX(), foeOwner.getY(), true);
+        else
+            foeOwner.getBody().applyLinearImpulse(-Configurations.GAMEPLAY_BOSS_SPEED, 0f, foeOwner.getX(), foeOwner.getY(), true);
     }
 }

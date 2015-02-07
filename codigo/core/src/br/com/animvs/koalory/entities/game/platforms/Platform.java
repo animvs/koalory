@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
@@ -12,6 +13,7 @@ import br.com.animvs.engine2.graficos.loaders.AnimacaoSkeletalData;
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.controller.LoadController;
+import br.com.animvs.koalory.controller.PhysicsController;
 import br.com.animvs.koalory.entities.game.Entity;
 import br.com.animvs.koalory.entities.game.mobiles.Player;
 
@@ -37,6 +39,29 @@ public abstract class Platform extends Entity {
     private boolean started;
 
     private ArrayMap<AnimacaoSkeletal, Vector2> graphics;
+
+    public final int getPlatformSize() {
+        return size;
+    }
+
+    public final float getSpeed() {
+        return speed;
+    }
+
+    @Override
+    protected boolean getDisposeOnCollect() {
+        return false;
+    }
+
+    @Override
+    protected BodyDef.BodyType getBodyType() {
+        return BodyDef.BodyType.KinematicBody;
+    }
+
+    @Override
+    protected PhysicsController.TargetPhysicsParameters.Shape getBodyShape() {
+        return PhysicsController.TargetPhysicsParameters.Shape.PLATFORM;
+    }
 
     public Platform(GameController controller, PolylineMapObject line) {
         super(controller, new Vector2(line.getPolyline().getX(), line.getPolyline().getY()));

@@ -41,8 +41,8 @@ public final class Projectile extends Mobile {
     private float graphicRotation;
 
     @Override
-    protected PhysicsController.TargetPhysicsParameters.Type getBodyShape() {
-        return PhysicsController.TargetPhysicsParameters.Type.CIRCLE;
+    protected PhysicsController.TargetPhysicsParameters.Shape getBodyShape() {
+        return PhysicsController.TargetPhysicsParameters.Shape.CIRCLE;
     }
 
     @Override

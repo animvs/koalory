@@ -15,6 +15,7 @@ import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.controller.PhysicsController;
+import br.com.animvs.koalory.entities.game.platforms.Platform;
 import br.com.animvs.koalory.entities.physics.PhysicBodyHolder;
 
 public abstract class Entity extends Group implements Disposable, PhysicBodyHolder {
@@ -30,8 +31,8 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
         return BodyDef.BodyType.DynamicBody;
     }
 
-    protected PhysicsController.TargetPhysicsParameters.Type getBodyShape() {
-        return PhysicsController.TargetPhysicsParameters.Type.RECTANGLE;
+    protected PhysicsController.TargetPhysicsParameters.Shape getBodyShape() {
+        return PhysicsController.TargetPhysicsParameters.Shape.RECTANGLE;
     }
 
     protected float getBodyDensity() {
@@ -202,7 +203,16 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
         bodyParameters.bodyHolder = this;
 
         //getController().getPhysics().createRetangleBody(bodyParameters);
-        getController().getPhysics().createBody(bodyParameters);
+
+        if (bodyParameters.shape == PhysicsController.TargetPhysicsParameters.Shape.PLATFORM) {
+            if (!(this instanceof Platform))
+                throw new RuntimeException("The body shape PLATFORM can only be used by 'Platform' entities");
+
+            Platform platform = (Platform) this;
+
+            getController().getPhysics().createPlatformBody(platform, platform.getPlatformSize());
+        } else
+            getController().getPhysics().createBody(bodyParameters);
 
         setGraphic(createGraphic());
     }

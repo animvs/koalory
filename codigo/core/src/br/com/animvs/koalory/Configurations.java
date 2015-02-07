@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public final class Configurations {
     public static final boolean DEBUG_PLAYER_IMMORTAL = false;
-    public static final boolean DEBUG_PHYSICS = true;
+    public static final boolean DEBUG_PHYSICS = false;
     public static final boolean SIMULATE_MOBILE_ON_DESKTOP = false;
 
     public static final Vector2 RESOLUTION_REAL = new Vector2(1280f, 768f);
@@ -41,7 +41,7 @@ public final class Configurations {
     public static final float GAMEPLAY_ENTITY_SIZE_Y = 100f;
 
     public static final float GAMEPLAY_MOVEMENT_SPEED = 1f;
-    public static final float GAMEPLAY_JUMP_FORCE = 10f;
+    public static final float GAMEPLAY_PLAYER_JUMP_FORCE = 9f;
     public static final int GAMEPLAY_LIVES_AT_START = 5;
 
     //public static final float GAMEPLAY_BOSS_START_INTERVAL = 20f;

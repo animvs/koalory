@@ -39,11 +39,13 @@
   <object id="152" name="sender" x="3518.84" y="253.333" width="64" height="65.3333">
    <properties>
     <property name="map" value="sandPlains1-1"/>
+    <property name="requiredMaps" value="greenHills1-1;frostPlateau1-1"/>
    </properties>
   </object>
   <object id="153" name="sender" x="2560.17" y="254.668" width="64" height="65.3333">
    <properties>
     <property name="map" value="frostPlateau1-1"/>
+    <property name="requiredMaps" value="greenHills1-1"/>
    </properties>
   </object>
   <object id="154" name="sender" x="1664.5" y="255.668" width="64" height="65.3333">
@@ -51,10 +53,10 @@
     <property name="map" value="greenHills1-1"/>
    </properties>
   </object>
-  <object id="161" name="sender" x="4929.33" y="344.667" width="61.3333" height="104">
+  <object id="161" name="sender" x="4929.33" y="344" width="61.3333" height="104">
    <properties>
     <property name="map" value="castle1"/>
-    <property name="requireMaps" value="greenHills1-1;sandPlains1-1;frostPlateau1-1"/>
+    <property name="requiredMaps" value="greenHills1-1;sandPlains1-1;frostPlateau1-1"/>
    </properties>
   </object>
   <object id="164" name="playerStart" x="896" y="128" width="64" height="64"/>

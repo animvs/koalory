@@ -60,8 +60,8 @@ public final class Player extends Mobile {
     }
 
     @Override
-    protected PhysicsController.TargetPhysicsParameters.Type getBodyShape() {
-        return PhysicsController.TargetPhysicsParameters.Type.PLAYER;
+    protected PhysicsController.TargetPhysicsParameters.Shape getBodyShape() {
+        return PhysicsController.TargetPhysicsParameters.Shape.PLAYER;
     }
 
     public boolean getGrounded() {
@@ -127,12 +127,17 @@ public final class Player extends Mobile {
 
         if (getBody() != null) {
 
-            computeGrounded();
-
             if (teleportTo != null) {
                 setPosition(teleportTo.x, teleportTo.y);
+
+                getController().getStage().getCamera().position.x = teleportTo.x;
+                getController().getStage().getCamera().position.y = teleportTo.y;
+                getController().getStage().getCamera().update();
+
                 teleportTo = null;
             }
+
+            computeGrounded();
 
             if (mustJump) {
                 mustJump = false;
@@ -141,7 +146,11 @@ public final class Player extends Mobile {
                 prepareAnimation("jump");
 
                 setPosition(getX(), getY() + 10f);
-                getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_JUMP_FORCE * Configurations.CORE_PHYSICS_MULTIPLIER, true);
+
+                if (groundedPlatform != null)
+                    setPosition(getX(), getY() + 10f * groundedPlatform.getSpeed());
+
+                getBody().applyForceToCenter(0f, Configurations.GAMEPLAY_PLAYER_JUMP_FORCE * Configurations.CORE_PHYSICS_MULTIPLIER, true);
             }
 
             /*processDamage();*/
@@ -162,8 +171,8 @@ public final class Player extends Mobile {
                 getGraphic().setAnimationSpeedScale(0f);
             }
 
-            if (getBody().getLinearVelocity().y > Configurations.GAMEPLAY_JUMP_FORCE * 0.5f)
-                getBody().setLinearVelocity(getBody().getLinearVelocity().x, Configurations.GAMEPLAY_JUMP_FORCE * 0.5f);
+            if (getBody().getLinearVelocity().y > Configurations.GAMEPLAY_PLAYER_JUMP_FORCE * 0.5f)
+                getBody().setLinearVelocity(getBody().getLinearVelocity().x, Configurations.GAMEPLAY_PLAYER_JUMP_FORCE * 0.5f);
 
             getBody().setAwake(true);
         }
