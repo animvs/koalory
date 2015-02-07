@@ -93,7 +93,7 @@ public final class Projectile extends Mobile {
         float rotation = MathUtils.radDeg * MathUtils.sin(graphicRotation);
 
         if (inDamage)
-            batch.setColor(1f, 0.7f, 0.7f, parentAlpha);
+            batch.setColor(1f, 0.6f, 0.6f, parentAlpha);
 
         batch.draw(regionCache, getX() - graphicSize / 2f, getY() - graphicSize / 2f, graphicSize / 2f, graphicSize / 2f, graphicSize, graphicSize, 1f, 1f, rotation);
 
