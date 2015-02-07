@@ -8,6 +8,7 @@ import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
 import br.com.animvs.engine2.matematica.Random;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.controller.PhysicsController;
+import br.com.animvs.koalory.entities.game.mobiles.Foe;
 import br.com.animvs.koalory.entities.game.mobiles.Mobile;
 import br.com.animvs.koalory.entities.game.mobiles.Player;
 
@@ -16,14 +17,17 @@ import br.com.animvs.koalory.entities.game.mobiles.Player;
  */
 public final class Projectile extends Mobile {
 
-    private final float radius;
-
     private Vector2 vectorCache;
 
     private final float lifeInterval;
     private float lifeCounter;
+    private final float inDamageInterval = 1f;
 
     private Player target;
+    private final Foe boss;
+
+    private boolean inDamage;
+    private float inDamageCounter;
 
     @Override
     protected PhysicsController.TargetPhysicsParameters.Type getBodyShape() {
@@ -40,7 +44,7 @@ public final class Projectile extends Mobile {
         return 0.7f;
     }
 
-    public Projectile(GameController controller, Vector2 spawnPosition, float lifeInterval, float radius) {
+    public Projectile(GameController controller, Vector2 spawnPosition, float lifeInterval, Foe boss) {
         super(controller, spawnPosition);
 
         if (lifeInterval == 0f)
@@ -49,12 +53,15 @@ public final class Projectile extends Mobile {
         if (spawnPosition == null)
             throw new RuntimeException("The parameter 'spawnPosition' must be != NULL");
 
-        this.radius = radius;
+        if (boss == null)
+            throw new RuntimeException("The parameter 'boss' must be != NULL");
+
         this.lifeInterval = lifeInterval;
+        this.boss = boss;
         this.vectorCache = new Vector2();
     }
 
-    //@Override
+    @Override
     protected AnimacaoSkeletal createGraphic() {
         return null;
     }
@@ -66,6 +73,34 @@ public final class Projectile extends Mobile {
         if (getDisposed())
             return;
 
+        if (inDamage)
+            processInDamage();
+        else
+            processNotInDamage();
+        //getBody().setLinearVelocity(vectorCache.x, vectorCache.y);
+    }
+
+    private void processInDamage() {
+        inDamageCounter += Gdx.graphics.getDeltaTime();
+
+        if (inDamageCounter >= inDamageInterval) {
+            inDamage = false;
+            return;
+        }
+
+        vectorCache.set(boss.getX(), boss.getY());
+        vectorCache.sub(getX(), getY()).nor();//.scl(-1f);
+
+        float force = 2f;
+
+        getBody().setLinearVelocity(vectorCache.x * force, vectorCache.y * force);
+        //getBody().applyLinearImpulse(vectorCache.x * force, vectorCache.y * force, getX(), getY(), true);
+
+        /*getBody().setLinearVelocity(0f, 0f);
+        getBody().applyForceToCenter(vectorCache.x * force, vectorCache.y * force, true);*/
+    }
+
+    private void processNotInDamage() {
         lifeCounter += Gdx.graphics.getDeltaTime();
 
         if (lifeCounter >= lifeInterval) {
@@ -85,7 +120,9 @@ public final class Projectile extends Mobile {
             }
         }
 
-        getBody().setLinearVelocity(vectorCache.x, vectorCache.y);
+        float force = 0.004f;
+
+        getBody().applyLinearImpulse(vectorCache.x * force, vectorCache.y * force, getX(), getY(), true);
     }
 
     @Override
@@ -94,6 +131,7 @@ public final class Projectile extends Mobile {
 
         //Gdx.app.log("WEIGHT", "Weight spawned at X: " + spawnPosition.x + " Y: " + spawnPosition.y);
         body.setGravityScale(0f);
+        body.setFixedRotation(true);
 
         while (true) {
             if (getController().getPlayers().getTotalPlayersInGame() == 0)
@@ -108,26 +146,15 @@ public final class Projectile extends Mobile {
 
     @Override
     protected void eventDeath(Entity killer) {
-
     }
 
-
-    public void collect(Player player) {
+    public void eventPlayerHit(Player player) {
         //super.collect(player);
 
-        if (!player.getAlive() || player.getBody() == null)
+        if (!player.getAlive() || player.getBody() == null || !boss.getAlive() || boss.getBody() == null)
             return;
 
-        vectorCache.set(getX(), getY());
-        vectorCache.sub(player.getX(), player.getY()).nor().scl(-1f);
-
-        float force = 65f;
-
-        player.setPhysicsFriction(0.05f);
-        if (player.getGrounded())
-            vectorCache.set(vectorCache.x * 1.5f, 0f);
-            //vectorCache.y = Math.abs(vectorCache.y);
-
-        player.getBody().applyForceToCenter(vectorCache.x * force, vectorCache.y * force * 1.25f, true);
+        inDamage = true;
+        inDamageCounter = 0f;
     }
 }

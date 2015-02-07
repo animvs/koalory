@@ -1,6 +1,5 @@
 package br.com.animvs.koalory.controller;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -17,10 +16,11 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import br.com.animvs.engine2.physics.AnimvsBodyFactory;
 import br.com.animvs.engine2.physics.AnimvsPhysicsController;
 import br.com.animvs.koalory.Configurations;
-import br.com.animvs.koalory.entities.game.items.DeathZone;
 import br.com.animvs.koalory.entities.game.Entity;
-import br.com.animvs.koalory.entities.game.mobiles.Foe;
+import br.com.animvs.koalory.entities.game.Projectile;
+import br.com.animvs.koalory.entities.game.items.DeathZone;
 import br.com.animvs.koalory.entities.game.items.Item;
+import br.com.animvs.koalory.entities.game.mobiles.Foe;
 import br.com.animvs.koalory.entities.game.mobiles.Player;
 import br.com.animvs.koalory.entities.physics.PhysicBodyHolder;
 
@@ -124,6 +124,15 @@ public final class PhysicsController extends AnimvsPhysicsController {
                         return null;
                     }
 
+                    private Projectile isProjectile(Fixture fixtureA, Fixture fixtureB) {
+                        if (fixtureA.getBody().getUserData() != null && fixtureA.getBody().getUserData() instanceof Projectile)
+                            return (Projectile) fixtureA.getBody().getUserData();
+                        else if (fixtureB.getBody().getUserData() != null && fixtureB.getBody().getUserData() instanceof Projectile)
+                            return (Projectile) fixtureB.getBody().getUserData();
+
+                        return null;
+                    }
+
                     /*private boolean isCollisionWall(Fixture fixtureA, Fixture fixtureB) {
                         if (fixtureA.getBody().getUserData() != null && fixtureA.getBody().getUserData() instanceof String) {
                             if (((String) fixtureA.getBody().getUserData()).equals("collision"))
@@ -194,31 +203,40 @@ public final class PhysicsController extends AnimvsPhysicsController {
                                     //if (contact.getWorldManifold().getNormal().y == 1f || contact.getWorldManifold().getNormal().y == -1f) {
 
                                     //Player has killed the foe by jumping it's head:
-                                    int playerIndex = -1;
+                                    /*int playerIndex = -1;
                                     try {
                                         playerIndex = controller.getPlayers().getPlayerIndex(player);
                                     } catch (Exception e) {
-                                    }
+                                    }*/
 
-                                    Gdx.app.log("KILL", "Player " + (playerIndex == -1 ? "UNKNOWN" : String.valueOf(playerIndex)) + " has killed a Koala");
-                                    foe.death(player);
+                                    if (foe.getPlayerCanKill()) {
+                                        //Gdx.app.log("KILL", "Player " + (playerIndex == -1 ? "UNKNOWN" : String.valueOf(playerIndex)) + " has killed a Koala");
+                                        foe.death(player);
+                                    }
                                 } else {
                                     //Player has been touched by a foe:
-                                    //DEPRECATED: Player's no longer are instant killed by foes
-                                    int playerIndex = -1;
+                                    /*int playerIndex = -1;
                                     if (Configurations.DEBUG_PLAYER_IMMORTAL)
                                         return;
 
                                     try {
                                         playerIndex = controller.getPlayers().getPlayerIndex(player);
                                     } catch (Exception e) {
-                                    }
+                                    }*/
 
                                     //Player has been damaged by the foe:
-                                    Gdx.app.log("KILL", "Player " + (playerIndex == -1 ? "UNKNOWN" : String.valueOf(playerIndex)) + " has been killed by a Koala");
+                                    //Gdx.app.log("KILL", "Player " + (playerIndex == -1 ? "UNKNOWN" : String.valueOf(playerIndex)) + " has been killed by a Koala");
                                     player.death(foe);
                                     //player.eventTouched(foe, contact);
                                 }
+                                return;
+                            }
+
+                            Projectile projectile = isProjectile(contact.getFixtureA(), contact.getFixtureB());
+                            if (projectile != null) {
+                                if (player.getY() - Configurations.CORE_TILE_SIZE / 2f > projectile.getY())
+                                    projectile.eventPlayerHit(player);
+
                                 return;
                             }
                         } else {

@@ -3,7 +3,6 @@ package br.com.animvs.koalory.entities.engine.ia;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
-import br.com.animvs.engine2.matematica.Random;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.entities.game.mobiles.Foe;
 
@@ -62,7 +61,7 @@ public final class IABoss extends IABase {
     public void update(Foe foeOwner) {
         switch (state) {
             case WAIT:
-                processStateWait();
+                processMoveForward(foeOwner);
                 break;
             case ATTACK:
                 processStateAttack(foeOwner);
@@ -72,8 +71,11 @@ public final class IABoss extends IABase {
         }
     }
 
-    private void processStateWait() {
+    private void processMoveForward(Foe foeOwner) {
         waitCounter += Gdx.graphics.getDeltaTime();
+
+        if (foeOwner != null && foeOwner.getAlive() && foeOwner.getBody() != null)
+            foeOwner.getBody().setLinearVelocity(-0.2f, 0f);
 
         if (waitCounter >= waitInterval)
             setState(State.ATTACK);
@@ -97,29 +99,8 @@ public final class IABoss extends IABase {
 
             float lifeInterval = 10f;
 
-            float forceMin = 50f;
-            float forceMax = forceMin * 3f;
-            float forceToUse = Random.random(forceMin, forceMax);
-
-            float radiusMin = 10f;
-            float radiusMax = 20f;
-
-            /*Player target = getController().getPlayers().getPlayer(Random.random(getController().getPlayers().getTotalPlayersInGame() - 1));
-
-            directionCache.set(foeOwner.getX(), foeOwner.getY());
-            directionCache.sub(target.getX(), target.getY()).nor();
-            directionCache.scl(-1f);*/
-
-            Vector2 spawnPosition = new Vector2(foeOwner.getX(), foeOwner.getY());
-            /*if (directionCache.x < 0f)
-                spawnPosition.x -= 150f;
-            else
-                spawnPosition.x += 150f;*/
-
-            /*getController().getEntities().spawnWeight(spawnPosition, new Vector2(directionCache.x * forceToUse, directionCache.y * forceToUse),
-                    lifeInterval, Random.random(radiusMin, radiusMax));*/
-
-            getController().getEntities().spawnWeight(spawnPosition, lifeInterval, Random.random(radiusMin, radiusMax));
+            Vector2 spawnPosition = new Vector2(foeOwner.getX(), foeOwner.getY() + 200f);
+            getController().getEntities().spawnProjectile(spawnPosition, lifeInterval, foeOwner);
         }
     }
 }

@@ -17,8 +17,17 @@ import br.com.animvs.koalory.entities.game.Entity;
 public final class Foe extends Mobile {
     private IABase ia;
 
+    private boolean playerCanKill;
     private String graphicName;
     private final float physicsScale;
+
+    public boolean getPlayerCanKill(){
+        return playerCanKill;
+    }
+
+    public void setPlayerCanKill(boolean playerCanKill) {
+        this.playerCanKill = playerCanKill;
+    }
 
     @Override
     protected float getBodyScaleX() {

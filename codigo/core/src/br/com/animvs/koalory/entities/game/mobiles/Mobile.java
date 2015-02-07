@@ -25,6 +25,8 @@ public abstract class Mobile extends Entity {
 
     private boolean alive;
 
+    private boolean fixedFacing;
+
     public final boolean getAlive() {
         return alive;
     }
@@ -39,6 +41,10 @@ public abstract class Mobile extends Entity {
 
     public float getPhysicsFriction() {
         return friction;
+    }
+
+    public final void setFixedFacing(boolean fixedFacing) {
+        this.fixedFacing = fixedFacing;
     }
 
     public void setPhysicsFriction(float friction) {
@@ -78,7 +84,11 @@ public abstract class Mobile extends Entity {
         if (getGraphic() == null)
             return;
 
-        getGraphic().flipX(!graphicsFacingRight);
+        if (fixedFacing)
+            getGraphic().flipX(true);
+        else
+            getGraphic().flipX(!graphicsFacingRight);
+
         super.draw(batch, parentAlpha);
     }
 

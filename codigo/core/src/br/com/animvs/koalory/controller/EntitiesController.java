@@ -9,15 +9,15 @@ import br.com.animvs.koalory.entities.engine.ia.IABoss;
 import br.com.animvs.koalory.entities.engine.ia.IAJump;
 import br.com.animvs.koalory.entities.engine.ia.IAStraight;
 import br.com.animvs.koalory.entities.game.Projectile;
+import br.com.animvs.koalory.entities.game.Spawner;
 import br.com.animvs.koalory.entities.game.items.CheckPoint;
 import br.com.animvs.koalory.entities.game.items.Color;
 import br.com.animvs.koalory.entities.game.items.DeathZone;
 import br.com.animvs.koalory.entities.game.items.EndLevel;
-import br.com.animvs.koalory.entities.game.mobiles.Foe;
 import br.com.animvs.koalory.entities.game.items.Item;
 import br.com.animvs.koalory.entities.game.items.Life;
 import br.com.animvs.koalory.entities.game.items.Sender;
-import br.com.animvs.koalory.entities.game.Spawner;
+import br.com.animvs.koalory.entities.game.mobiles.Foe;
 import br.com.animvs.koalory.entities.game.platforms.StaticPlatform;
 
 /**
@@ -93,8 +93,8 @@ public final class EntitiesController extends BaseController {
         getController().getStage().registerActor(platform);
     }
 
-    public void spawnWeight(Vector2 position, float lifeInterval, float radius) {
-        Projectile projectile = new Projectile(getController(), position, lifeInterval, radius);
+    public void spawnProjectile(Vector2 position, float lifeInterval, Foe boss) {
+        Projectile projectile = new Projectile(getController(), position, lifeInterval, boss);
         projectile.initialize();
     }
 
@@ -122,11 +122,13 @@ public final class EntitiesController extends BaseController {
 
     public void spawnBoss(Vector2 spawnPosition) {
         final float waitInterval = 5f;
-        final int attackTimes = 10;
+        final int attackTimes = 1;
         final float attackInterval = 0.7f;
 
-        Foe newBoss = new Foe(getController(), spawnPosition, "boss", 2.5f, new IABoss(getController(), waitInterval, attackTimes, attackInterval));
+        Foe newBoss = new Foe(getController(), spawnPosition, "boss", 3.5f, new IABoss(getController(), waitInterval, attackTimes, attackInterval));
         newBoss.initialize();
+        newBoss.setPlayerCanKill(false);
+        newBoss.setFixedFacing(true);
 
         getController().getStage().registerActor(newBoss);
     }
