@@ -47,9 +47,9 @@ public final class Configurations {
     public static final float GAMEPLAY_BOSS_PROJECTILES_LIFE_INTERVAL = 4.5f;
     public static final float GAMEPLAY_BOSS_ATTACK_INTERVAL = 0.7f;
     public static final float GAMEPLAY_BOSS_PROJETILE_FORCE = 0.07f;
-    public static int GAMEPLAY_BOSS_ATTACKS_PER_STATE = 3;
-    public static float GAMEPLAY_BOSS_WAIT_INTERVAL = 0.3f;
-    public static final float GAMEPLAY_BOSS_SPEED = 0.35f;
+    public static int GAMEPLAY_BOSS_ATTACKS_PER_STATE = 1;
+    public static float GAMEPLAY_BOSS_WAIT_INTERVAL = 1f;
+    public static final float GAMEPLAY_BOSS_SPEED = 0.075f;
 
     /*public static final float GAMEPLAY_FOE_SPEED = -0.35f;*/
     /*public static final float GAMEPLAY_JUMP_INTERVAL = 0.25f;*/
