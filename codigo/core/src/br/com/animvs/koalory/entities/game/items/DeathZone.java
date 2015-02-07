@@ -59,7 +59,8 @@ public final class DeathZone extends ItemTiled {
         if (!killsPlayer)
             return;
 
-        Gdx.app.log("KILL", "Player " + getController().getPlayers().getPlayerIndex(player) + " has been killed by a death zone");
+        //TODO: the "getController().getPlayers().getPlayerIndex(player)" can throw an exception
+        //Gdx.app.log("KILL", "Player " + getController().getPlayers().getPlayerIndex(player) + " has been killed by a death zone");
         player.death(this);
     }
 
