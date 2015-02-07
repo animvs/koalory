@@ -13,7 +13,7 @@ import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.controller.LoadController;
 import br.com.animvs.koalory.entities.game.Entity;
-import br.com.animvs.koalory.entities.game.Player;
+import br.com.animvs.koalory.entities.game.mobiles.Player;
 
 /**
  * Created by DALDEGAN on 27/01/2015.

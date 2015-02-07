@@ -1,14 +1,13 @@
-package br.com.animvs.koalory.entities.game;
+package br.com.animvs.koalory.entities.game.items;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
 import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
 import br.com.animvs.koalory.controller.GameController;
-import br.com.animvs.koalory.controller.PhysicsController;
+import br.com.animvs.koalory.entities.game.mobiles.Player;
 
 /**
  * Created by DALDEGAN on 31/01/2015.

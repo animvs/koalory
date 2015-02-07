@@ -1,7 +1,7 @@
 package br.com.animvs.koalory.entities.engine.input;
 
 import br.com.animvs.koalory.controller.GameController;
-import br.com.animvs.koalory.entities.game.Player;
+import br.com.animvs.koalory.entities.game.mobiles.Player;
 
 /**
  * Created by DALDEGAN on 26/01/2015.

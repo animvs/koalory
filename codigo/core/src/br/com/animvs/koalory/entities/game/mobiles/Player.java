@@ -1,4 +1,4 @@
-package br.com.animvs.koalory.entities.game;
+package br.com.animvs.koalory.entities.game.mobiles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.WorldManifold;
 import com.badlogic.gdx.utils.Array;
 
 import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
@@ -17,6 +16,7 @@ import br.com.animvs.koalory.controller.LoadController;
 import br.com.animvs.koalory.controller.PhysicsController;
 import br.com.animvs.koalory.controller.PlayersController;
 import br.com.animvs.koalory.entities.engine.input.InputProcessor;
+import br.com.animvs.koalory.entities.game.Entity;
 import br.com.animvs.koalory.entities.game.platforms.Platform;
 
 /**

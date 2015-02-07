@@ -17,12 +17,11 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import br.com.animvs.engine2.physics.AnimvsBodyFactory;
 import br.com.animvs.engine2.physics.AnimvsPhysicsController;
 import br.com.animvs.koalory.Configurations;
-import br.com.animvs.koalory.entities.game.DeathZone;
+import br.com.animvs.koalory.entities.game.items.DeathZone;
 import br.com.animvs.koalory.entities.game.Entity;
-import br.com.animvs.koalory.entities.game.Foe;
-import br.com.animvs.koalory.entities.game.Item;
-import br.com.animvs.koalory.entities.game.Player;
-import br.com.animvs.koalory.entities.game.platforms.Platform;
+import br.com.animvs.koalory.entities.game.mobiles.Foe;
+import br.com.animvs.koalory.entities.game.items.Item;
+import br.com.animvs.koalory.entities.game.mobiles.Player;
 import br.com.animvs.koalory.entities.physics.PhysicBodyHolder;
 
 /**

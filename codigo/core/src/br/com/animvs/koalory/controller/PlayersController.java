@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 
 import br.com.animvs.engine2.matematica.Random;
 import br.com.animvs.koalory.entities.engine.input.InputProcessor;
-import br.com.animvs.koalory.entities.game.Player;
+import br.com.animvs.koalory.entities.game.mobiles.Player;
 
 /**
  * Created by DALDEGAN on 26/01/2015.

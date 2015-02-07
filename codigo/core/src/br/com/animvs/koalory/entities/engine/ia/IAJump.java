@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
-import br.com.animvs.koalory.entities.game.Foe;
+import br.com.animvs.koalory.entities.game.mobiles.Foe;
 
 /**
  * Created by DALDEGAN on 24/01/2015.

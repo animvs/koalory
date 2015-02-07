@@ -1,4 +1,4 @@
-package br.com.animvs.koalory.entities.game;
+package br.com.animvs.koalory.entities.game.items;
 
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;

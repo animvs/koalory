@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.entities.engine.graphics.ParallaxCamera;
-import br.com.animvs.koalory.entities.game.Player;
+import br.com.animvs.koalory.entities.game.mobiles.Player;
 
 /**
  * Created by DALDEGAN on 26/01/2015.

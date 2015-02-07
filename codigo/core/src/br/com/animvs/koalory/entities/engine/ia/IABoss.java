@@ -4,9 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 import br.com.animvs.engine2.matematica.Random;
-import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
-import br.com.animvs.koalory.entities.game.Foe;
+import br.com.animvs.koalory.entities.game.mobiles.Foe;
 
 /**
  * Created by DALDEGAN on 05/02/2015.

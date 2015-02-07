@@ -1,4 +1,4 @@
-package br.com.animvs.koalory.entities.game;
+package br.com.animvs.koalory.entities.game.mobiles;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -8,8 +8,8 @@ import br.com.animvs.engine2.graficos.loaders.AnimacaoSkeletalData;
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.controller.LoadController;
-import br.com.animvs.koalory.controller.PhysicsController;
 import br.com.animvs.koalory.entities.engine.ia.IABase;
+import br.com.animvs.koalory.entities.game.Entity;
 
 /**
  * Created by DALDEGAN on 24/01/2015.

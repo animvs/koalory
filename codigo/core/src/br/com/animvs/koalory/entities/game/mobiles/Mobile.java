@@ -1,4 +1,4 @@
-package br.com.animvs.koalory.entities.game;
+package br.com.animvs.koalory.entities.game.mobiles;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
+import br.com.animvs.koalory.entities.game.Entity;
 
 /**
  * Created by DALDEGAN on 05/02/2015.
