@@ -8,6 +8,7 @@ import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.entities.engine.ia.IABoss;
 import br.com.animvs.koalory.entities.engine.ia.IAJump;
 import br.com.animvs.koalory.entities.engine.ia.IAStraight;
+import br.com.animvs.koalory.entities.game.Projectile;
 import br.com.animvs.koalory.entities.game.items.CheckPoint;
 import br.com.animvs.koalory.entities.game.items.Color;
 import br.com.animvs.koalory.entities.game.items.DeathZone;
@@ -17,7 +18,6 @@ import br.com.animvs.koalory.entities.game.items.Item;
 import br.com.animvs.koalory.entities.game.items.Life;
 import br.com.animvs.koalory.entities.game.items.Sender;
 import br.com.animvs.koalory.entities.game.Spawner;
-import br.com.animvs.koalory.entities.game.Weight;
 import br.com.animvs.koalory.entities.game.platforms.StaticPlatform;
 
 /**
@@ -94,8 +94,8 @@ public final class EntitiesController extends BaseController {
     }
 
     public void spawnWeight(Vector2 position, float lifeInterval, float radius) {
-        Weight weight = new Weight(getController(), position, lifeInterval, radius);
-        weight.initialize();
+        Projectile projectile = new Projectile(getController(), position, lifeInterval, radius);
+        projectile.initialize();
     }
 
     public void spawnFoe(String graphic, float physicsScale, float x, float y, float speedX, Float speedY, String ia, Float interval) {

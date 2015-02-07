@@ -14,7 +14,7 @@ import br.com.animvs.koalory.entities.game.mobiles.Player;
 /**
  * Created by DALDEGAN on 05/02/2015.
  */
-public final class Weight extends Mobile {
+public final class Projectile extends Mobile {
 
     private final float radius;
 
@@ -40,7 +40,7 @@ public final class Weight extends Mobile {
         return 0.7f;
     }
 
-    public Weight(GameController controller, Vector2 spawnPosition, float lifeInterval, float radius) {
+    public Projectile(GameController controller, Vector2 spawnPosition, float lifeInterval, float radius) {
         super(controller, spawnPosition);
 
         if (lifeInterval == 0f)
