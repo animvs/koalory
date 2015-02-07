@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="100" tilewidth="64" tileheight="64" nextobjectid="287">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="130" height="100" tilewidth="64" tileheight="64" nextobjectid="290">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
   <image source="tileset.png" width="832" height="640"/>
  </tileset>
@@ -20,7 +20,7 @@
  </layer>
  <layer name="ground" width="130" height="100">
   <data encoding="base64" compression="zlib">
-   eJztnUtuFDEURT0n0AuAaVgAZI6yg8yyARaSpZMnKIGMX5Xtvv5U+RzpKqmy5U/1kXvQr5MQAAAAAADW40EQOD9PgsD5wQPYKH1NceCa4MExK5yNq3qgeE/Eg2vtGw/wAA9+gwd4YOABHhh4gAcGHpAan0evkeABwQOCBwQPCB6cLTPT0oOzgwd4YOABHhh4gAcGHuCBgQd4YOABHhh4cL59tAAPzrePFuDB+fbRAjyo38eVvtuIB/X7iPt/eM9H4XoVfAt538fFA50HMaO9MAe+h7y94UE7D2J6euE5gAfjPYhp5cWeA3gwnwcxCi+OHMAD/dpn23eOA3hwbQ8+vecW6l8jtQerRvH3lRTBA5KbFKPXRPCA4AHBA4IHZHxSjF4TuaYHNXy54x5omMEDGA8egIEHYOABGD09SNXI3XMvl6MavdGfDVleKvalpPd5kOpTcy/Xh5IavZko+f8vpf1Szp3Vg+33PR9Ka/RWppcHt/C3TuIWpebeU/TzIepr13u1OfHYq6eXB+p5yNzxGL0uggcEDwgeEDyI1zLDOCvFY8Ra3kTzq8ZZKR7UDsxNLw9gbvAADDwAAw/AwAMwenngfRZeeu3l686cLbLx8idebclee2gwTm29Ti8P4vbaay+PIe1Cq73m7jO3TTVO7dl8FQ9yXFjNg5KzQe3Bq5O4vfY614W9NfTcZ26bapxSbzfUHvx0ErfXXpe44K2h5z5z21TjeOs9OhvUHpD5k2L0mggeEDwgeEDwgIxPih5zQBkjnjcezAcegIEHYOABGHgABh6A8bkgKvAADLUHRzVUNbVfQTBWSQ3XPeM/R89gy7+k2n80mjc1x3P4n5bnwUxjeeeVd2/UWdh6Xq8/HuieiQI8wIPauUvHV82LB3hwFGVdaIsa01Rdp6qeNaf+NLc+tdW8Xn+1B8q60BY1pqm6TlU9a079aW59aqt5vf54gAd4gAd4gAc18/4CLW05Sg==
+   eJztnUtOxDAQBb3nMweALRwAZo+4wey4AAfh6ExLRCDjTtqe9ifjKukJEke225TCggZCAAAAAACYj1uHwP45OgT2Dx7AAg6AgAfbzHAes3rg8T2R85i7bs6DujkP6uY8qJvzoG7Og7oJIYSQ2WOh9x4JHhA82ENGpqYHewcP8EDAAzwQ8AAPBDzAAwEP8EDAAzwQ8GB/ddQAD/ZXRw3wYH911AAPyuu4pt9txIPyOuLnb865c9yvBy/B9vu4eODnQUxvL8SB12CrDQ/qeRDT0gvNATzo70FMLS/WHMCD8TyI8fBiywE88N/7aHVbHMCD6/bg/pxDKP8aeXswazz+vpJH8IBYk6L3nggeEDwgeEDwgPRPit57ItfpQQmPF9wDH0bwAPqDByDgAQh4AEJLD1I9cpfcs7LVo9f7Z0OSU0FdnrR+H6SeKbln9SGnR28kcv7/S+5zKef26sHy+ZoPuT16M9PKg0P47ZM4RCm5d4w+3kbPyvVab0489+xp5YH3OmTsaPTeF8EDggcEDwgexHsZYZ6ZotFjL19O63vNM1M06B0Ym1YewNjgAQh4AAIegIAHILTyQPtZeO61lueVNWtk4fQTrbdkbTxUmKe0X6eVB/F46bWWp5B2oVat1jqtY17zlL6br8UDiwuzeZDzbvD24ENJPF56bXVhbQ8t67SOec2T6+2CtwefSuLx0uscF7Q9tKzTOuY1j7bfrXeDtwdk/KTovSeCBwQPCB4QPCD9k6LFGpBHj/PGg/HAAxDwAAQ8AAEPQMADEB4y4gUegODtwVYPVUnvV3CYK6eH65L536MzWPKX1PhbpXVTa7yH/9R8H4w0l/a+0u71ehfWXld7Hg/8zsQDPMCD0rVz5/daFw/wYCuefaE1ekxTfZ1e/ayW/lNrf2qtdbXnvT3w7Aut0WOa6uv06me19J9a+1Nrras9jwd4gAd4gAd4ULLuN5rETzo=
   </data>
  </layer>
  <objectgroup name="collision">
@@ -100,7 +100,7 @@
   <object id="263" name="floor" x="5440" y="2368" width="128" height="64"/>
   <object id="264" name="floor" x="5696" y="2432" width="128" height="64"/>
   <object id="270" name="roof" x="7680" y="1472">
-   <polyline points="0,0 -3072,0 -3072,448 -3264,448 -3264,0 -3264,-384 -3264,-1152"/>
+   <polyline points="0,0 -3072,0 -3072,448 -3264,448 -3264,0 -3264,-256 -3840,-256"/>
   </object>
   <object id="273" name="floor" x="4480" y="320">
    <polyline points="192,0 -896,0"/>
@@ -374,9 +374,10 @@
    </properties>
   </object>
   <object id="278" name="boss" x="4608" y="128" width="64" height="64"/>
-  <object id="279" name="checkpoint" x="7296" y="5632" width="64" height="64"/>
-  <object id="282" name="checkpoint" x="1152" y="3328" width="64" height="64"/>
+  <object id="279" name="checkpoint" x="2304" y="4416" width="64" height="64"/>
   <object id="286" name="checkpoint" x="4032" y="0" width="64" height="64"/>
+  <object id="288" name="life" x="3584" y="256" width="64" height="64"/>
+  <object id="289" name="life" x="4608" y="256" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="platform">
   <object id="143" name="platform" x="7520.67" y="5786.67">
