@@ -14,16 +14,20 @@ import br.com.animvs.koalory.entities.engine.ia.IABase;
 /**
  * Created by DALDEGAN on 24/01/2015.
  */
-public class Foe extends Mobile {
+public final class Foe extends Mobile {
     private IABase ia;
 
-    public Foe(GameController controller, Vector2 spawnPosition, String graphic, float physicsScale, IABase ia) {
+    private String graphicName;
+
+    public Foe(GameController controller, Vector2 spawnPosition, String graphicName, float physicsScale, IABase ia) {
         super(controller, spawnPosition);
 
         this.ia = ia;
+        this.graphicName = graphicName;
 
-        getController().getEntities().createEntityBody(this, physicsScale, PhysicsController.TargetPhysicsParameters.Type.RECTANGLE);
-        prepareGraphic(graphic);
+
+        /*getController().getEntities().createEntityBody(this, physicsScale, PhysicsController.TargetPhysicsParameters.Type.RECTANGLE);
+        prepareGraphic(graphic);*/
     }
 
     @Override
@@ -54,7 +58,8 @@ public class Foe extends Mobile {
         //getController().getSound().playDeathKoala();
     }
 
-    private void prepareGraphic(String graphicName) {
+    @Override
+    protected AnimacaoSkeletal createGraphic() {
         AnimacaoSkeletal graphic;
 
         if (graphicName == null || graphicName.trim().length() == 0 || graphicName.trim().equals("koala")) {
@@ -82,9 +87,12 @@ public class Foe extends Mobile {
             graphic.setEscala(2.5f, 2.5f);
             getGraphicOffset().set(0f, -125f);
         } else
-            throw new RuntimeException("Unknown graphic when spawning Foe: " + graphicName);
+            throw new RuntimeException("Unknown graphic name when spawning Foe: " + graphicName);
 
-        setGraphic(graphic);
+        //Clear unused resources:
+        graphicName = null;
+
+        return graphic;
     }
 
     private void checkFall() {

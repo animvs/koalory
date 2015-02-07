@@ -8,7 +8,9 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 
@@ -16,9 +18,11 @@ import br.com.animvs.engine2.physics.AnimvsBodyFactory;
 import br.com.animvs.engine2.physics.AnimvsPhysicsController;
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.entities.game.DeathZone;
+import br.com.animvs.koalory.entities.game.Entity;
 import br.com.animvs.koalory.entities.game.Foe;
 import br.com.animvs.koalory.entities.game.Item;
 import br.com.animvs.koalory.entities.game.Player;
+import br.com.animvs.koalory.entities.game.platforms.Platform;
 import br.com.animvs.koalory.entities.physics.PhysicBodyHolder;
 
 /**
@@ -36,7 +40,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
 
     public static class TargetPhysicsParameters {
         public static enum Type {
-            RECTANGLE, TRIANGLE, CIRCLE
+            RECTANGLE, PLAYER, CIRCLE
         }
 
         public PhysicBodyHolder bodyHolder;
@@ -46,11 +50,12 @@ public final class PhysicsController extends AnimvsPhysicsController {
         public final float width;
         public final float height;
         public final float density;
+        public final float friction;
         public final float restitution;
         public final boolean sensor;
         public final Type type;
 
-        public TargetPhysicsParameters(PhysicBodyHolder bodyHolder, Vector2 position, float rotation, BodyDef.BodyType bodyType, Type type, float width, float height, float density, float restitution, boolean sensor) {
+        public TargetPhysicsParameters(PhysicBodyHolder bodyHolder, Vector2 position, float rotation, BodyDef.BodyType bodyType, Type type, float width, float height, float density, float friction, float restitution, boolean sensor) {
             if (bodyHolder == null)
                 throw new RuntimeException("The parameter 'bodyHolder' must be != null");
 
@@ -61,6 +66,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
             this.width = width;
             this.height = height;
             this.density = density;
+            this.friction = friction;
             this.restitution = restitution;
             this.sensor = sensor;
             this.type = type;
@@ -241,6 +247,21 @@ public final class PhysicsController extends AnimvsPhysicsController {
         createBodies();
     }
 
+    public void createEntityBody(Entity entityOwner, float scale, PhysicsController.TargetPhysicsParameters.Type type) {
+        PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(entityOwner, new Vector2(600f, 550f), 0f,
+                BodyDef.BodyType.DynamicBody, type, Configurations.GAMEPLAY_ENTITY_SIZE_X * scale, Configurations.GAMEPLAY_ENTITY_SIZE_Y * scale, 1f, 0.1f, 0f, false);
+
+        controller.getPhysics().createBody(bodyParams);
+    }
+
+    /*public void createPlatformBody(Platform platform, int size) {
+        PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(platform, new Vector2(), 0f,
+                BodyDef.BodyType.KinematicBody, PhysicsController.TargetPhysicsParameters.Type.RECTANGLE,
+                Configurations.CORE_TILE_SIZE * size, Configurations.CORE_PLATFORM_SIZE_Y, 1f, 0.1f, 0f, false);
+
+        controller.getPhysics().createBody(bodyParams);
+    }*/
+
     private void createBodies() {
         targetToCreate.begin();
         for (int i = 0; i < targetToCreate.size; i++) {
@@ -252,7 +273,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
                 case RECTANGLE:
                     body = createRectangleBody(targetToCreate.get(i));
                     break;
-                case TRIANGLE:
+                case PLAYER:
                     body = createPlayerBody(targetToCreate.get(i));
                     break;
                 case CIRCLE:
@@ -286,7 +307,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
         return AnimvsBodyFactory.createSphere(controller.getPhysics(), parameters.position, parameters.bodyType, parameters.width, parameters.density, parameters.restitution, parameters.sensor);
     }
 
-    private Body createPlayerBody(TargetPhysicsParameters parameters) {
+    /*private Body createPlayerBody(TargetPhysicsParameters parameters) {
         Vector2[] vertices = new Vector2[5];
         vertices[0] = new Vector2(0f * parameters.width, -0.5f * parameters.height);
         vertices[1] = new Vector2(0.5f * parameters.width, 0f * parameters.height);
@@ -300,6 +321,51 @@ public final class PhysicsController extends AnimvsPhysicsController {
 
         return AnimvsBodyFactory.createByVertex(this, parameters.position, parameters.rotation, parameters.bodyType, vertices,
                 parameters.density * 1.8f, parameters.restitution, parameters.width, parameters.height, parameters.sensor);
+    }*/
+
+    private Body createPlayerBody(TargetPhysicsParameters parameters) {
+        BodyDef bodyDef = new BodyDef();
+
+        // bodyDef.fixedRotation = true;
+        // bodyDef.gravityScale = 0f;
+
+        bodyDef.type = parameters.bodyType;
+        bodyDef.position.set(toBox(parameters.position.x + (parameters.width / 2f)), toBox(parameters.position.y + (parameters.height / 2f)));
+
+        bodyDef.angle = parameters.rotation;
+        Body body = getWorld().createBody(bodyDef);
+
+        PolygonShape bodyPlayer = new PolygonShape();
+        PolygonShape bodyGrounder = new PolygonShape();
+
+        float w = toBox(parameters.width / 2f);
+        float h = toBox(parameters.height / 2f);
+
+        bodyPlayer.setAsBox(w, h);
+        bodyGrounder.setAsBox(w * 0.9f, h * 0.1f, new Vector2(0f, h * -1.1f), 0f);
+
+        FixtureDef fixtureDefPlayer = new FixtureDef();
+        fixtureDefPlayer.density = parameters.density;
+        fixtureDefPlayer.restitution = parameters.restitution;
+        fixtureDefPlayer.shape = bodyPlayer;
+        fixtureDefPlayer.isSensor = parameters.sensor;
+        fixtureDefPlayer.friction = parameters.friction;
+
+        FixtureDef fixtureDefGrounder = new FixtureDef();
+        fixtureDefGrounder.density = 0f;
+        fixtureDefGrounder.restitution = 0f;
+        fixtureDefGrounder.shape = bodyGrounder;
+        fixtureDefGrounder.isSensor = true;
+        fixtureDefGrounder.friction = 0f;
+
+        body.createFixture(fixtureDefPlayer);
+        Fixture fixtureGrounder = body.createFixture(fixtureDefGrounder);
+        fixtureGrounder.setUserData(Configurations.CORE_PLAYER_GROUNDER_USER_DATA);
+
+        bodyPlayer.dispose();
+        bodyGrounder.dispose();
+
+        return body;
     }
 
     private Body createRectangleBody(TargetPhysicsParameters parameters) {
@@ -310,6 +376,7 @@ public final class PhysicsController extends AnimvsPhysicsController {
                 parameters.width,
                 parameters.height,
                 parameters.density,
+                parameters.friction,
                 parameters.restitution,
                 parameters.sensor);
 

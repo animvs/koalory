@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Disposable;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.utils.Disposable;
 import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
 import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.controller.GameController;
+import br.com.animvs.koalory.controller.PhysicsController;
 import br.com.animvs.koalory.entities.physics.PhysicBodyHolder;
 
 public abstract class Entity extends Group implements Disposable, PhysicBodyHolder {
@@ -24,7 +26,41 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
 
     private boolean disposed;
 
-    /*private boolean facingRight;*/
+    protected BodyDef.BodyType getBodyType() {
+        return BodyDef.BodyType.DynamicBody;
+    }
+
+    protected PhysicsController.TargetPhysicsParameters.Type getBodyShape() {
+        return PhysicsController.TargetPhysicsParameters.Type.RECTANGLE;
+    }
+
+    protected float getBodyDensity() {
+        return 1f;
+    }
+
+    protected float getBodyFriction() {
+        return 0.1f;
+    }
+
+    protected float getBodyRestitution() {
+        return 0.1f;
+    }
+
+    protected float getBodyScaleX() {
+        return 1f;
+    }
+
+    protected float getBodyScaleY() {
+        return 1f;
+    }
+
+    protected boolean getBodySensor() {
+        return false;
+    }
+
+    protected boolean getDisposeOnCollect() {
+        return true;
+    }
 
     protected final GameController getController() {
         return controller;
@@ -142,6 +178,9 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
     }
 
     public Entity(GameController controller, Vector2 spawnPosition) {
+        if (spawnPosition == null)
+            throw new RuntimeException("The parameter 'spawnPosition' must be != NULL");
+
         this.controller = controller;
         this.spawnPosition = spawnPosition;
         this.graphicOffset = new Vector2();
@@ -156,6 +195,16 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
 
         //Clean unused resources:
         spawnPosition = null;
+    }
+
+    public final void initialize() {
+        PhysicsController.TargetPhysicsParameters bodyParameters = createBody();
+        bodyParameters.bodyHolder = this;
+
+        //getController().getPhysics().createRetangleBody(bodyParameters);
+        getController().getPhysics().createBody(bodyParameters);
+
+        setGraphic(createGraphic());
     }
 
     @Override
@@ -173,7 +222,7 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
 
     protected final boolean checkOwnsFixture(Fixture fixture) {
         for (int i = 0; i < getBody().getFixtureList().size; i++) {
-            if (getBody().getFixtureList().get(i) == fixture)
+            if (getBody().getFixtureList().get(i) == fixture && fixture.getUserData() != null && fixture.getUserData().equals(Configurations.CORE_PLAYER_GROUNDER_USER_DATA))
                 return true;
         }
 
@@ -185,5 +234,14 @@ public abstract class Entity extends Group implements Disposable, PhysicBodyHold
             controller.getPhysics().destroyBody(physicBody);
             physicBody = null;
         }
+    }
+
+    protected abstract AnimacaoSkeletal createGraphic();
+
+    private PhysicsController.TargetPhysicsParameters createBody() {
+        PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(this, new Vector2(), 0f, getBodyType(),
+                getBodyShape(), Configurations.CORE_TILE_SIZE * getBodyScaleX(), Configurations.CORE_TILE_SIZE * getBodyScaleY(), getBodyDensity(), getBodyFriction(), getBodyRestitution(), getBodySensor());
+
+        return bodyParams;
     }
 }

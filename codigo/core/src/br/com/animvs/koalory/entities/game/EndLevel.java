@@ -1,5 +1,6 @@
 package br.com.animvs.koalory.entities.game;
 
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
@@ -9,7 +10,7 @@ import br.com.animvs.koalory.controller.GameController;
 /**
  * Created by DALDEGAN on 05/02/2015.
  */
-public final class EndLevel extends Item {
+public final class EndLevel extends ItemTiled {
     @Override
     protected boolean getBodySensor() {
         return true;
@@ -25,8 +26,8 @@ public final class EndLevel extends Item {
         return null;
     }
 
-    public EndLevel(GameController controller, Vector2 spawnPosition) {
-        super(controller, spawnPosition);
+    public EndLevel(GameController controller, RectangleMapObject rectangleMapObject) {
+        super(controller, rectangleMapObject);
     }
 
     @Override

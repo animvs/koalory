@@ -13,7 +13,7 @@ import br.com.animvs.koalory.controller.PhysicsController;
 /**
  * Created by DALDEGAN on 31/01/2015.
  */
-public final class DeathZone extends Item {
+public final class DeathZone extends ItemTiled {
 
     private RectangleMapObject rectangle;
     private boolean killsIA;
@@ -33,21 +33,22 @@ public final class DeathZone extends Item {
     }
 
     public DeathZone(GameController controller, RectangleMapObject rectangle) {
-        super(controller, new Vector2(rectangle.getRectangle().x + rectangle.getRectangle().width / 2f, rectangle.getRectangle().y + rectangle.getRectangle().height / 2f));
+        //super(controller, new Vector2(rectangle.getRectangle().x + rectangle.getRectangle().width / 2f, rectangle.getRectangle().y + rectangle.getRectangle().height / 2f));
+        super(controller, rectangle);
         this.rectangle = rectangle;
         this.killsPlayer = true; //TRUE by default
 
         parseParameters();
     }
 
-    @Override
+    /*@Override
     protected PhysicsController.TargetPhysicsParameters createBody(float tileSize) {
         PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(this, new Vector2(), 0f,
                 getBodyType(), PhysicsController.TargetPhysicsParameters.Type.RECTANGLE,
                 rectangle.getRectangle().width, rectangle.getRectangle().height, getBodyDensity(), getBodyRestitution(), getBodySensor());
 
         return bodyParams;
-    }
+    }*/
 
     @Override
     protected AnimacaoSkeletal createGraphic() {

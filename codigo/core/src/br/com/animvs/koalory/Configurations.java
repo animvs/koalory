@@ -25,6 +25,8 @@ public final class Configurations {
     public static final float CORE_PLATFORM_SIZE_Y = 18f;
     public static final float CORE_PHYSICS_MULTIPLIER = 1.98f;
     public static final String CORE_PLATFORM_USER_DATA = "p";
+    public static final String CORE_PLAYER_GROUNDER_USER_DATA = "pg";
+    public static final String CORE_WALL_USER_DATA = "pg";
     public static final float CORE_PLATFORM_PATH_DISTANCE_TOLERANCE = 50f;
     public static final int CORE_GAMEPAD_BUTTON_ACTION = 1;
 

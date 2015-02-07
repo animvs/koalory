@@ -1,6 +1,7 @@
 package br.com.animvs.koalory.entities.game;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -12,7 +13,7 @@ import br.com.animvs.koalory.controller.GameController;
 /**
  * Created by DALDEGAN on 29/01/2015.
  */
-public final class Sender extends Item {
+public final class Sender extends ItemTiled {
 
     private String mapName;
 
@@ -26,8 +27,8 @@ public final class Sender extends Item {
         return true;
     }
 
-    public Sender(GameController controller, Vector2 spawnPosition, String mapName) {
-        super(controller, spawnPosition);
+    public Sender(GameController controller, RectangleMapObject rectangleMapObject, String mapName) {
+        super(controller, rectangleMapObject);
 
         if (mapName == null)
             throw new RuntimeException("The parameter 'mapName' must be != NULL");

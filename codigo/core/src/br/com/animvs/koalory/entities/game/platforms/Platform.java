@@ -21,7 +21,7 @@ import br.com.animvs.koalory.entities.game.Player;
 public abstract class Platform extends Entity {
     //float[] vertices = polylineObject.getPolyline().getTransformedVertices();
 
-    private Vector2 initialPosition;
+    //private Vector2 initialPosition;
 
     private int size;
     private float speed;
@@ -38,8 +38,8 @@ public abstract class Platform extends Entity {
 
     private ArrayMap<AnimacaoSkeletal, Vector2> graphics;
 
-    public Platform(GameController controller, Vector2 spawnPosition, PolylineMapObject line) {
-        super(controller, spawnPosition);
+    public Platform(GameController controller, PolylineMapObject line) {
+        super(controller, new Vector2(line.getPolyline().getX(), line.getPolyline().getY()));
 
         increasingIndex = true;
         positionCache = new Vector2();
@@ -47,10 +47,6 @@ public abstract class Platform extends Entity {
 
         preparePath(line);
         parseParameters(line);
-
-        initialPosition = new Vector2(line.getPolyline().getX(), line.getPolyline().getY());
-
-        getController().getEntities().createPlatformBody(this, size);
 
         float platformWidth = Configurations.CORE_TILE_SIZE * size;
 
@@ -64,14 +60,14 @@ public abstract class Platform extends Entity {
         }
     }
 
-    @Override
+    /*@Override
     public void setY(float y) {
         super.setY(y);
         if (getBody() != null)
             getBody().setTransform(getBody().getPosition().x, getController().getPhysics().toBox(y), getBody().getAngle());
 
         if (getGraphic() != null)
-            getGraphic().setPosicao(getX(), y /*- Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f*/);
+            getGraphic().setPosicao(getX(), y *//*- Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f*//*);
     }
 
     @Override
@@ -82,20 +78,20 @@ public abstract class Platform extends Entity {
             getBody().setTransform(getController().getPhysics().toBox(x), getController().getPhysics().toBox(y), getBody().getAngle());
 
         if (getGraphic() != null)
-            getGraphic().setPosicao(x, y /*- Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f*/);
-    }
+            getGraphic().setPosicao(x, y *//*- Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f*//*);
+    }*/
 
     @Override
     protected void eventAfterBodyCreated(Body body) {
         super.eventAfterBodyCreated(body);
 
-        setPosition(initialPosition.x, initialPosition.y);
+        //setPosition(initialPosition.x, initialPosition.y);
 
         for (int i = 0; i < body.getFixtureList().size; i++)
             body.getFixtureList().get(i).setUserData(Configurations.CORE_PLATFORM_USER_DATA);
 
         //free unused resource:
-        initialPosition = null;
+        //initialPosition = null;
     }
 
     @Override

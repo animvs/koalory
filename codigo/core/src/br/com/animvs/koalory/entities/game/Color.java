@@ -1,6 +1,7 @@
 package br.com.animvs.koalory.entities.game;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -13,7 +14,7 @@ import br.com.animvs.koalory.controller.LoadController;
 /**
  * Created by ANSCHAU on 24/01/2015.
  */
-public class Color extends Item {
+public class Color extends ItemTiled {
 
     private float colorRecovered;
 
@@ -27,8 +28,8 @@ public class Color extends Item {
         return true;
     }
 
-    public Color(GameController controller, Vector2 spawnPosition, float colorRecovered) {
-        super(controller, spawnPosition);
+    public Color(GameController controller, RectangleMapObject rectangleMapObject, float colorRecovered) {
+        super(controller, rectangleMapObject);
         this.colorRecovered = colorRecovered;
     }
 

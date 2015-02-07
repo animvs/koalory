@@ -49,6 +49,8 @@ public final class PlayersController extends BaseController {
             nextPlayerColorIndex = 0;
 
         Player newPLayer = new Player(getController(), skinName, inputMapper, playerColors.get(nextPlayerColorIndex));
+        newPLayer.initialize();
+
         playersInGame.add(newPLayer);
         inputMapper.setPlayer(newPLayer);
 

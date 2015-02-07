@@ -74,6 +74,9 @@ public abstract class Mobile extends Entity {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        if (getGraphic() == null)
+            return;
+
         getGraphic().flipX(!graphicsFacingRight);
         super.draw(batch, parentAlpha);
     }

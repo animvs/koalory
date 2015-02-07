@@ -12,57 +12,9 @@ import br.com.animvs.koalory.controller.PhysicsController;
 
 public abstract class Item extends Entity {
 
-    protected BodyDef.BodyType getBodyType() {
-        return BodyDef.BodyType.DynamicBody;
-    }
-
-    protected float getBodyDensity() {
-        return 1f;
-    }
-
-    protected float getBodyRestitution() {
-        return 0.1f;
-    }
-
-    protected float getBodyScaleX() {
-        return 1f;
-    }
-
-    protected float getBodyScaleY() {
-        return 1f;
-    }
-
-    protected boolean getBodySensor() {
-        return false;
-    }
-
-    protected boolean getDisposeOnCollect() {
-        return true;
-    }
-
     public Item(GameController controller, Vector2 spawnPosition){
         super(controller, spawnPosition);
     }
-
-    public final void initialize() {
-        PhysicsController.TargetPhysicsParameters bodyParameters = createBody(Configurations.CORE_TILE_SIZE);
-        bodyParameters.bodyHolder = this;
-
-        //getController().getPhysics().createRetangleBody(bodyParameters);
-        getController().getPhysics().createBody(bodyParameters);
-
-        setGraphic(createGraphic());
-    }
-
-    protected PhysicsController.TargetPhysicsParameters createBody(float tileSize) {
-        PhysicsController.TargetPhysicsParameters bodyParams = new PhysicsController.TargetPhysicsParameters(this, new Vector2(), 0f, getBodyType(),
-                PhysicsController.TargetPhysicsParameters.Type.RECTANGLE,
-                tileSize * getBodyScaleX(), tileSize * getBodyScaleY(), getBodyDensity(), getBodyRestitution(), getBodySensor());
-
-        return bodyParams;
-    }
-
-    protected abstract AnimacaoSkeletal createGraphic();
 
     @Override
     public void setY(float y) {

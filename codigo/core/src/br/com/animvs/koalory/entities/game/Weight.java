@@ -6,13 +6,14 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
 import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
+import br.com.animvs.engine2.matematica.Random;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.controller.PhysicsController;
 
 /**
  * Created by DALDEGAN on 05/02/2015.
  */
-public final class Weight extends Item {
+public final class Weight extends Mobile {
 
     private final float radius;
 
@@ -24,23 +25,18 @@ public final class Weight extends Item {
     private Player target;
 
     @Override
-    protected float getBodyDensity() {
-        return 1f;
+    protected PhysicsController.TargetPhysicsParameters.Type getBodyShape() {
+        return PhysicsController.TargetPhysicsParameters.Type.CIRCLE;
     }
 
     @Override
-    protected boolean getDisposeOnCollect() {
-        return true;
+    protected float getBodyScaleX() {
+        return Random.random(0.35f, 0.45f);
     }
 
     @Override
-    protected BodyDef.BodyType getBodyType() {
-        return BodyDef.BodyType.KinematicBody;
-    }
-
-    @Override
-    protected boolean getBodySensor() {
-        return true;
+    protected float getBodyRestitution() {
+        return 0.7f;
     }
 
     public Weight(GameController controller, Vector2 spawnPosition, float lifeInterval, float radius) {
@@ -57,15 +53,7 @@ public final class Weight extends Item {
         this.vectorCache = new Vector2();
     }
 
-    @Override
-    protected PhysicsController.TargetPhysicsParameters createBody(float tileSize) {
-        PhysicsController.TargetPhysicsParameters parameters = new PhysicsController.TargetPhysicsParameters(this, new Vector2(),
-                getRotation(), getBodyType(), PhysicsController.TargetPhysicsParameters.Type.CIRCLE, radius, radius, getBodyDensity(), getBodyRestitution(), getBodySensor());
-
-        return parameters;
-    }
-
-    @Override
+    //@Override
     protected AnimacaoSkeletal createGraphic() {
         return null;
     }
@@ -104,8 +92,12 @@ public final class Weight extends Item {
         super.eventAfterBodyCreated(body);
 
         //Gdx.app.log("WEIGHT", "Weight spawned at X: " + spawnPosition.x + " Y: " + spawnPosition.y);
+        body.setGravityScale(0f);
 
         while (true) {
+            if (getController().getPlayers().getTotalPlayersInGame() == 0)
+                break;
+
             target = getController().getPlayers().getPlayer(getController().getPlayers().getTotalPlayersInGame() - 1);
 
             if (target.getAlive())
@@ -114,8 +106,13 @@ public final class Weight extends Item {
     }
 
     @Override
+    protected void eventDeath(Entity killer) {
+
+    }
+
+
     public void collect(Player player) {
-        super.collect(player);
+        //super.collect(player);
 
         if (!player.getAlive() || player.getBody() == null)
             return;

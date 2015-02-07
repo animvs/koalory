@@ -35,6 +35,9 @@ public final class Player extends Mobile {
     private Vector2 groundedPlatformLastPosition;
     private boolean grounded;
 
+    private String graphicSkin;
+    private com.badlogic.gdx.graphics.Color graphicColor;
+
     /*private boolean inDamage;
     private float damageTimeCounter;*/
 
@@ -44,6 +47,21 @@ public final class Player extends Mobile {
 
     //private static final float ANIMATION_Y_VELOCITY_TOLERANCE = 1.3f;
 
+
+    @Override
+    protected float getBodyScaleX() {
+        return 0.85f;
+    }
+
+    @Override
+    protected float getBodyScaleY() {
+        return 1.6f;
+    }
+
+    @Override
+    protected PhysicsController.TargetPhysicsParameters.Type getBodyShape() {
+        return PhysicsController.TargetPhysicsParameters.Type.PLAYER;
+    }
 
     public boolean getGrounded() {
         return grounded;
@@ -70,17 +88,30 @@ public final class Player extends Mobile {
         groundedPlatformLastPosition = new Vector2();
         input = inputMapper;
 
+        this.graphicSkin = skinName;
+        this.graphicColor = color;
+
         /*lastPositionCache = new Vector2();*/
         //alive = true;
 
-        getController().getEntities().createEntityBody(this, 1f, PhysicsController.TargetPhysicsParameters.Type.TRIANGLE);
+        //getController().getEntities().createEntityBody(this, 1f, PhysicsController.TargetPhysicsParameters.Type.PLAYER);
+    }
+
+    @Override
+    protected AnimacaoSkeletal createGraphic() {
+        AnimacaoSkeletal graphic = new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_CHARACTER, AnimacaoSkeletalData.class));
 
         getGraphicOffset().set(0f, -50f);
-        setGraphic(new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_CHARACTER, AnimacaoSkeletalData.class)));
-        getGraphic().setSkin(skinName);
+        graphic.setSkin(graphicSkin);
 
-        getGraphic().getColor().set(color);
-        getGraphic().setInterpolationDefault(0.25f);
+        graphic.getColor().set(graphicColor);
+        graphic.setInterpolationDefault(0.25f);
+
+        //Clean unused resources:
+        graphicSkin = null;
+        graphicColor = null;
+
+        return graphic;
     }
 
     public void updateInputOnly() {
@@ -143,7 +174,6 @@ public final class Player extends Mobile {
             float speedX = groundedPlatform.getBody().getLinearVelocity().x + getInput().getMovementX();
 
             getBody().setLinearVelocity(speedX, groundedPlatform.getBody().getLinearVelocity().y);
-
             groundedPlatformLastPosition.set(groundedPlatform.getX(), groundedPlatform.getY());
         }
 
@@ -281,7 +311,6 @@ public final class Player extends Mobile {
     }
 
     private void computeGrounded() {
-        //groundedPlatform = null;
         Array<Contact> contactList = getController().getPhysics().getWorld().getContactList();
         for (int i = 0; i < contactList.size; i++) {
             Contact contact = contactList.get(i);
@@ -289,14 +318,14 @@ public final class Player extends Mobile {
 
                 positionCache.set(getX(), getY());
 
-                WorldManifold manifold = contact.getWorldManifold();
+                /*WorldManifold manifold = contact.getWorldManifold();
                 boolean below = true;
                 for (int j = 0; j < manifold.getPoints().length; j++)
-                    below |= (getController().getPhysics().toWorld(manifold.getPoints()[j].y) < positionCache.y - Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f);
+                    below &= (getController().getPhysics().toWorld(manifold.getPoints()[j].y) < positionCache.y *//*- Configurations.GAMEPLAY_ENTITY_SIZE_Y / 2f*//*);*/
 
                 groundedPlatform = null;
 
-                if (below) {
+                /*if (below) {*/
                     if (contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals(Configurations.CORE_PLATFORM_USER_DATA))
                         groundedPlatform = (Platform) contact.getFixtureA().getBody().getUserData();
 
@@ -310,10 +339,10 @@ public final class Player extends Mobile {
 
                     grounded = true;
                     return;
-                }
+                /*}*/
 
-                grounded = false;
-                return;
+                /*grounded = false;
+                return;*/
             }
         }
         grounded = false;

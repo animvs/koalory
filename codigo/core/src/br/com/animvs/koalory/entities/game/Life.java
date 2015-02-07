@@ -3,6 +3,7 @@ package br.com.animvs.koalory.entities.game;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 
@@ -13,7 +14,7 @@ import br.com.animvs.koalory.controller.GameController;
 /**
  * Created by DALDEGAN on 04/02/2015.
  */
-public final class Life extends Item {
+public final class Life extends ItemTiled {
 
     private TextureRegion regionCache;
 
@@ -32,8 +33,8 @@ public final class Life extends Item {
         return null; //Uses texture region
     }
 
-    public Life(GameController controller, Vector2 spawnPosition) {
-        super(controller, spawnPosition);
+    public Life(GameController controller, RectangleMapObject rectangleMapObject) {
+        super(controller, rectangleMapObject);
     }
 
     @Override

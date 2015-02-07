@@ -55,7 +55,7 @@ public class LevelController implements Disposable {
         playerStart.set(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
 
         for (int i = 0; i < bodiesCollision.size; i++)
-            bodiesCollision.getValueAt(i).setUserData("collision");
+            bodiesCollision.getValueAt(i).setUserData(Configurations.CORE_WALL_USER_DATA);
 
         createItemsAndSpawners();
         createPlatforms();
@@ -128,97 +128,133 @@ public class LevelController implements Disposable {
         MapObjects objects = map.getLayers().get(Configurations.LEVEL_LAYER_ITEMS).getObjects();
 
         for (int i = 0; i < objects.getCount(); i++) {
-            if (objects.get(i).getName().toLowerCase().trim().equals("color")) {
-                Object powerProperty = objects.get(i).getProperties().get("power");
-
-                if (powerProperty == null)
-                    throw new RuntimeException("Item color does not have the property 'power'");
-
-                RectangleMapObject rectangle = castLevelObject(objects.get(i));
-                controller.getEntities().spawnItemColorProgress(rectangle.getRectangle().getX(), rectangle.getRectangle().getY(), Float.parseFloat(powerProperty.toString()));
-            } else if (objects.get(i).getName().toLowerCase().trim().equals("spawn")) {
-                RectangleMapObject rectangle = castLevelObject(objects.get(i));
-
-                float spawnInterval = Float.parseFloat(objects.get(i).getProperties().get("spawnInterval").toString());
-                float speedX = Float.parseFloat(objects.get(i).getProperties().get("speed").toString());
-
-                String graphic = null;
-                String ia = null;
-                Float speedY = null;
-                Float interval = null;
-
-                if (objects.get(i).getProperties().get("graphic") != null)
-                    graphic = objects.get(i).getProperties().get("graphic").toString();
-
-                if (objects.get(i).getProperties().get("speedY") != null)
-                    speedY = Float.parseFloat(objects.get(i).getProperties().get("speedY").toString());
-
-                if (objects.get(i).getProperties().get("ia") != null)
-                    ia = objects.get(i).getProperties().get("ia").toString();
-
-                if (objects.get(i).getProperties().get("interval") != null)
-                    interval = Float.parseFloat(objects.get(i).getProperties().get("interval").toString());
-
-                Vector2 position = new Vector2(rectangle.getRectangle().getX(), rectangle.getRectangle().y);
-                controller.getEntities().createSpawner(graphic, position, spawnInterval, ia, speedX, speedY, interval);
-            } else if (objects.get(i).getName().toLowerCase().trim().equals("sender")) {
-                if (objects.get(i).getProperties().get("map") == null)
-                    throw new RuntimeException("Item RECEIVER does not have the property 'map'");
-
-                String mapName = objects.get(i).getProperties().get("map").toString();
-
-                //Verfies if sender's level completed requirements are fulfilled:
-                Array<String> missingMaps = new Array<String>();
-                boolean cancelCreation = false;
-
-                if (objects.get(i).getProperties().get("requiredMaps") != null) {
-                    String[] requiredMaps = objects.get(i).getProperties().get("requiredMaps").toString().split(";");
-
-                    for (int j = 0; j < requiredMaps.length; j++) {
-                        if (!controller.getProfile().checkLevelClear(requiredMaps[j])) {
-                            missingMaps.add(requiredMaps[j]);
-                            cancelCreation = true;
-                        }
-                    }
-                }
-
-                if (cancelCreation) {
-                    String message = "Sender creation skipped, level clear requirements where not fulfilled, the following maps still not completed: \"";
-
-                    for (int j = 0; j < missingMaps.size; j++) {
-                        if (j > 0)
-                            message += ", ";
-                        message += missingMaps.get(j);
-                    }
-                    message += "\"";
-
-                    Gdx.app.log("ITEM SENDER", message);
-                    continue;
-                }
-
-                RectangleMapObject rectangle = castLevelObject(objects.get(i));
-                controller.getEntities().createSender(rectangle, mapName);
-            } else if (objects.get(i).getName().toLowerCase().trim().equals("deathzone")) {
-                RectangleMapObject rectangle = castLevelObject(objects.get(i));
-                controller.getEntities().createDeathZone(rectangle);
-            } else if (objects.get(i).getName().toLowerCase().trim().equals("endlevel")) {
-                RectangleMapObject rectangle = castLevelObject(objects.get(i));
-                controller.getEntities().createEndLevel(rectangle);
-            } else if (objects.get(i).getName().toLowerCase().trim().equals("playerstart")) {
-                RectangleMapObject rectangle = castLevelObject(objects.get(i));
-                playerStart.set(rectangle.getRectangle().getX(), rectangle.getRectangle().getY());
-            } else if (objects.get(i).getName().toLowerCase().trim().equals("life")) {
-                RectangleMapObject rectangle = castLevelObject(objects.get(i));
-                controller.getEntities().createLife(rectangle);
-            } else if (objects.get(i).getName().toLowerCase().trim().equals("checkpoint")) {
-                RectangleMapObject rectangle = castLevelObject(objects.get(i));
-                controller.getEntities().createCheckpoint(rectangle);
-            } else if (objects.get(i).getName().toLowerCase().trim().equals("boss")) {
-                RectangleMapObject rectangle = castLevelObject(objects.get(i));
-                controller.getEntities().spawnBoss(new Vector2(rectangle.getRectangle().x, rectangle.getRectangle().y));
-            } else
+            if (objects.get(i).getName().toLowerCase().trim().equals("color"))
+                createColor(objects.get(i));
+            else if (objects.get(i).getName().toLowerCase().trim().equals("spawn"))
+                createSpawn(objects.get(i));
+            else if (objects.get(i).getName().toLowerCase().trim().equals("sender"))
+                createSender(objects.get(i));
+            else if (objects.get(i).getName().toLowerCase().trim().equals("deathzone"))
+                createDeathZone(objects.get(i));
+            else if (objects.get(i).getName().toLowerCase().trim().equals("endlevel"))
+                createEndLevel(objects.get(i));
+            else if (objects.get(i).getName().toLowerCase().trim().equals("playerstart"))
+                createPlayerStart(objects.get(i));
+            else if (objects.get(i).getName().toLowerCase().trim().equals("life"))
+                createLife(objects.get(i));
+            else if (objects.get(i).getName().toLowerCase().trim().equals("checkpoint"))
+                createCheckpoint(objects.get(i));
+            else if (objects.get(i).getName().toLowerCase().trim().equals("boss"))
+                createBoss(objects.get(i));
+            else
                 throw new RuntimeException("Unknown object type when loading map - Map: " + mapName + " object: " + objects.get(i).getName());
         }
+    }
+
+    private void createBoss(MapObject mapObject) {
+        RectangleMapObject rectangle = castLevelObject(mapObject);
+        controller.getEntities().spawnBoss(new Vector2(rectangle.getRectangle().x, rectangle.getRectangle().y));
+    }
+
+    private void createCheckpoint(MapObject mapObject) {
+        RectangleMapObject rectangle = castLevelObject(mapObject);
+        controller.getEntities().createCheckpoint(rectangle);
+    }
+
+    private void createLife(MapObject mapObject) {
+        RectangleMapObject rectangle = castLevelObject(mapObject);
+        controller.getEntities().createLife(rectangle);
+    }
+
+    private void createPlayerStart(MapObject mapObject) {
+        RectangleMapObject rectangle = castLevelObject(mapObject);
+        playerStart.set(rectangle.getRectangle().getX(), rectangle.getRectangle().getY());
+    }
+
+    private void createEndLevel(MapObject mapObject) {
+        RectangleMapObject rectangle = castLevelObject(mapObject);
+        controller.getEntities().createEndLevel(rectangle);
+    }
+
+    private void createColor(MapObject mapObject) {
+        Object powerProperty = mapObject.getProperties().get("power");
+
+        if (powerProperty == null)
+            throw new RuntimeException("Item color does not have the property 'power'");
+
+        RectangleMapObject rectangle = castLevelObject(mapObject);
+        controller.getEntities().spawnItemColorProgress(rectangle, Float.parseFloat(powerProperty.toString()));
+    }
+
+    private void createDeathZone(MapObject mapObject) {
+        RectangleMapObject rectangle = castLevelObject(mapObject);
+        controller.getEntities().createDeathZone(rectangle);
+    }
+
+    private void createSender(MapObject mapObject) {
+        if (mapObject.getProperties().get("map") == null)
+            throw new RuntimeException("Item RECEIVER does not have the property 'map'");
+
+        String mapName = mapObject.getProperties().get("map").toString();
+
+        //Verfies if sender's level completed requirements are fulfilled:
+        Array<String> missingMaps = new Array<String>();
+        boolean cancelCreation = false;
+
+        if (mapObject.getProperties().get("requiredMaps") != null) {
+            String[] requiredMaps = mapObject.getProperties().get("requiredMaps").toString().split(";");
+
+            for (int j = 0; j < requiredMaps.length; j++) {
+                if (!controller.getProfile().checkLevelClear(requiredMaps[j])) {
+                    missingMaps.add(requiredMaps[j]);
+                    cancelCreation = true;
+                }
+            }
+        }
+
+        if (cancelCreation) {
+            String message = "Sender creation skipped, level clear requirements where not fulfilled, the following maps still not completed: \"";
+
+            for (int j = 0; j < missingMaps.size; j++) {
+                if (j > 0)
+                    message += ", ";
+                message += missingMaps.get(j);
+            }
+            message += "\"";
+
+            Gdx.app.log("ITEM SENDER", message);
+            return;
+        }
+
+        RectangleMapObject rectangle = castLevelObject(mapObject);
+        controller.getEntities().createSender(rectangle, mapName);
+    }
+
+    private void createSpawn(MapObject mapObject) {
+        RectangleMapObject rectangle = castLevelObject(mapObject);
+
+        float spawnInterval = Float.parseFloat(mapObject.getProperties().get("spawnInterval").toString());
+        float speedX = Float.parseFloat(mapObject.getProperties().get("speed").toString());
+
+        String graphic = null;
+        String ia = null;
+        Float speedY = null;
+        Float interval = null;
+
+        if (mapObject.getProperties().get("graphic") != null)
+            graphic = mapObject.getProperties().get("graphic").toString();
+
+        if (mapObject.getProperties().get("speedY") != null)
+            speedY = Float.parseFloat(mapObject.getProperties().get("speedY").toString());
+
+        if (mapObject.getProperties().get("ia") != null)
+            ia = mapObject.getProperties().get("ia").toString();
+
+        if (mapObject.getProperties().get("interval") != null)
+            interval = Float.parseFloat(mapObject.getProperties().get("interval").toString());
+
+        //Vector2 position = new Vector2(rectangle.getRectangle().x, rectangle.getRectangle().y);
+        controller.getEntities().createSpawner(graphic, rectangle, spawnInterval, ia, speedX, speedY, interval);
     }
 
     private RectangleMapObject castLevelObject(MapObject object) {
