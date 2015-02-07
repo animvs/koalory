@@ -13,22 +13,26 @@ import br.com.animvs.koalory.entities.game.mobiles.Player;
  */
 public final class IABoss extends IABase {
 
-    private float waitCounter;
+    private float timeCounter;
     private int attacksPerformed;
     private float attackCounter;
 
     private State state;
 
+    private Vector2 distanceCameraCache;
+
     //private Vector2 directionCache;
 
     private enum State {
-        WAIT, ATTACK
+        WAIT_CAMERA, MOVE, ATTACK
     }
 
     private void setState(State newState) {
         switch (newState) {
-            case WAIT:
-                waitCounter = 0f;
+            case WAIT_CAMERA:
+                timeCounter = 0f;
+            case MOVE:
+                timeCounter = 0f;
                 break;
             case ATTACK:
                 attacksPerformed = 0;
@@ -44,7 +48,8 @@ public final class IABoss extends IABase {
     public IABoss(GameController controller) {
         super(controller);
 
-        this.state = State.WAIT;
+        this.state = State.WAIT_CAMERA;
+        this.distanceCameraCache = new Vector2();
 
         //this.directionCache = new Vector2();
     }
@@ -52,7 +57,9 @@ public final class IABoss extends IABase {
     @Override
     public void update(Foe foeOwner) {
         switch (state) {
-            case WAIT:
+            case WAIT_CAMERA:
+                processWaitStart(foeOwner);
+            case MOVE:
                 processMoveForward(foeOwner);
                 break;
             case ATTACK:
@@ -63,13 +70,21 @@ public final class IABoss extends IABase {
         }
     }
 
+    private void processWaitStart(Foe foeOwner) {
+        distanceCameraCache.set(foeOwner.getX(), foeOwner.getY());
+
+        if (distanceCameraCache.dst2(getController().getCamera().getPosition().x, getController().getCamera().getPosition().y ) > 0.1f) {
+            setState(State.MOVE);
+        }
+    }
+
     private void processMoveForward(Foe foeOwner) {
-        waitCounter += Gdx.graphics.getDeltaTime();
+        timeCounter += Gdx.graphics.getDeltaTime();
 
         move(foeOwner);
         //foeOwner.getBody().setLinearVelocity(-0.2f, 0f);
 
-        if (waitCounter >= Configurations.GAMEPLAY_BOSS_WAIT_INTERVAL)
+        if (timeCounter >= Configurations.GAMEPLAY_BOSS_WAIT_INTERVAL)
             setState(State.ATTACK);
     }
 
@@ -95,7 +110,7 @@ public final class IABoss extends IABase {
             return;
 
         if (attacksPerformed >= Configurations.GAMEPLAY_BOSS_ATTACKS_PER_STATE) {
-            setState(State.WAIT);
+            setState(State.MOVE);
             return;
         }
 
