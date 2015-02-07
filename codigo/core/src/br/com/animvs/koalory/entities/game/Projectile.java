@@ -118,10 +118,11 @@ public final class Projectile extends Mobile {
         vectorCache.set(boss.getX(), boss.getY());
         vectorCache.sub(getX(), getY()).nor();//.scl(-1f);
 
-        float force = 2f;
+        float force = 0.04f;
 
-        getBody().setLinearVelocity(vectorCache.x * force, vectorCache.y * force);
-        //getBody().applyLinearImpulse(vectorCache.x * force, vectorCache.y * force, getX(), getY(), true);
+        //getBody().setLinearVelocity(vectorCache.x * force, vectorCache.y * force);
+        getBody().setLinearVelocity(0f, 0f);
+        getBody().applyLinearImpulse(vectorCache.x * force, vectorCache.y * force, getX(), getY(), true);
 
         /*getBody().setLinearVelocity(0f, 0f);
         getBody().applyForceToCenter(vectorCache.x * force, vectorCache.y * force, true);*/

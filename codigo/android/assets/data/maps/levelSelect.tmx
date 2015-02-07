@@ -51,7 +51,7 @@
     <property name="map" value="greenHills1-1"/>
    </properties>
   </object>
-  <object id="161" name="sender" x="4937" y="361.333" width="64" height="65.3333">
+  <object id="161" name="sender" x="1152" y="320" width="64" height="65.3333">
    <properties>
     <property name="map" value="castle1"/>
     <property name="requireMaps" value="greenHills1-1;sandPlains1-1;frostPlateau1-1"/>

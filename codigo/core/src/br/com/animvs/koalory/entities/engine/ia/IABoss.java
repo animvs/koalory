@@ -1,7 +1,6 @@
 package br.com.animvs.koalory.entities.engine.ia;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 import br.com.animvs.koalory.Configurations;
@@ -67,24 +66,27 @@ public final class IABoss extends IABase {
     private void processMoveForward(Foe foeOwner) {
         waitCounter += Gdx.graphics.getDeltaTime();
 
-        if (foeOwner != null && foeOwner.getAlive() && foeOwner.getBody() != null) {
-
-            Player target = getController().getPlayers().getPlayerRandom();
-            if (target == null)
-                return;
-
-            float force = 0.035f;
-            boolean directionRight = foeOwner.getX() < target.getX();
-
-            if (directionRight)
-                foeOwner.getBody().applyLinearImpulse(force, 0f, foeOwner.getX(), foeOwner.getY(), true);
-            else
-                foeOwner.getBody().applyLinearImpulse(-force, 0f, foeOwner.getX(), foeOwner.getY(), true);
-        }
-            //foeOwner.getBody().setLinearVelocity(-0.2f, 0f);
+        move(foeOwner);
+        //foeOwner.getBody().setLinearVelocity(-0.2f, 0f);
 
         if (waitCounter >= Configurations.GAMEPLAY_BOSS_WAIT_INTERVAL)
             setState(State.ATTACK);
+    }
+
+    private void move(Foe foeOwner) {
+        if (foeOwner == null || !foeOwner.getAlive() || foeOwner.getBody() == null)
+            return;
+
+        Player target = getController().getPlayers().getPlayerRandom();
+        if (target == null)
+            return;
+
+        boolean directionRight = foeOwner.getX() < target.getX();
+
+        if (directionRight)
+            foeOwner.getBody().applyLinearImpulse(Configurations.GAMEPLAY_BOSS_SPEED, 0f, foeOwner.getX(), foeOwner.getY(), true);
+        else
+            foeOwner.getBody().applyLinearImpulse(-Configurations.GAMEPLAY_BOSS_SPEED, 0f, foeOwner.getX(), foeOwner.getY(), true);
     }
 
     private void processStateAttack(Foe foeOwner) {
