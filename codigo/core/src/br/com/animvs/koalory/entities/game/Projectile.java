@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
 import br.com.animvs.engine2.matematica.Random;
+import br.com.animvs.koalory.Configurations;
 import br.com.animvs.koalory.LoadController;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.controller.PhysicsController;
@@ -118,7 +119,7 @@ public final class Projectile extends Mobile {
         vectorCache.set(boss.getX(), boss.getY());
         vectorCache.sub(getX(), getY()).nor();//.scl(-1f);
 
-        float force = 0.04f;
+        float force = Configurations.GAMEPLAY_BOSS_PROJETILE_FORCE;
 
         //getBody().setLinearVelocity(vectorCache.x * force, vectorCache.y * force);
         getBody().setLinearVelocity(0f, 0f);
