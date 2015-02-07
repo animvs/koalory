@@ -1,10 +1,12 @@
 package br.com.animvs.koalory.entities.engine.ia;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.entities.game.mobiles.Foe;
+import br.com.animvs.koalory.entities.game.mobiles.Player;
 
 /**
  * Created by DALDEGAN on 05/02/2015.
@@ -74,8 +76,21 @@ public final class IABoss extends IABase {
     private void processMoveForward(Foe foeOwner) {
         waitCounter += Gdx.graphics.getDeltaTime();
 
-        if (foeOwner != null && foeOwner.getAlive() && foeOwner.getBody() != null)
-            foeOwner.getBody().setLinearVelocity(-0.2f, 0f);
+        if (foeOwner != null && foeOwner.getAlive() && foeOwner.getBody() != null) {
+
+            Player target = getController().getPlayers().getPlayerRandom();
+            if (target == null)
+                return;
+
+            float force = 0.035f;
+            boolean directionRight = foeOwner.getX() < target.getX();
+
+            if (directionRight)
+                foeOwner.getBody().applyLinearImpulse(force, 0f, foeOwner.getX(), foeOwner.getY(), true);
+            else
+                foeOwner.getBody().applyLinearImpulse(-force, 0f, foeOwner.getX(), foeOwner.getY(), true);
+        }
+            //foeOwner.getBody().setLinearVelocity(-0.2f, 0f);
 
         if (waitCounter >= waitInterval)
             setState(State.ATTACK);
@@ -97,7 +112,7 @@ public final class IABoss extends IABase {
             attackCounter = 0f;
             attacksPerformed++;
 
-            float lifeInterval = 10f;
+            float lifeInterval = 3f;
 
             Vector2 spawnPosition = new Vector2(foeOwner.getX(), foeOwner.getY() + 200f);
             getController().getEntities().spawnProjectile(spawnPosition, lifeInterval, foeOwner);

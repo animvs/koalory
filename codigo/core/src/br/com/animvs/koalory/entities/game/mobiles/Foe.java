@@ -55,7 +55,6 @@ public final class Foe extends Mobile {
         this.physicsScale = physicsScale;
         this.playerCanKill = true;
 
-
         /*getController().getEntities().createEntityBody(this, physicsScale, PhysicsController.TargetPhysicsParameters.Type.RECTANGLE);
         prepareGraphic(graphic);*/
     }

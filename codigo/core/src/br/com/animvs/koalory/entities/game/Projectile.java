@@ -1,11 +1,16 @@
 package br.com.animvs.koalory.entities.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
 import br.com.animvs.engine2.graficos.AnimacaoSkeletal;
 import br.com.animvs.engine2.matematica.Random;
+import br.com.animvs.koalory.LoadController;
 import br.com.animvs.koalory.controller.GameController;
 import br.com.animvs.koalory.controller.PhysicsController;
 import br.com.animvs.koalory.entities.game.mobiles.Foe;
@@ -29,6 +34,11 @@ public final class Projectile extends Mobile {
     private boolean inDamage;
     private float inDamageCounter;
 
+    private TextureRegion regionCache;
+
+    private float radiusScale;
+    private float graphicRotation;
+
     @Override
     protected PhysicsController.TargetPhysicsParameters.Type getBodyShape() {
         return PhysicsController.TargetPhysicsParameters.Type.CIRCLE;
@@ -36,7 +46,7 @@ public final class Projectile extends Mobile {
 
     @Override
     protected float getBodyScaleX() {
-        return Random.random(0.35f, 0.45f);
+        return radiusScale;
     }
 
     @Override
@@ -56,6 +66,7 @@ public final class Projectile extends Mobile {
         if (boss == null)
             throw new RuntimeException("The parameter 'boss' must be != NULL");
 
+        this.radiusScale = Random.random(0.35f, 0.45f);
         this.lifeInterval = lifeInterval;
         this.boss = boss;
         this.vectorCache = new Vector2();
@@ -64,6 +75,22 @@ public final class Projectile extends Mobile {
     @Override
     protected AnimacaoSkeletal createGraphic() {
         return null;
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        if (regionCache == null)
+            regionCache = getController().getLoad().get(LoadController.ATLAS_OBJECTS, TextureAtlas.class).findRegion("fireball");
+
+        float graphicSize = 35f * (1f + radiusScale);
+
+        graphicRotation += Gdx.graphics.getDeltaTime() * 20f;
+
+        if (graphicRotation > 1000000f)
+            graphicRotation = 0f;
+
+        float rotation = MathUtils.radDeg * MathUtils.sin(graphicRotation);
+        batch.draw(regionCache, getX() - graphicSize / 2f, getY() - graphicSize / 2f, graphicSize / 2f, graphicSize / 2f, graphicSize, graphicSize, 1f, 1f, rotation);
     }
 
     @Override
@@ -133,15 +160,7 @@ public final class Projectile extends Mobile {
         body.setGravityScale(0f);
         body.setFixedRotation(true);
 
-        while (true) {
-            if (getController().getPlayers().getTotalPlayersInGame() == 0)
-                break;
-
-            target = getController().getPlayers().getPlayer(getController().getPlayers().getTotalPlayersInGame() - 1);
-
-            if (target.getAlive())
-                break;
-        }
+        target = getController().getPlayers().getPlayerRandom();
     }
 
     @Override

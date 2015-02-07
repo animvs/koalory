@@ -60,6 +60,25 @@ public final class PlayersController extends BaseController {
         return newPLayer;
     }
 
+    public Player getPlayerRandom(){
+        if (getTotalPlayersInGame() == 0)
+            return null;
+
+        Player target = null;
+
+        while (true) {
+            if (getTotalPlayersInGame() == 0)
+                break;
+
+            target = getPlayer(getTotalPlayersInGame() - 1);
+
+            if (target.getAlive())
+                break;
+        }
+
+        return target;
+    }
+
     /*public int getPlayerIndex(Player player) {
         return playersInGame.indexOf(player, true);
     }*/

@@ -236,6 +236,14 @@ public final class PhysicsController extends AnimvsPhysicsController {
                             if (projectile != null) {
                                 if (player.getY() - Configurations.CORE_TILE_SIZE / 2f > projectile.getY())
                                     projectile.eventPlayerHit(player);
+                                else if (player.getAlive() && player.getBody() != null) {
+                                    boolean directionRight = projectile.getX() < player.getX();
+
+                                    if (directionRight)
+                                        player.getBody().applyLinearImpulse(0.05f, 0f, player.getX(), player.getY(), true);
+                                    else
+                                        player.getBody().applyLinearImpulse(-0.05f, 0f, player.getX(), player.getY(), true);
+                                }
 
                                 return;
                             }
