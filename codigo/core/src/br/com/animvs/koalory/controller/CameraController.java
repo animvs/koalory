@@ -44,6 +44,10 @@ public final class CameraController extends BaseController {
         return cameraOwner;
     }
 
+    public Matrix4 getMatrix(){
+        return camera.combined;
+    }
+
     public CameraController(GameController controller, ParallaxCamera camera) {
         super(controller);
         this.camera = camera;

@@ -65,9 +65,9 @@ public final class Foe extends Mobile {
 
         if (getBody() != null) {
             if (getBody().getLinearVelocity().x != 0f) {
-                getGraphic().setAnimationSpeedScale(Configurations.CORE_PLAYER_ANIM_SPEED_MULTIPLIER);
+                getGraphic().setAnimationSpeedScale(0, Configurations.CORE_PLAYER_ANIM_SPEED_MULTIPLIER);
             } else
-                getGraphic().setAnimationSpeedScale(0f);
+                getGraphic().setAnimationSpeedScale(0, 0f);
         }
 
         ia.update(this);
@@ -95,7 +95,7 @@ public final class Foe extends Mobile {
             graphic = new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_KOALA, AnimacaoSkeletalData.class));
             //graphic.setSkin("standard");
             graphic.setAnimation("walk", true);
-            graphic.setAnimationSpeedScale(3f);
+            graphic.setAnimationSpeedScale(0, 3f);
             graphic.setEscala(0.7f, 0.7f);
             getGraphicOffset().set(0f, -35f);
         } else if (graphicName.toLowerCase().trim().equals("fire")) {
@@ -112,7 +112,7 @@ public final class Foe extends Mobile {
             graphic = new AnimacaoSkeletal(getController().getLoad().get(LoadController.SKELETON_KOALA, AnimacaoSkeletalData.class));
             //graphic.setSkin("standard");
             graphic.setAnimation("walk", true);
-            graphic.setAnimationSpeedScale(3f);
+            graphic.setAnimationSpeedScale(0, 3f);
             graphic.setEscala(2.5f, 2.5f);
             getGraphicOffset().set(0f, -125f);
         } else

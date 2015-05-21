@@ -11,7 +11,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Disposable;
 
 import br.com.animvs.engine2.physics.MapBodyBuilder;
@@ -28,7 +27,7 @@ public class LevelController implements Disposable {
     private OrthographicCamera cameraCache;
 
     //Objects created from tiled:
-    private ArrayMap<String, Body> bodiesCollision;
+    private Array<Body> bodiesCollision;
 
     public LevelController(GameController controller) {
         this.controller = controller;
@@ -55,7 +54,7 @@ public class LevelController implements Disposable {
         playerStart.set(Configurations.GAMEPLAY_PLAYER_START.x, Configurations.GAMEPLAY_PLAYER_START.y);
 
         for (int i = 0; i < bodiesCollision.size; i++)
-            bodiesCollision.getValueAt(i).setUserData(Configurations.CORE_WALL_USER_DATA);
+            bodiesCollision.get(i).setUserData(Configurations.CORE_WALL_USER_DATA);
 
         createItemsAndSpawners();
         createPlatforms();
@@ -93,7 +92,7 @@ public class LevelController implements Disposable {
 
         if (bodiesCollision != null) {
             for (int i = 0; i < bodiesCollision.size; i++)
-                controller.getPhysics().destroyBody(bodiesCollision.getValueAt(i));
+                controller.getPhysics().destroyBody(bodiesCollision.get(i));
 
             bodiesCollision.clear();
         }

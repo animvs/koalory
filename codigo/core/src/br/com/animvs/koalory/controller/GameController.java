@@ -29,6 +29,7 @@ public final class GameController implements Disposable {
     private StageController stage;
     private LevelController level;
     private EntitiesController entities;
+    private LightController light;
 
     private AnimvsIntCrypto crypto;
     private AnimvsFontController fonts;
@@ -85,6 +86,10 @@ public final class GameController implements Disposable {
 
     public PlayersController getPlayers() {
         return players;
+    }
+
+    public LightController getLight() {
+        return light;
     }
 
     public int getLives() {
@@ -168,7 +173,7 @@ public final class GameController implements Disposable {
             this.sound = new SoundController(this);
 
             this.language = new AnimvsLanguageController("pt-br", Configurations.CORE_LANGUAGE_PATH);
-            this.fonts = new AnimvsFontController(language, "br.com.animvs.koalory.fontscache", Configurations.CORE_LANGUAGE_PATH, createFontsInfo(), "0123456789%", (int) Configurations.RESOLUTION_REAL.x);
+            this.fonts = new AnimvsFontController(language, "br.com.animvs.koalory.fontscache", Configurations.CORE_LANGUAGE_PATH, createFontsInfo(), "0123456789%", "1.3.2",(int) Configurations.RESOLUTION_REAL.x);
             this.fonts.loadFonts();
 
             this.ui = new UIController(this, LoadController.UI_JSON_PATH, Configurations.RESOLUTION_REAL);
@@ -189,6 +194,7 @@ public final class GameController implements Disposable {
             this.players = new PlayersController(this);
             this.input = new InputController(this);
             this.profile = new ProfileController(this);
+            this.light = new LightController(this);
 
             level = new LevelController(this);
 
@@ -199,6 +205,7 @@ public final class GameController implements Disposable {
             camera.initialize();
             input.initialize();
             profile.initialize();
+            light.initialize();
 
             this.colorRecovered = 0f; //starts with 0% of recovered colors
             this.lives = Configurations.GAMEPLAY_LIVES_AT_START; // starts with 5 lives
@@ -248,6 +255,8 @@ public final class GameController implements Disposable {
 
                 if (physics != null && Configurations.DEBUG_PHYSICS)
                     physics.renderDebug(stage.getCamera().combined);
+
+                //light.render();
 
                 entities.processMatchEnd();
                 camera.update();

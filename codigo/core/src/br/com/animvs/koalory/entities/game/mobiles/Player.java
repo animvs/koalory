@@ -168,7 +168,7 @@ public final class Player extends Mobile {
                 prepareAnimation("walk");
             } else if (grounded) {
                 prepareAnimation("walk");
-                getGraphic().setAnimationSpeedScale(0f);
+                getGraphic().setAnimationSpeedScale(0, 0f);
             }
 
             if (getBody().getLinearVelocity().y > Configurations.GAMEPLAY_PLAYER_JUMP_FORCE * 0.5f)
@@ -182,6 +182,8 @@ public final class Player extends Mobile {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        getController().getLight().updateLightPosition(getX(), getY());
+
         if (grounded && groundedPlatform != null) {
 
             //setPhysicsFriction(0f);
@@ -287,7 +289,7 @@ public final class Player extends Mobile {
                 getGraphic().setAnimation(newAnimationName, true);
         }
 
-        getGraphic().setAnimationSpeedScale(Configurations.CORE_PLAYER_ANIM_SPEED_MULTIPLIER);
+        getGraphic().setAnimationSpeedScale(0, Configurations.CORE_PLAYER_ANIM_SPEED_MULTIPLIER);
     }
 
     private void clampByCamera() {
