@@ -208,7 +208,7 @@ public class LevelController implements Disposable {
             String[] requiredMaps = mapObject.getProperties().get("requiredMaps").toString().split(";");
 
             for (int j = 0; j < requiredMaps.length; j++) {
-                if (!controller.getProfile().checkLevelClear(requiredMaps[j])) {
+                if (!Configurations.DEBUG_LEVELS_OPENED && !controller.getProfile().checkLevelClear(requiredMaps[j])) {
                     missingMaps.add(requiredMaps[j]);
                     cancelCreation = true;
                 }

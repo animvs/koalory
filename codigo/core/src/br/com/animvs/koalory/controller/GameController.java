@@ -105,6 +105,9 @@ public final class GameController implements Disposable {
     }
 
     public float getColorRecovered() {
+        if (Configurations.DEBUG_COLOR_ALWAYS_FILLED)
+            return 1.0f;
+
         return colorRecovered;
     }
 

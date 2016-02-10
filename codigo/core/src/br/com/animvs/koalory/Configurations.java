@@ -4,7 +4,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public final class Configurations {
     public static final boolean DEBUG_PLAYER_IMMORTAL = false;
-    public static final boolean DEBUG_PHYSICS = true;
+    public static final boolean DEBUG_COLOR_ALWAYS_FILLED = true;
+    public static final boolean DEBUG_LEVELS_OPENED = true;
+    public static final boolean DEBUG_PHYSICS = false;
     public static final boolean SIMULATE_MOBILE_ON_DESKTOP = false;
 
     public static final Vector2 RESOLUTION_REAL = new Vector2(1280f, 768f);
